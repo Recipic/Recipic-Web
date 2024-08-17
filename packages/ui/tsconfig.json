@@ -1,0 +1,14 @@
+{
+  "extends": "@recipic-packages/typescript-config/react-library.json",
+  "include": [
+    ".",
+    ".eslintrc.js",
+    "postcss.config.js",
+    "tailwind.config.js"
+  ],
+  "exclude": ["dist", "build", "node_modules"],
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "."
+  }
+}
