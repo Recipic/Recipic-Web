@@ -16,7 +16,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['postcss.config.js', 'tailwind.config.js'],
+      files: ['postcss.config.js', 'tailwind.config.ts'],
       env: {
         node: true,
       },
