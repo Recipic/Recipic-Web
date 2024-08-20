@@ -1,18 +1,16 @@
-import React, { useState } from 'react';
-import { Button, PageLayout } from '@recipic-packages/ui';
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import Router from './router';
+import { Suspense } from 'react';
 
-export default function App() {
-  const [count, setCount] = useState(0);
-
+const App = () => {
   return (
-    <PageLayout isTabBarVisible>
-      <Button onClick={() => setCount(count => count + 1)}>count is {count}</Button>
-      <Button variant="secondary" onClick={() => setCount(count => count + 1)}>
-        count is {count}
-      </Button>
-      <Button variant="destructive" onClick={() => setCount(count => count + 1)}>
-        count is {count}
-      </Button>
-    </PageLayout>
+    <Suspense>
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+    </Suspense>
   );
-}
+};
+
+export default App;
