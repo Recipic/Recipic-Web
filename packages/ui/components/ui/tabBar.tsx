@@ -22,7 +22,7 @@ export function TabBar() {
   const [activeTab, setActiveTab] = useState<TTabBarKey>('home');
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200">
+    <div className="fixed bottom-0 left-0 right-0 mx-auto max-w-lg bg-white shadow-lg border-t border-gray-200">
       <div className="flex justify-around items-center h-16">
         {tabItems.map(item => (
           <button
