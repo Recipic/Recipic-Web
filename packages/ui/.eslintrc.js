@@ -4,6 +4,9 @@ module.exports = {
     project: './tsconfig.json',
     tsconfigRootDir: __dirname,
   },
+  ignorePatterns: [
+    'types/svg.d.ts',
+  ],
   settings: {
     'import/resolver': {
       typescript: {

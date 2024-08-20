@@ -1,14 +1,10 @@
 {
   "extends": "@recipic-packages/typescript-config/react-library.json",
-  "include": [
-    ".",
-    ".eslintrc.js",
-    "postcss.config.js",
-    "tailwind.config.ts"
-  ],
+  "include": [".", ".eslintrc.js", "postcss.config.js", "tailwind.config.ts", "**/*.ts", "**/*.tsx", "**/*.svg", "src/types/*.d.ts"],
   "exclude": ["dist", "build", "node_modules"],
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "."
-  }
+  },
+  "files": ["types/svg.d.ts"]
 }

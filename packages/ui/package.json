@@ -14,8 +14,8 @@
   },
   "devDependencies": {
     "@recipic-packages/eslint-config": "workspace:*",
-    "@recipic-packages/typescript-config": "workspace:*",
     "@recipic-packages/tailwind-config": "workspace:*",
+    "@recipic-packages/typescript-config": "workspace:*",
     "@turbo/gen": "^1.12.4",
     "@types/eslint": "^8.56.5",
     "@types/node": "^20.11.24",
@@ -25,7 +25,8 @@
     "eslint": "^8.56.0",
     "postcss": "^8.4.41",
     "tailwindcss": "^3.4.10",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "vite-plugin-svgr": "^4.2.0"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.0",
