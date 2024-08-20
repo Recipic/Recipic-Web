@@ -1,14 +1,20 @@
+import React from 'react';
 import { TabBar } from './tabBar';
+import { Header } from './header';
 
 type TPageLayoutProps = {
   children: React.ReactNode;
-  isTabBarVisible?: boolean; // 탭바 표시 여부를 결정하는 선택적 prop
+  isTabBarVisible?: boolean;
+  title?: string;
 };
 
-export function PageLayout({ children, isTabBarVisible = true }: TPageLayoutProps) {
+export function PageLayout({ children, isTabBarVisible = true, title }: TPageLayoutProps) {
   return (
-    <div className="flex flex-col min-h-screen bg-white max-w-lg mx-auto">
-      <main className="flex-grow">{children}</main>
+    <div className="flex flex-col h-screen bg-white max-w-lg mx-auto">
+      <Header title={title} />
+      <main className="flex-grow overflow-y-auto overflow-x-hidden">
+        <div className="px-4 py-4">{children}</div>
+      </main>
       {isTabBarVisible && <TabBar />}
     </div>
   );
