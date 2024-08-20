@@ -23,7 +23,7 @@ export function TabBar() {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 mx-auto max-w-lg bg-white shadow-lg border-t border-gray-200">
-      <div className="flex justify-around items-center h-16">
+      <div className="flex justify-around items-center h-14">
         {tabItems.map(item => (
           <button
             key={item.key}
@@ -35,7 +35,7 @@ export function TabBar() {
                 className: 'w-6 h-6',
               })}
             </div>
-            <span className={`mt-1 text-xs ${activeTab === item.key ? 'text-black' : 'text-gray-400'}`}>
+            <span className={`mt-1 text-regular12 ${activeTab === item.key ? 'text-black' : 'text-gray-400'}`}>
               {item.label}
             </span>
           </button>
