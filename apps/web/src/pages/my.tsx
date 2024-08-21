@@ -1,6 +1,6 @@
 import React from 'react';
 import { Header, PageLayout, Button } from '@recipic-packages/ui';
-import { FaCog } from 'react-icons/fa';
+import { GearIcon } from '@radix-ui/react-icons';
 import { useNavigate } from 'react-router-dom';
 
 export default function My() {
@@ -12,10 +12,10 @@ export default function My() {
           variant="ghost"
           size="icon"
           onClick={() => navigate('/settings')}
-          className="text-gray-600"
+          className="text-black"
           aria-label="설정"
         >
-          <FaCog className="h-6 w-6" />
+          <GearIcon className="h-7 w-7" />
         </Button>
       </Header>
       {/* 페이지 내용 */}

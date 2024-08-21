@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { FaChevronLeft } from 'react-icons/fa';
+import { ChevronLeftIcon } from '@radix-ui/react-icons';
 import { useNavigate } from 'react-router-dom';
 import { Button } from './button';
 
@@ -20,14 +20,8 @@ export function TopNavBar({ children, showBackButton = true }: TopNavBarProps) {
       <div className="px-1 py-1 flex justify-between items-center">
         <div className="flex items-center">
           {showBackButton && (
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={handleGoBack}
-              className=" text-gray-700"
-              aria-label="뒤로 가기"
-            >
-              <FaChevronLeft className="h-6 w-6" />
+            <Button variant="ghost" size="icon" onClick={handleGoBack} className=" text-black" aria-label="뒤로 가기">
+              <ChevronLeftIcon className="h-8 w-8" />
             </Button>
           )}
         </div>
