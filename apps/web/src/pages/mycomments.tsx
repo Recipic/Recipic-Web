@@ -52,17 +52,18 @@ export default function MyComments() {
     <PageLayout>
       <TopNavBar />
       <Header title="내가 작성한 댓글"></Header>
-      <div className="flex items-center m-6"></div>
-      {commentItems.map(comment => (
-        <MyCommentBox
-          mainTitle={comment.mainTitle}
-          brandImage={comment.brandImage}
-          comment={comment.comment}
-          likesCount={comment.likesCount}
-          publishDate={comment.publishDate}
-          recipieId={comment.recipieId}
-        />
-      ))}
+      <div className="flex flex-col items-center gap-y-6 p-6">
+        {commentItems.map(comment => (
+          <MyCommentBox
+            mainTitle={comment.mainTitle}
+            brandImage={comment.brandImage}
+            comment={comment.comment}
+            likesCount={comment.likesCount}
+            publishDate={comment.publishDate}
+            recipieId={comment.recipieId}
+          />
+        ))}
+      </div>
     </PageLayout>
   );
 }

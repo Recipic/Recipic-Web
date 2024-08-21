@@ -1,9 +1,23 @@
 import { HeartFilledIcon } from '@radix-ui/react-icons';
 import { CommentProps } from '../../pages/mycomments';
-
-const CommentComponent: React.FC<CommentProps> = ({ mainTitle, brandImage, comment, likesCount, publishDate }) => {
+import { useNavigate } from 'react-router-dom';
+const CommentComponent: React.FC<CommentProps> = ({
+  mainTitle,
+  brandImage,
+  comment,
+  likesCount,
+  publishDate,
+  recipieId,
+}) => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/recipies/${recipieId}`);
+  };
   return (
-    <div className="flex flex-col border rounded-lg p-4 shadow-sm bg-white">
+    <div
+      onClick={handleClick}
+      className="w-96 flex flex-col border rounded-lg p-4 shadow-sm bg-white cursor-pointer transform transition-transform duration-300 ease-out hover:scale-105 hover:shadow-lg"
+    >
       <div className="flex justify-between items-start mb-3">
         <div className="flex items-center">
           <div className="w-10 h-10 rounded-full mr-4 bg-slate-200 flex justify-center items-center">{brandImage}</div>
@@ -11,12 +25,13 @@ const CommentComponent: React.FC<CommentProps> = ({ mainTitle, brandImage, comme
         </div>
         <button className="text-gray-400 hover:text-gray-600">X</button>
       </div>
+      <hr className="mb-4" />
       <p className="text-gray-700 mb-4 ">{comment.length > 30 ? comment.slice(0, 30) + '...' : comment}</p>
       <div className="flex justify-between items-center text-sm text-gray-500">
-        <span>{publishDate}</span>
+        <span className="text-[1.5vw]">{publishDate}</span>
         <div className="flex items-center">
-          <HeartFilledIcon className="text-red-500 mr-1" />
-          <span>{likesCount}</span>
+          <HeartFilledIcon className="text-pink-500 mr-1" />
+          <span className="text-[1.5vw]">{likesCount}</span>
         </div>
       </div>
     </div>
