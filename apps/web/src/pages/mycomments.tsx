@@ -1,10 +1,9 @@
 import React from 'react';
-import BannerComponent from '../components/MyBannerComponent';
+import MyCommentBox from '../components/MyCommentBox';
 import { Header, PageLayout, TopNavBar } from '@recipic-packages/ui';
+import { ImageIcon } from '@radix-ui/react-icons';
 
-import { KeyboardIcon, HeartFilledIcon, ImageIcon } from '@radix-ui/react-icons';
-import { useNavigate } from 'react-router-dom';
-interface CommentProps {
+export interface CommentProps {
   mainTitle: string; //본문 제목
   brandImage: React.ReactNode; //해당 브랜드 이미지프로필?
   comment: string; //내가 쓴 댓글 내용
@@ -14,7 +13,6 @@ interface CommentProps {
 }
 
 export default function MyComments() {
-  const navigate = useNavigate();
   const commentItems: CommentProps[] = [
     {
       mainTitle: '요아정 꿀조합!!! 딸기바나나',
@@ -55,6 +53,16 @@ export default function MyComments() {
       <TopNavBar />
       <Header title="내가 작성한 댓글"></Header>
       <div className="flex items-center m-6"></div>
+      {commentItems.map(comment => (
+        <MyCommentBox
+          mainTitle={comment.mainTitle}
+          brandImage={comment.brandImage}
+          comment={comment.comment}
+          likesCount={comment.likesCount}
+          publishDate={comment.publishDate}
+          recipieId={comment.recipieId}
+        />
+      ))}
     </PageLayout>
   );
 }
