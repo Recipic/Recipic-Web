@@ -16,7 +16,7 @@ const CommentComponent: React.FC<CommentProps> = ({
   return (
     <div
       onClick={handleClick}
-      className="w-96 flex flex-col border rounded-lg p-4 shadow-sm bg-white cursor-pointer transform transition-transform duration-300 ease-out hover:scale-105 hover:shadow-lg"
+      className="w-[90%] flex flex-col border rounded-lg p-4 shadow-sm bg-white cursor-pointer transform transition-transform duration-300 ease-out hover:scale-105 hover:shadow-lg"
     >
       <div className="flex justify-between items-start mb-3">
         <div className="flex items-center">
@@ -28,10 +28,10 @@ const CommentComponent: React.FC<CommentProps> = ({
       <hr className="mb-4" />
       <p className="text-gray-700 mb-4 ">{comment.length > 30 ? comment.slice(0, 30) + '...' : comment}</p>
       <div className="flex justify-between items-center text-sm text-gray-500">
-        <span className="text-[1.5vw]">{publishDate}</span>
+        <span className="text-3">{publishDate}</span>
         <div className="flex items-center">
           <HeartFilledIcon className="text-pink-500 mr-1" />
-          <span className="text-[1.5vw]">{likesCount}</span>
+          <span className="text-3">{likesCount}</span>
         </div>
       </div>
     </div>
