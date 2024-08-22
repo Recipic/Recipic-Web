@@ -1,19 +1,23 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Button } from '@recipic-packages/ui';
 import { TBrand } from '@/types/brand';
 import { getBrandImage, formatBrandToHangeul } from '@/utils/formatBrand';
 
 type TBrandButtonProps = {
   brand: TBrand;
-  onClick: () => void;
+  onClick: (brand: TBrand) => void;
 };
 
 export default function BrandButton({ brand, onClick }: TBrandButtonProps) {
   const brandLogo = getBrandImage(brand);
 
+  const handleClick = useCallback(() => {
+    onClick(brand);
+  }, [brand, onClick]);
+
   return (
     <Button
-      onClick={onClick}
+      onClick={handleClick}
       variant="ghost"
       aria-label={`${formatBrandToHangeul(brand)} 버튼`}
       className="flex flex-col items-center justify-center p-4 min-h-[90px]"

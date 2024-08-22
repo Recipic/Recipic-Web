@@ -11,8 +11,8 @@ export default function Recipe() {
   return (
     <PageLayout isTabBarVisible isBottomSpace>
       <Header title="레시피" />
-      <SearchBar />
-      <BrandButtonList brands={brands} onClick={() => {}} /> {/* TODO: 클릭시 get 요청 */}
+      <SearchBar onSearchClick={() => {}} /> {/* TODO: 클릭시 get 요청 */}
+      <BrandButtonList brands={brands} onSearchClick={() => {}} /> {/* TODO: 클릭시 get 요청 */}
       <RecipeCardList recipeInfosList={recipeInfosListData} />
     </PageLayout>
   );

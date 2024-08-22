@@ -2,22 +2,23 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { Button, Form, FormControl, FormField, FormItem, Input } from '@recipic-packages/ui';
+import { TSearchFormValues } from '@/types/search';
 
-type TSearchFormValues = {
-  searchQuery: string;
+type TSearchBarProps = {
+  onSearchClick: ({ searchQuery }: TSearchFormValues) => void;
 };
 
-export function SearchBar() {
+export function SearchBar({ onSearchClick }: TSearchBarProps) {
   const form = useForm<TSearchFormValues>({
     defaultValues: {
       searchQuery: '',
     },
   });
 
-  function onSubmit(data: TSearchFormValues) {
-    console.log('Search query:', data.searchQuery);
-    // Here you would typically handle the search, e.g. by calling an API
-  }
+  const onSubmit = ({ searchQuery }: TSearchFormValues) => {
+    onSearchClick({ searchQuery: searchQuery });
+    console.log('Search query:', searchQuery);
+  };
 
   return (
     <div className="px-4 py-2 flex-[1_0_100%]">
