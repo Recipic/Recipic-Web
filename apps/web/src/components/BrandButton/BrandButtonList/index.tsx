@@ -16,7 +16,7 @@ export default function BrandButtonList({ brands, onSearchClick }: TBrandButtonL
   );
 
   return (
-    <div className="grid grid-cols-5 p-4">
+    <div className="grid grid-cols-5 px-4">
       {brands.map((brand, index) => (
         <BrandButton key={index} brand={brand} onClick={handleBrandClick} />
       ))}

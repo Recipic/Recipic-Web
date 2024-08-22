@@ -14,7 +14,10 @@ import { TBrand } from '@/types/brand';
 export default function Recipe() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState<string>(searchParams.get('keyword') || '');
-  const [isSearching, setIsSearching] = useState<boolean>(Boolean(searchParams.get('keyword')));
+  const [isSearching, setIsSearching] = useState(() => {
+    const keyword = searchParams.get('keyword');
+    return keyword !== null && keyword !== '';
+  });
 
   /**
    * 검색을 처리하는 함수
@@ -58,13 +61,10 @@ export default function Recipe() {
     [handleSearch],
   );
 
-  /**
-   * 뒤로 가기를 처리하는 함수
-   */
   const handleGoBack = useCallback(() => {
     setIsSearching(false);
-    setSearchParams({});
     setSearchQuery('');
+    setSearchParams({});
   }, [setSearchParams]);
 
   useEffect(() => {
@@ -75,20 +75,23 @@ export default function Recipe() {
       // TODO: 여기에 실제 검색 로직 추가 (API 호출)
       console.log('Initial search for:', keyword);
     } else {
+      setSearchQuery('');
       setIsSearching(false);
     }
   }, [searchParams]);
 
   return (
     <PageLayout isTabBarVisible isBottomSpace>
+      <Header title="레시피" />
       {isSearching ? (
         <TopNavBar showBackButton onBackButtonClick={handleGoBack}>
           <SearchBar onSearchClick={handleSearchSubmit} searchQuery={searchQuery} />
         </TopNavBar>
       ) : (
         <>
-          <Header title="레시피" />
-          <SearchBar onSearchClick={handleSearchSubmit} searchQuery={searchQuery} />
+          <div className="px-4 py-3 flex-[1_0_100%]">
+            <SearchBar onSearchClick={handleSearchSubmit} searchQuery={searchQuery} />
+          </div>
           <BrandButtonList brands={brands} onSearchClick={handleBrandClick} />
         </>
       )}
