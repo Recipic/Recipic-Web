@@ -6,7 +6,7 @@ import { TRecipeCardInfo } from '@/types/recipeCard';
 
 export default function Recipe() {
   return (
-    <PageLayout isTabBarVisible>
+    <PageLayout isTabBarVisible isBottomSpace>
       <Header title="레시피" />
       <RecipeCardList recipeInfosList={recipeInfosListData} />
     </PageLayout>

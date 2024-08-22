@@ -5,7 +5,7 @@ import { SectionTitle } from '../components/SectionTitle';
 
 export default function Home() {
   return (
-    <PageLayout isTabBarVisible>
+    <PageLayout isTabBarVisible isBottomSpace>
       <CarouselWithBanners />
       <SectionTitle title="이번 달 인기 레시피" />
       <SectionTitle title="최신 HOT 브랜드" />
