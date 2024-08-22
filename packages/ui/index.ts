@@ -5,5 +5,6 @@ export { Header } from './components/ui/header';
 export { TopNavBar } from './components/ui/topNavBar';
 export { Carousel } from './components/ui/carousel';
 export { Banner } from './components/ui/banner';
+export { Card } from './components/ui/card';
 export { cn } from './lib/utils';
 import './styles/fonts.css';

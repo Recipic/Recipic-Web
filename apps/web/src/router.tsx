@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import ComponentTest from './pages/componentTest';
 import Home from './pages/home';
-import Recipe from './pages/recipie';
+import Recipe from './pages/recipe';
 import Picked from './pages/picked';
 import My from './pages/my';
 import Settings from './pages/settings';
