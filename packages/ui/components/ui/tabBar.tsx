@@ -4,20 +4,17 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 type TTabBarKey = 'home' | 'recipe' | 'favorite' | 'my';
 
-type TTabLabel = '홈' | '레시피' | '찜' | '마이';
-
 type TTabItem = {
   key: TTabBarKey;
   icon: React.ReactElement;
-  label: TTabLabel;
   path: string;
 };
 
 const tabItems: TTabItem[] = [
-  { key: 'home', icon: <HomeIcon />, label: '홈', path: '/' },
-  { key: 'recipe', icon: <MixerHorizontalIcon />, label: '레시피', path: '/recipe' },
-  { key: 'favorite', icon: <HeartIcon />, label: '찜', path: '/picked' },
-  { key: 'my', icon: <PersonIcon />, label: '마이', path: '/my' },
+  { key: 'home', icon: <HomeIcon />, path: '/' },
+  { key: 'recipe', icon: <MixerHorizontalIcon />, path: '/recipe' },
+  { key: 'favorite', icon: <HeartIcon />, path: '/picked' },
+  { key: 'my', icon: <PersonIcon />, path: '/my' },
 ];
 
 export function TabBar() {
@@ -43,14 +40,11 @@ export function TabBar() {
             className="flex flex-col items-center justify-center w-full h-full"
             onClick={() => handleTabClick(item.path)}
           >
-            <div className={`w-7 h-7 ${getActiveTab() === item.key ? 'text-black' : 'text-gray-400'}`}>
+            <div className={`w-8 h-8 ${getActiveTab() === item.key ? 'text-black' : 'text-gray-400'}`}>
               {React.cloneElement(item.icon, {
-                className: 'w-7 h-7',
+                className: 'w-8 h-8',
               })}
             </div>
-            <span className={`mt-1 text-regular12 ${getActiveTab() === item.key ? 'text-black' : 'text-gray-400'}`}>
-              {item.label}
-            </span>
           </button>
         ))}
       </div>
