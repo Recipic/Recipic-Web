@@ -6,12 +6,17 @@ import { Button } from './button';
 type TopNavBarProps = {
   children?: ReactNode;
   showBackButton?: boolean;
+  onBackButtonClick?: () => void;
 };
 
-export function TopNavBar({ children, showBackButton = true }: TopNavBarProps) {
+export function TopNavBar({ children, showBackButton = true, onBackButtonClick }: TopNavBarProps) {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
+    if (onBackButtonClick !== undefined) {
+      onBackButtonClick();
+      return;
+    }
     navigate(-1);
   };
 

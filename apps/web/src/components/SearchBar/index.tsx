@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { Button, Form, FormControl, FormField, FormItem, Input } from '@recipic-packages/ui';
@@ -6,18 +6,22 @@ import { TSearchFormValues } from '@/types/search';
 
 type TSearchBarProps = {
   onSearchClick: ({ searchQuery }: TSearchFormValues) => void;
+  searchQuery: string;
 };
 
-export function SearchBar({ onSearchClick }: TSearchBarProps) {
+export function SearchBar({ onSearchClick, searchQuery }: TSearchBarProps) {
   const form = useForm<TSearchFormValues>({
     defaultValues: {
-      searchQuery: '',
+      searchQuery: searchQuery,
     },
   });
 
+  useEffect(() => {
+    form.setValue('searchQuery', searchQuery);
+  }, [searchQuery, form]);
+
   const onSubmit = ({ searchQuery }: TSearchFormValues) => {
     onSearchClick({ searchQuery: searchQuery });
-    console.log('Search query:', searchQuery);
   };
 
   return (
