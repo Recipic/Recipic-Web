@@ -5,11 +5,13 @@ import { RecipeCardList } from '@/components/RecipeCard/RecipeCardList';
 import { TRecipeCardInfo } from '@/types/recipeCard';
 import BrandButtonList from '@/components/BrandButton/BrandButtonList';
 import { brands } from '@/constants/brands';
+import { SearchBar } from '@/components/SearchBar';
 
 export default function Recipe() {
   return (
     <PageLayout isTabBarVisible isBottomSpace>
       <Header title="레시피" />
+      <SearchBar />
       <BrandButtonList brands={brands} onClick={() => {}} /> {/* TODO: 클릭시 get 요청 */}
       <RecipeCardList recipeInfosList={recipeInfosListData} />
     </PageLayout>
