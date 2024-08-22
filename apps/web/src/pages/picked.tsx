@@ -74,7 +74,7 @@ export default function Picked() {
         </TopNavBar>
       ) : (
         <>
-          <div className="px-4 py-3 flex-[1_0_100%]">
+          <div className="px-4 py-2 flex-[1_0_100%]">
             <SearchBar onSearchClick={handleSearchSubmit} searchQuery={searchQuery} />
           </div>
         </>

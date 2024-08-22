@@ -28,7 +28,7 @@ export function TopNavBar({
 
   return (
     <div className="sticky top-0 bg-white z-10">
-      <div className={`px-4 py-3 flex items-center ${childrenPosition === 'right' ? 'justify-between' : ''}`}>
+      <div className={`px-4 py-2 flex items-center ${childrenPosition === 'right' ? 'justify-between' : ''}`}>
         <div className="flex items-center">
           {showBackButton && (
             <Button variant="ghost" size="icon" onClick={handleGoBack} className="text-black" aria-label="뒤로 가기">
