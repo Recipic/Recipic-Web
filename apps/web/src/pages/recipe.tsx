@@ -3,16 +3,20 @@ import { Header, PageLayout } from '@recipic-packages/ui';
 import MockThumbnail from '@/assets/images/mockBanner.webp';
 import { RecipeCardList } from '@/components/RecipeCard/RecipeCardList';
 import { TRecipeCardInfo } from '@/types/recipeCard';
+import BrandButtonList from '@/components/BrandButton/BrandButtonList';
+import { brands } from '@/constants/brands';
 
 export default function Recipe() {
   return (
     <PageLayout isTabBarVisible isBottomSpace>
       <Header title="레시피" />
+      <BrandButtonList brands={brands} onClick={() => {}} /> {/* TODO: 클릭시 get 요청 */}
       <RecipeCardList recipeInfosList={recipeInfosListData} />
     </PageLayout>
   );
 }
 
+//TODO: 목데이터. 추후 삭제 예정
 const recipeInfosListData: TRecipeCardInfo[] = [
   {
     recipeId: 101,
