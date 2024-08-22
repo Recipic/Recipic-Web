@@ -4,7 +4,12 @@ import { HeartIcon, ChatBubbleIcon } from '@radix-ui/react-icons';
 import { getBrandImage, formatBrandToHangeul } from '@/utils/formatBrand';
 import { TRecipeCardInfo } from '@/types/recipeCard';
 
+type TRecipeCardProps = {
+  onClick: () => void;
+} & TRecipeCardInfo;
+
 export function RecipeCard({
+  onClick,
   thunbnailUrl,
   scrapCount,
   commentCount,
@@ -12,12 +17,12 @@ export function RecipeCard({
   title,
   description,
   brand,
-}: TRecipeCardInfo) {
+}: TRecipeCardProps) {
   const brandImage = getBrandImage(brand);
   const displayDescription = description.length > 30 ? `${description.substring(0, 30)}...` : description;
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="max-w-2xl mx-auto" onClick={onClick}>
       <Card className="bg-white rounded-lg overflow-hidden flex flex-row md:flex-nowrap" style={{ height: '210px' }}>
         <div className="flex-none w-full md:w-2/5 relative">
           {thunbnailUrl ? (

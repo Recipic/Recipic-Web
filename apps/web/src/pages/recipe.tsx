@@ -84,7 +84,7 @@ export default function Recipe() {
     <PageLayout isTabBarVisible isBottomSpace>
       <Header title="레시피" />
       {isSearching ? (
-        <TopNavBar showBackButton onBackButtonClick={handleGoBack}>
+        <TopNavBar showBackButton onBackButtonClick={handleGoBack} childrenPosition="center">
           <SearchBar onSearchClick={handleSearchSubmit} searchQuery={searchQuery} />
         </TopNavBar>
       ) : (

@@ -69,7 +69,7 @@ export default function Picked() {
     <PageLayout isTabBarVisible isBottomSpace>
       <Header title="찜" />
       {isSearching ? (
-        <TopNavBar showBackButton onBackButtonClick={handleGoBack}>
+        <TopNavBar showBackButton onBackButtonClick={handleGoBack} childrenPosition="center">
           <SearchBar onSearchClick={handleSearchSubmit} searchQuery={searchQuery} />
         </TopNavBar>
       ) : (

@@ -26,14 +26,14 @@ export function SearchBar({ onSearchClick, searchQuery }: TSearchBarProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex items-center">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex items-center w-full">
         <FormField
           control={form.control}
           name="searchQuery"
           render={({ field }) => (
             <FormItem className="flex-grow">
               <FormControl>
-                <Input placeholder="브랜드, 재료 등" {...field} className="w-full" />
+                <Input placeholder="브랜드, 재료 등" {...field} />
               </FormControl>
             </FormItem>
           )}

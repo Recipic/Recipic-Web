@@ -32,6 +32,7 @@ export default function ComponentTest() {
         </Button>
         <div className="px-4 flex-[1_0_100%]">
           <RecipeCard
+            onClick={() => console.log('Recipe card clicked')}
             recipeId={recipeData.recipeId}
             userId={recipeData.userId}
             title={recipeData.title}

@@ -7,9 +7,15 @@ type TopNavBarProps = {
   children?: ReactNode;
   showBackButton?: boolean;
   onBackButtonClick?: () => void;
+  childrenPosition?: 'left' | 'right' | 'center';
 };
 
-export function TopNavBar({ children, showBackButton = true, onBackButtonClick }: TopNavBarProps) {
+export function TopNavBar({
+  children,
+  showBackButton = true,
+  onBackButtonClick,
+  childrenPosition = 'left',
+}: TopNavBarProps) {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
@@ -22,15 +28,17 @@ export function TopNavBar({ children, showBackButton = true, onBackButtonClick }
 
   return (
     <div className="sticky top-0 bg-white z-10">
-      <div className="px-4 py-3 flex justify-between items-center">
+      <div className={`px-4 py-3 flex items-center ${childrenPosition === 'right' ? 'justify-between' : ''}`}>
         <div className="flex items-center">
           {showBackButton && (
-            <Button variant="ghost" size="icon" onClick={handleGoBack} className=" text-black" aria-label="뒤로 가기">
+            <Button variant="ghost" size="icon" onClick={handleGoBack} className="text-black" aria-label="뒤로 가기">
               <ChevronLeftIcon className="h-8 w-8" />
             </Button>
           )}
+          {childrenPosition === 'left' && children}
         </div>
-        {children && <div className="flex-grow">{children}</div>}
+        {childrenPosition === 'center' && <div className="flex-grow flex justify-center">{children}</div>}
+        {childrenPosition === 'right' && <div>{children}</div>}
       </div>
     </div>
   );
