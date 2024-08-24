@@ -4,8 +4,8 @@ import { Header, PageLayout, TopNavBar } from '@recipic-packages/ui';
 export default function Settings() {
   return (
     <PageLayout>
-      <TopNavBar />
-      <Header title="설정" />
+      <TopNavBar order="first" />
+      <Header title="설정" order="second" />
     </PageLayout>
   );
 }

@@ -8,7 +8,7 @@ type TopNavBarProps = {
   showBackButton?: boolean;
   onBackButtonClick?: () => void;
   childrenPosition?: 'left' | 'right' | 'center';
-  order?: 'first' | 'second';
+  order: 'first' | 'second';
 };
 
 export function TopNavBar({
