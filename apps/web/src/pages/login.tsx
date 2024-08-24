@@ -1,10 +1,11 @@
 // src/pages/Login.tsx
 import React, { useEffect } from 'react';
 import { PageLayout } from '@recipic-packages/ui';
-import RecipicIcon from '../../public/Icons/RecipicIcon.png'; // 경로 확인 필요
-import { BASE_URL } from '../env';
+import RecipicIcon from '../../public/Icons/RecipicIcon.png';
 import axios from 'axios';
 const Login: React.FC = () => {
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+
   //   카카오 정보제공동의 후 인가코드(Authorization code) 획득
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
@@ -27,7 +28,7 @@ const Login: React.FC = () => {
   const sendCodeToServer = async (code: string): Promise<void> => {
     try {
       const response = await axios.post<ApiResponse>(
-        `${BASE_URL}/api/auth/kakao`,
+        `${baseUrl}/api/auth/kakao`,
         {
           authorizationCode: code,
         },

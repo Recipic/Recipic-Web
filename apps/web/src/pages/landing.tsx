@@ -3,10 +3,12 @@ import React, { useEffect } from 'react';
 import { PageLayout } from '@recipic-packages/ui';
 import RecipicIcon from '../../public/Icons/RecipicIcon.png'; // 경로 확인 필요
 import kakaoLoginButton from '../assets/images/kakao_login_medium_wide.png'; // 카카오 로그인 버튼 이미지 경로
-import { REST_API_KEY, REDIRECT_URL } from '../env';
+
 import axios from 'axios';
 const Landing: React.FC = () => {
-  const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URL}&response_type=code`;
+  const redirectUrl = import.meta.env.VITE_REDIRECT_URL;
+  const apiKey = import.meta.env.VITE_REST_API_KEY;
+  const link = `https://kauth.kakao.com/oauth/authorize?client_id=${apiKey}&redirect_uri=${redirectUrl}&response_type=code`;
   const loginHandler = () => {
     console.log('Kakao login is clicked.');
     window.location.href = link;

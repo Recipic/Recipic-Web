@@ -1,6 +1,7 @@
 import React from 'react';
 import SettingsBannerComponent from '../components/SettingsBannerComponent';
 import { Header, PageLayout, TopNavBar } from '@recipic-packages/ui';
+
 interface BannerProps {
   title: string;
   route: string;
