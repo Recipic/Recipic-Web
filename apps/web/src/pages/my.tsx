@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 export default function My() {
   const navigate = useNavigate();
   return (
-    <PageLayout isTabBarVisible isBottomSpace>
-      <Header title="마이">
+    <PageLayout isTabBarVisible isBottomSpace isHeaderVisible>
+      <Header title="마이" order="first">
         <Button
           variant="ghost"
           size="icon"

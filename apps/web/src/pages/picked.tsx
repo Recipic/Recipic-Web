@@ -66,8 +66,8 @@ export default function Picked() {
   }, [searchParams]);
 
   return (
-    <PageLayout isTabBarVisible isBottomSpace>
-      <Header title="찜" />
+    <PageLayout isTabBarVisible isBottomSpace isHeaderVisible>
+      <Header title="찜" order="first" />
       {isSearching ? (
         <TopNavBar showBackButton onBackButtonClick={handleGoBack} childrenPosition="center">
           <SearchBar onSearchClick={handleSearchSubmit} searchQuery={searchQuery} />

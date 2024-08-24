@@ -8,6 +8,7 @@ type TopNavBarProps = {
   showBackButton?: boolean;
   onBackButtonClick?: () => void;
   childrenPosition?: 'left' | 'right' | 'center';
+  order?: 'first' | 'second';
 };
 
 export function TopNavBar({
@@ -15,11 +16,12 @@ export function TopNavBar({
   showBackButton = true,
   onBackButtonClick,
   childrenPosition = 'left',
+  order = 'first',
 }: TopNavBarProps) {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
-    if (onBackButtonClick !== undefined) {
+    if (onBackButtonClick) {
       onBackButtonClick();
       return;
     }
@@ -27,8 +29,8 @@ export function TopNavBar({
   };
 
   return (
-    <div className="sticky top-0 bg-white z-10">
-      <div className={`px-4 py-2 flex items-center ${childrenPosition === 'right' ? 'justify-between' : ''}`}>
+    <div className={`fixed top-0 bg-white z-10 w-full ${order === 'second' ? 'mt-12' : ''}`}>
+      <div className={`px-4 py-1 flex items-center ${childrenPosition === 'right' ? 'justify-between' : ''}`}>
         <div className="flex items-center">
           {showBackButton && (
             <Button variant="ghost" size="icon" onClick={handleGoBack} className="text-black" aria-label="뒤로 가기">

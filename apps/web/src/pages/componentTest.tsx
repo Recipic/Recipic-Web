@@ -10,9 +10,9 @@ export default function ComponentTest() {
   const [count, setCount] = useState(0);
 
   return (
-    <PageLayout isTabBarVisible={false}>
-      <TopNavBar />
-      <Header title="테스트 페이지">
+    <PageLayout isTabBarVisible={false} isHeaderVisible isTopNavBarVisible>
+      <TopNavBar order="first" />
+      <Header title="테스트 페이지" order="second">
         <Button variant="secondary" onClick={() => setCount(count => count + 1)}>
           버튼1
         </Button>

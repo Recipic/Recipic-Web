@@ -81,8 +81,8 @@ export default function Recipe() {
   }, [searchParams]);
 
   return (
-    <PageLayout isTabBarVisible isBottomSpace>
-      <Header title="레시피" />
+    <PageLayout isTabBarVisible isBottomSpace isHeaderVisible>
+      <Header title="레시피" order="first" />
       {isSearching ? (
         <TopNavBar showBackButton onBackButtonClick={handleGoBack} childrenPosition="center">
           <SearchBar onSearchClick={handleSearchSubmit} searchQuery={searchQuery} />
@@ -92,7 +92,7 @@ export default function Recipe() {
           <div className="px-4 py-2 flex-[1_0_100%]">
             <SearchBar onSearchClick={handleSearchSubmit} searchQuery={searchQuery} />
           </div>
-          <BrandButtonList brands={brands} onSearchClick={handleBrandClick} />
+          <BrandButtonList brands={brands} onSearchClick={handleBrandClick} gridCols={5} />
         </>
       )}
       <RecipeCardList recipeInfosList={recipeInfosListData} />
