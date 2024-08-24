@@ -1,17 +1,18 @@
 import React, { ReactNode } from 'react';
+import { TOrderType } from '../../types/order';
 
 type HeaderPropsWithTitle = {
   title: string;
   titleImage?: never;
   children?: ReactNode;
-  order: 'first' | 'second';
+  order: TOrderType;
 };
 
 type HeaderPropsWithImage = {
   title?: never;
   titleImage: string;
   children?: ReactNode;
-  order: 'first' | 'second';
+  order: TOrderType;
 };
 
 type HeaderProps = HeaderPropsWithTitle | HeaderPropsWithImage;

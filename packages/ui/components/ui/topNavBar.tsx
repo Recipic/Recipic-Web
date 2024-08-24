@@ -2,13 +2,16 @@ import React, { ReactNode } from 'react';
 import { ChevronLeftIcon } from '@radix-ui/react-icons';
 import { useNavigate } from 'react-router-dom';
 import { Button } from './button';
+import { TOrderType } from '../../types/order';
+
+type TChildrenPosition = 'left' | 'right' | 'center';
 
 type TopNavBarProps = {
   children?: ReactNode;
   showBackButton?: boolean;
   onBackButtonClick?: () => void;
-  childrenPosition?: 'left' | 'right' | 'center';
-  order: 'first' | 'second';
+  childrenPosition?: TChildrenPosition;
+  order: TOrderType;
 };
 
 export function TopNavBar({
