@@ -29,7 +29,7 @@ export function TopNavBar({
   };
 
   return (
-    <div className={`fixed top-0 bg-white z-10 w-full ${order === 'second' ? 'mt-12' : ''}`}>
+    <div className={`fixed top-0 bg-white z-10 w-full max-w-lg ${order === 'second' ? 'mt-12' : ''}`}>
       <div className={`px-4 py-1 flex items-center ${childrenPosition === 'right' ? 'justify-between' : ''}`}>
         <div className="flex items-center">
           {showBackButton && (

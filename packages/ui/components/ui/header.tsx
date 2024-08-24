@@ -18,7 +18,7 @@ type HeaderProps = HeaderPropsWithTitle | HeaderPropsWithImage;
 
 export function Header({ title, titleImage, children, order = 'first' }: HeaderProps) {
   return (
-    <div className={`fixed top-0 bg-white z-10 w-full ${order === 'second' ? 'mt-12' : ''}`}>
+    <div className={`fixed top-0 bg-white z-10 w-full max-w-lg ${order === 'second' ? 'mt-12' : ''}`}>
       <div className="px-4 py-1 flex justify-between items-center">
         {title ? (
           <h1 className="text-H1 font-semibold">{title}</h1>
