@@ -9,7 +9,9 @@ import {
   BellIcon,
   PaperPlaneIcon,
   InstagramLogoIcon,
+  FileTextIcon,
 } from '@radix-ui/react-icons';
+import DislikeIcon from '../../public/Icons/DislikeIcon.png';
 import { useNavigate } from 'react-router-dom';
 interface BannerProps {
   title: string;
@@ -19,9 +21,16 @@ interface BannerProps {
 
 export default function My() {
   const navigate = useNavigate();
-  const bannerItems: BannerProps[] = [
+  const userMenuItems: BannerProps[] = [
     { title: '내가 작성한 레시피', icon: <Pencil2Icon />, route: '/my-recipes' },
-    { title: '내가 작성한 댓글', icon: <KeyboardIcon />, route: '/my-comments' },
+    {
+      title: '싫어하는 재료',
+      icon: <img src={DislikeIcon} alt="Dislike Icon" className="w-4 h-4" />,
+      route: '/filter-ingredients',
+    },
+    { title: '내가 작성한 댓글', icon: <FileTextIcon />, route: '/my-comments' },
+  ];
+  const bannerItems: BannerProps[] = [
     { title: '공지사항', icon: <BellIcon />, route: '/notice' },
     { title: '문의하기', icon: <PaperPlaneIcon />, route: '/inquiry' },
     { title: '공식 인스타그램', icon: <InstagramLogoIcon />, route: '/instagram' },
@@ -39,6 +48,7 @@ export default function My() {
           <GearIcon className="h-7 w-7" />
         </Button>
       </Header>
+      <br />
       <div className="flex items-center m-6">
         <img src="https://via.placeholder.com/100" alt="Profile" className="w-12 h-12 rounded-full" />
         <div className="ml-4">
@@ -48,6 +58,18 @@ export default function My() {
           </div>
         </div>
       </div>
+      <div className="my-12"></div>
+
+      <div className="flex justify-between mx-7 my-4">
+        {userMenuItems.map((item, index) => (
+          <div key={index} className="flex flex-col items-center cursor-pointer" onClick={() => navigate(item.route)}>
+            {item.icon}
+            <span className="mt-2 text-sm">{item.title}</span>
+          </div>
+        ))}
+      </div>
+      <div className="my-12"></div>
+
       {bannerItems.map((item, index) => (
         <BannerComponent key={index} title={item.title} icon={item.icon} route={item.route} />
       ))}
