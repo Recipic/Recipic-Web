@@ -37,7 +37,7 @@ export default function My() {
   ];
 
   return (
-    <PageLayout isTabBarVisible>
+    <PageLayout isTabBarVisible isBottomSpace>
       <Header title="마이">
         <Button
           variant="ghost"
