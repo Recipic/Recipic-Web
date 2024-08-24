@@ -4,10 +4,14 @@ import { Header, PageLayout, TopNavBar } from '@recipic-packages/ui';
 import MockThumbnail from '@/assets/images/mockBanner.webp';
 import { RecipeCardList } from '@/components/RecipeCard/RecipeCardList';
 import { TRecipeCardInfo } from '@/types/recipeCard';
+import BrandButtonList from '@/components/BrandButton/BrandButtonList';
+import { brands } from '@/constants/brands';
 import { SearchBar } from '@/components/SearchBar';
 import { TSearchFormValues } from '@/types/search';
+import { formatBrandToHangeul } from '@/utils/formatBrand';
+import { TBrand } from '@/types/brand';
 
-export default function Picked() {
+export default function Recipe() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState<string>(searchParams.get('keyword') || '');
   const [isSearching, setIsSearching] = useState(() => {
@@ -46,6 +50,17 @@ export default function Picked() {
     [handleSearch],
   );
 
+  /**
+   * 브랜드 버튼 클릭을 처리하는 함수
+   * @param {TBrand} searchBrand - 클릭된 브랜드
+   */
+  const handleBrandClick = useCallback(
+    (searchBrand: TBrand) => {
+      handleSearch({ searchQuery: formatBrandToHangeul(searchBrand) });
+    },
+    [handleSearch],
+  );
+
   const handleGoBack = useCallback(() => {
     setIsSearching(false);
     setSearchQuery('');
@@ -67,7 +82,7 @@ export default function Picked() {
 
   return (
     <PageLayout isTabBarVisible isBottomSpace>
-      <Header title="찜" />
+      <Header title="레시피" />
       {isSearching ? (
         <TopNavBar showBackButton onBackButtonClick={handleGoBack} childrenPosition="center">
           <SearchBar onSearchClick={handleSearchSubmit} searchQuery={searchQuery} />
@@ -77,15 +92,16 @@ export default function Picked() {
           <div className="px-4 py-2 flex-[1_0_100%]">
             <SearchBar onSearchClick={handleSearchSubmit} searchQuery={searchQuery} />
           </div>
+          <BrandButtonList brands={brands} onSearchClick={handleBrandClick} />
         </>
       )}
-      <RecipeCardList recipeInfosList={pickedRecipeInfosListData} />
+      <RecipeCardList recipeInfosList={recipeInfosListData} />
     </PageLayout>
   );
 }
 
 //TODO: 목데이터. 추후 삭제 예정
-const pickedRecipeInfosListData: TRecipeCardInfo[] = [
+const recipeInfosListData: TRecipeCardInfo[] = [
   {
     recipeId: 1,
     userId: 'user456',
