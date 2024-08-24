@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Header, PageLayout } from '@recipic-packages/ui';
-import { CarouselWithBanners } from '../components/CarouselWithBanners';
-import { SectionTitle } from '../components/SectionTitle';
+import { CarouselWithBanners } from '@/components/CarouselWithBanners';
+import { Section } from '@/components/Section';
 import { TBrand } from '@/types/brand';
 import { useNavigate } from 'react-router-dom';
 import { formatBrandToHangeul } from '@/utils/formatBrand';
@@ -46,12 +46,15 @@ export default function Home() {
         </Button>
       </Header>
       <CarouselWithBanners />
-      <SectionTitle title="이번 달 인기 레시피" />
-      <VerticalRecipeCardList recipeInfosList={recipeInfosListData} />
-      <SectionTitle title="최신 HOT 브랜드" />
-      <BrandButtonList brands={brands} onSearchClick={handleBrandClick} gridCols={4} />
-      <SectionTitle title="유명인의 인기 레시피" />
-      <VerticalRecipeCardList recipeInfosList={recipeInfosListData} />
+      <Section title="이번 달 인기 레시피">
+        <VerticalRecipeCardList recipeInfosList={recipeInfosListData} />
+      </Section>
+      <Section title="최신 HOT 브랜드">
+        <BrandButtonList brands={brands} onSearchClick={handleBrandClick} gridCols={4} />
+      </Section>
+      <Section title="유명인의 인기 레시피">
+        <VerticalRecipeCardList recipeInfosList={recipeInfosListData} />
+      </Section>
     </PageLayout>
   );
 }

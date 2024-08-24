@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Header, PageLayout, TopNavBar } from '@recipic-packages/ui';
 import { CarouselWithBanners } from '@/components/CarouselWithBanners';
-import { SectionTitle } from '@/components/SectionTitle';
+import { Section } from '@/components/Section';
 import { TRecipeCardInfo } from '@/types/recipeCard';
 import { RecipeCard } from '@/components/RecipeCard';
 import MockThumbnail from '@/assets/images/mockBanner.webp';
@@ -20,7 +20,7 @@ export default function ComponentTest() {
           버튼2
         </Button>
       </Header>
-      <SectionTitle title="테스트 섹션 타이틀" />
+      <Section title="테스트 섹션 타이틀" />
       <div className="space-y-4 mt-4">
         <CarouselWithBanners />
         <Button onClick={() => setCount(count => count + 1)}>count is {count}</Button>
