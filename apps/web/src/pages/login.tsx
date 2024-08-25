@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { PageLayout } from '@recipic-packages/ui';
-import RecipicIcon from '../../public/Icons/RecipicIcon.png';
+import RecipicIcon from '../assets/images/RecipicIcon.png';
 import axios from 'axios';
 const Login: React.FC = () => {
   const baseUrl = import.meta.env.VITE_BASE_URL;
