@@ -2,11 +2,14 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import ComponentTest from './pages/componentTest';
 import Home from './pages/home';
-import Recipe from './pages/recipie';
+import Recipe from './pages/recipe';
 import Picked from './pages/picked';
 import My from './pages/my';
 import Settings from './pages/settings';
 import MyComments from './pages/mycomments';
+import RecipeDetail from './pages/recipeDetail';
+import Landing from './pages/landing';
+import Login from './pages/login';
 
 export default function Router() {
   return (
@@ -19,6 +22,12 @@ export default function Router() {
       <Route path="/settings" element={<Settings />} /> {/* 설정 */}
       <Route path="/my-comments" element={<MyComments />} />
       {/* 내가 작성한 댓글 */}
+      <Route path="/recipe/:id" element={<RecipeDetail />} /> {/* 레시피 상세 */}
+      <Route path="/landing" element={<Landing />} />
+      {/* 랜딩페이지 */}
+      <Route path="/oauth/kakao" element={<Login />} />
+      {/* 로그인페이지 */}
+      <Route path="/recipe/:id" element={<RecipeDetail />} /> {/* 레시피 상세 */}
     </Routes>
   );
 }

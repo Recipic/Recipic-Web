@@ -37,8 +37,8 @@ export default function My() {
   ];
 
   return (
-    <PageLayout isTabBarVisible>
-      <Header title="마이">
+    <PageLayout isTabBarVisible isBottomSpace isHeaderVisible>
+      <Header title="마이" order="first">
         <Button
           variant="ghost"
           size="icon"
@@ -65,7 +65,7 @@ export default function My() {
         {userMenuItems.map((item, index) => (
           <div
             key={index}
-            className="flex flex-col text-center text-[3vw] items-center cursor-pointer w-[27vw]"
+            className="flex flex-col text-center text-4 items-center cursor-pointer w-[27vw]"
             onClick={() => navigate(item.route)}
           >
             {item.icon}

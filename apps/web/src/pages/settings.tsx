@@ -1,6 +1,7 @@
 import React from 'react';
 import SettingsBannerComponent from '../components/SettingsBannerComponent';
 import { Header, PageLayout, TopNavBar } from '@recipic-packages/ui';
+
 interface BannerProps {
   title: string;
   route: string;
@@ -23,9 +24,9 @@ export default function Settings() {
   ];
   return (
     <PageLayout>
-      <TopNavBar />
-      <Header title="설정" />
-      <div className="mt-8 mb-8">
+      <Header title="설정" order="second" />
+      <TopNavBar order="first" />
+      <div className="mt-28 mb-8">
         <h2 className="text-gray-500 text-sm mb-2 ml-4">유저</h2>
         {userSettings.map((item, index) => (
           <SettingsBannerComponent key={index} title={item.title} route={item.route} />
