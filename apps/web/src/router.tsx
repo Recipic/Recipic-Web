@@ -8,7 +8,8 @@ import My from './pages/my';
 import Settings from './pages/settings';
 import RecipeDetail from './pages/recipeDetail';
 import MyComments from './pages/mycomments';
-
+import Landing from './pages/landing';
+import Login from './pages/login';
 export default function Router() {
   return (
     <Routes>
@@ -21,6 +22,10 @@ export default function Router() {
       <Route path="/recipe/:id" element={<RecipeDetail />} /> {/* 레시피 상세 */}
       <Route path="/my-comments" element={<MyComments />} />
       {/* 내가 작성한 댓글 */}
+      <Route path="/landing" element={<Landing />} />
+      {/* 랜딩페이지 */}
+      <Route path="/oauth/kakao" element={<Login />} />
+      {/* 로그인페이지 */}
     </Routes>
   );
 }
