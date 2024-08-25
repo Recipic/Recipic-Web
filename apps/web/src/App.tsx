@@ -1,16 +1,15 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Router from './router';
-import useScrollToTop from './hooks/useScrollToTop';
 import { CookiesProvider } from 'react-cookie';
+import ScrollToTop from './components/ScrollToTop';
 
 const App = () => {
-  useScrollToTop();
-
   return (
     <CookiesProvider>
       <BrowserRouter>
         <Router />
+        <ScrollToTop />
       </BrowserRouter>
     </CookiesProvider>
   );
