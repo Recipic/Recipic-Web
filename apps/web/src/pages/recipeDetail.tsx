@@ -14,8 +14,8 @@ export default function RecipeDetail() {
   };
 
   return (
-    <PageLayout isBottomSpace>
-      <TopNavBar showBackButton childrenPosition="right">
+    <PageLayout isBottomSpace isTopNavBarVisible>
+      <TopNavBar showBackButton childrenPosition="right" order="first">
         <Button variant="ghost" size="icon" onClick={handleLikeClick} className="text-black" aria-label="좋아요">
           {isLiked ? <HeartFilledIcon className="h-7 w-7 text-red-500" /> : <HeartIcon className="h-7 w-7" />}
         </Button>

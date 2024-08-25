@@ -24,7 +24,8 @@ export default function Settings() {
   ];
   return (
     <PageLayout>
-      <TopNavBar />
+       <TopNavBar order="first" />
+      <Header title="설정" order="second" />
       <Header title="설정" />
       <div className="mt-8 mb-8">
         <h2 className="text-gray-500 text-sm mb-2 ml-4">유저</h2>
