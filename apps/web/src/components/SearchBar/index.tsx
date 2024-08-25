@@ -26,7 +26,7 @@ export function SearchBar({ onSearchClick, searchQuery }: TSearchBarProps) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="flex items-center w-full">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="flex items-center w-full gap-1 h-10">
         <FormField
           control={form.control}
           name="searchQuery"

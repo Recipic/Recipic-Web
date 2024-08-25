@@ -23,8 +23,8 @@ export default function Settings() {
   ];
   return (
     <PageLayout>
-      <TopNavBar />
-      <Header title="설정" />
+      <TopNavBar order="first" />
+      <Header title="설정" order="second" />
       <div className="mt-8 mb-8">
         <h2 className="text-gray-500 text-sm mb-2 ml-4">유저</h2>
         {userSettings.map((item, index) => (
