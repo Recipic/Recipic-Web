@@ -5,7 +5,7 @@ import RecipicIcon from '../../public/Icons/RecipicIcon.png'; // 경로 확인 �
 import kakaoLoginButton from '../assets/images/kakao_login_medium_wide.png'; // 카카오 로그인 버튼 이미지 경로
 
 import axios from 'axios';
-const Landing: React.FC = () => {
+export default function Landing() {
   const redirectUrl = import.meta.env.VITE_REDIRECT_URL;
   const apiKey = import.meta.env.VITE_REST_API_KEY;
   const link = `https://kauth.kakao.com/oauth/authorize?client_id=${apiKey}&redirect_uri=${redirectUrl}&response_type=code`;
@@ -26,6 +26,4 @@ const Landing: React.FC = () => {
       </div>
     </PageLayout>
   );
-};
-
-export default Landing;
+}

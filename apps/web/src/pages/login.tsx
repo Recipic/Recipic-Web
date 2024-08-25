@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { PageLayout } from '@recipic-packages/ui';
 import RecipicIcon from '../../public/Icons/RecipicIcon.png';
 import axios from 'axios';
-const Login: React.FC = () => {
+export default function Login() {
   const baseUrl = import.meta.env.VITE_BASE_URL;
 
   //   카카오 정보제공동의 후 인가코드(Authorization code) 획득
@@ -52,6 +52,4 @@ const Login: React.FC = () => {
       </div>
     </PageLayout>
   );
-};
-
-export default Login;
+}
