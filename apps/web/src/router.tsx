@@ -26,7 +26,7 @@ export default function Router() {
       <Route path="/landing" element={<Landing />} />
       {/* 랜딩페이지 */}
       <Route path="/oauth/kakao" element={<Login />} />
-      {/* 랜딩페이지 */}
+      {/* 로그인페이지 */}
       <Route path="/recipe/:id" element={<RecipeDetail />} /> {/* 레시피 상세 */}
     </Routes>
   );
