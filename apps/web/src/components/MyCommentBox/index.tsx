@@ -10,7 +10,7 @@ export default function CommentComponent(props: CommentProps) {
   return (
     <div
       onClick={handleClick}
-      className="w-[90%] flex flex-col border rounded-lg p-4 shadow-sm bg-white cursor-pointer transform transition-transform duration-300 ease-out hover:scale-105 hover:shadow-lg"
+      className="w-[100%] flex flex-col border rounded-lg p-4 shadow-sm bg-white cursor-pointer transform transition-transform duration-300 ease-out hover:scale-105 hover:shadow-lg"
     >
       <div className="flex justify-between items-start mb-3">
         <div className="flex items-center">

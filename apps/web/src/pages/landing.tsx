@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import { PageLayout } from '@recipic-packages/ui';
 import RecipicIcon from '../../public/Icons/RecipicIcon.png'; // 경로 확인 필요
+import axios from 'axios';
 import kakaoLogo from '../assets/kakaoLogo.svg';
 
 export default function Landing() {

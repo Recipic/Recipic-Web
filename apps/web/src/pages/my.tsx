@@ -21,20 +21,6 @@ interface BannerProps {
 
 export default function My() {
   const navigate = useNavigate();
-  const userMenuItems: BannerProps[] = [
-    { title: '내가 작성한 레시피', icon: <Pencil2Icon className="w-6 h-6" />, route: '/my-recipes' },
-    {
-      title: '싫어하는 재료',
-      icon: <img src={DislikeIcon} alt="Dislike Icon" className="w-6 h-6" />,
-      route: '/filter-ingredients',
-    },
-    { title: '내가 작성한 댓글', icon: <FileTextIcon className="w-6 h-6" />, route: '/my-comments' },
-  ];
-  const bannerItems: BannerProps[] = [
-    { title: '공지사항', icon: <BellIcon />, route: '/notice' },
-    { title: '문의하기', icon: <PaperPlaneIcon />, route: '/inquiry' },
-    { title: '공식 인스타그램', icon: <InstagramLogoIcon />, route: '/instagram' },
-  ];
 
   return (
     <PageLayout isTabBarVisible isBottomSpace isHeaderVisible>
@@ -81,3 +67,18 @@ export default function My() {
     </PageLayout>
   );
 }
+
+const userMenuItems: BannerProps[] = [
+  { title: '내가 작성한 레시피', icon: <Pencil2Icon className="w-6 h-6" />, route: '/my-recipes' },
+  {
+    title: '싫어하는 재료',
+    icon: <img src={DislikeIcon} alt="Dislike Icon" className="w-6 h-6" />,
+    route: '/filter-ingredients',
+  },
+  { title: '내가 작성한 댓글', icon: <FileTextIcon className="w-6 h-6" />, route: '/my-comments' },
+];
+const bannerItems: BannerProps[] = [
+  { title: '공지사항', icon: <BellIcon />, route: '/notice' },
+  { title: '문의하기', icon: <PaperPlaneIcon />, route: '/inquiry' },
+  { title: '공식 인스타그램', icon: <InstagramLogoIcon />, route: '/instagram' },
+];
