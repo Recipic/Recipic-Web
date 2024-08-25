@@ -52,6 +52,9 @@ export default function My() {
         ))}
       </div>
       <div className="my-12"></div>
+      {bannerItems.map((item, index) => (
+        <BannerComponent key={index} title={item.title} icon={item.icon} route={item.route} />
+      ))}
     </PageLayout>
   );
 }
