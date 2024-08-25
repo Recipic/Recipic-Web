@@ -6,6 +6,7 @@ import { RecipeCardList } from '@/components/RecipeCard/RecipeCardList';
 import { TRecipeCardInfo } from '@/types/recipeCard';
 import { SearchBar } from '@/components/SearchBar';
 import { TSearchFormValues } from '@/types/search';
+import { useAuth } from '@/contexts/auth/authProvider';
 
 export default function Picked() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -14,6 +15,7 @@ export default function Picked() {
     const keyword = searchParams.get('keyword');
     return keyword !== null && keyword !== '';
   });
+  const { isLoggedIn } = useAuth(); // 로그인 여부
 
   /**
    * 검색을 처리하는 함수
