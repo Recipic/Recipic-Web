@@ -1,15 +1,9 @@
 import { HeartFilledIcon } from '@radix-ui/react-icons';
 import { CommentProps } from '../../pages/mycomments';
 import { useNavigate } from 'react-router-dom';
-const CommentComponent: React.FC<CommentProps> = ({
-  mainTitle,
-  brandImage,
-  comment,
-  likesCount,
-  publishDate,
-  recipieId,
-}) => {
+export default function CommentComponent(props: CommentProps) {
   const navigate = useNavigate();
+  const { mainTitle, brandImage, comment, likesCount, publishDate, recipieId } = props;
   const handleClick = () => {
     navigate(`/recipies/${recipieId}`);
   };
@@ -36,6 +30,4 @@ const CommentComponent: React.FC<CommentProps> = ({
       </div>
     </div>
   );
-};
-
-export default CommentComponent;
+}

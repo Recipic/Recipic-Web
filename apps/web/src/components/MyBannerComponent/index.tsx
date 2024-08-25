@@ -7,9 +7,9 @@ interface BannerProps {
   route: string;
 }
 
-const BannerComponent: React.FC<BannerProps> = ({ title, icon, route }) => {
+export default function BannerComponent(props: BannerProps) {
   const navigate = useNavigate();
-
+  const { title, icon, route } = props;
   const handleClick = () => {
     navigate(route);
   };
@@ -20,6 +20,4 @@ const BannerComponent: React.FC<BannerProps> = ({ title, icon, route }) => {
       <div className="text-lg font-semibold">{title}</div>
     </div>
   );
-};
-
-export default BannerComponent;
+}
