@@ -39,6 +39,19 @@ export default function My() {
         </div>
       </div>
       <div className="my-12"></div>
+      <div className="flex justify-between mx-7 my-4">
+        {userMenuItems.map((item, index) => (
+          <div
+            key={index}
+            className="flex flex-col text-center text-4 items-center cursor-pointer w-[27vw]"
+            onClick={() => navigate(item.route)}
+          >
+            {item.icon}
+            <span className="mt-2 text-sm">{item.title}</span>
+          </div>
+        ))}
+      </div>
+      <div className="my-12"></div>
     </PageLayout>
   );
 }
@@ -48,3 +61,18 @@ interface BannerProps {
   icon: React.ReactNode;
   route: string;
 }
+
+const userMenuItems: BannerProps[] = [
+  { title: '내가 작성한 레시피', icon: <Pencil2Icon className="w-6 h-6" />, route: '/my-recipes' },
+  {
+    title: '싫어하는 재료',
+    icon: <img src={DislikeIcon} alt="Dislike Icon" className="w-6 h-6" />,
+    route: '/filter-ingredients',
+  },
+  { title: '내가 작성한 댓글', icon: <FileTextIcon className="w-6 h-6" />, route: '/my-comments' },
+];
+const bannerItems: BannerProps[] = [
+  { title: '공지사항', icon: <BellIcon />, route: '/notice' },
+  { title: '문의하기', icon: <PaperPlaneIcon />, route: '/inquiry' },
+  { title: '공식 인스타그램', icon: <InstagramLogoIcon />, route: '/instagram' },
+];
