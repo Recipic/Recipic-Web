@@ -1,4 +1,5 @@
 import React from 'react';
+import MyCommentBox from '../components/MyCommentBox';
 import { Header, PageLayout, TopNavBar } from '@recipic-packages/ui';
 import { ImageIcon } from '@radix-ui/react-icons';
 
@@ -7,6 +8,18 @@ export default function MyComments() {
     <PageLayout>
       <Header title="내가 작성한 댓글" order="second" />
       <TopNavBar order="first" />
+      <div className="flex flex-col items-center px-4 gap-y-6 mt-24">
+        {commentItems.map(comment => (
+          <MyCommentBox
+            mainTitle={comment.mainTitle}
+            brandImage={comment.brandImage}
+            comment={comment.comment}
+            likesCount={comment.likesCount}
+            publishDate={comment.publishDate}
+            recipieId={comment.recipieId}
+          />
+        ))}
+      </div>
     </PageLayout>
   );
 }
