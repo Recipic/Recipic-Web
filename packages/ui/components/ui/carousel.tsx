@@ -1,11 +1,17 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, Children } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
+import type { EmblaOptionsType } from 'embla-carousel';
+
+type TAlignmentType = 'start' | 'center' | 'end';
 
 type TCarouselProps = {
   children: React.ReactNode;
   autoScroll?: boolean;
   showDots?: boolean;
   autoScrollInterval?: number;
+  slidesToShow?: number;
+  freeScroll?: boolean;
+  alignmentMode?: TAlignmentType;
 };
 
 export function Carousel({
@@ -13,8 +19,25 @@ export function Carousel({
   autoScroll = false,
   showDots = false,
   autoScrollInterval = 3000,
+  slidesToShow = 1,
+  freeScroll = false,
+  alignmentMode = 'start',
 }: TCarouselProps) {
-  const [emblaRef, emblaApi] = useEmblaCarousel();
+  const childrenCount = Children.count(children);
+  const shouldEnableScroll = childrenCount > slidesToShow;
+
+  const options: EmblaOptionsType = {
+    slidesToScroll: freeScroll ? 1 : slidesToShow,
+    dragFree: freeScroll,
+    align: freeScroll ? alignmentMode : 'start',
+  };
+
+  if (shouldEnableScroll) {
+    options.containScroll = freeScroll ? false : 'trimSnaps';
+  }
+
+  const [emblaRef, emblaApi] = useEmblaCarousel(options);
+
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
 
@@ -27,16 +50,20 @@ export function Carousel({
 
   useEffect(() => {
     if (!emblaApi) return;
+
     onSelect();
     setScrollSnaps(emblaApi.scrollSnapList());
     emblaApi.on('select', onSelect);
+
+    emblaApi.reInit();
+
     return () => {
       emblaApi.off('select', onSelect);
     };
-  }, [emblaApi, onSelect]);
+  }, [emblaApi, onSelect, slidesToShow, freeScroll, childrenCount, alignmentMode]);
 
   useEffect(() => {
-    if (autoScroll && emblaApi) {
+    if (autoScroll && emblaApi && shouldEnableScroll) {
       const interval = setInterval(() => {
         if (emblaApi.canScrollNext()) {
           emblaApi.scrollNext();
@@ -47,14 +74,18 @@ export function Carousel({
 
       return () => clearInterval(interval);
     }
-  }, [emblaApi, autoScroll, autoScrollInterval]);
+  }, [emblaApi, autoScroll, autoScrollInterval, shouldEnableScroll]);
 
   return (
     <div className="relative">
       <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex">{children}</div>
+        <div className="flex">
+          {React.Children.map(children, child => (
+            <div style={{ flex: `0 0 ${100 / slidesToShow}%` }}>{child}</div>
+          ))}
+        </div>
       </div>
-      {showDots && (
+      {showDots && shouldEnableScroll && (
         <div className="flex justify-center mt-1">
           {scrollSnaps.map((_, index) => (
             <button

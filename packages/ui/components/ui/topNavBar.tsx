@@ -2,12 +2,16 @@ import React, { ReactNode } from 'react';
 import { ChevronLeftIcon } from '@radix-ui/react-icons';
 import { useNavigate } from 'react-router-dom';
 import { Button } from './button';
+import { TOrderType } from '../../types/order';
+
+type TChildrenPosition = 'left' | 'right' | 'center';
 
 type TopNavBarProps = {
   children?: ReactNode;
   showBackButton?: boolean;
   onBackButtonClick?: () => void;
-  childrenPosition?: 'left' | 'right' | 'center';
+  childrenPosition?: TChildrenPosition;
+  order: TOrderType;
 };
 
 export function TopNavBar({
@@ -15,11 +19,12 @@ export function TopNavBar({
   showBackButton = true,
   onBackButtonClick,
   childrenPosition = 'left',
+  order = 'first',
 }: TopNavBarProps) {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
-    if (onBackButtonClick !== undefined) {
+    if (onBackButtonClick) {
       onBackButtonClick();
       return;
     }
@@ -27,8 +32,8 @@ export function TopNavBar({
   };
 
   return (
-    <div className="sticky top-0 bg-white z-10">
-      <div className={`px-4 py-2 flex items-center ${childrenPosition === 'right' ? 'justify-between' : ''}`}>
+    <div className={`fixed top-0 bg-white z-10 w-full max-w-lg ${order === 'second' ? 'mt-12' : ''}`}>
+      <div className={`px-4 py-1 flex items-center ${childrenPosition === 'right' ? 'justify-between' : ''}`}>
         <div className="flex items-center">
           {showBackButton && (
             <Button variant="ghost" size="icon" onClick={handleGoBack} className="text-black" aria-label="뒤로 가기">
