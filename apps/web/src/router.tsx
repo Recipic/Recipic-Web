@@ -6,6 +6,7 @@ import Recipe from './pages/recipe';
 import Picked from './pages/picked';
 import My from './pages/my';
 import Settings from './pages/settings';
+import MyComments from './pages/mycomments';
 import RecipeDetail from './pages/recipeDetail';
 
 export default function Router() {
@@ -17,6 +18,8 @@ export default function Router() {
       <Route path="/picked" element={<Picked />} /> {/* 찜 */}
       <Route path="/my" element={<My />} /> {/* 마이페이지 */}
       <Route path="/settings" element={<Settings />} /> {/* 설정 */}
+      <Route path="/my-comments" element={<MyComments />} />
+      {/* 내가 작성한 댓글 */}
       <Route path="/recipe/:id" element={<RecipeDetail />} /> {/* 레시피 상세 */}
     </Routes>
   );
