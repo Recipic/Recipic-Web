@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { formatBrandToHangeul } from '@/utils/formatBrand';
 import BrandButtonList from '@/components/BrandButton/BrandButtonList';
 import { MagnifyingGlassIcon, BellIcon } from '@radix-ui/react-icons';
-import RecipcLogoNoBgImage from '@/assets/images/recipcLogoNoBg.webp';
+import RecipcLogoImage from '@/assets/images/logo.webp';
 import MockThumbnail from '@/assets/images/mockBanner.webp';
 import { TRecipeCardInfo } from '@/types/recipeCard';
 import { VerticalRecipeCardList } from '@/components/VerticalRecipeCard/VerticalRecipeCardList';
@@ -25,7 +25,7 @@ export default function Home() {
 
   return (
     <PageLayout isTabBarVisible isBottomSpace isHeaderVisible>
-      <Header titleImage={RecipcLogoNoBgImage} order="first">
+      <Header titleImage={RecipcLogoImage} order="first">
         <Button
           variant="ghost"
           size="icon"
