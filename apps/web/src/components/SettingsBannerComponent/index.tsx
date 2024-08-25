@@ -6,6 +6,7 @@ interface BannerProps {
   title: string;
   route: string;
 }
+
 export default function BannerComponent(props: BannerProps) {
   const navigate = useNavigate();
   const { title, route } = props;
