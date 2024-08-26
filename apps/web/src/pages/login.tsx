@@ -3,10 +3,11 @@ import { PageLayout } from '@recipic-packages/ui';
 import RecipicIcon from '../assets/images/RecipicIcon.png';
 import axios from 'axios';
 const Login: React.FC = () => {
-  const baseUrl = import.meta.env.VITE_BASE_URL;
+  const baseUrl = import.meta.env.VITE_APP_SERVER_URL;
 
   //   카카오 정보제공동의 후 인가코드(Authorization code) 획득
   useEffect(() => {
+    console.log('login.tsx 파일입니다.');
     const queryParams = new URLSearchParams(window.location.search);
     const authorizationCode = queryParams.get('code');
     if (authorizationCode) {
