@@ -10,6 +10,7 @@ import RecipeDetail from './pages/recipeDetail';
 import MyComments from './pages/mycomments';
 import Landing from './pages/landing';
 import Login from './pages/login';
+import AddRecipe from './pages/addRecipe';
 export default function Router() {
   return (
     <Routes>
@@ -26,6 +27,8 @@ export default function Router() {
       {/* 랜딩페이지 */}
       <Route path="/oauth/kakao" element={<Login />} />
       {/* 로그인페이지 */}
+      <Route path="/add-recipe" element={<AddRecipe />} />
+      {/* 레시피 작성 페이지 */}
     </Routes>
   );
 }
