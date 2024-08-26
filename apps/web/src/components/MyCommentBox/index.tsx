@@ -1,6 +1,7 @@
-import { HeartFilledIcon } from '@radix-ui/react-icons';
+import { HeartFilledIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { CommentProps } from '../../pages/mycomments';
 import { useNavigate } from 'react-router-dom';
+import { Button } from '@recipic-packages/ui';
 export default function CommentComponent(props: CommentProps) {
   const navigate = useNavigate();
   const { mainTitle, brandImage, comment, likesCount, publishDate, recipieId } = props;
@@ -17,7 +18,15 @@ export default function CommentComponent(props: CommentProps) {
           <div className="w-10 h-10 rounded-full mr-4 bg-slate-200 flex justify-center items-center">{brandImage}</div>
           <h3 className="font-bold text-base">{mainTitle.length > 12 ? mainTitle.slice(0, 12) + '...' : mainTitle}</h3>
         </div>
-        <button className="text-gray-400 hover:text-gray-600">X</button>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => navigate('/recipe')}
+          className="text-black"
+          aria-label="레시피 검색"
+        >
+          <MagnifyingGlassIcon className="h-7 w-7" />
+        </Button>
       </div>
       <hr className="mb-4" />
       <p className="text-gray-700 mb-4 ">{comment.length > 30 ? comment.slice(0, 30) + '...' : comment}</p>
