@@ -24,7 +24,7 @@ export default function Router() {
       {/* 내가 작성한 댓글 */}
       <Route path="/landing" element={<Landing />} />
       {/* 랜딩페이지 */}
-      <Route path="/oauth/kakao" element={<Login />} />
+      <Route path="/kakao/callback" element={<Login />} />
       {/* 로그인페이지 */}
     </Routes>
   );

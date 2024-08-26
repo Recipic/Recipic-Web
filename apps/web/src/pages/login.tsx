@@ -7,6 +7,7 @@ const Login: React.FC = () => {
 
   //   카카오 정보제공동의 후 인가코드(Authorization code) 획득
   useEffect(() => {
+    console.log('login.tsx 파일입니다.');
     const queryParams = new URLSearchParams(window.location.search);
     const authorizationCode = queryParams.get('code');
     if (authorizationCode) {
