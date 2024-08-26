@@ -22,6 +22,9 @@ export default function DislikeIngredients() {
           </div>
         ))}
       </div>
+      <div className="fixed px-4 bottom-0 left-0 right-0 mx-auto max-w-lg bg-white">
+        <Button className="px-4 mb-8 w-[100%] text-white rounded-md">등록하기</Button>
+      </div>
     </PageLayout>
   );
 }
