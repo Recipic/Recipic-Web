@@ -8,20 +8,21 @@ const Login: React.FC = () => {
   //   카카오 정보제공동의 후 인가코드(Authorization code) 획득
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
-    const code = queryParams.get('code');
-    if (code) {
-      console.log('Authorization code: ', code);
+    const authorizationCode = queryParams.get('code');
+    if (authorizationCode) {
+      console.log('Authorization code: ', authorizationCode);
       //   서버에 인가코드 전송
-      sendCodeToServer(code);
+      sendCodeToServer(authorizationCode);
     } else {
       console.log('Authorization code를 받지 못했습니다.');
     }
   }, []);
 
-  // response data 정의(후에 수정?)
+  // response data 정의, refreshToken은 cookie로 발급
   interface ApiResponse {
-    message: string;
-    accessToken: string;
+    grantType: string; // 토큰 타입 Bearer
+    accessToken: string; // 액세스 토큰
+    accessTokenExpiresIn: number; // 액세스 토큰 만료 시간
   }
 
   const sendCodeToServer = async (code: string): Promise<void> => {
@@ -36,6 +37,7 @@ const Login: React.FC = () => {
         },
       );
       console.log('Server response:', response.data);
+      //로컬스토리지에 accessToken 저장
       localStorage.setItem('accessToken: ', response.data.accessToken);
     } catch (error) {
       console.error('Error:', error);
