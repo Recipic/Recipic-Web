@@ -5,16 +5,18 @@ import { Section } from '@/components/Section';
 import { TBrand } from '@/types/brand';
 import { useNavigate } from 'react-router-dom';
 import { formatBrandToHangeul } from '@/utils/formatBrand';
-import BrandButtonList from '@/components/BrandButton/BrandButtonList';
+import BrandButtonList from '@/components/Buttons/BrandButton/BrandButtonList';
 import { MagnifyingGlassIcon, BellIcon } from '@radix-ui/react-icons';
 import RecipcLogoImage from '@/assets/images/logo.webp';
 import MockThumbnail from '@/assets/images/mockBanner.webp';
 import { TRecipeCardInfo } from '@/types/recipeCard';
 import { VerticalRecipeCardList } from '@/components/VerticalRecipeCard/VerticalRecipeCardList';
+import { useGetRecipeRankList } from '@/hooks/useGetRecipeRankList';
 
 export default function Home() {
   const navigate = useNavigate();
-
+  const { recipeRankListData } = useGetRecipeRankList();
+  console.log(recipeRankListData);
   /**
    * 브랜드 버튼 클릭을 처리하는 함수
    * @param {TBrand} searchBrand - 클릭된 브랜드

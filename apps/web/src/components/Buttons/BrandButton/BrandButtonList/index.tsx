@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import BrandButton from '@/components/BrandButton';
+import BrandButton from '@/components/Buttons/BrandButton';
 import { TBrand } from '@/types/brand';
 
 type GridCols = 2 | 3 | 4 | 5 | 6;

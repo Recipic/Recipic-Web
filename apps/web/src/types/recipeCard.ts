@@ -4,11 +4,11 @@ export type TRecipeCardInfo = {
   recipeId?: number;
   userId: string;
   title: string;
+  thunbnailUrl: string;
+  description: string;
   brand: TBrand;
   isCelebrity?: boolean;
   createdAt?: string;
-  thunbnailUrl: string;
-  description: string;
   scrapCount: number;
   commentCount: number;
 };
