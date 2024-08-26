@@ -22,7 +22,7 @@ export function RecipeCard({
   const displayDescription = description.length > 30 ? `${description.substring(0, 30)}...` : description;
 
   return (
-    <div className="max-w-2xl mx-auto" onClick={onClick}>
+    <div className="max-w-screen-lg mx-auto" onClick={onClick}>
       <Card className="bg-white rounded-lg overflow-hidden flex flex-row md:flex-nowrap" style={{ height: '210px' }}>
         <div className="flex-none w-full md:w-2/5 relative">
           {thunbnailUrl ? (

@@ -4,12 +4,15 @@ import { Header, PageLayout, TopNavBar } from '@recipic-packages/ui';
 import MockThumbnail from '@/assets/images/mockBanner.webp';
 import { RecipeCardList } from '@/components/RecipeCard/RecipeCardList';
 import { TRecipeCardInfo } from '@/types/recipeCard';
-import BrandButtonList from '@/components/BrandButton/BrandButtonList';
+import BrandButtonList from '@/components/Buttons/BrandButton/BrandButtonList';
 import { brands } from '@/constants/brands';
 import { SearchBar } from '@/components/SearchBar';
 import { TSearchFormValues } from '@/types/search';
 import { formatBrandToHangeul } from '@/utils/formatBrand';
 import { TBrand } from '@/types/brand';
+import { WriteRecipeButton } from '@/components/Buttons/WriteRecipeButton';
+import { WriteRecipeDrawer } from '@/components/Drawers/WriteRecipeDrawer';
+import { useDrawer } from '@/hooks/useDrawer';
 
 export default function Recipe() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -18,6 +21,7 @@ export default function Recipe() {
     const keyword = searchParams.get('keyword');
     return keyword !== null && keyword !== '';
   });
+  const { isOpen, open, close } = useDrawer();
 
   /**
    * 검색을 처리하는 함수
@@ -96,6 +100,8 @@ export default function Recipe() {
         </>
       )}
       <RecipeCardList recipeInfosList={recipeInfosListData} />
+      <WriteRecipeButton onClick={open} />
+      <WriteRecipeDrawer isOpen={isOpen} onClose={close} />
     </PageLayout>
   );
 }
