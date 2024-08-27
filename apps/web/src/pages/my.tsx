@@ -70,7 +70,7 @@ const userMenuItems: BannerProps[] = [
   {
     title: '싫어하는 재료',
     icon: <img src={DislikeIcon} alt="Dislike Icon" className="w-6 h-6" />,
-    route: '/filter-ingredients',
+    route: '/dislike-ingredients',
   },
   { title: '내가 작성한 댓글', icon: <FileTextIcon className="w-6 h-6" />, route: '/my-comments' },
 ];

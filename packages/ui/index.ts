@@ -23,5 +23,6 @@ export {
 } from './components/ui/drawer';
 export { RadioGroup, RadioGroupItem } from './components/ui/radioGroup';
 export { TextArea } from './components/ui/textArea';
+export { Checkbox } from './components/ui/checkbox';
 export { cn } from './lib/utils';
 import './styles/fonts.css';

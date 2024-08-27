@@ -1,29 +1,77 @@
-import { Header, PageLayout, TopNavBar, RadioGroup, RadioGroupItem, Button } from '@recipic-packages/ui';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { Header, PageLayout, TopNavBar, Button } from '@recipic-packages/ui';
+import { Form, FormField, FormItem, FormLabel } from '@recipic-packages/ui';
+import { CheckboxWithLabel } from '@/components/CheckboxWithLabel';
+
+const formSchema = z.object({
+  dislikes: z.array(z.string()).min(1, '최소 한 개 이상의 재료를 선택해주세요.'),
+});
+
+type FormValues = z.infer<typeof formSchema>;
 
 export default function DislikeIngredients() {
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      dislikes: [],
+    },
+  });
+
+  const onSubmit = (data: FormValues) => {
+    console.log('선택된 싫어하는 재료:', data.dislikes);
+  };
+
   return (
-    <PageLayout>
+    <PageLayout isBottomSpace isHeaderVisible isTopNavBarVisible>
       <Header title="싫어하는 재료" order="second" />
       <TopNavBar order="first" />
-      <div className="flex flex-col items-center px-4 gap-y-6 mt-24 mb-24 overflow-y-auto">
-        {ingredientGroups.map((group, groupIndex) => (
-          <div key={groupIndex} className="w-full">
-            <h3 className="font-semibold mb-4">{group.groupName}</h3>
-            <RadioGroup className="grid grid-cols-3 gap-x-8 gap-y-4">
-              {group.items.map((ingredient, itemIndex) => (
-                <div key={itemIndex} className="flex items-center">
-                  <RadioGroupItem value={ingredient} id={`ingredient-${groupIndex}-${itemIndex}`} />
-                  <label htmlFor={`ingredient-${groupIndex}-${itemIndex}`} className="ml-2">
-                    {ingredient}
-                  </label>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex-grow overflow-y-auto px-4 py-2 pb-20">
+          <FormField
+            control={form.control}
+            name="dislikes"
+            render={() => (
+              <FormItem>
+                <div className="space-y-10">
+                  {ingredientGroups.map(group => (
+                    <div key={group.groupName}>
+                      <FormLabel>{group.groupName}</FormLabel>
+                      <div className="grid grid-cols-3 gap-5 mt-2">
+                        {group.items.map(ingredient => (
+                          <FormField
+                            key={ingredient}
+                            control={form.control}
+                            name="dislikes"
+                            render={({ field }) => (
+                              <CheckboxWithLabel
+                                checked={field.value?.includes(ingredient)}
+                                onCheckedChange={(checked: boolean) => {
+                                  const updatedValue = checked
+                                    ? [...field.value, ingredient]
+                                    : field.value?.filter(value => value !== ingredient);
+                                  field.onChange(updatedValue);
+                                }}
+                                label={ingredient}
+                              />
+                            )}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </RadioGroup>
-          </div>
-        ))}
-      </div>
-      <div className="fixed px-4 bottom-0 left-0 right-0 mx-auto max-w-lg bg-white">
-        <Button className="px-4 mb-8 w-[100%] text-white rounded-md">등록하기</Button>
+              </FormItem>
+            )}
+          />
+        </form>
+      </Form>
+      <div className="fixed bottom-0 left-0 right-0 p-4 bg-white max-w-lg mx-auto">
+        <Button type="submit" className="w-full" onClick={form.handleSubmit(onSubmit)}>
+          등록하기
+        </Button>
       </div>
     </PageLayout>
   );
@@ -50,10 +98,6 @@ const ingredientGroups = [
   {
     groupName: '향신료',
     items: ['후추', '계피', '페퍼로치노'],
-  },
-  {
-    groupName: '기타',
-    items: ['초콜릿', '그라놀라', '꿀', '시리얼', '슈팅캔디', '아몬드'],
   },
   {
     groupName: '기타',

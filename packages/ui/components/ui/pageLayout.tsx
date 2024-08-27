@@ -24,7 +24,7 @@ export function PageLayout({
     <div className="flex flex-col min-h-dvh bg-white max-w-lg mx-auto relative">
       <main className="flex-grow overflow-y-auto overflow-x-hidden" style={{ paddingTop }}>
         {children}
-        {isBottomSpace && <div className="h-16" />}
+        {isBottomSpace && <div className="h-20" />}
       </main>
       {isTabBarVisible && <TabBar />}
     </div>
