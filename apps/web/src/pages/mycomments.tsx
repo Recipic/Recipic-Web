@@ -8,7 +8,7 @@ export default function MyComments() {
     <PageLayout>
       <Header title="내가 작성한 댓글" order="second" />
       <TopNavBar order="first" />
-      <div className="flex flex-col items-center px-4 gap-y-6 mt-24">
+      <div className="mb-6 flex flex-col items-center px-4 gap-y-6 mt-24">
         {commentItems.map(comment => (
           <MyCommentBox
             mainTitle={comment.mainTitle}
