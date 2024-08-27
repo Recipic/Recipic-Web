@@ -21,6 +21,7 @@ export default function DislikeIngredients() {
   });
 
   const onSubmit = (data: FormValues) => {
+    //TODO: api 연동 필요
     console.log('선택된 싫어하는 재료:', data.dislikes);
   };
 
