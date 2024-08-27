@@ -10,6 +10,7 @@ import RecipeDetail from './pages/recipeDetail';
 import MyComments from './pages/mycomments';
 import Landing from './pages/landing';
 import Login from './pages/login';
+import DislikeIngredients from './pages/dislikeIngredients';
 export default function Router() {
   return (
     <Routes>
@@ -26,6 +27,8 @@ export default function Router() {
       {/* 랜딩페이지 */}
       <Route path="/kakao/callback" element={<Login />} />
       {/* 로그인페이지 */}
+      <Route path="/dislike-ingredients" element={<DislikeIngredients />} />
+      {/* 내가 싫어하는 재료 */}
     </Routes>
   );
 }
