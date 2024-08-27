@@ -43,7 +43,7 @@ export default function My() {
         {userMenuItems.map((item, index) => (
           <div
             key={index}
-            className="flex flex-col text-center text-4 items-center cursor-pointer w-[27vw]"
+            className="flex flex-col text-center text-[0.8rem] items-center cursor-pointer w-[27vw]"
             onClick={() => navigate(item.route)}
           >
             {item.icon}
