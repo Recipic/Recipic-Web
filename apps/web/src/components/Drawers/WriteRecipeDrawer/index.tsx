@@ -20,7 +20,6 @@ import {
   Input,
   RadioGroup,
   RadioGroupItem,
-  Carousel,
   Label,
   TextArea,
 } from '@recipic-packages/ui';
@@ -51,8 +50,8 @@ const recipeFormSchema = z.object({
         preview: z.string(),
       }),
     )
-    .min(1, '이미지를 최소 하나 이상 추가해주세요')
-    .max(10, '이미지는 최대 10개까지 추가할 수 있습니다'),
+    .min(1, '이미지를 추가해주세요')
+    .max(1, '이미지는 최대 1개까지 추가할 수 있습니다'),
   description: z.string().min(1, '레시피 설명을 입력해주세요'),
   isCelebrity: z.boolean({
     required_error: '공개 여부를 선택해주세요',
@@ -158,10 +157,10 @@ export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(event.target.files || []);
     const currentImageCount = imageFields.length;
-    const availableSlots = 10 - currentImageCount;
+    const availableSlots = 1 - currentImageCount;
 
     if (files.length > availableSlots) {
-      alert(`최대 10장의 이미지만 업로드할 수 있어요`);
+      alert(`최대 1장의 이미지만 업로드할 수 있어요`);
       return;
     }
 
@@ -210,50 +209,45 @@ export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) 
                 <FormItem>
                   <FormLabel>이미지</FormLabel>
                   <FormControl>
-                    <Carousel freeScroll slidesToShow={1}>
-                      <div className="flex items-start space-x-2">
-                        <Button
-                          type="button"
-                          variant="outline"
-                          onClick={handleImageUploadClick}
-                          className="p-4 w-20 h-20 flex-shrink-0"
-                        >
-                          <div className="flex flex-col items-center">
-                            <ImageIcon className="h-6 w-6 mb-1 text-gray-400" />
-                            <p className="text-semibold14 text-gray-400">{imageFields.length}/10</p>
-                          </div>
-                        </Button>
-                        <Input
-                          type="file"
-                          accept="image/*"
-                          multiple
-                          onChange={handleImageChange}
-                          className="hidden"
-                          ref={fileInputRef}
-                        />
-                        <div className="flex flex-grow space-x-2">
-                          {imageFields.map((image, index) => (
-                            <div key={image.id} className="relative flex-shrink-0 w-20 h-20">
-                              <img src={image.preview} alt="Preview" className="w-full h-full object-cover rounded" />
-                              <Button
-                                type="button"
-                                onClick={() => removeImage(index)}
-                                className="absolute top-1 right-1 rounded-full p-0 w-5 h-5"
-                                size="icon"
-                              >
-                                <Cross2Icon className="h-3 w-3 text-white" />
-                              </Button>
-                            </div>
-                          ))}
+                    <div className="flex items-center space-x-4">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={handleImageUploadClick}
+                        className="w-20 h-20 flex-shrink-0"
+                      >
+                        <div className="flex flex-col items-center">
+                          <ImageIcon className="h-6 w-6 mb-1 text-gray-400" />
+                          <p className="text-semibold14 text-gray-400">{imageFields.length}/1</p>
                         </div>
-                      </div>
-                    </Carousel>
+                      </Button>
+                      {imageFields.map((image, index) => (
+                        <div key={image.id} className="relative w-20 h-20">
+                          <img src={image.preview} alt="Preview" className="w-full h-full object-cover rounded" />
+                          <Button
+                            type="button"
+                            onClick={() => removeImage(index)}
+                            className="absolute top-1 right-1 rounded-full p-0 w-5 h-5"
+                            size="icon"
+                          >
+                            <Cross2Icon className="h-3 w-3 text-white" />
+                          </Button>
+                        </div>
+                      ))}
+
+                      <Input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                        className="hidden"
+                        ref={fileInputRef}
+                      />
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="brand"

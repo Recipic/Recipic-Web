@@ -14,7 +14,7 @@ export function VerticalRecipeCardList({ recipeInfosList }: TRecipeCardListProps
   return (
     <Carousel slidesToShow={2} freeScroll>
       {recipeInfosList.map((recipeInfo: TRecipeCardInfo) => (
-        <div key={recipeInfo.recipeId} className="px-4 py-2 flex-[1_0_100%]">
+        <div key={recipeInfo.recipeId} className="px-4 py-2 flex">
           <VerticalRecipeCard
             onClick={() => navigate(`/recipe/${recipeInfo.recipeId}`)}
             thunbnailUrl={recipeInfo.thunbnailUrl}

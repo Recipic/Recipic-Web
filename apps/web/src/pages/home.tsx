@@ -15,7 +15,7 @@ import { useGetRecipeRankList } from '@/hooks/useGetRecipeRankList';
 
 export default function Home() {
   const navigate = useNavigate();
-  const { recipeRankListData } = useGetRecipeRankList();
+  //const { recipeRankListData } = useGetRecipeRankList();
   //console.log(recipeRankListData);
   /**
    * 브랜드 버튼 클릭을 처리하는 함수
