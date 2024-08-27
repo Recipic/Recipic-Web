@@ -22,5 +22,6 @@ export {
   DrawerDescription,
 } from './components/ui/drawer';
 export { RadioGroup, RadioGroupItem } from './components/ui/radioGroup';
+export { TextArea } from './components/ui/textArea';
 export { cn } from './lib/utils';
 import './styles/fonts.css';

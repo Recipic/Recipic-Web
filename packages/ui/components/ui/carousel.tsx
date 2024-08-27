@@ -26,42 +26,44 @@ export function Carousel({
   const childrenCount = Children.count(children);
   const shouldEnableScroll = childrenCount > slidesToShow;
 
+  // Embla 옵션 설정
   const options: EmblaOptionsType = {
-    slidesToScroll: freeScroll ? 1 : slidesToShow,
-    dragFree: freeScroll,
-    align: freeScroll ? alignmentMode : 'start',
+    slidesToScroll: freeScroll ? 1 : slidesToShow, // freeScroll일 때 1씩 스크롤
+    dragFree: freeScroll, // freeScroll 옵션이 있으면 자유 스크롤 허용
+    containScroll: freeScroll ? false : 'trimSnaps', // freeScroll일 때 containScroll 비활성화
+    align: alignmentMode, // 정렬 모드 설정
+    loop: false, // freeScroll에서 무한 스크롤 비활성화
+    skipSnaps: freeScroll, // freeScroll일 때 스냅 건너뛰기 활성화
   };
-
-  if (shouldEnableScroll) {
-    options.containScroll = freeScroll ? false : 'trimSnaps';
-  }
 
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
 
+  // 스냅 위치로 스크롤
   const scrollTo = useCallback((index: number) => emblaApi && emblaApi.scrollTo(index), [emblaApi]);
 
+  // 선택된 슬라이드를 업데이트
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
     setSelectedIndex(emblaApi.selectedScrollSnap());
   }, [emblaApi]);
 
+  // embla API가 로드되었을 때 이벤트 처리
   useEffect(() => {
     if (!emblaApi) return;
 
-    onSelect();
     setScrollSnaps(emblaApi.scrollSnapList());
     emblaApi.on('select', onSelect);
-
     emblaApi.reInit();
 
     return () => {
       emblaApi.off('select', onSelect);
     };
-  }, [emblaApi, onSelect, slidesToShow, freeScroll, childrenCount, alignmentMode]);
+  }, [emblaApi, onSelect]);
 
+  // 자동 스크롤 기능 추가
   useEffect(() => {
     if (autoScroll && emblaApi && shouldEnableScroll) {
       const interval = setInterval(() => {

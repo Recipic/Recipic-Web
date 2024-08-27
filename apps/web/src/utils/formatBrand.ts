@@ -1,6 +1,7 @@
 import { TBrand } from '@/types/brand';
 import StarbucksLogoImage from '@/assets/brand/starbucks.webp';
 import SubwayLogoImage from '@/assets/brand/subway.webp';
+import YoajungLogoImage from '@/assets/brand/yoajung.webp';
 
 /** 브랜드에 맞는 이미지를 반환하는 함수 */
 export function getBrandImage(brand: TBrand) {
@@ -8,6 +9,7 @@ export function getBrandImage(brand: TBrand) {
   const brandImages = {
     starbucks: StarbucksLogoImage,
     subway: SubwayLogoImage,
+    yoajung: YoajungLogoImage,
   };
   return brandImages[brand];
 }
@@ -18,6 +20,7 @@ export function formatBrandToHangeul(brand: TBrand) {
   const brandKoreanNames = {
     starbucks: '스타벅스',
     subway: '서브웨이',
+    yoajung: '요아정',
   };
   return brandKoreanNames[brand];
 }

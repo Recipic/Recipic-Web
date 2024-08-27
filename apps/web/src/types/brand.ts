@@ -1,1 +1,1 @@
-export type TBrand = 'starbucks' | 'subway';
+export type TBrand = 'starbucks' | 'subway' | 'yoajung';
