@@ -2,8 +2,11 @@ import React from 'react';
 import MyCommentBox from '../components/MyCommentBox';
 import { Header, PageLayout, TopNavBar } from '@recipic-packages/ui';
 import { ImageIcon } from '@radix-ui/react-icons';
+import { useGetMyCommentsList } from '@/hooks/useGetMyCommentsList';
 
 export default function MyComments() {
+  const { myCommentsList } = useGetMyCommentsList();
+  console.log(myCommentsList);
   return (
     <PageLayout>
       <Header title="내가 작성한 댓글" order="second" />

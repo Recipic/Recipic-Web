@@ -2,7 +2,7 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { TGetMyCommentsResponse } from '@/apis/myCommentsList/type';
 import { getMyCommentsListQueryKey } from '@/constants/myCommentsListQueryKeys';
 
-export const useGetRecipeRankList = () => {
+export const useGetMyCommentsList = () => {
   const {
     data: myCommentsList,
     isLoading,
