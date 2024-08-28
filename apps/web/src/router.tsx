@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import ComponentTest from './pages/componentTest';
 import Home from './pages/home';
 import Recipe from './pages/recipe';
 import Picked from './pages/picked';
@@ -14,7 +13,6 @@ import DislikeIngredients from './pages/dislikeIngredients';
 export default function Router() {
   return (
     <Routes>
-      <Route path="/component-test" element={<ComponentTest />} />
       <Route path="/" element={<Home />} /> {/* 홈 */}
       <Route path="/recipe" element={<Recipe />} /> {/* 레시피 */}
       <Route path="/picked" element={<Picked />} /> {/* 찜 */}
