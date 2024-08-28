@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { TGetMyCommentsResponse } from '@/apis/myCommentsList/type';
-import { getMyCommentsListQueryKey } from '@/constants/myCommentsListQueryKeys';
+import { getMyCommentsListQueryKey } from '@/constants/queryKeys';
 
 export const useGetMyCommentsList = () => {
   const {
