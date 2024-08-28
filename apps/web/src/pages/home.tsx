@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { Button, Header, PageLayout } from '@recipic-packages/ui';
 import { CarouselWithBanners } from '@/components/CarouselWithBanners';
 import { Section } from '@/components/Section';
@@ -8,15 +8,15 @@ import { formatBrandToHangeul } from '@/utils/formatBrand';
 import BrandButtonList from '@/components/Buttons/BrandButton/BrandButtonList';
 import { MagnifyingGlassIcon, BellIcon } from '@radix-ui/react-icons';
 import RecipcLogoImage from '@/assets/images/logo.webp';
-import MockThumbnail from '@/assets/images/mockBanner.webp';
-import { TRecipeCardInfo } from '@/types/recipeCard';
 import { VerticalRecipeCardList } from '@/components/VerticalRecipeCard/VerticalRecipeCardList';
 import { useGetRecipeRankList } from '@/hooks/useGetRecipeRankList';
+import { useGetRecipeCelebRankList } from '@/hooks/useGetRecipeCelebRankList';
+import { brands } from '@/constants/brands';
 
 export default function Home() {
   const navigate = useNavigate();
   const { recipeRankListData } = useGetRecipeRankList();
-  console.log(recipeRankListData);
+  const { recipeCelebRankListData } = useGetRecipeCelebRankList();
 
   /** 브랜드 버튼 클릭을 처리하는 함수 */
   const handleBrandClick = (searchBrand: TBrandEn) => {
@@ -50,77 +50,11 @@ export default function Home() {
         <VerticalRecipeCardList recipeInfosList={recipeRankListData} />
       </Section>
       <Section title="최신 HOT 브랜드">
-        <BrandButtonList brands={brands} onSearchClick={handleBrandClick} gridCols={4} />
+        <BrandButtonList brands={brands} onSearchClick={handleBrandClick} gridCols={3} />
       </Section>
       <Section title="유명인의 인기 레시피">
-        <VerticalRecipeCardList recipeInfosList={recipeInfosListData} />
+        <VerticalRecipeCardList recipeInfosList={recipeCelebRankListData} />
       </Section>
     </PageLayout>
   );
 }
-
-export const brands: TBrandEn[] = ['starbucks', 'subway', 'starbucks', 'subway'];
-
-//TODO: 목데이터. 추후 삭제 예정
-const recipeInfosListData: TRecipeCardInfo[] = [
-  {
-    recipeId: 1,
-    userNickName: 'user456',
-    title: '스타벅스 꿀조합 슈렉 프라푸치노오오오오오옹!!',
-    brandName: '스타벅스',
-    isCelebrity: true,
-    createdAt: '2024-08-21T12:34:56',
-    thumbnailUrl: MockThumbnail,
-    description:
-      '날씨가 참 더운데 쌉쌀한 말차에 달콤한 초코가 조합이 된 슈렉 프라푸치노를 만들어봤어요! 맛있게 먹어보세요!',
-    scrapCount: 85,
-    commentCount: 16,
-    status: '1',
-    userProfileImageUrl: MockThumbnail,
-  },
-  {
-    recipeId: 1,
-    userNickName: 'user456',
-    title: '스타벅스 꿀조합 슈렉 프라푸치노오오오오오옹!!',
-    brandName: '요아정',
-    isCelebrity: true,
-    createdAt: '2024-08-21T12:34:56',
-    thumbnailUrl: MockThumbnail,
-    description:
-      '날씨가 참 더운데 쌉쌀한 말차에 달콤한 초코가 조합이 된 슈렉 프라푸치노를 만들어봤어요! 맛있게 먹어보세요!',
-    scrapCount: 85,
-    commentCount: 16,
-    status: '1',
-    userProfileImageUrl: MockThumbnail,
-  },
-  {
-    recipeId: 1,
-    userNickName: 'user456',
-    title: '스타벅스 꿀조합 슈렉 프라푸치노오오오오오옹!!',
-    brandName: '서브웨이',
-    isCelebrity: true,
-    createdAt: '2024-08-21T12:34:56',
-    thumbnailUrl: MockThumbnail,
-    description:
-      '날씨가 참 더운데 쌉쌀한 말차에 달콤한 초코가 조합이 된 슈렉 프라푸치노를 만들어봤어요! 맛있게 먹어보세요!',
-    scrapCount: 85,
-    commentCount: 16,
-    status: '1',
-    userProfileImageUrl: MockThumbnail,
-  },
-  {
-    recipeId: 1,
-    userNickName: 'user456',
-    title: '스타벅스 꿀조합 슈렉 프라푸치노오오오오오옹!!',
-    brandName: '스타벅스',
-    isCelebrity: true,
-    createdAt: '2024-08-21T12:34:56',
-    thumbnailUrl: MockThumbnail,
-    description:
-      '날씨가 참 더운데 쌉쌀한 말차에 달콤한 초코가 조합이 된 슈렉 프라푸치노를 만들어봤어요! 맛있게 먹어보세요!',
-    scrapCount: 85,
-    commentCount: 16,
-    status: '1',
-    userProfileImageUrl: MockThumbnail,
-  },
-];
