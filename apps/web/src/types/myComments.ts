@@ -21,7 +21,7 @@ interface Pageable {
   unpaged: boolean;
 }
 
-export interface TGetMyComments {
+export interface TMyComments {
   content: Comment[];
   totalElements: number;
   totalPages: number;
