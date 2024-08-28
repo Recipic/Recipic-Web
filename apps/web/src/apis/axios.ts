@@ -13,21 +13,34 @@ type TAuthResponse = {
   accessToken: string;
 };
 
+const getAccessToken = (): string => {
+  if (import.meta.env.MODE === 'development') {
+    return import.meta.env.VITE_APP_SUPER_ACCESS_TOKEN;
+  }
+
+  //TODO: 추후 context로 수정할 예정
+  const storedToken = localStorage.getItem('accessToken');
+  if (storedToken) {
+    return storedToken;
+  }
+
+  return '';
+};
+
 export const instance: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_APP_SERVER_URL,
   headers: {
-    Authorization: `Bearer ${import.meta.env.VITE_APP_SUPER_ACCESS_TOKEN}`,
+    Authorization: `Bearer ${getAccessToken()}`,
   },
-  withCredentials: true, // 쿠키 사용을 위한 설정
+  withCredentials: true,
 });
 
-// 쿠키를 사용하기 위한 hook (react-cookie의 useCookies 사용)
 export const useAxiosWithReissue = () => {
-  const [cookies] = useCookies(['refreshToken']); // 쿠키에서 refreshToken 가져오기
+  const [cookies] = useCookies(['refreshToken']);
 
   instance.interceptors.request.use(
     (config: CustomAxiosRequestConfig): CustomAxiosRequestConfig => {
-      const accessToken = import.meta.env.VITE_APP_SUPER_ACCESS_TOKEN; // 테스트용 엑세스 토큰
+      const accessToken = getAccessToken();
       if (accessToken && config.headers) {
         config.headers.Authorization = `Bearer ${accessToken}`;
       }
@@ -43,41 +56,40 @@ export const useAxiosWithReissue = () => {
     async (error: AxiosError): Promise<AxiosResponse> => {
       const originalRequest = error.config as CustomAxiosRequestConfig;
 
-      // 401 Unauthorized 처리
-      if (error.response?.status === 401 && !originalRequest._retry) {
-        originalRequest._retry = true;
-
-        try {
-          const refreshToken = cookies.refreshToken; // react-cookie에서 refreshToken 가져오기
-          if (!refreshToken) {
-            return Promise.reject(error); // 리프레시 토큰이 없다면 에러 처리
-          }
-
-          // 새로운 엑세스 토큰 요청
-          const response: AxiosResponse<TAuthResponse, TReissueRequestData> = await instance.post('/auth/reissue', {
-            refreshToken: refreshToken, // 리프레시 토큰 사용
-          });
-
-          // 새로운 엑세스 토큰 발급
-          if (response.status === 200) {
-            const newAccessToken = response.data.accessToken;
-
-            // 새로운 엑세스 토큰 설정
-            if (originalRequest.headers) {
-              originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
-            }
-
-            // 실패한 요청 재시도
-            return instance(originalRequest);
-          }
-        } catch (refreshError) {
-          // 토큰 재발급 실패 시 에러 반환
-          return Promise.reject(refreshError);
-        }
+      if (error.response?.status !== 401 || originalRequest._retry) {
+        return Promise.reject(error);
       }
 
-      // 다른 에러 처리
-      return Promise.reject(error);
+      originalRequest._retry = true;
+
+      try {
+        const refreshToken = cookies.refreshToken;
+        if (!refreshToken) {
+          return Promise.reject(error);
+        }
+
+        const response: AxiosResponse<TAuthResponse, TReissueRequestData> = await instance.post('/auth/reissue', {
+          refreshToken: refreshToken,
+        });
+
+        if (response.status !== 200) {
+          return Promise.reject(error);
+        }
+
+        const newAccessToken = response.data.accessToken;
+
+        if (import.meta.env.MODE !== 'development') {
+          localStorage.setItem('accessToken', newAccessToken);
+        }
+
+        if (originalRequest.headers) {
+          originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
+        }
+
+        return instance(originalRequest);
+      } catch (refreshError) {
+        return Promise.reject(refreshError);
+      }
     },
   );
 
