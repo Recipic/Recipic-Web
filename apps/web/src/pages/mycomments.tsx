@@ -3,31 +3,28 @@ import MyCommentBox from '../components/MyCommentBox';
 import { Header, PageLayout, TopNavBar } from '@recipic-packages/ui';
 import { ImageIcon } from '@radix-ui/react-icons';
 import { useGetMyCommentsList } from '@/hooks/useGetMyCommentsList';
-
 export default function MyComments() {
   /*임시적으로 변수 할당.*/
-  const { myCommentsList } = useGetMyCommentsList({ recipeId: 1, page: 1, size: 10, sortType: 'latest' });
-  console.log(myCommentsList);
+  const { myCommentsList } = useGetMyCommentsList();
   return (
     <PageLayout>
       <Header title="내가 작성한 댓글" order="second" />
       <TopNavBar order="first" />
       <div className="mb-6 flex flex-col items-center px-4 gap-y-6 mt-24">
-        {commentItems.map(comment => (
+        {myCommentsList.content.map(comment => (
           <MyCommentBox
-            mainTitle={comment.mainTitle}
-            brandImage={comment.brandImage}
-            comment={comment.comment}
-            likesCount={comment.likesCount}
-            publishDate={comment.publishDate}
-            recipieId={comment.recipieId}
+            key={comment.commentId}
+            recipeTitle={comment.recipeTitle}
+            content={comment.content}
+            likeCount={comment.likeCount}
+            recipeId={comment.recipeId}
           />
         ))}
       </div>
     </PageLayout>
   );
 }
-
+/*
 export interface CommentProps {
   mainTitle: string; //본문 제목
   brandImage: React.ReactNode; //해당 브랜드 이미지프로필?
@@ -80,3 +77,4 @@ const commentItems: CommentProps[] = [
     recipieId: 4,
   },
 ];
+*/
