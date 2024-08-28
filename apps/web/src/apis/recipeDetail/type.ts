@@ -1,3 +1,3 @@
-import { getRecipeDetailResponse } from '@/types/recipeDetail';
+import { TRecipeDetail } from '@/types/recipe';
 
-export type TGetRecipeDetailResponse = getRecipeDetailResponse;
+export type TGetRecipeDetailResponse = TRecipeDetail;

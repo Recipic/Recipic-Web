@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Header, PageLayout } from '@recipic-packages/ui';
 import { CarouselWithBanners } from '@/components/CarouselWithBanners';
 import { Section } from '@/components/Section';
-import { TBrand } from '@/types/brand';
+import { TBrandEn } from '@/types/brand';
 import { useNavigate } from 'react-router-dom';
 import { formatBrandToHangeul } from '@/utils/formatBrand';
 import BrandButtonList from '@/components/Buttons/BrandButton/BrandButtonList';
@@ -22,7 +22,7 @@ export default function Home() {
    * 브랜드 버튼 클릭을 처리하는 함수
    * @param {TBrand} searchBrand - 클릭된 브랜드
    */
-  const handleBrandClick = (searchBrand: TBrand) => {
+  const handleBrandClick = (searchBrand: TBrandEn) => {
     navigate(`recipe?keyword=${formatBrandToHangeul(searchBrand)}`);
   };
 
@@ -62,7 +62,7 @@ export default function Home() {
   );
 }
 
-export const brands: TBrand[] = ['starbucks', 'subway', 'starbucks', 'subway'];
+export const brands: TBrandEn[] = ['starbucks', 'subway', 'starbucks', 'subway'];
 
 //TODO: 목데이터. 추후 삭제 예정
 const recipeInfosListData: TRecipeCardInfo[] = [
