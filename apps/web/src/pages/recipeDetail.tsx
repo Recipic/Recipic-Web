@@ -22,8 +22,8 @@ const commentSortOptions: Array<{ value: TSortOption; label: string }> = [
 export default function RecipeDetail() {
   const [commentSortOption, setCommentSortOption] = useState<TSortOption>('latest'); // 최신순, 좋아요순 옵션 상태
   const { recipeId } = useParams<{ recipeId: string }>(); // recipeId를 url 파라미터에서 가져오기
-  //const { recipeDetailData } = useGetRecipeDetail({ recipeId: recipeId as string });
-  //console.log(recipeDetailData);
+  const { recipeDetailData } = useGetRecipeDetail({ recipeId: recipeId as string });
+  console.log(recipeDetailData);
   /** 레시피 상세 글에 대한 스크랩(좋아요) 클릭 핸들러 */
   const handleRecipeLikeClick = () => {
     console.log('스크랩 클릭');

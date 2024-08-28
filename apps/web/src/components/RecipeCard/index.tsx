@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from '@recipic-packages/ui';
 import { HeartIcon, ChatBubbleIcon } from '@radix-ui/react-icons';
-import { getBrandImage, formatBrandToHangeul } from '@/utils/formatBrand';
+import { getBrandImage } from '@/utils/formatBrand';
 import { TRecipeCardInfo } from '@/types/recipeCard';
 
 type TRecipeCardProps = {
@@ -10,24 +10,24 @@ type TRecipeCardProps = {
 
 export function RecipeCard({
   onClick,
-  thunbnailUrl,
+  thumbnailUrl,
   scrapCount,
   commentCount,
-  userId,
+  userNickName,
   title,
   description,
-  brand,
+  brandName,
 }: TRecipeCardProps) {
-  const brandImage = getBrandImage(brand);
+  const brandImage = getBrandImage(brandName);
   const displayDescription = description.length > 30 ? `${description.substring(0, 30)}...` : description;
 
   return (
     <div className="max-w-screen-lg mx-auto" onClick={onClick}>
       <Card className="bg-white rounded-lg overflow-hidden flex flex-row md:flex-nowrap" style={{ height: '210px' }}>
         <div className="flex-none w-full md:w-2/5 relative">
-          {thunbnailUrl ? (
+          {thumbnailUrl ? (
             <img
-              src={thunbnailUrl}
+              src={thumbnailUrl}
               alt="Post image"
               className="absolute inset-0 w-full h-full object-cover rounded-l-lg md:rounded-none"
             />
@@ -50,11 +50,15 @@ export function RecipeCard({
                 <ChatBubbleIcon className="h-4 w-4 text-gray-500" />
                 <p className="text-regular14 text-gray-700 mx-1">{commentCount}</p>
               </div>
-              <p className="text-regular16 text-gray-700">{userId}</p>
+              <p className="text-regular16 text-gray-700">{userNickName}</p>
             </div>
             <div className="flex items-center mt-2">
-              <img src={brandImage} alt={`${brand} brand logo`} className="h-8 w-8 rounded-full object-cover mr-2" />
-              <p className="text-gray-800">{formatBrandToHangeul(brand)}</p>
+              <img
+                src={brandImage}
+                alt={`${brandName} 브랜드 이미지`}
+                className="h-8 w-8 rounded-full object-cover mr-2"
+              />
+              <p className="text-gray-800">{brandName}</p>
             </div>
           </div>
         </div>
