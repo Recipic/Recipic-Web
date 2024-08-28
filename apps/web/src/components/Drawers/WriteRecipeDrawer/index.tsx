@@ -37,7 +37,7 @@ const recipeFormSchema = z.object({
     .array(
       z.object({
         ingredientId: z.string(),
-        name: z.string(),
+        ingredientName: z.string(),
         quantity: z.number(), // 서버에서 받은 증감 단위
         selectedQuantity: z.number().min(0, '수량은 0 이상이어야 합니다.'), // 실제 선택된 수량
         unit: z.string(),
@@ -286,7 +286,7 @@ export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) 
                       {fields.map(ingredient => (
                         <div key={ingredient.id} className="flex items-center justify-between mb-2">
                           <p className="text-black text-regular16">
-                            {ingredient.name} {ingredient.selectedQuantity} {ingredient.unit}
+                            {ingredient.ingredientName} {ingredient.selectedQuantity} {ingredient.unit}
                           </p>
                           <div className="flex items-center gap-1">
                             <Button
