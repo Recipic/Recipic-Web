@@ -6,12 +6,19 @@ type TCustomSelectProps<T extends string> = {
   value: T;
   placeholder?: string;
   onChange: (value: T) => void;
+  className: string;
 };
 
-export function CustomSelect<T extends string>({ items, value, placeholder, onChange }: TCustomSelectProps<T>) {
+export function CustomSelect<T extends string>({
+  items,
+  value,
+  placeholder,
+  onChange,
+  className,
+}: TCustomSelectProps<T>) {
   return (
     <Select value={value} onValueChange={onChange}>
-      <SelectTrigger className="w-28">
+      <SelectTrigger className={className}>
         <SelectValue placeholder={placeholder || '선택'} />
       </SelectTrigger>
       <SelectContent>

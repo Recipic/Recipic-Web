@@ -27,6 +27,8 @@ import { DrawerCloseButton } from '@/components/Buttons/DrawerCloseButton';
 import { brands } from '@/constants/brands';
 import { formatBrandToHangeul } from '@/utils/formatBrand';
 import { TIngredient } from '@/types/recipe';
+import { TBrandEn } from '@/types/brand';
+import { CustomSelect } from '@/components/CustomSelect';
 
 const recipeFormSchema = z.object({
   title: z.string().min(1, '제목을 입력해주세요').max(20, '제목은 최대 20자까지 입력할 수 있습니다'),
@@ -84,6 +86,11 @@ const ingredientsOptions: TIngredient[] = [
     cost: 600,
   },
 ];
+
+const brandOptions = brands.map((brand: TBrandEn) => ({
+  value: brand,
+  label: formatBrandToHangeul(brand),
+}));
 
 export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) {
   const form = useForm<TRecipeFormValues>({
@@ -256,14 +263,13 @@ export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) 
                 <FormItem className="flex-1">
                   <FormLabel>브랜드</FormLabel>
                   <FormControl>
-                    <select {...field} className="w-full p-2 border rounded">
-                      <option value="">브랜드를 선택해주세요</option>
-                      {brands.map(brand => (
-                        <option key={brand} value={brand}>
-                          {formatBrandToHangeul(brand)}
-                        </option>
-                      ))}
-                    </select>
+                    <CustomSelect<string>
+                      items={brandOptions}
+                      value={field.value}
+                      onChange={field.onChange}
+                      placeholder="브랜드를 선택해주세요"
+                      className="w-full"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

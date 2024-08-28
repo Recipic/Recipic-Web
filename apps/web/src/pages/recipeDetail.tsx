@@ -92,6 +92,7 @@ export default function RecipeDetail() {
             items={commentSortOptions}
             value={commentSortOption}
             onChange={setCommentSortOption}
+            className="w-28"
           />
         </div>
         {commentsData.map((comment: TComment) => (
