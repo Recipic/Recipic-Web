@@ -5,7 +5,7 @@ userId -> userName
 brandId -> brandName
 ingredientId -> ingredientName
 */
-interface TgetRecipeDetailResponse {
+export type getRecipeDetailResponse = {
   recipeId: string;
   userId: string;
   brandId: string;
@@ -18,17 +18,16 @@ interface TgetRecipeDetailResponse {
   scrapCount: number;
   comments: Comment[];
   includeIngredients: Ingredient[];
-}
+};
 
-interface Comment {
+export type Comment = {
   commentId: string;
   userId: string;
   content: string;
   createdAt: string;
   likeCount: number;
-}
+};
 
-interface Ingredient {
-  ingredientId: number;
+export type Ingredient = {
   count: number;
-}
+};
