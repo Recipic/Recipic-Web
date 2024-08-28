@@ -5,7 +5,7 @@ import { getRecipeDetailQueryKey } from '@/constants/queryKeys';
 
 export const useGetRecipeDetail = (recipeId: string) => {
   const {
-    data: recipeRankListData,
+    data: recipeDetailData,
     isLoading,
     error,
   } = useSuspenseQuery<TGetRecipeDetailResponse>({
@@ -14,5 +14,5 @@ export const useGetRecipeDetail = (recipeId: string) => {
     staleTime: 1000 * 60 * 60, // 1시간
     gcTime: 1000 * 60 * 40, // 40분
   });
-  return { recipeRankListData, isLoading, error };
+  return { recipeDetailData, isLoading, error };
 };
