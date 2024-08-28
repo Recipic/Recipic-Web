@@ -1,23 +1,21 @@
-export interface Comment {
+export type Comment = {
   commentId: number;
-  recipeTitle: string;
   content: string;
+  createdAt: string;
+  userId: number;
+  userProfileImageUrl: string;
+  userNickName: string;
+  recipeTitle: string;
+  recipeId: number;
   likeCount: number;
-}
+  isLiked: boolean;
+};
 
-export interface TGetMyCommentsResponse {
-  content: Comment[];
-  totalElements: number;
-  totalPages: number;
+export type TMyCommentsList = Comment[];
+
+export type myCommentsListParams = {
+  recipeId: number;
+  page: number;
   size: number;
-  number: number;
-  sort: {
-    empty: boolean;
-    unsorted: boolean;
-    sorted: boolean;
-  };
-  first: boolean;
-  last: boolean;
-  numberOfElements: number;
-  empty: boolean;
-}
+  sortType: 'latest' | 'likes';
+};
