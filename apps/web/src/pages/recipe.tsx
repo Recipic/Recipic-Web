@@ -9,7 +9,7 @@ import { brands } from '@/constants/brands';
 import { SearchBar } from '@/components/SearchBar';
 import { TSearchFormValues } from '@/types/search';
 import { formatBrandToHangeul } from '@/utils/formatBrand';
-import { TBrand } from '@/types/brand';
+import { TBrandEn } from '@/types/brand';
 import { WriteRecipeButton } from '@/components/Buttons/WriteRecipeButton';
 import { WriteRecipeDrawer } from '@/components/Drawers/WriteRecipeDrawer';
 import { useDrawer } from '@/hooks/useDrawer';
@@ -54,12 +54,8 @@ export default function Recipe() {
     [handleSearch],
   );
 
-  /**
-   * 브랜드 버튼 클릭을 처리하는 함수
-   * @param {TBrand} searchBrand - 클릭된 브랜드
-   */
   const handleBrandClick = useCallback(
-    (searchBrand: TBrand) => {
+    (searchBrand: TBrandEn) => {
       handleSearch({ searchQuery: formatBrandToHangeul(searchBrand) });
     },
     [handleSearch],

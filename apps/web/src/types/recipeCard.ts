@@ -1,4 +1,4 @@
-import { TBrand } from '@/types/brand';
+import { TBrandEn } from '@/types/brand';
 
 export type TRecipeCardInfo = {
   recipeId?: number;
@@ -6,7 +6,7 @@ export type TRecipeCardInfo = {
   title: string;
   thunbnailUrl: string;
   description: string;
-  brand: TBrand;
+  brand: TBrandEn;
   isCelebrity?: boolean;
   createdAt?: string;
   scrapCount: number;

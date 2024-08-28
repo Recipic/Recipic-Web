@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react';
 import { Button } from '@recipic-packages/ui';
-import { TBrand } from '@/types/brand';
+import { TBrandEn } from '@/types/brand';
 import { getBrandImage, formatBrandToHangeul } from '@/utils/formatBrand';
 
 type TBrandButtonProps = {
-  brand: TBrand;
-  onClick: (brand: TBrand) => void;
+  brand: TBrandEn;
+  onClick: (brand: TBrandEn) => void;
 };
 
 export default function BrandButton({ brand, onClick }: TBrandButtonProps) {
