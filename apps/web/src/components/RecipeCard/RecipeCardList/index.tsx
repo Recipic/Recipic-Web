@@ -16,13 +16,13 @@ export function RecipeCardList({ recipeInfosList }: TRecipeCardListProps) {
         <div key={recipeInfo.recipeId} className="mb-4">
           <RecipeCard
             onClick={() => navigate(`/recipe/${recipeInfo.recipeId}`)}
-            thunbnailUrl={recipeInfo.thunbnailUrl}
+            thumbnailUrl={recipeInfo.thumbnailUrl}
             scrapCount={recipeInfo.scrapCount}
             commentCount={recipeInfo.commentCount}
-            userId={recipeInfo.userId}
+            userNickName={recipeInfo.userNickName}
             title={recipeInfo.title}
             description={recipeInfo.description}
-            brand={recipeInfo.brand}
+            brandName={recipeInfo.brandName}
           />
         </div>
       ))}

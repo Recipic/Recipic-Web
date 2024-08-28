@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Button, Header, PageLayout } from '@recipic-packages/ui';
 import { CarouselWithBanners } from '@/components/CarouselWithBanners';
 import { Section } from '@/components/Section';
@@ -18,10 +18,7 @@ export default function Home() {
   const { recipeRankListData } = useGetRecipeRankList();
   console.log(recipeRankListData);
 
-  /**
-   * 브랜드 버튼 클릭을 처리하는 함수
-   * @param {TBrand} searchBrand - 클릭된 브랜드
-   */
+  /** 브랜드 버튼 클릭을 처리하는 함수 */
   const handleBrandClick = (searchBrand: TBrandEn) => {
     navigate(`recipe?keyword=${formatBrandToHangeul(searchBrand)}`);
   };
@@ -50,7 +47,7 @@ export default function Home() {
       </Header>
       <CarouselWithBanners />
       <Section title="이번 달 인기 레시피">
-        <VerticalRecipeCardList recipeInfosList={recipeInfosListData} />
+        <VerticalRecipeCardList recipeInfosList={recipeRankListData} />
       </Section>
       <Section title="최신 HOT 브랜드">
         <BrandButtonList brands={brands} onSearchClick={handleBrandClick} gridCols={4} />
@@ -68,52 +65,62 @@ export const brands: TBrandEn[] = ['starbucks', 'subway', 'starbucks', 'subway']
 const recipeInfosListData: TRecipeCardInfo[] = [
   {
     recipeId: 1,
-    userId: 'user456',
+    userNickName: 'user456',
     title: '스타벅스 꿀조합 슈렉 프라푸치노오오오오오옹!!',
-    brand: 'starbucks',
+    brandName: '스타벅스',
     isCelebrity: true,
     createdAt: '2024-08-21T12:34:56',
-    thunbnailUrl: MockThumbnail,
+    thumbnailUrl: MockThumbnail,
     description:
       '날씨가 참 더운데 쌉쌀한 말차에 달콤한 초코가 조합이 된 슈렉 프라푸치노를 만들어봤어요! 맛있게 먹어보세요!',
     scrapCount: 85,
     commentCount: 16,
+    status: '1',
+    userProfileImageUrl: MockThumbnail,
   },
   {
-    recipeId: 2,
-    userId: 'user456',
-    title: '스타벅스 꿀조합 슈렉 ',
-    brand: 'starbucks',
+    recipeId: 1,
+    userNickName: 'user456',
+    title: '스타벅스 꿀조합 슈렉 프라푸치노오오오오오옹!!',
+    brandName: '요아정',
     isCelebrity: true,
     createdAt: '2024-08-21T12:34:56',
-    thunbnailUrl: MockThumbnail,
+    thumbnailUrl: MockThumbnail,
     description:
       '날씨가 참 더운데 쌉쌀한 말차에 달콤한 초코가 조합이 된 슈렉 프라푸치노를 만들어봤어요! 맛있게 먹어보세요!',
     scrapCount: 85,
     commentCount: 16,
+    status: '1',
+    userProfileImageUrl: MockThumbnail,
   },
   {
-    recipeId: 3,
-    userId: 'user456',
+    recipeId: 1,
+    userNickName: 'user456',
     title: '스타벅스 꿀조합 슈렉 프라푸치노오오오오오옹!!',
-    brand: 'starbucks',
+    brandName: '서브웨이',
     isCelebrity: true,
     createdAt: '2024-08-21T12:34:56',
-    thunbnailUrl: MockThumbnail,
-    description: '날씨가 참 더운데 쌉쌀한 말차에',
+    thumbnailUrl: MockThumbnail,
+    description:
+      '날씨가 참 더운데 쌉쌀한 말차에 달콤한 초코가 조합이 된 슈렉 프라푸치노를 만들어봤어요! 맛있게 먹어보세요!',
     scrapCount: 85,
     commentCount: 16,
+    status: '1',
+    userProfileImageUrl: MockThumbnail,
   },
   {
-    recipeId: 4,
-    userId: 'user456',
-    title: '스타벅스 꿀조합 슈렉 ',
-    brand: 'starbucks',
+    recipeId: 1,
+    userNickName: 'user456',
+    title: '스타벅스 꿀조합 슈렉 프라푸치노오오오오오옹!!',
+    brandName: '스타벅스',
     isCelebrity: true,
     createdAt: '2024-08-21T12:34:56',
-    thunbnailUrl: MockThumbnail,
-    description: '날씨가 참 더운데 쌉쌀한 말차에',
+    thumbnailUrl: MockThumbnail,
+    description:
+      '날씨가 참 더운데 쌉쌀한 말차에 달콤한 초코가 조합이 된 슈렉 프라푸치노를 만들어봤어요! 맛있게 먹어보세요!',
     scrapCount: 85,
     commentCount: 16,
+    status: '1',
+    userProfileImageUrl: MockThumbnail,
   },
 ];

@@ -1,14 +1,16 @@
-import { TBrandEn } from '@/types/brand';
+import { TBrandKo } from '@/types/brand';
 
 export type TRecipeCardInfo = {
   recipeId?: number;
-  userId: string;
+  userNickName: string;
   title: string;
-  thunbnailUrl: string;
+  thumbnailUrl: string;
   description: string;
-  brand: TBrandEn;
+  brandName: TBrandKo;
   isCelebrity?: boolean;
   createdAt?: string;
   scrapCount: number;
   commentCount: number;
+  status?: string;
+  userProfileImageUrl?: string | null;
 };
