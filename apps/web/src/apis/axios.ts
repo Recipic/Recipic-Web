@@ -15,6 +15,9 @@ type TAuthResponse = {
 
 export const instance: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_APP_SERVER_URL,
+  headers: {
+    Authorization: `Bearer ${import.meta.env.VITE_APP_SUPER_ACCESS_TOKEN}`,
+  },
   withCredentials: true, // 쿠키 사용을 위한 설정
 });
 
@@ -26,7 +29,7 @@ export const useAxiosWithReissue = () => {
     (config: CustomAxiosRequestConfig): CustomAxiosRequestConfig => {
       const accessToken = import.meta.env.VITE_APP_SUPER_ACCESS_TOKEN; // 테스트용 엑세스 토큰
       if (accessToken && config.headers) {
-        config.headers['Authorization'] = `Bearer ${accessToken}`;
+        config.headers.Authorization = `Bearer ${accessToken}`;
       }
       return config;
     },
