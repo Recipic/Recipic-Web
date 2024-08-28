@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MyCommentBox from '../components/MyCommentBox';
 import { Header, PageLayout, TopNavBar } from '@recipic-packages/ui';
 import { ImageIcon } from '@radix-ui/react-icons';
 import { useGetMyCommentsList } from '@/hooks/useGetMyCommentsList';
 
 export default function MyComments() {
-  const { myCommentsList } = useGetMyCommentsList();
+  /*임시적으로 변수 할당.*/
+  const { myCommentsList } = useGetMyCommentsList({ recipeId: 1, page: 1, size: 10, sortType: 'latest' });
   console.log(myCommentsList);
   return (
     <PageLayout>

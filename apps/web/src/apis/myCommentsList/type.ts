@@ -1,3 +1,5 @@
-import { TMyComments } from '@/types/myComments';
+import { TMyCommentsList, myCommentsListParams } from '@/types/myComments';
 
-export type TGetMyCommentsResponse = TMyComments;
+export type TGetMyCommentsResponse = TMyCommentsList;
+
+export type TGetMyCommentsListParams = myCommentsListParams;

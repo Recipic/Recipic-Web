@@ -1,36 +1,21 @@
-export interface Comment {
+export type Comment = {
   commentId: number;
-  recipeId: number;
-  recipeTitle: string;
   content: string;
+  createdAt: string;
+  userId: number;
+  userProfileImageUrl: string;
+  userNickName: string;
+  recipeTitle: string;
+  recipeId: number;
   likeCount: number;
-}
+  isLiked: boolean;
+};
 
-interface Sort {
-  empty: boolean;
-  sorted: boolean;
-  unsorted: boolean;
-}
+export type TMyCommentsList = Comment[];
 
-interface Pageable {
-  pageNumber: number;
-  pageSize: number;
-  sort: Sort;
-  offset: number;
-  paged: boolean;
-  unpaged: boolean;
-}
-
-export interface TMyComments {
-  content: Comment[];
-  totalElements: number;
-  totalPages: number;
+export type myCommentsListParams = {
+  recipeId: number;
+  page: number;
   size: number;
-  number: number;
-  sort: Sort;
-  pageable: Pageable;
-  first: boolean;
-  last: boolean;
-  numberOfElements: number;
-  empty: boolean;
-}
+  sortType: 'latest' | 'likes';
+};
