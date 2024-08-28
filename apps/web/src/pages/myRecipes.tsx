@@ -67,7 +67,8 @@ export default function MyRecipes() {
 
   return (
     <PageLayout isTabBarVisible isBottomSpace isHeaderVisible isTopNavBarVisible={isSearching}>
-      <Header title="내가 작성한 레시피" order="first" />
+      <Header title="내가 작성한 레시피" order="second" />
+      <TopNavBar order="first" />
       {isSearching ? (
         <TopNavBar showBackButton onBackButtonClick={handleGoBack} childrenPosition="center" order="second">
           <SearchBar onSearchClick={handleSearchSubmit} searchQuery={searchQuery} />
