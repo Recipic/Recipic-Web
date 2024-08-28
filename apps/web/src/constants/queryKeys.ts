@@ -4,6 +4,8 @@ import { getMyCommentsList } from '@/apis/myCommentsList/getMyCommentsList';
 import { TRecipeId } from '@/types/recipe';
 import { TGetMyCommentsListParams } from '@/apis/myCommentsList/type';
 import { getRecipeCelebRankList } from '@/apis/home/getRecipeCelebRankList';
+import { TGetRecipeListParams } from '@/apis/recipe/type';
+import { getRecipeList } from '@/apis/recipe/getRecipeList';
 
 /** 홈 페이지에서 일반인 레시피 순위 리스트를 받고 관리하기 위한 쿼리 키 */
 export const getRecipeRankListQueryKey = () => {

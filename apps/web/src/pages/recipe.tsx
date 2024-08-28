@@ -69,14 +69,16 @@ export default function Recipe() {
 
   useEffect(() => {
     const keyword = searchParams.get('keyword');
-    if (keyword) {
+    if (keyword === null || keyword === '') {
+      setSearchQuery('');
+      setIsSearching(false);
+      return;
+    }
+    if (keyword !== null && keyword !== '') {
       setSearchQuery(keyword);
       setIsSearching(true);
       // TODO: 여기에 실제 검색 로직 추가 (API 호출)
-      console.log('Initial search for:', keyword);
-    } else {
-      setSearchQuery('');
-      setIsSearching(false);
+      return;
     }
   }, [searchParams]);
 
