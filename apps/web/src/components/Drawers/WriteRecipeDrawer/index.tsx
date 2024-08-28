@@ -26,6 +26,7 @@ import {
 import { DrawerCloseButton } from '@/components/Buttons/DrawerCloseButton';
 import { brands } from '@/constants/brands';
 import { formatBrandToHangeul } from '@/utils/formatBrand';
+import { TIngredient } from '@/types/recipe';
 
 const recipeFormSchema = z.object({
   title: z.string().min(1, '제목을 입력해주세요').max(20, '제목은 최대 20자까지 입력할 수 있습니다'),
@@ -65,10 +66,10 @@ type TWriteRecipeDrawerProps = {
   onClose: () => void;
 };
 
-const ingredientsOptions = [
+const ingredientsOptions: TIngredient[] = [
   {
     ingredientId: 'zava',
-    name: '자바칩',
+    ingredientName: '자바칩',
     quantity: 1,
     unit: '개',
     calorie: 45.6,
@@ -76,7 +77,7 @@ const ingredientsOptions = [
   },
   {
     ingredientId: 'choco',
-    name: '초코 드리즐',
+    ingredientName: '초코 드리즐',
     quantity: 10,
     unit: 'g',
     calorie: 45.6,
