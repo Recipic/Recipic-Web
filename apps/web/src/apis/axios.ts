@@ -14,17 +14,20 @@ type TAuthResponse = {
 };
 
 const getAccessToken = (): string => {
-  if (import.meta.env.MODE === 'development') {
-    return import.meta.env.VITE_APP_SUPER_ACCESS_TOKEN;
-  }
+  return import.meta.env.VITE_APP_SUPER_ACCESS_TOKEN;
 
-  //TODO: 추후 context로 수정할 예정
-  const storedToken = localStorage.getItem('accessToken');
-  if (storedToken) {
-    return storedToken;
-  }
+  //TODO: 발표를 위해 임시로 주석처리
+  // if (import.meta.env.MODE === 'development') {
+  //   return import.meta.env.VITE_APP_SUPER_ACCESS_TOKEN;
+  // }
 
-  return '';
+  // //TODO: 추후 context로 수정할 예정
+  // const storedToken = localStorage.getItem('accessToken');
+  // if (storedToken) {
+  //   return storedToken;
+  // }
+
+  // return '';
 };
 
 export const instance: AxiosInstance = axios.create({
