@@ -3,10 +3,15 @@ import { PageLayout, Button, TopNavBar } from '@recipic-packages/ui';
 import { HeartIcon, HeartFilledIcon } from '@radix-ui/react-icons';
 import { CarouselWithRecipeDetailImage } from '@/components/CarouselWithRecipeDetailImage';
 import MockImage from '@/assets/images/mockBanner.webp';
-
+import { useGetRecipeDetail } from '@/hooks/useGetRecipeDetail';
 const detailImages = [MockImage, MockImage, MockImage];
 export default function RecipeDetail() {
+  /*임시로 recipeId값 1로 해놓음.*/
+  const [recipeId, setRecipeId] = useState<string>('1');
+
   const [isLiked, setIsLiked] = useState(false);
+  const { recipeDetailData } = useGetRecipeDetail(recipeId);
+  console.log(recipeDetailData);
 
   const handleLikeClick = () => {
     setIsLiked(prev => !prev);
