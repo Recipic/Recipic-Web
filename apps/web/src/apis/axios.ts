@@ -14,7 +14,7 @@ type TAuthResponse = {
 };
 
 const getAccessToken = (): string => {
-  return import.meta.env.VITE_APP_SUPER_ACCESS_TOKEN;
+  //return import.meta.env.VITE_APP_SUPER_ACCESS_TOKEN;
 
   //TODO: 발표를 위해 임시로 주석처리
   // if (import.meta.env.MODE === 'development') {
@@ -22,10 +22,12 @@ const getAccessToken = (): string => {
   // }
 
   // //TODO: 추후 context로 수정할 예정
-  // const storedToken = localStorage.getItem('accessToken');
-  // if (storedToken) {
-  //   return storedToken;
-  // }
+  const storedToken = localStorage.getItem('accessToken');
+  if (storedToken) {
+    return storedToken;
+  } else {
+    return import.meta.env.VITE_APP_SUPER_ACCESS_TOKEN;
+  }
 
   // return '';
 };

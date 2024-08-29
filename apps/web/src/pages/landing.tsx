@@ -1,5 +1,6 @@
 import { PageLayout } from '@recipic-packages/ui';
-import RecipicIcon from '../assets/images/RecipicIcon.png'; // 경로 확인 필요
+import logo from '../assets/icons/logo.svg';
+import Recipic from '../assets/icons/Recipic.svg';
 import kakaoLogo from '../assets/images/kakaoLogo.svg';
 
 export default function Landing() {
@@ -14,8 +15,10 @@ export default function Landing() {
   return (
     <PageLayout isBottomSpace>
       <div className="flex flex-col items-center justify-center min-h-screen">
-        <img src={RecipicIcon} alt="Recipic Logo" className="w-24 mb-4" />
-        <h1 className="text-xl font-bold mb-6">RECIPICK</h1>
+        <img src={Recipic} alt="Recipic Logo" className="w-24 mb-4" />
+        <img src={logo} alt="Recipic Logo" className="w-24 mb-4" />
+        {/* <h1 className="text-xl font-bold mb-6">RECIPICK</h1> */}
+
         <div className="my-2">
           <button
             onClick={loginHandler}
