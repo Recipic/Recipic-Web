@@ -1,12 +1,3 @@
-import { TBrand } from '@/types/brand';
+import { TBrandEn } from '@/types/brand';
 
-export const brands: TBrand[] = [
-  'starbucks',
-  'subway',
-  'starbucks',
-  'subway',
-  'starbucks',
-  'subway',
-  'starbucks',
-  'subway',
-];
+export const brands: TBrandEn[] = ['starbucks', 'subway', 'yoajung'];

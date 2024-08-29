@@ -22,5 +22,22 @@ export {
   DrawerDescription,
 } from './components/ui/drawer';
 export { RadioGroup, RadioGroupItem } from './components/ui/radioGroup';
+export { TextArea } from './components/ui/textArea';
+export { Checkbox } from './components/ui/checkbox';
+export { Avatar, AvatarImage, AvatarFallback } from './components/ui/avatar';
+export { Badge, badgeVariants } from './components/ui/badge';
+export { Separator } from './components/ui/separator';
+export {
+  Select,
+  SelectGroup,
+  SelectValue,
+  SelectTrigger,
+  SelectContent,
+  SelectLabel,
+  SelectItem,
+  SelectSeparator,
+  SelectScrollUpButton,
+  SelectScrollDownButton,
+} from './components/ui/select';
 export { cn } from './lib/utils';
 import './styles/fonts.css';

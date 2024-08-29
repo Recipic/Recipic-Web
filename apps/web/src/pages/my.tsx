@@ -39,11 +39,11 @@ export default function My() {
         </div>
       </div>
       <div className="my-12"></div>
-      <div className="flex justify-between mx-7 my-4">
+      <div className="grid grid-cols-3 gap-4 px-7 py-4">
         {userMenuItems.map((item, index) => (
           <div
             key={index}
-            className="flex flex-col text-center text-4 items-center cursor-pointer w-[27vw]"
+            className="flex flex-col items-center text-center text-[0.8rem] cursor-pointer"
             onClick={() => navigate(item.route)}
           >
             {item.icon}
@@ -51,6 +51,7 @@ export default function My() {
           </div>
         ))}
       </div>
+
       <div className="my-12"></div>
       {bannerItems.map((item, index) => (
         <BannerComponent key={index} title={item.title} icon={item.icon} route={item.route} />
@@ -70,7 +71,7 @@ const userMenuItems: BannerProps[] = [
   {
     title: '싫어하는 재료',
     icon: <img src={DislikeIcon} alt="Dislike Icon" className="w-6 h-6" />,
-    route: '/filter-ingredients',
+    route: '/dislike-ingredients',
   },
   { title: '내가 작성한 댓글', icon: <FileTextIcon className="w-6 h-6" />, route: '/my-comments' },
 ];

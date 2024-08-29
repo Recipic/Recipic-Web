@@ -29,12 +29,11 @@ export function Carousel({
   const options: EmblaOptionsType = {
     slidesToScroll: freeScroll ? 1 : slidesToShow,
     dragFree: freeScroll,
-    align: freeScroll ? alignmentMode : 'start',
+    containScroll: freeScroll ? false : 'trimSnaps',
+    align: alignmentMode,
+    loop: false,
+    skipSnaps: freeScroll,
   };
-
-  if (shouldEnableScroll) {
-    options.containScroll = freeScroll ? false : 'trimSnaps';
-  }
 
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
 
@@ -51,16 +50,14 @@ export function Carousel({
   useEffect(() => {
     if (!emblaApi) return;
 
-    onSelect();
     setScrollSnaps(emblaApi.scrollSnapList());
     emblaApi.on('select', onSelect);
-
     emblaApi.reInit();
 
     return () => {
       emblaApi.off('select', onSelect);
     };
-  }, [emblaApi, onSelect, slidesToShow, freeScroll, childrenCount, alignmentMode]);
+  }, [emblaApi, onSelect]);
 
   useEffect(() => {
     if (autoScroll && emblaApi && shouldEnableScroll) {
@@ -80,8 +77,10 @@ export function Carousel({
     <div className="relative">
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex">
-          {React.Children.map(children, child => (
-            <div style={{ flex: `0 0 ${100 / slidesToShow}%` }}>{child}</div>
+          {React.Children.map(children, (child, index) => (
+            <div key={index} style={{ flex: `0 0 ${100 / slidesToShow}%` }}>
+              {child}
+            </div>
           ))}
         </div>
       </div>

@@ -9,7 +9,7 @@ import { brands } from '@/constants/brands';
 import { SearchBar } from '@/components/SearchBar';
 import { TSearchFormValues } from '@/types/search';
 import { formatBrandToHangeul } from '@/utils/formatBrand';
-import { TBrand } from '@/types/brand';
+import { TBrandEn } from '@/types/brand';
 import { WriteRecipeButton } from '@/components/Buttons/WriteRecipeButton';
 import { WriteRecipeDrawer } from '@/components/Drawers/WriteRecipeDrawer';
 import { useDrawer } from '@/hooks/useDrawer';
@@ -54,12 +54,8 @@ export default function Recipe() {
     [handleSearch],
   );
 
-  /**
-   * 브랜드 버튼 클릭을 처리하는 함수
-   * @param {TBrand} searchBrand - 클릭된 브랜드
-   */
   const handleBrandClick = useCallback(
-    (searchBrand: TBrand) => {
+    (searchBrand: TBrandEn) => {
       handleSearch({ searchQuery: formatBrandToHangeul(searchBrand) });
     },
     [handleSearch],
@@ -73,14 +69,16 @@ export default function Recipe() {
 
   useEffect(() => {
     const keyword = searchParams.get('keyword');
-    if (keyword) {
+    if (keyword === null || keyword === '') {
+      setSearchQuery('');
+      setIsSearching(false);
+      return;
+    }
+    if (keyword !== null && keyword !== '') {
       setSearchQuery(keyword);
       setIsSearching(true);
       // TODO: 여기에 실제 검색 로직 추가 (API 호출)
-      console.log('Initial search for:', keyword);
-    } else {
-      setSearchQuery('');
-      setIsSearching(false);
+      return;
     }
   }, [searchParams]);
 
@@ -110,52 +108,62 @@ export default function Recipe() {
 const recipeInfosListData: TRecipeCardInfo[] = [
   {
     recipeId: 1,
-    userId: 'user456',
+    userNickName: 'user456',
     title: '스타벅스 꿀조합 슈렉 프라푸치노오오오오오옹!!',
-    brand: 'starbucks',
+    brandName: '스타벅스',
     isCelebrity: true,
     createdAt: '2024-08-21T12:34:56',
-    thunbnailUrl: MockThumbnail,
+    thumbnailUrl: MockThumbnail,
     description:
       '날씨가 참 더운데 쌉쌀한 말차에 달콤한 초코가 조합이 된 슈렉 프라푸치노를 만들어봤어요! 맛있게 먹어보세요!',
     scrapCount: 85,
     commentCount: 16,
+    status: '1',
+    userProfileImageUrl: MockThumbnail,
   },
   {
-    recipeId: 2,
-    userId: 'user456',
-    title: '스타벅스 꿀조합 슈렉 ',
-    brand: 'starbucks',
+    recipeId: 1,
+    userNickName: 'user456',
+    title: '스타벅스 꿀조합 슈렉 프라푸치노오오오오오옹!!',
+    brandName: '요아정',
     isCelebrity: true,
     createdAt: '2024-08-21T12:34:56',
-    thunbnailUrl: MockThumbnail,
+    thumbnailUrl: MockThumbnail,
     description:
       '날씨가 참 더운데 쌉쌀한 말차에 달콤한 초코가 조합이 된 슈렉 프라푸치노를 만들어봤어요! 맛있게 먹어보세요!',
     scrapCount: 85,
     commentCount: 16,
+    status: '1',
+    userProfileImageUrl: MockThumbnail,
   },
   {
-    recipeId: 3,
-    userId: 'user456',
+    recipeId: 1,
+    userNickName: 'user456',
     title: '스타벅스 꿀조합 슈렉 프라푸치노오오오오오옹!!',
-    brand: 'starbucks',
+    brandName: '서브웨이',
     isCelebrity: true,
     createdAt: '2024-08-21T12:34:56',
-    thunbnailUrl: MockThumbnail,
-    description: '날씨가 참 더운데 쌉쌀한 말차에',
+    thumbnailUrl: MockThumbnail,
+    description:
+      '날씨가 참 더운데 쌉쌀한 말차에 달콤한 초코가 조합이 된 슈렉 프라푸치노를 만들어봤어요! 맛있게 먹어보세요!',
     scrapCount: 85,
     commentCount: 16,
+    status: '1',
+    userProfileImageUrl: MockThumbnail,
   },
   {
-    recipeId: 4,
-    userId: 'user456',
-    title: '스타벅스 꿀조합 슈렉 ',
-    brand: 'starbucks',
+    recipeId: 1,
+    userNickName: 'user456',
+    title: '스타벅스 꿀조합 슈렉 프라푸치노오오오오오옹!!',
+    brandName: '스타벅스',
     isCelebrity: true,
     createdAt: '2024-08-21T12:34:56',
-    thunbnailUrl: MockThumbnail,
-    description: '날씨가 참 더운데 쌉쌀한 말차에',
+    thumbnailUrl: MockThumbnail,
+    description:
+      '날씨가 참 더운데 쌉쌀한 말차에 달콤한 초코가 조합이 된 슈렉 프라푸치노를 만들어봤어요! 맛있게 먹어보세요!',
     scrapCount: 85,
     commentCount: 16,
+    status: '1',
+    userProfileImageUrl: MockThumbnail,
   },
 ];

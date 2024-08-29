@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import BrandButton from '@/components/Buttons/BrandButton';
-import { TBrand } from '@/types/brand';
+import { TBrandEn } from '@/types/brand';
 
 type GridCols = 2 | 3 | 4 | 5 | 6;
 
@@ -14,13 +14,13 @@ const gridColsMap: Record<GridCols, string> = {
 
 type TBrandButtonListProps = {
   gridCols: GridCols;
-  brands: TBrand[];
-  onSearchClick: (searchBrand: TBrand) => void;
+  brands: TBrandEn[];
+  onSearchClick: (searchBrand: TBrandEn) => void;
 };
 
 export default function BrandButtonList({ brands, onSearchClick, gridCols }: TBrandButtonListProps) {
   const handleBrandClick = useCallback(
-    (brand: TBrand) => {
+    (brand: TBrandEn) => {
       onSearchClick(brand);
     },
     [onSearchClick],
