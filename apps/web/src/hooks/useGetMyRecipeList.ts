@@ -1,12 +1,12 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { TGetRecipeListParams, TGetRecipeListResponse } from '@/apis/recipe/type';
+import { TGetMyRecipeListParams, TGetMyRecipeListResponse } from '@/apis/myRecipe/type';
 import { getMyRecipeList } from '@/apis/myRecipe/getMyRecipeList';
 
 const DEFAULT_SIZE = 5;
 
-export const useGetMyRecipeList = ({ keyword }: Omit<TGetRecipeListParams, 'page'>) => {
+export const useGetMyRecipeList = ({ keyword }: Omit<TGetMyRecipeListParams, 'page'>) => {
   const { data, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } = useInfiniteQuery<
-    TGetRecipeListResponse,
+    TGetMyRecipeListResponse,
     Error
   >({
     queryKey: ['myRecipeList', keyword],
@@ -22,6 +22,6 @@ export const useGetMyRecipeList = ({ keyword }: Omit<TGetRecipeListParams, 'page
       return allPages.length + 1;
     },
   });
-  const recipeInfosList = data !== undefined ? data.pages.flat() : [];
-  return { recipeInfosList, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage };
+  const myRecipeInfosList = data !== undefined ? data.pages.flat() : [];
+  return { myRecipeInfosList, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage };
 };

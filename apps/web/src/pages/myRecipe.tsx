@@ -10,7 +10,7 @@ import PrimarySpinner from '@/components/common/PrimarySpinner';
 export default function MyRecipe() {
   const { searchQuery, isSearching, handleSearchSubmit, handleGoBack } = useSearchLogic();
 
-  const { recipeInfosList, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } = useGetMyRecipeList({
+  const { myRecipeInfosList, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } = useGetMyRecipeList({
     keyword: searchQuery,
   });
 
@@ -36,13 +36,13 @@ export default function MyRecipe() {
       )}
       {isLoading ? (
         <PrimarySpinner />
-      ) : recipeInfosList.length === 0 ? (
+      ) : myRecipeInfosList.length === 0 ? (
         <div className="px-4 py-4 text-center">
           <p className="text-regular16 text-gray-500">검색된 레시피가 없어요</p>
         </div>
       ) : (
         <>
-          <RecipeCardList recipeInfosList={recipeInfosList} />
+          <RecipeCardList recipeInfosList={myRecipeInfosList} />
           <div ref={ref}>{isFetchingNextPage && <PrimarySpinner />}</div>
         </>
       )}
