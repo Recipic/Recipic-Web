@@ -39,5 +39,6 @@ export {
   SelectScrollUpButton,
   SelectScrollDownButton,
 } from './components/ui/select';
+export { Spinner } from './components/ui/spinner';
 export { cn } from './lib/utils';
 import './styles/fonts.css';
