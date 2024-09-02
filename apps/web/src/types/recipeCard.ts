@@ -4,7 +4,7 @@ export type TRecipeCardInfo = {
   recipeId?: number;
   userNickName: string;
   title: string;
-  thumbnailUrl: string;
+  thumbnailUrl?: string;
   description: string;
   brandName: TBrandKo;
   isCelebrity?: boolean;
