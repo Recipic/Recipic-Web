@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { PageLayout, TopNavBar, Badge, Separator } from '@recipic-packages/ui';
-import { CarouselWithRecipeDetailImage } from '@/components/CarouselWithRecipeDetailImage';
+import { CarouselWithRecipeDetailImage } from '@/components/recipeDetail/CarouselWithRecipeDetailImage';
 import MockImage from '@/assets/images/mockBanner.webp';
 import { useGetRecipeDetail } from '@/hooks/useGetRecipeDetail';
-import { TIncludeIngredient, TRecipeDetail } from '@/types/recipe';
-import { Section } from '@/components/Section';
-import { AvatarLabel } from '@/components/AvatarLabel';
+import { TIncludeIngredient } from '@/types/recipe';
+import { Section } from '@/components/common/Section';
+import { AvatarLabel } from '@/components/common/AvatarLabel';
 import { getBrandImage } from '@/utils/formatBrand';
-import { CommentInputForm } from '@/components/Form/CommentInputForm';
+import { CommentInputForm } from '@/components/recipeDetail/CommentInputForm';
 import { Comment } from '@/components/Comment';
 import { TComment, TSortOption } from '@/types/comments';
-import { LikeButton } from '@/components/Buttons/LikeButton';
-import { CustomSelect } from '@/components/CustomSelect';
+import { LikeButton } from '@/components/common/Buttons/LikeButton';
+import { CustomSelect } from '@/components/common/CustomSelect';
 import { useParams } from 'react-router-dom';
 
 const commentSortOptions: Array<{ value: TSortOption; label: string }> = [
@@ -102,91 +102,6 @@ export default function RecipeDetail() {
     </PageLayout>
   );
 }
-
-//TODO: 목데이터
-const recipeDetailData: TRecipeDetail = {
-  recipeId: '3',
-  userNickName: '먹부림 사냥꾼',
-  userProfileImageUrl: null,
-  brandName: '요아정',
-  title: '요아정 꿀조합!! 딸기바나나',
-  description:
-    '이렇게 선택해서 먹으면 기분이 좋그든요이렇게 선택해서 먹으면 기분이 좋그든요이렇게 선택해서 먹으면 기분이 좋그든요이렇게 선택해서 먹으면 기분이 좋그든요이렇게 선택해서 먹으면 기분이 좋그든요',
-  thunbnailUrl: MockImage,
-  isCelebrity: false,
-  createdAt: '2024-08-24T10:41:47.000Z',
-  status: '1',
-  scrapCount: 10,
-  isScrapped: false,
-  includeIngredients: [
-    {
-      ingredient: {
-        ingredientId: '1',
-        ingredientName: '딸기',
-        quantity: 0.5,
-        unit: '개',
-        cost: 300,
-        calorie: 30,
-      },
-      count: 2,
-    },
-    {
-      ingredient: {
-        ingredientId: '2',
-        ingredientName: '바나나',
-        quantity: 1,
-        unit: '개',
-        cost: 500,
-        calorie: 90,
-      },
-      count: 1,
-    },
-    {
-      ingredient: {
-        ingredientId: '3',
-        ingredientName: '초코',
-        quantity: 30,
-        unit: 'g',
-        cost: 200,
-        calorie: 120,
-      },
-      count: 3,
-    },
-    {
-      ingredient: {
-        ingredientId: '4',
-        ingredientName: '말차',
-        quantity: 1,
-        unit: '스쿱',
-        cost: 150,
-        calorie: 20,
-      },
-      count: 10,
-    },
-    {
-      ingredient: {
-        ingredientId: '5',
-        ingredientName: '할라피뇨',
-        quantity: 0.5,
-        unit: '조각',
-        cost: 100,
-        calorie: 5,
-      },
-      count: 4,
-    },
-    {
-      ingredient: {
-        ingredientId: '6',
-        ingredientName: '홍차',
-        quantity: 1,
-        unit: '티백',
-        cost: 200,
-        calorie: 0,
-      },
-      count: 8,
-    },
-  ],
-};
 
 //TODO: 목데이터
 const commentsData: TComment[] = [

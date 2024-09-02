@@ -1,5 +1,5 @@
 import React from 'react';
-import { RecipeCard } from '@/components/RecipeCard';
+import { RecipeCard } from '@/components/common/RecipeCard';
 import { TRecipeCardInfo } from '@/types/recipeCard';
 import { useNavigate } from 'react-router-dom';
 

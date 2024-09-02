@@ -1,16 +1,16 @@
 import React from 'react';
 import { Header, PageLayout, TopNavBar } from '@recipic-packages/ui';
-import { RecipeCardList } from '@/components/RecipeCard/RecipeCardList';
-import BrandButtonList from '@/components/Buttons/BrandButton/BrandButtonList';
+import { RecipeCardList } from '@/components/common/RecipeCard/RecipeCardList';
 import { brands } from '@/constants/brands';
-import { SearchBar } from '@/components/SearchBar';
-import { WriteRecipeButton } from '@/components/Buttons/WriteRecipeButton';
-import { WriteRecipeDrawer } from '@/components/Drawers/WriteRecipeDrawer';
+import { WriteRecipeButton } from '@/components/recipe/WriteRecipeButton';
+import { WriteRecipeDrawer } from '@/components/recipe/WriteRecipeDrawer';
 import { useDrawer } from '@/hooks/useDrawer';
 import { useGetRecipeList } from '@/hooks/useGetRecipeList';
 import { useSearchLogic } from '@/hooks/useSearchLogic';
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
 import { Spinner } from '@recipic-packages/ui';
+import BrandButtonList from '@/components/common/Buttons/BrandButton/BrandButtonList';
+import { SearchBar } from '@/components/common/SearchBar';
 
 export default function Recipe() {
   const { searchQuery, isSearching, handleSearchSubmit, handleBrandClick, handleGoBack } = useSearchLogic();

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Header, PageLayout } from '@recipic-packages/ui';
-import { RecipeCardList } from '@/components/RecipeCard/RecipeCardList';
+import { RecipeCardList } from '@/components/common/RecipeCard/RecipeCardList';
 import { useGetPickedRecipeList } from '@/hooks/useGetPickedRecipeList';
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
 import PrimarySpinner from '@/components/common/PrimarySpinner';

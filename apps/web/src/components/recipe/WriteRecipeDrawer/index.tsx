@@ -23,12 +23,12 @@ import {
   Label,
   TextArea,
 } from '@recipic-packages/ui';
-import { DrawerCloseButton } from '@/components/Buttons/DrawerCloseButton';
+import { DrawerCloseButton } from '@/components/recipe/DrawerCloseButton';
 import { brands } from '@/constants/brands';
 import { formatBrandToHangeul } from '@/utils/formatBrand';
 import { TIngredient } from '@/types/recipe';
 import { TBrandEn } from '@/types/brand';
-import { CustomSelect } from '@/components/CustomSelect';
+import { CustomSelect } from '@/components/common/CustomSelect';
 
 const recipeFormSchema = z.object({
   title: z.string().min(1, '제목을 입력해주세요').max(20, '제목은 최대 20자까지 입력할 수 있습니다'),

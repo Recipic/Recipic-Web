@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
-import BrandButton from '@/components/Buttons/BrandButton';
 import { TBrandEn } from '@/types/brand';
+import BrandButton from '@/components/common/Buttons//BrandButton';
 
 type GridCols = 2 | 3 | 4 | 5 | 6;
 

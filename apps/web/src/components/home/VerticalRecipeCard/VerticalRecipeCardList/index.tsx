@@ -1,5 +1,5 @@
 import React from 'react';
-import { VerticalRecipeCard } from '@/components/VerticalRecipeCard';
+import { VerticalRecipeCard } from '@/components/home/VerticalRecipeCard';
 import { TRecipeCardInfo } from '@/types/recipeCard';
 import { useNavigate } from 'react-router-dom';
 import { Carousel } from '@recipic-packages/ui';

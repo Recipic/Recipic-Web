@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Header, PageLayout, TopNavBar, Button } from '@recipic-packages/ui';
 import { Form, FormField, FormItem, FormLabel } from '@recipic-packages/ui';
-import { CheckboxWithLabel } from '@/components/CheckboxWithLabel';
+import { CheckboxWithLabel } from '@/components/common/CheckboxWithLabel';
 
 const formSchema = z.object({
   dislikes: z.array(z.string()).min(1, '최소 한 개 이상의 재료를 선택해주세요.'),

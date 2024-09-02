@@ -1,18 +1,18 @@
 import React from 'react';
 import { Header, PageLayout } from '@recipic-packages/ui';
-import { CarouselWithBanners } from '@/components/CarouselWithBanners';
-import { Section } from '@/components/Section';
+import { CarouselWithBanners } from '@/components/home/CarouselWithBanners';
+import { Section } from '@/components/common/Section';
 import { TBrandEn } from '@/types/brand';
 import { useNavigate } from 'react-router-dom';
 import { formatBrandToHangeul } from '@/utils/formatBrand';
-import BrandButtonList from '@/components/Buttons/BrandButton/BrandButtonList';
 import RecipcLogoImage from '@/assets/images/logo.webp';
-import { VerticalRecipeCardList } from '@/components/VerticalRecipeCard/VerticalRecipeCardList';
+import { VerticalRecipeCardList } from '@/components/home/VerticalRecipeCard/VerticalRecipeCardList';
 import { useGetRecipeRankList } from '@/hooks/useGetRecipeRankList';
 import { useGetRecipeCelebRankList } from '@/hooks/useGetRecipeCelebRankList';
 import { brands } from '@/constants/brands';
-import SearchButton from '@/components/Buttons/SearchButton';
-import NotificationButton from '@/components/Buttons/NotificationButton';
+import NotificationButton from '@/components/home/NotificationButton';
+import SearchButton from '@/components/common/Buttons/SearchButton';
+import BrandButtonList from '@/components/common/Buttons/BrandButton/BrandButtonList';
 
 export default function Home() {
   const navigate = useNavigate();

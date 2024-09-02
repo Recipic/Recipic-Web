@@ -1,12 +1,12 @@
 import React from 'react';
 import { Header, PageLayout, TopNavBar } from '@recipic-packages/ui';
-import { RecipeCardList } from '@/components/RecipeCard/RecipeCardList';
-import { SearchBar } from '@/components/SearchBar';
+import { RecipeCardList } from '@/components/common/RecipeCard/RecipeCardList';
 import { useGetMyRecipeList } from '@/hooks/useGetMyRecipeList';
 import { useSearchLogic } from '@/hooks/useSearchLogic';
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
 import PrimarySpinner from '@/components/common/PrimarySpinner';
 import { DEFAULT_SIZE } from '@/constants/pagenation';
+import { SearchBar } from '@/components/common/SearchBar';
 
 export default function MyRecipe() {
   const { searchQuery, isSearching, handleSearchSubmit, handleGoBack } = useSearchLogic();

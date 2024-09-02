@@ -1,9 +1,9 @@
 import React from 'react';
-import { AvatarLabel } from '@/components/AvatarLabel';
+import { AvatarLabel } from '@/components/common/AvatarLabel';
 import { getRelativeTime } from '@/utils/date';
 import DefaltUserProfile from '@/assets/icons/defaultUserProfile.webp';
 import { TComment } from '@/types/comments';
-import { LikeButton } from '@/components/Buttons/LikeButton';
+import { LikeButton } from '@/components/common/Buttons/LikeButton';
 
 type TCommentProps = {
   onLikeClick: () => void;

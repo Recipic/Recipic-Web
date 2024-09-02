@@ -1,6 +1,6 @@
 import React from 'react';
 import { Banner, Carousel } from '@recipic-packages/ui';
-import MockBannerImage from '../../assets/images/mockBanner.webp';
+import MockBannerImage from '@/assets/images/mockBanner.webp';
 
 const banners = [
   { id: 1, imageUrl: MockBannerImage, onClick: () => console.log('Banner 1 clicked') },
