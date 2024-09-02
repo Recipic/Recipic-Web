@@ -1,17 +1,16 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { TGetMyRecipeListParams, TGetMyRecipeListResponse } from '@/apis/myRecipe/type';
 import { getMyRecipeList } from '@/apis/myRecipe/getMyRecipeList';
+import { DEFAULT_SIZE } from '@/constants/pagenation';
 
-const DEFAULT_SIZE = 5;
-
-export const useGetMyRecipeList = ({ keyword }: Omit<TGetMyRecipeListParams, 'page'>) => {
+export const useGetMyRecipeList = ({ keyword, size = DEFAULT_SIZE }: Omit<TGetMyRecipeListParams, 'page'>) => {
   const { data, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } = useInfiniteQuery<
     TGetMyRecipeListResponse,
     Error
   >({
     queryKey: ['myRecipeList', keyword],
     queryFn: ({ pageParam = 1 }) => {
-      const result = getMyRecipeList({ page: pageParam as number, keyword: keyword, size: DEFAULT_SIZE });
+      const result = getMyRecipeList({ page: pageParam as number, keyword: keyword, size: size });
       return result;
     },
     initialPageParam: 1,

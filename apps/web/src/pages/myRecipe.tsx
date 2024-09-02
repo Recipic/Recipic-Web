@@ -6,12 +6,14 @@ import { useGetMyRecipeList } from '@/hooks/useGetMyRecipeList';
 import { useSearchLogic } from '@/hooks/useSearchLogic';
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
 import PrimarySpinner from '@/components/common/PrimarySpinner';
+import { DEFAULT_SIZE } from '@/constants/pagenation';
 
 export default function MyRecipe() {
   const { searchQuery, isSearching, handleSearchSubmit, handleGoBack } = useSearchLogic();
 
   const { myRecipeInfosList, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } = useGetMyRecipeList({
     keyword: searchQuery,
+    size: DEFAULT_SIZE,
   });
 
   const { ref } = useInfiniteScroll({
