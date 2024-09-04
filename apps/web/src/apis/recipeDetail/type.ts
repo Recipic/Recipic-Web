@@ -16,3 +16,7 @@ export type TPostLeaveCommentBody = {
   recipeId: number;
   comment: string;
 };
+
+export type TPostLikeCommentBody = {
+  commentId: number;
+};

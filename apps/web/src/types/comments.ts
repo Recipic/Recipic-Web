@@ -1,5 +1,5 @@
 export type TComment = {
-  commentId: string;
+  commentId: number;
   content: string;
   createdAt: string;
   userId: number;
@@ -11,4 +11,4 @@ export type TComment = {
   isLiked: boolean;
 };
 
-export type TSortOption = 'latest' | 'liked';
+export type TSortOption = 'latest' | 'likes';

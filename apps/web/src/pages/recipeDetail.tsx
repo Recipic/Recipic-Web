@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
-import { PageLayout, TopNavBar, Badge, Separator } from '@recipic-packages/ui';
+import { PageLayout, TopNavBar, Separator } from '@recipic-packages/ui';
 import { CarouselWithRecipeDetailImage } from '@/components/recipeDetail/CarouselWithRecipeDetailImage';
 import { useGetRecipeDetail } from '@/hooks/useGetRecipeDetail';
-import { TIncludeIngredient } from '@/types/recipe';
 import { Section } from '@/components/common/Section';
 import { AvatarLabel } from '@/components/common/AvatarLabel';
 import { getBrandImage } from '@/utils/formatBrand';
 import { CommentInputForm } from '@/components/recipeDetail/CommentInputForm';
-import { Comment } from '@/components/Comment';
-import { TComment, TSortOption } from '@/types/comments';
+import { TSortOption } from '@/types/comments';
 import { LikeButton } from '@/components/common/Buttons/LikeButton';
 import { CustomSelect } from '@/components/common/CustomSelect';
 import { useParams } from 'react-router-dom';
@@ -18,10 +16,13 @@ import { useGetCommentsList } from '@/hooks/useGetCommentsList';
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
 import PrimarySpinner from '@/components/common/PrimarySpinner';
 import { usePostLeaveComment } from '@/hooks/usePostLeaveComment';
+import { usePostLikeComment } from '@/hooks/usePostLikeComment';
+import BadgeList from '@/components/recipeDetail/BadgeList';
+import CommentList from '@/components/recipeDetail/CommentList';
 
 const commentSortOptions: Array<{ value: TSortOption; label: string }> = [
   { value: 'latest', label: '최신순' },
-  { value: 'liked', label: '좋아요순' },
+  { value: 'likes', label: '좋아요순' },
 ];
 
 export default function RecipeDetail() {
@@ -31,6 +32,7 @@ export default function RecipeDetail() {
   const { recipeDetailData } = useGetRecipeDetail({ recipeId: recipeId });
   const { mutate: mutateRecipePick } = usePostRecipePick();
   const { mutate: mutateLeaveComment } = usePostLeaveComment();
+  const { mutate: mutateLikeComment } = usePostLikeComment();
   const { commentsList, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } = useGetCommentsList({
     recipeId: recipeId,
     size: DEFAULT_SIZE,
@@ -49,9 +51,8 @@ export default function RecipeDetail() {
   };
 
   /** 댓글에 대한 좋아요 클릭 핸들러 */
-  const handleCommentLikeClick = () => {
-    console.log('댓글 좋아요 클릭');
-    //TODO: 댓글 좋아요 클릭 api 연동 후 optimistic update
+  const handleCommentLikeClick = ({ commentId }: { commentId: number }) => {
+    mutateLikeComment({ recipeId: recipeId, commentId: commentId });
   };
 
   /** 댓글 등록 핸들러 */
@@ -74,7 +75,7 @@ export default function RecipeDetail() {
         <div className="px-4 py-2">
           <AvatarLabel
             imageUrl={getBrandImage(recipeDetailData.brandName)}
-            imageAlt="글쓴이 프로필 이미지"
+            imageAlt={`${recipeDetailData.brandName} 브랜드 로고 이미지`}
             label={recipeDetailData.brandName}
           />
         </div>
@@ -82,11 +83,7 @@ export default function RecipeDetail() {
           <p className="text-gray-700 mb-4">{recipeDetailData.description}</p>
         </div>
         <div className="px-4 py-2 flex flex-wrap gap-2">
-          {recipeDetailData.includeIngredients.map((ingredient: TIncludeIngredient) => (
-            <Badge key={ingredient.ingredient.ingredientId} variant="default">
-              {`${ingredient.ingredient.ingredientName} ${ingredient.ingredient.quantity}${ingredient.ingredient.unit} x ${ingredient.count}`}
-            </Badge>
-          ))}
+          <BadgeList includeIngredients={recipeDetailData.includeIngredients} />
         </div>
       </Section>
       <Separator className="my-2" />
@@ -94,7 +91,7 @@ export default function RecipeDetail() {
         <div className="p-4">
           <AvatarLabel
             imageUrl={recipeDetailData.userProfileImageUrl}
-            imageAlt="글쓴이 프로필 이미지"
+            imageAlt="작성자 프로필 이미지"
             label={recipeDetailData.userNickName}
           />
         </div>
@@ -118,9 +115,7 @@ export default function RecipeDetail() {
           </div>
         ) : (
           <>
-            {commentsList.map((comment: TComment) => (
-              <Comment key={comment.commentId} onLikeClick={handleCommentLikeClick} {...comment} />
-            ))}
+            <CommentList commentsList={commentsList} onCommentLikeClick={handleCommentLikeClick} />
             <div ref={ref}>{isFetchingNextPage && <PrimarySpinner />}</div>
           </>
         )}
