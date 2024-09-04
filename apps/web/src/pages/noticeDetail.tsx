@@ -1,15 +1,26 @@
+import React, { useState } from 'react';
 import { Header, PageLayout, TopNavBar } from '@recipic-packages/ui';
 import NoticeComponent from '../components/Notice';
+import { useParams } from 'react-router-dom';
 
-export default function Notice() {
+export default function NoticeDetail() {
+  const params = useParams<{ noticeId: string }>();
+  const targetId = Number(params.noticeId);
+  const foundNotice = noticeItems.find(notice => notice.noticeId === targetId);
   return (
     <PageLayout>
-      <Header title="공지사항" order="second" />
+      <Header title="공지사항 상세" order="second" />
       <TopNavBar order="first" />
       <div className="mb-6 flex flex-col items-center mt-24">
-        {noticeItems.map(notice => (
-          <NoticeComponent title={notice.title} createdDate={notice.createdDate} noticeId={notice.noticeId} />
-        ))}
+        {foundNotice ? (
+          <NoticeComponent
+            title={foundNotice.title}
+            createdDate={foundNotice.createdDate}
+            noticeId={foundNotice.noticeId}
+          />
+        ) : (
+          <p>공지사항 상세 불러오기에 실패했습니다. noticeId: {targetId}</p>
+        )}
       </div>
     </PageLayout>
   );
