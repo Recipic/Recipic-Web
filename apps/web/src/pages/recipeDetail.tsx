@@ -3,7 +3,7 @@ import { PageLayout, TopNavBar, Badge, Separator } from '@recipic-packages/ui';
 import { CarouselWithRecipeDetailImage } from '@/components/recipeDetail/CarouselWithRecipeDetailImage';
 import MockImage from '@/assets/images/mockBanner.webp';
 import { useGetRecipeDetail } from '@/hooks/useGetRecipeDetail';
-import { TIncludeIngredient } from '@/types/recipe';
+import { TIncludeIngredient, TRecipeId } from '@/types/recipe';
 import { Section } from '@/components/common/Section';
 import { AvatarLabel } from '@/components/common/AvatarLabel';
 import { getBrandImage } from '@/utils/formatBrand';
@@ -13,6 +13,8 @@ import { TComment, TSortOption } from '@/types/comments';
 import { LikeButton } from '@/components/common/Buttons/LikeButton';
 import { CustomSelect } from '@/components/common/CustomSelect';
 import { useParams } from 'react-router-dom';
+import { toast } from 'sonner';
+import { usePostRecipePick } from '@/hooks/usePostRecipePick';
 
 const commentSortOptions: Array<{ value: TSortOption; label: string }> = [
   { value: 'latest', label: '최신순' },
@@ -21,12 +23,12 @@ const commentSortOptions: Array<{ value: TSortOption; label: string }> = [
 
 export default function RecipeDetail() {
   const [commentSortOption, setCommentSortOption] = useState<TSortOption>('latest'); // 최신순, 좋아요순 옵션 상태
-  const { recipeId } = useParams<{ recipeId: string }>(); // recipeId를 url 파라미터에서 가져오기
-  const { recipeDetailData } = useGetRecipeDetail({ recipeId: recipeId as string });
-  console.log(recipeDetailData);
+  const { recipeId } = useParams() as { recipeId: string | number }; // recipeId를 url 파라미터에서 가져오기
+  const { recipeDetailData } = useGetRecipeDetail({ recipeId: recipeId });
+  const { mutate: mutateRecipePick } = usePostRecipePick();
   /** 레시피 상세 글에 대한 스크랩(좋아요) 클릭 핸들러 */
   const handleRecipeLikeClick = () => {
-    console.log('스크랩 클릭');
+    mutateRecipePick({ recipeId: recipeId });
     //TODO: 스크랩 클릭 api 연동 후 recipeDetailData refetch
   };
 

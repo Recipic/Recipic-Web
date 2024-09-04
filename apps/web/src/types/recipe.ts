@@ -31,5 +31,5 @@ export type TRecipeDetail = {
 };
 
 export type TRecipeId = {
-  recipeId: string;
+  recipeId: string | number;
 };
