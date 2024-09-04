@@ -13,7 +13,7 @@ export const useGetCommentsList = ({
     Error
   >({
     ...getCommentsListQueryKey({ recipeId, sortType }),
-    initialPageParam: 1,
+    initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       if (!lastPage || lastPage.length === 0) {
         return undefined;

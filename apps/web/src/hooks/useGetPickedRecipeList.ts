@@ -8,11 +8,11 @@ export const useGetPickedRecipeList = () => {
     Error
   >({
     queryKey: ['pickedRecipeList'],
-    queryFn: ({ pageParam = 1 }) => {
+    queryFn: ({ pageParam = 0 }) => {
       const result = getPickedRecipeList({ page: pageParam as number });
       return result;
     },
-    initialPageParam: 1,
+    initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       if (!lastPage || lastPage.length === 0) {
         return undefined;

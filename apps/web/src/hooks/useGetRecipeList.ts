@@ -8,11 +8,11 @@ export const useGetRecipeList = ({ keyword }: Omit<TGetRecipeListParams, 'page'>
     Error
   >({
     queryKey: ['recipeList', keyword],
-    queryFn: ({ pageParam = 1 }) => {
+    queryFn: ({ pageParam = 0 }) => {
       const result = getRecipeList({ page: pageParam as number, keyword: keyword });
       return result;
     },
-    initialPageParam: 1,
+    initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       if (!lastPage || lastPage.length === 0) {
         return undefined;

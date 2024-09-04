@@ -43,7 +43,7 @@ export const getRecipeDetailQueryKey = ({ recipeId }: TRecipeId) => {
 export const getCommentsListQueryKey = ({ recipeId, sortType }: Omit<TGetCommentsListParams, 'page' | 'size'>) => {
   return {
     queryKey: ['commentsList', recipeId, sortType],
-    queryFn: ({ pageParam = 1, size }: { pageParam?: number; size: number }) =>
+    queryFn: ({ pageParam = 0, size }: { pageParam?: number; size: number }) =>
       getCommentsList({ recipeId: recipeId, page: pageParam, size: size, sortType: sortType }),
   };
 };

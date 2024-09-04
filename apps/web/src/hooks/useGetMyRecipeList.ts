@@ -9,11 +9,11 @@ export const useGetMyRecipeList = ({ keyword, size = DEFAULT_SIZE }: Omit<TGetMy
     Error
   >({
     queryKey: ['myRecipeList', keyword],
-    queryFn: ({ pageParam = 1 }) => {
+    queryFn: ({ pageParam = 0 }) => {
       const result = getMyRecipeList({ page: pageParam as number, keyword: keyword, size: size });
       return result;
     },
-    initialPageParam: 1,
+    initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       if (!lastPage || lastPage.length === 0) {
         return undefined;
