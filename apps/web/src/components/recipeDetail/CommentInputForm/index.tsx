@@ -5,18 +5,18 @@ import * as z from 'zod';
 import { Form, FormField, FormItem, FormControl, Input, Button } from '@recipic-packages/ui';
 
 const commentSchema = z.object({
-  content: z.string().min(1, '댓글을 입력해주세요').max(100, '댓글은 100자 이내로 입력해주세요'),
+  comment: z.string().min(1, '댓글을 입력해주세요').max(100, '댓글은 100자 이내로 입력해주세요'),
 });
 
 type TCommentInputFormProps = {
-  onSubmit: (data: { content: string }) => void;
+  onSubmit: (data: { comment: string }) => void;
 };
 
 export function CommentInputForm({ onSubmit }: TCommentInputFormProps) {
   const form = useForm<z.infer<typeof commentSchema>>({
     resolver: zodResolver(commentSchema),
     defaultValues: {
-      content: '',
+      comment: '',
     },
   });
 
@@ -32,7 +32,7 @@ export function CommentInputForm({ onSubmit }: TCommentInputFormProps) {
         <div className="flex items-center gap-2">
           <FormField
             control={form.control}
-            name="content"
+            name="comment"
             render={({ field }) => (
               <FormItem className="flex-grow">
                 <FormControl>

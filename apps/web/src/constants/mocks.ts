@@ -69,7 +69,7 @@ export const pickedRecipeInfosListData: TRecipeCardInfo[] = [
 
 //TODO: 목데이터
 export const recipeDetailData: TRecipeDetail = {
-  recipeId: '3',
+  recipeId: 3,
   userNickName: '먹부림 사냥꾼',
   userProfileImageUrl: null,
   brandName: '요아정',

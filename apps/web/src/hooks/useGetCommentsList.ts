@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { TGetCommentsListParams, TGetCommentsListResponse } from '@/apis/recipeDetail/type';
-import { getCommentsList } from '@/apis/recipeDetail/getCommentsList';
 import { DEFAULT_SIZE } from '@/constants/pagenation';
+import { getCommentsListQueryKey } from '@/constants/queryKeys';
 
 export const useGetCommentsList = ({
   recipeId,
@@ -12,11 +12,7 @@ export const useGetCommentsList = ({
     TGetCommentsListResponse,
     Error
   >({
-    queryKey: ['myRecipeList', recipeId, sortType],
-    queryFn: ({ pageParam = 1 }) => {
-      const result = getCommentsList({ recipeId: recipeId, page: pageParam as number, size: size, sortType: sortType });
-      return result;
-    },
+    ...getCommentsListQueryKey({ recipeId, sortType }),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
       if (!lastPage || lastPage.length === 0) {
@@ -24,7 +20,13 @@ export const useGetCommentsList = ({
       }
       return allPages.length + 1;
     },
+    queryFn: ({ pageParam }) =>
+      getCommentsListQueryKey({ recipeId: recipeId, sortType: sortType }).queryFn({
+        pageParam: pageParam as number,
+        size: size,
+      }),
   });
+
   const commentsList = data !== undefined ? data.pages.flat() : [];
   return { commentsList, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage };
 };

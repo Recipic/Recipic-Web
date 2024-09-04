@@ -20,6 +20,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
           error: 'group-[.toaster]:text-red-500 group-[.toaster]:border-red-500',
         },
       }}
+      position="bottom-center"
       {...props}
     />
   );

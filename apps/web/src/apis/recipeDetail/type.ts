@@ -11,3 +11,8 @@ export type TGetCommentsListParams = {
   size: number;
   sortType: TSortOption;
 };
+
+export type TPostLeaveCommentBody = {
+  recipeId: number;
+  comment: string;
+};

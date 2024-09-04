@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { PageLayout, TopNavBar, Badge, Separator } from '@recipic-packages/ui';
 import { CarouselWithRecipeDetailImage } from '@/components/recipeDetail/CarouselWithRecipeDetailImage';
-import MockImage from '@/assets/images/mockBanner.webp';
 import { useGetRecipeDetail } from '@/hooks/useGetRecipeDetail';
 import { TIncludeIngredient } from '@/types/recipe';
 import { Section } from '@/components/common/Section';
@@ -18,6 +17,7 @@ import { usePostRecipePick } from '@/hooks/usePostRecipePick';
 import { useGetCommentsList } from '@/hooks/useGetCommentsList';
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
 import PrimarySpinner from '@/components/common/PrimarySpinner';
+import { usePostLeaveComment } from '@/hooks/usePostLeaveComment';
 
 const commentSortOptions: Array<{ value: TSortOption; label: string }> = [
   { value: 'latest', label: '최신순' },
@@ -26,9 +26,11 @@ const commentSortOptions: Array<{ value: TSortOption; label: string }> = [
 
 export default function RecipeDetail() {
   const [commentSortOption, setCommentSortOption] = useState<TSortOption>('latest'); // 최신순, 좋아요순 옵션 상태
-  const { recipeId } = useParams() as unknown as { recipeId: number }; // recipeId를 url 파라미터에서 가져오기
+  const params = useParams<{ recipeId: string }>(); // recipeId를 url 파라미터에서 가져오기
+  const recipeId = Number(params.recipeId);
   const { recipeDetailData } = useGetRecipeDetail({ recipeId: recipeId });
   const { mutate: mutateRecipePick } = usePostRecipePick();
+  const { mutate: mutateLeaveComment } = usePostLeaveComment();
   const { commentsList, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } = useGetCommentsList({
     recipeId: recipeId,
     size: DEFAULT_SIZE,
@@ -53,11 +55,8 @@ export default function RecipeDetail() {
   };
 
   /** 댓글 등록 핸들러 */
-  const handleCommentSubmit = async (data: { content: string }) => {
-    // TODO: 댓글 달기 post api 호출 후 commentsData refetch
-    // TODO: 이를 위해선 페이지네이션 페이지를 useState로 관리하기
-
-    console.log('새 댓글 추가:', data.content);
+  const handleCommentSubmit = async (data: { comment: string }) => {
+    mutateLeaveComment({ recipeId: recipeId, comment: data.comment });
   };
 
   return (

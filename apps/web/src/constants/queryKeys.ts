@@ -4,8 +4,8 @@ import { getMyCommentsList } from '@/apis/myCommentsList/getMyCommentsList';
 import { TRecipeId } from '@/types/recipe';
 import { TGetMyCommentsListParams } from '@/apis/myCommentsList/type';
 import { getRecipeCelebRankList } from '@/apis/home/getRecipeCelebRankList';
-import { TGetRecipeListParams } from '@/apis/recipe/type';
-import { getRecipeList } from '@/apis/recipe/getRecipeList';
+import { getCommentsList } from '@/apis/recipeDetail/getCommentsList';
+import { TGetCommentsListParams } from '@/apis/recipeDetail/type';
 
 /** 홈 페이지에서 일반인 레시피 순위 리스트를 받고 관리하기 위한 쿼리 키 */
 export const getRecipeRankListQueryKey = () => {
@@ -36,5 +36,14 @@ export const getRecipeDetailQueryKey = ({ recipeId }: TRecipeId) => {
   return {
     queryKey: ['recipeDetail', recipeId],
     queryFn: () => getRecipeDetail({ recipeId: recipeId }),
+  };
+};
+
+/** 레시피 댓글 목록을 받고 관리하기 위한 쿼리 키 */
+export const getCommentsListQueryKey = ({ recipeId, sortType }: Omit<TGetCommentsListParams, 'page' | 'size'>) => {
+  return {
+    queryKey: ['commentsList', recipeId, sortType],
+    queryFn: ({ pageParam = 1, size }: { pageParam?: number; size: number }) =>
+      getCommentsList({ recipeId: recipeId, page: pageParam, size: size, sortType: sortType }),
   };
 };

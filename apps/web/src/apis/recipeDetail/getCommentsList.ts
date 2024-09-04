@@ -11,7 +11,7 @@ export const getCommentsList = async ({
 }: TGetCommentsListParams): Promise<TGetCommentsListResponse> => {
   try {
     const response = await instance.get<TGetResponse<TGetCommentsListResponse>>(
-      `/api/recipe/comment/list?recipeid=${recipeId}&page=${page}&size=5${size}&sortType=${sortType}`,
+      `/api/recipe/comment/list?recipeId=${recipeId}&page=${page}&size=${size}&sortType=${sortType}`,
     );
     return response.data.response;
   } catch (error: unknown) {
