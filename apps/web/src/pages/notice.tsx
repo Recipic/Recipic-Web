@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import MyCommentBox from '../components/MyCommentBox';
 import { Header, PageLayout, TopNavBar } from '@recipic-packages/ui';
-import { ImageIcon } from '@radix-ui/react-icons';
-import { useGetMyCommentsList } from '@/hooks/useGetMyCommentsList';
+import NoticeComponent from '../components/Notice';
 
 export default function Notice() {
-  /*임시적으로 변수 할당.*/
-  const { myCommentsList } = useGetMyCommentsList({ recipeId: 1, page: 1, size: 10, sortType: 'latest' });
-  console.log(myCommentsList);
   return (
     <PageLayout>
       <Header title="공지사항" order="second" />
       <TopNavBar order="first" />
-      <div className="mb-6 flex flex-col items-center px-4 gap-y-6 mt-24"></div>
+      <div className="mb-6 flex flex-col items-center mt-24">
+        {noticeItems.map(notice => (
+          <NoticeComponent title={notice.title} createdDate={notice.createdDate} noticeId={notice.noticeId} />
+        ))}
+      </div>
     </PageLayout>
   );
 }
