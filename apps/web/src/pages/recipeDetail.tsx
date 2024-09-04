@@ -3,7 +3,7 @@ import { PageLayout, TopNavBar, Badge, Separator } from '@recipic-packages/ui';
 import { CarouselWithRecipeDetailImage } from '@/components/recipeDetail/CarouselWithRecipeDetailImage';
 import MockImage from '@/assets/images/mockBanner.webp';
 import { useGetRecipeDetail } from '@/hooks/useGetRecipeDetail';
-import { TIncludeIngredient, TRecipeId } from '@/types/recipe';
+import { TIncludeIngredient } from '@/types/recipe';
 import { Section } from '@/components/common/Section';
 import { AvatarLabel } from '@/components/common/AvatarLabel';
 import { getBrandImage } from '@/utils/formatBrand';
@@ -13,8 +13,11 @@ import { TComment, TSortOption } from '@/types/comments';
 import { LikeButton } from '@/components/common/Buttons/LikeButton';
 import { CustomSelect } from '@/components/common/CustomSelect';
 import { useParams } from 'react-router-dom';
-import { toast } from 'sonner';
+import { DEFAULT_SIZE } from '@/constants/pagenation';
 import { usePostRecipePick } from '@/hooks/usePostRecipePick';
+import { useGetCommentsList } from '@/hooks/useGetCommentsList';
+import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
+import PrimarySpinner from '@/components/common/PrimarySpinner';
 
 const commentSortOptions: Array<{ value: TSortOption; label: string }> = [
   { value: 'latest', label: '최신순' },
@@ -23,13 +26,24 @@ const commentSortOptions: Array<{ value: TSortOption; label: string }> = [
 
 export default function RecipeDetail() {
   const [commentSortOption, setCommentSortOption] = useState<TSortOption>('latest'); // 최신순, 좋아요순 옵션 상태
-  const { recipeId } = useParams() as { recipeId: string | number }; // recipeId를 url 파라미터에서 가져오기
+  const { recipeId } = useParams() as unknown as { recipeId: number }; // recipeId를 url 파라미터에서 가져오기
   const { recipeDetailData } = useGetRecipeDetail({ recipeId: recipeId });
   const { mutate: mutateRecipePick } = usePostRecipePick();
+  const { commentsList, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } = useGetCommentsList({
+    recipeId: recipeId,
+    size: DEFAULT_SIZE,
+    sortType: commentSortOption,
+  });
+
+  const { ref } = useInfiniteScroll({
+    fetchNextPage: fetchNextPage,
+    hasNextPage: hasNextPage,
+    isFetchingNextPage: isFetchingNextPage,
+  });
+
   /** 레시피 상세 글에 대한 스크랩(좋아요) 클릭 핸들러 */
   const handleRecipeLikeClick = () => {
     mutateRecipePick({ recipeId: recipeId });
-    //TODO: 스크랩 클릭 api 연동 후 recipeDetailData refetch
   };
 
   /** 댓글에 대한 좋아요 클릭 핸들러 */
@@ -97,34 +111,21 @@ export default function RecipeDetail() {
             className="w-28"
           />
         </div>
-        {commentsData.map((comment: TComment) => (
-          <Comment key={comment.commentId} onLikeClick={handleCommentLikeClick} {...comment} />
-        ))}
+        {isLoading ? (
+          <PrimarySpinner />
+        ) : commentsList.length === 0 ? (
+          <div className="px-4 py-4 text-center">
+            <p className="text-regular16 text-gray-500">아직 댓글이 없어요.</p>
+          </div>
+        ) : (
+          <>
+            {commentsList.map((comment: TComment) => (
+              <Comment key={comment.commentId} onLikeClick={handleCommentLikeClick} {...comment} />
+            ))}
+            <div ref={ref}>{isFetchingNextPage && <PrimarySpinner />}</div>
+          </>
+        )}
       </Section>
     </PageLayout>
   );
 }
-
-//TODO: 목데이터
-const commentsData: TComment[] = [
-  {
-    commentId: '1',
-    content: '정말 맛있어 보이네요!',
-    createdAt: '2024-08-27T02:11:19.740Z',
-    userId: 1,
-    userProfileImageUrl: null,
-    userNickName: '맛있는 레시피',
-    likeCount: 50000,
-    isLiked: false,
-  },
-  {
-    commentId: '2',
-    content: '꼭 따라해볼게요!',
-    createdAt: '2023-08-26T15:30:00.000Z',
-    userId: 2,
-    userProfileImageUrl: MockImage,
-    userNickName: '요리초보',
-    likeCount: 2,
-    isLiked: true,
-  },
-];

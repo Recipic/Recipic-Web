@@ -1,6 +1,7 @@
 import { TRecipeCardInfo } from '@/types/recipeCard';
 import MockThumbnail from '@/assets/images/mockBanner.webp';
 import { TRecipeDetail } from '@/types/recipe';
+import { TComment } from '@/types/comments';
 
 //TODO: 목데이터. 추후 삭제 예정
 export const pickedRecipeInfosListData: TRecipeCardInfo[] = [
@@ -150,3 +151,31 @@ export const recipeDetailData: TRecipeDetail = {
     },
   ],
 };
+
+//TODO: 목데이터
+export const commentsData: TComment[] = [
+  {
+    commentId: '1',
+    content: '정말 맛있어 보이네요!',
+    createdAt: '2024-08-27T02:11:19.740Z',
+    userId: 1,
+    userProfileImageUrl: null,
+    userNickName: '맛있는 레시피',
+    recipeTitle: '요아정의 레시피',
+    recipeId: 1,
+    likeCount: 50000,
+    isLiked: false,
+  },
+  {
+    commentId: '2',
+    content: '꼭 따라해볼게요!',
+    createdAt: '2023-08-26T15:30:00.000Z',
+    userId: 2,
+    userProfileImageUrl: MockThumbnail,
+    userNickName: '요리초보',
+    recipeTitle: '요아정의 레시피',
+    recipeId: 1,
+    likeCount: 2,
+    isLiked: true,
+  },
+];
