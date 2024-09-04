@@ -2,6 +2,7 @@ import { TRecipeCardInfo } from '@/types/recipeCard';
 import MockThumbnail from '@/assets/images/mockBanner.webp';
 import { TRecipeDetail } from '@/types/recipe';
 import { TComment } from '@/types/comments';
+import { TIngredientGroup } from '@/types/dislikeIngredients';
 
 //TODO: 목데이터. 추후 삭제 예정
 export const pickedRecipeInfosListData: TRecipeCardInfo[] = [
@@ -177,5 +178,71 @@ export const commentsData: TComment[] = [
     recipeId: 1,
     likeCount: 2,
     isLiked: true,
+  },
+];
+
+// TODO: 목데이터
+export const ingredientGroups: TIngredientGroup[] = [
+  {
+    groupName: '과일',
+    ingredients: [
+      { ingredientName: '파인애플', ingredientId: 1 },
+      { ingredientName: '블루베리', ingredientId: 2 },
+      { ingredientName: '딸기', ingredientId: 3 },
+      { ingredientName: '자몽', ingredientId: 4 },
+      { ingredientName: '멜론', ingredientId: 5 },
+    ],
+  },
+  {
+    groupName: '야채',
+    ingredients: [
+      { ingredientName: '양상추', ingredientId: 6 },
+      { ingredientName: '토마토', ingredientId: 7 },
+      { ingredientName: '오이', ingredientId: 8 },
+      { ingredientName: '피망', ingredientId: 9 },
+      { ingredientName: '양파', ingredientId: 10 },
+      { ingredientName: '아보카도', ingredientId: 11 },
+      { ingredientName: '레드페퍼', ingredientId: 12 },
+      { ingredientName: '할라피뇨', ingredientId: 13 },
+      { ingredientName: '올리브', ingredientId: 14 },
+    ],
+  },
+  {
+    groupName: '육류',
+    ingredients: [
+      { ingredientName: '베이컨', ingredientId: 15 },
+      { ingredientName: '치킨', ingredientId: 16 },
+      { ingredientName: '칠리', ingredientId: 17 },
+      { ingredientName: '터키', ingredientId: 18 },
+      { ingredientName: '햄', ingredientId: 19 },
+      { ingredientName: '페퍼로니', ingredientId: 20 },
+    ],
+  },
+  {
+    groupName: '유제품',
+    ingredients: [
+      { ingredientName: '치즈', ingredientId: 21 },
+      { ingredientName: '우유', ingredientId: 22 },
+      { ingredientName: '아이스크림', ingredientId: 23 },
+    ],
+  },
+  {
+    groupName: '향신료',
+    ingredients: [
+      { ingredientName: '후추', ingredientId: 24 },
+      { ingredientName: '계피', ingredientId: 25 },
+      { ingredientName: '페퍼로치노', ingredientId: 26 },
+    ],
+  },
+  {
+    groupName: '기타',
+    ingredients: [
+      { ingredientName: '초콜릿', ingredientId: 27 },
+      { ingredientName: '그라놀라', ingredientId: 28 },
+      { ingredientName: '꿀', ingredientId: 29 },
+      { ingredientName: '시리얼', ingredientId: 30 },
+      { ingredientName: '슈팅캔디', ingredientId: 31 },
+      { ingredientName: '아몬드', ingredientId: 32 },
+    ],
   },
 ];

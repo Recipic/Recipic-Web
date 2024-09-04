@@ -1,16 +1,71 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, ControllerRenderProps } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { Header, PageLayout, TopNavBar, Button } from '@recipic-packages/ui';
+import { Header, PageLayout, TopNavBar } from '@recipic-packages/ui';
 import { Form, FormField, FormItem, FormLabel } from '@recipic-packages/ui';
 import { CheckboxWithLabel } from '@/components/common/CheckboxWithLabel';
+import { ingredientGroups } from '@/constants/mocks';
+import { BottomFixedButtonWithGradientDiv } from '@/components/common/Buttons/BottomFixedButtonWithGradientDiv';
+import { TIngredient, TIngredientGroup } from '@/types/dislikeIngredients';
 
 const formSchema = z.object({
-  dislikes: z.array(z.string()).min(1, '최소 한 개 이상의 재료를 선택해주세요.'),
+  dislikes: z.array(z.number()),
 });
 
 type FormValues = z.infer<typeof formSchema>;
+
+type TIngredientCheckboxProps = {
+  ingredient: TIngredient;
+  field: ControllerRenderProps<FormValues, 'dislikes'>;
+};
+
+function IngredientCheckbox({ ingredient, field }: TIngredientCheckboxProps) {
+  const isChecked = field.value.includes(ingredient.ingredientId);
+
+  const handleCheckboxChange = (checked: boolean) => {
+    const updatedValue = checked
+      ? [...(field.value || []), ingredient.ingredientId]
+      : field.value?.filter((value: number) => value !== ingredient.ingredientId);
+    field.onChange(updatedValue);
+  };
+
+  return (
+    <CheckboxWithLabel checked={isChecked} onCheckedChange={handleCheckboxChange} label={ingredient.ingredientName} />
+  );
+}
+
+type TIngredientGroupProps = {
+  group: TIngredientGroup;
+  field: ControllerRenderProps<FormValues, 'dislikes'>;
+};
+
+function IngredientGroup({ group, field }: TIngredientGroupProps) {
+  return (
+    <div key={group.groupName}>
+      <FormLabel>{group.groupName}</FormLabel>
+      <div className="grid grid-cols-3 gap-5 mt-2">
+        {group.ingredients.map((ingredient: TIngredient) => (
+          <IngredientCheckbox key={ingredient.ingredientId} ingredient={ingredient} field={field} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+type TIngredientListProps = {
+  field: ControllerRenderProps<FormValues, 'dislikes'>;
+};
+
+function IngredientList({ field }: TIngredientListProps) {
+  return (
+    <div className="space-y-10">
+      {ingredientGroups.map((group: TIngredientGroup) => (
+        <IngredientGroup key={group.groupName} group={group} field={field} />
+      ))}
+    </div>
+  );
+}
 
 export default function DislikeIngredients() {
   const form = useForm<FormValues>({
@@ -21,8 +76,8 @@ export default function DislikeIngredients() {
   });
 
   const onSubmit = (data: FormValues) => {
-    //TODO: api 연동 필요
-    console.log('선택된 싫어하는 재료:', data.dislikes);
+    // TODO: API 연동 필요
+    console.log('선택된 싫어하는 재료 ID:', data.dislikes);
   };
 
   return (
@@ -34,74 +89,15 @@ export default function DislikeIngredients() {
           <FormField
             control={form.control}
             name="dislikes"
-            render={() => (
+            render={({ field }) => (
               <FormItem>
-                <div className="space-y-10">
-                  {ingredientGroups.map(group => (
-                    <div key={group.groupName}>
-                      <FormLabel>{group.groupName}</FormLabel>
-                      <div className="grid grid-cols-3 gap-5 mt-2">
-                        {group.items.map(ingredient => (
-                          <FormField
-                            key={ingredient}
-                            control={form.control}
-                            name="dislikes"
-                            render={({ field }) => (
-                              <CheckboxWithLabel
-                                checked={field.value?.includes(ingredient)}
-                                onCheckedChange={(checked: boolean) => {
-                                  const updatedValue = checked
-                                    ? [...field.value, ingredient]
-                                    : field.value?.filter(value => value !== ingredient);
-                                  field.onChange(updatedValue);
-                                }}
-                                label={ingredient}
-                              />
-                            )}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                <IngredientList field={field} />
               </FormItem>
             )}
           />
         </form>
       </Form>
-      <div className="fixed bottom-0 left-0 right-0 p-4 bg-white max-w-lg mx-auto">
-        <Button type="submit" className="w-full" onClick={form.handleSubmit(onSubmit)}>
-          등록하기
-        </Button>
-      </div>
+      <BottomFixedButtonWithGradientDiv buttonText="등록하기" onClick={form.handleSubmit(onSubmit)} />
     </PageLayout>
   );
 }
-
-// 목데이터
-const ingredientGroups = [
-  {
-    groupName: '과일',
-    items: ['파인애플', '블루베리', '딸기', '자몽', '멜론'],
-  },
-  {
-    groupName: '야채',
-    items: ['양상추', '토마토', '오이', '피망', '양파', '아보카도', '레드페퍼', '할라피뇨', '올리브'],
-  },
-  {
-    groupName: '육류',
-    items: ['베이컨', '치킨', '칠리', '터키', '햄', '페퍼로니'],
-  },
-  {
-    groupName: '유제품',
-    items: ['치즈', '우유', '아이스크림'],
-  },
-  {
-    groupName: '향신료',
-    items: ['후추', '계피', '페퍼로치노'],
-  },
-  {
-    groupName: '기타',
-    items: ['초콜릿', '그라놀라', '꿀', '시리얼', '슈팅캔디', '아몬드'],
-  },
-];
