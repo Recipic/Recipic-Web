@@ -155,7 +155,7 @@ export const recipeDetailData: TRecipeDetail = {
 //TODO: 목데이터
 export const commentsData: TComment[] = [
   {
-    commentId: '1',
+    commentId: 1,
     content: '정말 맛있어 보이네요!',
     createdAt: '2024-08-27T02:11:19.740Z',
     userId: 1,
@@ -167,7 +167,7 @@ export const commentsData: TComment[] = [
     isLiked: false,
   },
   {
-    commentId: '2',
+    commentId: 2,
     content: '꼭 따라해볼게요!',
     createdAt: '2023-08-26T15:30:00.000Z',
     userId: 2,

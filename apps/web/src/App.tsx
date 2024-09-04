@@ -3,11 +3,11 @@ import { BrowserRouter } from 'react-router-dom';
 import Router from './router';
 import { CookiesProvider } from 'react-cookie';
 import ScrollToTop from './components/common/ScrollToTop';
+import FallbackUI from './components/common/FallbackUI';
 
 const App = () => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      {/* TODO:  임시 */}
+    <Suspense fallback={<FallbackUI />}>
       <CookiesProvider>
         <BrowserRouter>
           <Router />
