@@ -5,10 +5,9 @@ export type TComment = {
   userId: number;
   userProfileImageUrl: string | null;
   userNickName: string;
-  recipeTitle: string;
-  recipeId: number;
   likeCount: number;
-  isLiked: boolean;
+  liked: boolean;
+  myComment: boolean;
 };
 
 export type TSortOption = 'latest' | 'likes';

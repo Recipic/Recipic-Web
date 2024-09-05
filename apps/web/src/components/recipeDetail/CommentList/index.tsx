@@ -15,6 +15,7 @@ export default function CommentList({ commentsList, onCommentLikeClick }: TComme
           key={comment.commentId}
           onLikeClick={() => onCommentLikeClick({ commentId: comment.commentId })}
           {...comment}
+          liked={comment.liked}
         />
       ))}
     </>

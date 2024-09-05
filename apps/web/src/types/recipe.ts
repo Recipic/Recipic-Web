@@ -1,8 +1,8 @@
 import { TBrandKo } from '@/types/brand';
 
 export type TIngredient = {
-  ingredientId: string;
-  ingredientName: string;
+  ingredientId: number;
+  name: string;
   quantity: number;
   unit: string;
   cost: number;

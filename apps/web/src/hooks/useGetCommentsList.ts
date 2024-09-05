@@ -2,6 +2,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { TGetCommentsListParams, TGetCommentsListResponse } from '@/apis/recipeDetail/type';
 import { DEFAULT_SIZE } from '@/constants/pagenation';
 import { getCommentsListQueryKey } from '@/constants/queryKeys';
+import { getCommentsList } from '@/apis/recipeDetail/getCommentsList';
 
 export const useGetCommentsList = ({
   recipeId,
@@ -12,21 +13,25 @@ export const useGetCommentsList = ({
     TGetCommentsListResponse,
     Error
   >({
-    ...getCommentsListQueryKey({ recipeId, sortType }),
+    queryKey: getCommentsListQueryKey({ recipeId, sortType }).queryKey,
     initialPageParam: 0,
-    getNextPageParam: (lastPage, allPages) => {
-      if (!lastPage || lastPage.length === 0) {
+    getNextPageParam: lastPage => {
+      if (lastPage.last || lastPage.empty) {
         return undefined;
       }
-      return allPages.length + 1;
+      return lastPage.number + 1;
     },
-    queryFn: ({ pageParam }) =>
-      getCommentsListQueryKey({ recipeId: recipeId, sortType: sortType }).queryFn({
-        pageParam: pageParam as number,
-        size: size,
+    queryFn: ({ pageParam = 0 }) =>
+      getCommentsList({
+        recipeId,
+        page: pageParam as number,
+        size,
+        sortType,
       }),
   });
 
-  const commentsList = data !== undefined ? data.pages.flat() : [];
-  return { commentsList, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage };
+  const commentsList = data?.pages.flatMap(page => page.content) ?? [];
+  const totalComments = data?.pages[0]?.totalElements ?? 0;
+
+  return { commentsList, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage, totalComments };
 };
