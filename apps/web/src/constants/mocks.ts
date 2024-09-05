@@ -87,7 +87,7 @@ export const recipeDetailData: TRecipeDetail = {
     {
       ingredient: {
         ingredientId: 1,
-        name: '딸기',
+        ingredientName: '딸기',
         quantity: 0.5,
         unit: '개',
         cost: 300,
@@ -98,7 +98,7 @@ export const recipeDetailData: TRecipeDetail = {
     {
       ingredient: {
         ingredientId: 2,
-        name: '바나나',
+        ingredientName: '바나나',
         quantity: 1,
         unit: '개',
         cost: 500,
@@ -109,7 +109,7 @@ export const recipeDetailData: TRecipeDetail = {
     {
       ingredient: {
         ingredientId: 3,
-        name: '초코',
+        ingredientName: '초코',
         quantity: 30,
         unit: 'g',
         cost: 200,
@@ -120,7 +120,7 @@ export const recipeDetailData: TRecipeDetail = {
     {
       ingredient: {
         ingredientId: 4,
-        name: '말차',
+        ingredientName: '말차',
         quantity: 1,
         unit: '스쿱',
         cost: 150,
@@ -131,7 +131,7 @@ export const recipeDetailData: TRecipeDetail = {
     {
       ingredient: {
         ingredientId: 5,
-        name: '할라피뇨',
+        ingredientName: '할라피뇨',
         quantity: 0.5,
         unit: '조각',
         cost: 100,
@@ -142,7 +142,7 @@ export const recipeDetailData: TRecipeDetail = {
     {
       ingredient: {
         ingredientId: 6,
-        name: '홍차',
+        ingredientName: '홍차',
         quantity: 1,
         unit: '티백',
         cost: 200,
@@ -248,7 +248,7 @@ export const ingredientGroups: TIngredientGroup[] = [
 export const ingredientsOptions: TIngredient[] = [
   {
     ingredientId: 1,
-    name: '자바칩',
+    ingredientName: '자바칩',
     quantity: 1,
     unit: '개',
     calorie: 45.6,
@@ -256,7 +256,7 @@ export const ingredientsOptions: TIngredient[] = [
   },
   {
     ingredientId: 2,
-    name: '초코 드리즐',
+    ingredientName: '초코 드리즐',
     quantity: 10,
     unit: 'g',
     calorie: 45.6,

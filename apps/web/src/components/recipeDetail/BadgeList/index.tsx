@@ -1,6 +1,6 @@
+import React from 'react';
 import { TIncludeIngredient } from '@/types/recipe';
 import { Badge } from '@recipic-packages/ui';
-import React from 'react';
 
 type TBadgeListProps = {
   includeIngredients: TIncludeIngredient[];
