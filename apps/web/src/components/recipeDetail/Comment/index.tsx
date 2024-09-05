@@ -4,9 +4,11 @@ import { getRelativeTime } from '@/utils/date';
 import DefaltUserProfile from '@/assets/icons/defaultUserProfile.webp';
 import { TComment } from '@/types/comments';
 import { LikeButton } from '@/components/common/Buttons/LikeButton';
+import XButton from '@/components/common/Buttons/XButton';
 
 type TCommentProps = {
   onLikeClick: () => void;
+  onCommentDeleteClick: () => void;
 } & TComment;
 
 export function Comment({
@@ -17,6 +19,7 @@ export function Comment({
   likeCount,
   liked,
   onLikeClick,
+  onCommentDeleteClick,
   myComment,
 }: TCommentProps) {
   return (
@@ -27,7 +30,11 @@ export function Comment({
           label={userNickName}
           imageAlt="유저 프로필"
         />
-        <LikeButton isLiked={liked} likeCount={likeCount} onLikeClick={onLikeClick} size="small" />
+        {myComment === true ? (
+          <XButton onClick={onCommentDeleteClick} />
+        ) : (
+          <LikeButton isLiked={liked} likeCount={likeCount} onLikeClick={onLikeClick} size="small" />
+        )}
       </div>
 
       <p className="mt-2 mb-1">{content}</p>

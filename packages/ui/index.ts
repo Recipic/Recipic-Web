@@ -41,5 +41,18 @@ export {
 } from './components/ui/select';
 export { Spinner } from './components/ui/spinner';
 export { Toaster } from './components/ui/sonner';
+export {
+  AlertDialog,
+  AlertDialogPortal,
+  AlertDialogOverlay,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogFooter,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogAction,
+  AlertDialogCancel,
+} from './components/ui/alertDialog';
 export { cn } from './lib/utils';
 import './styles/fonts.css';

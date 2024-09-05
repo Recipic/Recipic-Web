@@ -19,6 +19,8 @@ import { usePostLeaveComment } from '@/hooks/usePostLeaveComment';
 import { usePostLikeComment } from '@/hooks/usePostLikeComment';
 import BadgeList from '@/components/recipeDetail/BadgeList';
 import CommentList from '@/components/recipeDetail/CommentList';
+import { useDeleteMyComment } from '@/hooks/useDeleteMyComment';
+import { useAlertDialog } from '@/contexts/alertDialogContext';
 
 const commentSortOptions: Array<{ value: TSortOption; label: string }> = [
   { value: 'latest', label: '최신순' },
@@ -29,10 +31,12 @@ export default function RecipeDetail() {
   const [commentSortOption, setCommentSortOption] = useState<TSortOption>('latest'); // 최신순, 좋아요순 옵션 상태
   const params = useParams<{ recipeId: string }>(); // recipeId를 url 파라미터에서 가져오기
   const recipeId = Number(params.recipeId);
+  const { showAlertDialog } = useAlertDialog();
   const { recipeDetailData } = useGetRecipeDetail({ recipeId: recipeId });
   const { mutate: mutateRecipePick } = usePostRecipePick();
   const { mutate: mutateLeaveComment } = usePostLeaveComment();
   const { mutate: mutateLikeComment } = usePostLikeComment();
+  const { mutate: mutateDeleteMyComment } = useDeleteMyComment();
   const { commentsList, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } = useGetCommentsList({
     recipeId: recipeId,
     size: DEFAULT_SIZE,
@@ -58,6 +62,19 @@ export default function RecipeDetail() {
   /** 댓글 등록 핸들러 */
   const handleCommentSubmit = async (data: { comment: string }) => {
     mutateLeaveComment({ recipeId: recipeId, comment: data.comment });
+  };
+
+  /** 댓글 삭제 핸들러 */
+  const handleDeleteMyComment = async ({ commentId }: { commentId: number }) => {
+    showAlertDialog({
+      title: '댓글 삭제',
+      description: `댓글을 삭제하면 다시 복구할 수 없어요.\n삭제하시겠어요?`,
+      cancelText: '취소',
+      confirmText: '삭제',
+      onConfirm: () => {
+        mutateDeleteMyComment({ recipeId: recipeId, commentId: commentId });
+      },
+    });
   };
 
   return (
@@ -115,7 +132,11 @@ export default function RecipeDetail() {
           </div>
         ) : (
           <>
-            <CommentList commentsList={commentsList} onCommentLikeClick={handleCommentLikeClick} />
+            <CommentList
+              commentsList={commentsList}
+              onCommentLikeClick={handleCommentLikeClick}
+              onCommentDeleteClick={handleDeleteMyComment}
+            />
             <div ref={ref}>{isFetchingNextPage && <PrimarySpinner />}</div>
           </>
         )}

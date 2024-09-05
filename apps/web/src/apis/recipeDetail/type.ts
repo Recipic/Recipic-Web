@@ -47,3 +47,7 @@ export type TPostLeaveCommentBody = {
 export type TPostLikeCommentBody = {
   commentId: number;
 };
+
+export type TDeleteMyCommentParams = {
+  commentId: number;
+};
