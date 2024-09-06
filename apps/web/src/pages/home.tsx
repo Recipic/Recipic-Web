@@ -13,7 +13,7 @@ import { brands } from '@/constants/brands';
 import NotificationButton from '@/components/home/NotificationButton';
 import SearchButton from '@/components/common/Buttons/SearchButton';
 import BrandButtonList from '@/components/common/Buttons/BrandButton/BrandButtonList';
-
+import { RandomBrandAnimatedBanner } from '@/components/home/AnimatedBanners/RandomBrandAnimatedBanner';
 export default function Home() {
   const navigate = useNavigate();
   const { recipeRankListData } = useGetRecipeRankList();
@@ -30,6 +30,7 @@ export default function Home() {
         <SearchButton onClick={() => navigate('/recipe')} />
         <NotificationButton onClick={() => {}} /* TODO: 알림 페이지 이동 */ />
       </Header>
+      <RandomBrandAnimatedBanner />
       <CarouselWithBanners />
       <Section title="이번 달 인기 레시피">
         <VerticalRecipeCardList recipeInfosList={recipeRankListData} />
