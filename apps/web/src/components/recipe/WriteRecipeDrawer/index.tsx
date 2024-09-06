@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Cross2Icon, MinusIcon, PlusIcon, ImageIcon } from '@radix-ui/react-icons';
-import { useForm, useFieldArray } from 'react-hook-form';
+import { useForm, useFieldArray, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import {
@@ -24,28 +24,34 @@ import {
   TextArea,
 } from '@recipic-packages/ui';
 import { DrawerCloseButton } from '@/components/recipe/DrawerCloseButton';
-import { brands } from '@/constants/brands';
-import { formatBrandToHangeul } from '@/utils/formatBrand';
-import { TIngredient } from '@/types/recipe';
-import { TBrandEn } from '@/types/brand';
+import { brandsko } from '@/constants/brands';
+import { TBrandKo } from '@/types/brand';
 import { CustomSelect } from '@/components/common/CustomSelect';
+import { useGetIngredientOfBrand } from '@/hooks/useGetIngredientOfBrand';
 
 const recipeFormSchema = z.object({
   title: z.string().min(1, '제목을 입력해주세요').max(20, '제목은 최대 20자까지 입력할 수 있습니다'),
-  brand: z.string().min(1, '브랜드를 선택해주세요'),
+  brand: z
+    .enum([...(brandsko as [TBrandKo, ...TBrandKo[]])]) // 배열을 튜플로 변환
+    .optional() // 선택적으로 undefined 가능
+    .refine(value => value !== undefined, {
+      message: '브랜드를 선택해주세요',
+    }), // undefined 일 경우 에러 메시지 출력
   ingredients: z
     .array(
       z.object({
-        ingredientId: z.string(),
+        ingredientId: z.number(),
         ingredientName: z.string(),
-        quantity: z.number(), // 서버에서 받은 증감 단위
-        selectedQuantity: z.number().min(0, '수량은 0 이상이어야 합니다.'), // 실제 선택된 수량
+        quantity: z.number(),
+        selectedQuantity: z.number().min(0, '수량은 0 이상이어야 합니다.'),
         unit: z.string(),
         calorie: z.number(),
         cost: z.number(),
       }),
     )
-    .min(1, '재료를 추가해주세요'),
+    .refine(ingredients => ingredients.some(ingredient => ingredient.selectedQuantity > 0), {
+      message: '옵션 재료를 최소 1개 이상 선택해주세요',
+    }),
   images: z
     .array(
       z.object({
@@ -68,28 +74,9 @@ type TWriteRecipeDrawerProps = {
   onClose: () => void;
 };
 
-const ingredientsOptions: TIngredient[] = [
-  {
-    ingredientId: 'zava',
-    ingredientName: '자바칩',
-    quantity: 1,
-    unit: '개',
-    calorie: 45.6,
-    cost: 600,
-  },
-  {
-    ingredientId: 'choco',
-    ingredientName: '초코 드리즐',
-    quantity: 10,
-    unit: 'g',
-    calorie: 45.6,
-    cost: 600,
-  },
-];
-
-const brandOptions = brands.map((brand: TBrandEn) => ({
+const brandOptions = brandsko.map((brand: TBrandKo) => ({
   value: brand,
-  label: formatBrandToHangeul(brand),
+  label: brand,
 }));
 
 export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) {
@@ -97,21 +84,40 @@ export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) 
     resolver: zodResolver(recipeFormSchema),
     defaultValues: {
       title: '',
-      brand: '',
-      ingredients: ingredientsOptions.map(ingredient => ({
-        ...ingredient,
-        selectedQuantity: 0, // 초기 선택 수량은 0으로 설정
-      })),
+      brand: undefined,
+      ingredients: [],
       images: [],
       description: '',
       isCelebrity: false,
     },
   });
 
-  const { fields } = useFieldArray({
+  const brandName: TBrandKo | undefined = useWatch({
+    control: form.control,
+    name: 'brand',
+  });
+
+  const { ingredientOptions } = useGetIngredientOfBrand({
+    brandName: brandName,
+  });
+
+  const { fields, replace } = useFieldArray({
     control: form.control,
     name: 'ingredients',
   });
+
+  useEffect(() => {
+    if (ingredientOptions) {
+      replace(
+        ingredientOptions.map(ingredient => ({
+          ...ingredient,
+          selectedQuantity: 0,
+        })),
+      );
+    } else {
+      replace([]);
+    }
+  }, [ingredientOptions, replace]);
 
   const {
     fields: imageFields,
@@ -122,8 +128,8 @@ export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) 
     name: 'images',
   });
 
-  const handleQuantityChange = (id: string, isIncrease: boolean) => {
-    const currentIngredients = form.getValues('ingredients');
+  const handleQuantityChange = (id: number, isIncrease: boolean) => {
+    const currentIngredients = form.getValues('ingredients') || [];
     const updatedIngredients = currentIngredients.map(ingredient => {
       if (ingredient.ingredientId === id) {
         const newSelectedQuantity = isIncrease
@@ -136,11 +142,17 @@ export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) 
       }
       return ingredient;
     });
-    form.setValue('ingredients', updatedIngredients);
+    form.setValue('ingredients', updatedIngredients, { shouldValidate: true });
+    form.trigger('ingredients');
   };
 
   const onSubmit = (data: TRecipeFormValues) => {
-    console.log(data);
+    const filteredIngredients = data.ingredients.filter(ingredient => ingredient.selectedQuantity > 0);
+    const submissionData = {
+      ...data,
+      ingredients: filteredIngredients,
+    };
+    console.log(submissionData);
     // TODO: 데이터 처리 로직 추가
     onClose();
   };
@@ -194,7 +206,9 @@ export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) 
         <Form {...form}>
           <form
             id="recipe-form"
-            onSubmit={form.handleSubmit(onSubmit)}
+            onSubmit={form.handleSubmit(onSubmit, errors => {
+              console.log('Form errors:', errors);
+            })}
             className="pb-4 space-y-8 flex-grow overflow-y-auto px-4"
           >
             <FormField
@@ -263,10 +277,10 @@ export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) 
                 <FormItem className="flex-1">
                   <FormLabel>브랜드</FormLabel>
                   <FormControl>
-                    <CustomSelect<string>
+                    <CustomSelect<TBrandKo | undefined>
                       items={brandOptions}
-                      value={field.value}
-                      onChange={field.onChange}
+                      value={field.value || undefined}
+                      onChange={(value: TBrandKo | undefined) => field.onChange(value)}
                       placeholder="브랜드를 선택해주세요"
                       className="w-full"
                     />
@@ -278,38 +292,44 @@ export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) 
             <FormField
               control={form.control}
               name="ingredients"
-              render={() => (
+              render={({ fieldState }) => (
                 <FormItem>
-                  <FormLabel>옵션 재료 (선택)</FormLabel>
+                  <FormLabel>옵션 재료</FormLabel>
                   <FormControl>
                     <div className={'px-2'}>
-                      {fields.map(ingredient => (
-                        <div key={ingredient.id} className="flex items-center justify-between mb-2">
-                          <p className="text-black text-regular16">
-                            {ingredient.ingredientName} {ingredient.selectedQuantity} {ingredient.unit}
-                          </p>
-                          <div className="flex items-center gap-1">
-                            <Button
-                              className="w-7 h-7"
-                              onClick={() => handleQuantityChange(ingredient.ingredientId, false)}
-                              size="icon"
-                              disabled={ingredient.selectedQuantity === 0}
-                            >
-                              <MinusIcon className="h-5 w-5" />
-                            </Button>
-                            <Button
-                              className="w-7 h-7"
-                              onClick={() => handleQuantityChange(ingredient.ingredientId, true)}
-                              size="icon"
-                            >
-                              <PlusIcon className="h-5 w-5" />
-                            </Button>
+                      {fields.length > 0 ? (
+                        fields.map(ingredient => (
+                          <div key={ingredient.id} className="flex items-center justify-between mb-2">
+                            <p className="text-black text-regular16">
+                              {ingredient.ingredientName} {ingredient.selectedQuantity} {ingredient.unit}
+                            </p>
+                            <div className="flex items-center gap-1">
+                              <Button
+                                className="w-7 h-7"
+                                onClick={() => handleQuantityChange(ingredient.ingredientId, false)}
+                                size="icon"
+                                disabled={ingredient.selectedQuantity === 0}
+                                type="button"
+                              >
+                                <MinusIcon className="h-5 w-5" />
+                              </Button>
+                              <Button
+                                className="w-7 h-7"
+                                onClick={() => handleQuantityChange(ingredient.ingredientId, true)}
+                                size="icon"
+                                type="button"
+                              >
+                                <PlusIcon className="h-5 w-5" />
+                              </Button>
+                            </div>
                           </div>
-                        </div>
-                      ))}
+                        ))
+                      ) : (
+                        <p className="text-gray-500">선택할 수 있는 옵션 재료가 없어요.</p>
+                      )}
                     </div>
                   </FormControl>
-                  <FormMessage />
+                  {fieldState.error && <FormMessage>{fieldState.error.message}</FormMessage>}
                 </FormItem>
               )}
             />

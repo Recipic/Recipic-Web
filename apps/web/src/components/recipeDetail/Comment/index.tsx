@@ -4,9 +4,11 @@ import { getRelativeTime } from '@/utils/date';
 import DefaltUserProfile from '@/assets/icons/defaultUserProfile.webp';
 import { TComment } from '@/types/comments';
 import { LikeButton } from '@/components/common/Buttons/LikeButton';
+import XButton from '@/components/common/Buttons/XButton';
 
 type TCommentProps = {
   onLikeClick: () => void;
+  onCommentDeleteClick: () => void;
 } & TComment;
 
 export function Comment({
@@ -15,8 +17,10 @@ export function Comment({
   userProfileImageUrl,
   userNickName,
   likeCount,
-  isLiked,
+  liked,
   onLikeClick,
+  onCommentDeleteClick,
+  myComment,
 }: TCommentProps) {
   return (
     <div className="p-4 border-b">
@@ -26,13 +30,16 @@ export function Comment({
           label={userNickName}
           imageAlt="유저 프로필"
         />
-        <LikeButton isLiked={isLiked} likeCount={likeCount} onLikeClick={onLikeClick} size="small" />
+        {myComment === true ? (
+          <XButton onClick={onCommentDeleteClick} />
+        ) : (
+          <LikeButton isLiked={liked} likeCount={likeCount} onLikeClick={onLikeClick} size="small" />
+        )}
       </div>
 
       <p className="mt-2 mb-1">{content}</p>
       <div className="flex justify-between text-regular14 text-gray-500">
         <p>{getRelativeTime({ date: createdAt })}</p>
-        <p>좋아요 {likeCount}</p>
       </div>
     </div>
   );

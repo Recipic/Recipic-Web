@@ -1,6 +1,6 @@
 import { TRecipeCardInfo } from '@/types/recipeCard';
 import MockThumbnail from '@/assets/images/mockBanner.webp';
-import { TRecipeDetail } from '@/types/recipe';
+import { TIngredient, TRecipeDetail } from '@/types/recipe';
 import { TComment } from '@/types/comments';
 import { TIngredientGroup } from '@/types/dislikeIngredients';
 
@@ -86,7 +86,7 @@ export const recipeDetailData: TRecipeDetail = {
   includeIngredients: [
     {
       ingredient: {
-        ingredientId: '1',
+        ingredientId: 1,
         ingredientName: '딸기',
         quantity: 0.5,
         unit: '개',
@@ -97,7 +97,7 @@ export const recipeDetailData: TRecipeDetail = {
     },
     {
       ingredient: {
-        ingredientId: '2',
+        ingredientId: 2,
         ingredientName: '바나나',
         quantity: 1,
         unit: '개',
@@ -108,7 +108,7 @@ export const recipeDetailData: TRecipeDetail = {
     },
     {
       ingredient: {
-        ingredientId: '3',
+        ingredientId: 3,
         ingredientName: '초코',
         quantity: 30,
         unit: 'g',
@@ -119,7 +119,7 @@ export const recipeDetailData: TRecipeDetail = {
     },
     {
       ingredient: {
-        ingredientId: '4',
+        ingredientId: 4,
         ingredientName: '말차',
         quantity: 1,
         unit: '스쿱',
@@ -130,7 +130,7 @@ export const recipeDetailData: TRecipeDetail = {
     },
     {
       ingredient: {
-        ingredientId: '5',
+        ingredientId: 5,
         ingredientName: '할라피뇨',
         quantity: 0.5,
         unit: '조각',
@@ -141,7 +141,7 @@ export const recipeDetailData: TRecipeDetail = {
     },
     {
       ingredient: {
-        ingredientId: '6',
+        ingredientId: 6,
         ingredientName: '홍차',
         quantity: 1,
         unit: '티백',
@@ -162,10 +162,9 @@ export const commentsData: TComment[] = [
     userId: 1,
     userProfileImageUrl: null,
     userNickName: '맛있는 레시피',
-    recipeTitle: '요아정의 레시피',
-    recipeId: 1,
     likeCount: 50000,
-    isLiked: false,
+    liked: false,
+    myComment: false,
   },
   {
     commentId: 2,
@@ -174,10 +173,9 @@ export const commentsData: TComment[] = [
     userId: 2,
     userProfileImageUrl: MockThumbnail,
     userNickName: '요리초보',
-    recipeTitle: '요아정의 레시피',
-    recipeId: 1,
     likeCount: 2,
-    isLiked: true,
+    liked: true,
+    myComment: true,
   },
 ];
 
@@ -244,5 +242,24 @@ export const ingredientGroups: TIngredientGroup[] = [
       { ingredientName: '슈팅캔디', ingredientId: 31 },
       { ingredientName: '아몬드', ingredientId: 32 },
     ],
+  },
+];
+
+export const ingredientsOptions: TIngredient[] = [
+  {
+    ingredientId: 1,
+    ingredientName: '자바칩',
+    quantity: 1,
+    unit: '개',
+    calorie: 45.6,
+    cost: 600,
+  },
+  {
+    ingredientId: 2,
+    ingredientName: '초코 드리즐',
+    quantity: 10,
+    unit: 'g',
+    calorie: 45.6,
+    cost: 600,
   },
 ];

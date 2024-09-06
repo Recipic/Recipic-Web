@@ -6,6 +6,8 @@ import { TGetMyCommentsListParams } from '@/apis/myCommentsList/type';
 import { getRecipeCelebRankList } from '@/apis/home/getRecipeCelebRankList';
 import { getCommentsList } from '@/apis/recipeDetail/getCommentsList';
 import { TGetCommentsListParams } from '@/apis/recipeDetail/type';
+import { getIngredientOfBrand } from '@/apis/recipe/getIngredientOfBrand';
+import { TGetIngredientOfBrandParams } from '@/apis/recipe/type';
 
 /** 홈 페이지에서 일반인 레시피 순위 리스트를 받고 관리하기 위한 쿼리 키 */
 export const getRecipeRankListQueryKey = () => {
@@ -45,5 +47,13 @@ export const getCommentsListQueryKey = ({ recipeId, sortType }: Omit<TGetComment
     queryKey: ['commentsList', recipeId, sortType],
     queryFn: ({ pageParam = 0, size }: { pageParam?: number; size: number }) =>
       getCommentsList({ recipeId: recipeId, page: pageParam, size: size, sortType: sortType }),
+  };
+};
+
+/** 레시피 작성 폼 Drawer에서 브랜드별 재료 정보를 받고 관리하기 위한 쿼리 키 */
+export const getIngredientOfBrandQueryKey = ({ brandName }: TGetIngredientOfBrandParams) => {
+  return {
+    queryKey: ['ingredientOfBrand', brandName],
+    queryFn: () => getIngredientOfBrand({ brandName: brandName }),
   };
 };
