@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import MyCommentBox from '../components/MyCommentBox';
+import MyCommentBox from '../components/myComment';
 import { Header, PageLayout, TopNavBar } from '@recipic-packages/ui';
 import NoticeComponent from '../components/Notice';
 

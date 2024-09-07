@@ -12,6 +12,7 @@ import Login from './pages/login';
 import DislikeIngredients from './pages/dislikeIngredients';
 import MyRecipe from './pages/myRecipe';
 import Notice from './pages/notice';
+import EditProfile from './pages/editProfile';
 export default function Router() {
   return (
     <Routes>
@@ -31,6 +32,7 @@ export default function Router() {
       {/* 내가 싫어하는 재료 */}
       <Route path="/my-recipe" element={<MyRecipe />} /> {/* 내가 작성한 레시피 */}
       <Route path="/notice" element={<Notice />} /> {/*공지사항*/}
+      <Route path="/editprofile" element={<EditProfile />} /> {/*공지사항*/}
     </Routes>
   );
 }

@@ -1,12 +1,11 @@
 import React from 'react';
 import { Header, PageLayout, Button } from '@recipic-packages/ui';
-import BannerComponent from '../components/MyBannerComponent';
+import BannerComponent from '../components/myBanner';
 import DislikeIcon from '../assets/images/DislikeIcon.png';
 import { useNavigate } from 'react-router-dom';
 import {
   GearIcon,
   Pencil2Icon,
-  KeyboardIcon,
   BellIcon,
   PaperPlaneIcon,
   InstagramLogoIcon,
