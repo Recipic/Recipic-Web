@@ -6,12 +6,12 @@ import { useNavigate } from 'react-router-dom';
 import {
   GearIcon,
   Pencil2Icon,
-  KeyboardIcon,
   BellIcon,
   PaperPlaneIcon,
   InstagramLogoIcon,
   FileTextIcon,
 } from '@radix-ui/react-icons';
+import { AvatarLabel } from '@/components/common/AvatarLabel';
 
 export default function My() {
   const navigate = useNavigate();
@@ -29,14 +29,8 @@ export default function My() {
         </Button>
       </Header>
       <br />
-      <div className="flex items-center m-6">
-        <img src="https://via.placeholder.com/100" alt="Profile" className="w-12 h-12 rounded-full" />
-        <div className="ml-4">
-          <div className="flex items-center">
-            <span className="text-xl font-semibold">먹부림 사냥꾼</span>
-            <Pencil2Icon className="ml-2 w-5 h-5" />
-          </div>
-        </div>
+      <div className="px-6 py-2">
+        <AvatarLabel imageUrl={null} imageAlt={`유저 프로필 이미지`} label={'먹부림 사냥꾼'} />
       </div>
       <div className="my-12"></div>
       <div className="grid grid-cols-3 gap-4 px-7 py-4">
