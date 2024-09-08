@@ -1,3 +1,4 @@
+import { getMyInfo } from './../apis/my/getMyInfo';
 import { getRecipeRankList } from '@/apis/home/getRecipeRankList';
 import { getRecipeDetail } from '@/apis/recipeDetail/getRecipeDetail';
 import { getMyCommentsList } from '@/apis/myCommentsList/getMyCommentsList';
@@ -55,5 +56,13 @@ export const getIngredientOfBrandQueryKey = ({ brandName }: TGetIngredientOfBran
   return {
     queryKey: ['ingredientOfBrand', brandName],
     queryFn: () => getIngredientOfBrand({ brandName: brandName }),
+  };
+};
+
+/** 유저 정보를 받고 관리하기 위한 쿼리 키 */
+export const getMyInfoQueryKey = () => {
+  return {
+    queryKey: ['myInfo'],
+    queryFn: () => getMyInfo(),
   };
 };

@@ -1,76 +1,55 @@
 import React from 'react';
-import { Header, PageLayout, Button } from '@recipic-packages/ui';
+import { Header, Label, PageLayout } from '@recipic-packages/ui';
 import DislikeIcon from '@/assets/icons/dislikeIcon.svg?react';
-import { useNavigate } from 'react-router-dom';
-import {
-  GearIcon,
-  Pencil2Icon,
-  BellIcon,
-  PaperPlaneIcon,
-  InstagramLogoIcon,
-  FileTextIcon,
-} from '@radix-ui/react-icons';
+import { Pencil2Icon, BellIcon, PaperPlaneIcon, InstagramLogoIcon, FileTextIcon } from '@radix-ui/react-icons';
 import { AvatarLabel } from '@/components/common/AvatarLabel';
-import BannerComponent from '@/components/myBanner';
+import UserMenuButtonList from '@/components/my/UserMenuButton/UserMenuButtonList';
+import SettingsButton from '@/components/my/SettingsButton';
+import { TMenu } from '@/types/my';
+import { MypageSection } from '@/components/my/MypageSection';
+import MenuList from '@/components/my/Menu/MenuList';
+import { useGetMyInfo } from '@/hooks/useGetMyInfo';
+import { useNavigate } from 'react-router-dom';
 
 export default function My() {
+  const { myInfoData } = useGetMyInfo();
   const navigate = useNavigate();
-  return (
-    <PageLayout isTabBarVisible isBottomSpace isHeaderVisible>
-      <Header title="마이" order="first">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => navigate('/settings')}
-          className="text-black"
-          aria-label="설정"
-        >
-          <GearIcon className="h-7 w-7" />
-        </Button>
-      </Header>
-      <br />
-      <div className="px-6 py-2">
-        <AvatarLabel imageUrl={null} imageAlt={`유저 프로필 이미지`} label={'먹부림 사냥꾼'} />
-      </div>
-      <div className="my-12"></div>
-      <div className="grid grid-cols-3 gap-4 px-7 py-4">
-        {userMenuItems.map((item, index) => (
-          <div
-            key={index}
-            className="flex flex-col items-center text-center text-[0.8rem] cursor-pointer"
-            onClick={() => navigate(item.route)}
-          >
-            {item.icon}
-            <span className="mt-2 text-sm">{item.title}</span>
-          </div>
-        ))}
-      </div>
 
-      <div className="my-12"></div>
-      {bannerItems.map((item, index) => (
-        <BannerComponent key={index} title={item.title} icon={item.icon} route={item.route} />
-      ))}
+  const userMenuItems: TMenu[] = [
+    { title: '내 레시피', icon: <Pencil2Icon className="w-6 h-6" />, onClick: () => navigate('/my-recipe') },
+    {
+      title: '알러지 선택',
+      icon: <DislikeIcon className="w-6 h-6" />,
+      onClick: () => navigate('/dislike-ingredients'),
+    },
+    { title: '내 댓글', icon: <FileTextIcon className="w-6 h-6" />, onClick: () => navigate('/my-comments') },
+  ];
+
+  const menuItems: TMenu[] = [
+    { title: '공지사항', icon: <BellIcon className="w-4 h-4" />, onClick: () => navigate('/notice') },
+    { title: '문의하기', icon: <PaperPlaneIcon className="w-4 h-4" />, onClick: () => {} }, // TODO: 카카오톡 문의하기로 연결
+    { title: '공식 인스타그램', icon: <InstagramLogoIcon className="w-4 h-4" />, onClick: () => {} }, // TODO: 인스타그램으로 연결
+  ];
+
+  return (
+    <PageLayout isTabBarVisible isBottomSpace isHeaderVisible pageBackgroundStyle="gray">
+      <Header title="마이" order="first" headerBackgroundStyle="gray">
+        <SettingsButton />
+      </Header>
+      <MypageSection>
+        <AvatarLabel
+          imageUrl={myInfoData.profileImageUrl}
+          imageAlt={`유저 프로필 이미지`}
+          label={myInfoData.nickName}
+        />
+      </MypageSection>
+      <MypageSection>
+        <UserMenuButtonList buttons={userMenuItems} gridCols={3} />
+      </MypageSection>
+      <MypageSection>
+        <Label className="text-bold16">고객센터</Label>
+        <MenuList menuItems={menuItems} />
+      </MypageSection>
     </PageLayout>
   );
 }
-
-type TBannerProps = {
-  title: string;
-  icon: React.ReactNode;
-  route: string;
-};
-
-const userMenuItems: TBannerProps[] = [
-  { title: '내가 작성한 레시피', icon: <Pencil2Icon className="w-6 h-6" />, route: '/my-recipe' },
-  {
-    title: '싫어하는 재료',
-    icon: <DislikeIcon className="w-6 h-6" />,
-    route: '/dislike-ingredients',
-  },
-  { title: '내가 작성한 댓글', icon: <FileTextIcon className="w-6 h-6" />, route: '/my-comments' },
-];
-const bannerItems: TBannerProps[] = [
-  { title: '공지사항', icon: <BellIcon />, route: '/notice' },
-  { title: '문의하기', icon: <PaperPlaneIcon />, route: '/inquiry' },
-  { title: '공식 인스타그램', icon: <InstagramLogoIcon />, route: '/instagram' },
-];
