@@ -1,3 +1,4 @@
+import React from 'react';
 import { PageLayout } from '@recipic-packages/ui';
 import logo from '../assets/icons/logo.svg';
 import Recipic from '../assets/icons/Recipic.svg';

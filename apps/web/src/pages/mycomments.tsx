@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import MyCommentBox from '../components/MyCommentBox';
 import { Header, PageLayout, TopNavBar } from '@recipic-packages/ui';
 import { ImageIcon } from '@radix-ui/react-icons';
@@ -15,6 +15,8 @@ export default function MyComments() {
       <div className="mb-6 flex flex-col items-center px-4 gap-y-6 mt-24">
         {commentItems.map(comment => (
           <MyCommentBox
+            key={comment.commentId}
+            commentId={comment.commentId}
             mainTitle={comment.mainTitle}
             brandImage={comment.brandImage}
             comment={comment.comment}
@@ -29,6 +31,7 @@ export default function MyComments() {
 }
 
 export interface CommentProps {
+  commentId: number;
   mainTitle: string; //본문 제목
   brandImage: React.ReactNode; //해당 브랜드 이미지프로필?
   comment: string; //내가 쓴 댓글 내용
@@ -40,6 +43,7 @@ export interface CommentProps {
 //목데이터. 추후 삭제 예정
 const commentItems: CommentProps[] = [
   {
+    commentId: 1,
     mainTitle: '요아정 꿀조합!!! 딸기바나나',
     brandImage: <ImageIcon />,
     comment: '너무 꿀조합이네요 우와~~~',
@@ -48,6 +52,7 @@ const commentItems: CommentProps[] = [
     recipieId: 1,
   },
   {
+    commentId: 2,
     mainTitle: '서브웨이는 역시 BMT지~~~',
     brandImage: <ImageIcon />,
     comment: '인정하는 바입니다. 소스는 무조건 랜치와 스위트칠리로...',
@@ -56,6 +61,7 @@ const commentItems: CommentProps[] = [
     recipieId: 2,
   },
   {
+    commentId: 3,
     mainTitle: '요아정 꿀조합!!! 딸기바나나',
     brandImage: <ImageIcon />,
     comment: '역시 이 조합이 최고네요. 매번 먹어도 질리지가 않아요!',
@@ -64,6 +70,7 @@ const commentItems: CommentProps[] = [
     recipieId: 3,
   },
   {
+    commentId: 4,
     mainTitle: '문의하기',
     brandImage: <ImageIcon />,
     comment: '앱 사용 중 문의사항이 있습니다.',
@@ -72,6 +79,7 @@ const commentItems: CommentProps[] = [
     recipieId: 4,
   },
   {
+    commentId: 5,
     mainTitle: '문의하기',
     brandImage: <ImageIcon />,
     comment: '앱 사용 중 문의사항이 있습니다.',

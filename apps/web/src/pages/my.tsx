@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import {
   GearIcon,
   Pencil2Icon,
-  KeyboardIcon,
   BellIcon,
   PaperPlaneIcon,
   InstagramLogoIcon,

@@ -1,3 +1,4 @@
+import React from 'react';
 import { HeartFilledIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { CommentProps } from '../../pages/mycomments';
 import { useNavigate } from 'react-router-dom';
@@ -16,7 +17,7 @@ export default function CommentComponent(props: CommentProps) {
       <div className="flex justify-between items-start mb-3">
         <div className="flex items-center">
           <div className="w-10 h-10 rounded-full mr-4 bg-slate-200 flex justify-center items-center">{brandImage}</div>
-          <h3 className="font-bold text-base">{mainTitle.length > 12 ? mainTitle.slice(0, 12) + '...' : mainTitle}</h3>
+          <h3 className="font-bold text-base">{mainTitle.length > 18 ? mainTitle.slice(0, 18) + '...' : mainTitle}</h3>
         </div>
         <Button
           variant="ghost"
