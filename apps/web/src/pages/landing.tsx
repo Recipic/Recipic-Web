@@ -1,7 +1,8 @@
+import React from 'react';
 import { PageLayout } from '@recipic-packages/ui';
-import logo from '../assets/icons/logo.svg';
-import Recipic from '../assets/icons/Recipic.svg';
-import kakaoLogo from '../assets/images/kakaoLogo.svg';
+import LogoImage from '@/assets/icons/logo.svg';
+import RecipicLogoImage from '@/assets/icons/Recipic.svg';
+import KakaoLogoImage from '@/assets/images/kakaoLogo.svg';
 
 export default function Landing() {
   const redirectUrl = import.meta.env.VITE_REDIRECT_URL;
@@ -15,16 +16,15 @@ export default function Landing() {
   return (
     <PageLayout isBottomSpace>
       <div className="flex flex-col items-center justify-center min-h-screen">
-        <img src={Recipic} alt="Recipic Logo" className="w-24 mb-4" />
-        <img src={logo} alt="Recipic Logo" className="w-24 mb-4" />
+        <RecipicLogoImage className="w-24 mb-4" />
+        <LogoImage className="w-24 mb-4" />
         {/* <h1 className="text-xl font-bold mb-6">RECIPICK</h1> */}
-
         <div className="my-2">
           <button
             onClick={loginHandler}
             className="bg-[#FEE500] text-black font-bold py-2 px-20 mx-4 rounded inline-flex justify-between items-center"
           >
-            <img src={kakaoLogo} alt="Kakao Login" className="cursor-pointer w-4" onClick={loginHandler} />
+            <KakaoLogoImage className="cursor-pointer w-4" onClick={loginHandler} />
             <span className="pl-2">카카오 로그인하기</span>
           </button>
         </div>
