@@ -48,7 +48,7 @@ export default function My() {
       </MypageSection>
       <MypageSection>
         <Label className="text-bold16">고객센터</Label>
-        <MenuList menuItems={menuItems} />
+        <MenuList menuItems={menuItems} ariaLabel="고객센터 메뉴 목록" />
       </MypageSection>
     </PageLayout>
   );
