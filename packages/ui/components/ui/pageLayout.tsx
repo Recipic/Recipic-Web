@@ -14,7 +14,7 @@ type TPageLayoutProps = {
 
 const backgroundStyleVariants: Record<TPageBackgroundStyle, string> = {
   white: 'bg-white',
-  gray: 'bg-gray-150',
+  gray: 'bg-backgroundSecondaryLight',
 };
 
 export function PageLayout({

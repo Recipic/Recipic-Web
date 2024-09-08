@@ -23,7 +23,7 @@ type HeaderProps = HeaderPropsWithTitle | HeaderPropsWithImage;
 
 const headerStyleVariants: Record<THeaderBackgroundStyle, string> = {
   white: 'bg-white',
-  gray: 'bg-gray-150',
+  gray: 'bg-backgroundSecondaryLight',
 };
 
 export function Header({ title, titleImage, children, order = 'first', headerBackgroundStyle = 'white' }: HeaderProps) {
