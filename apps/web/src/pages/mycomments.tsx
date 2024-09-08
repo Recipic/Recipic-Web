@@ -1,28 +1,25 @@
 import React from 'react';
 import MyCommentBox from '../components/MyCommentBox';
 import { Header, PageLayout, TopNavBar } from '@recipic-packages/ui';
-import { ImageIcon } from '@radix-ui/react-icons';
-import { useGetMyCommentsList } from '@/hooks/useGetMyCommentsList';
+import { useGetUserCommentsList } from '@/hooks/useGetUserCommentsList';
 
 export default function MyComments() {
-  /*임시적으로 변수 할당.*/
-  const { myCommentsList } = useGetMyCommentsList({ recipeId: 1, page: 1, size: 10, sortType: 'latest' });
-  console.log(myCommentsList);
+  const { userCommentsListData } = useGetUserCommentsList();
+  console.log(userCommentsListData);
   return (
     <PageLayout>
       <Header title="내가 작성한 댓글" order="second" />
       <TopNavBar order="first" />
       <div className="mb-6 flex flex-col items-center px-4 gap-y-6 mt-24">
-        {commentItems.map(comment => (
+        {userCommentsListData.map(comment => (
           <MyCommentBox
             key={comment.commentId}
             commentId={comment.commentId}
-            mainTitle={comment.mainTitle}
-            brandImage={comment.brandImage}
-            comment={comment.comment}
-            likesCount={comment.likesCount}
-            publishDate={comment.publishDate}
-            recipieId={comment.recipieId}
+            recipeId={comment.recipeId}
+            recipeTitle={comment.recipeTitle}
+            content={comment.content}
+            likeCount={comment.likeCount}
+            createdAt={comment.createdAt}
           />
         ))}
       </div>
@@ -39,52 +36,3 @@ export interface CommentProps {
   publishDate: string; //등록일자
   recipieId: number; //redirect할 본문 링크
 }
-
-//목데이터. 추후 삭제 예정
-const commentItems: CommentProps[] = [
-  {
-    commentId: 1,
-    mainTitle: '요아정 꿀조합!!! 딸기바나나',
-    brandImage: <ImageIcon />,
-    comment: '너무 꿀조합이네요 우와~~~',
-    likesCount: 5,
-    publishDate: '2024-08-22',
-    recipieId: 1,
-  },
-  {
-    commentId: 2,
-    mainTitle: '서브웨이는 역시 BMT지~~~',
-    brandImage: <ImageIcon />,
-    comment: '인정하는 바입니다. 소스는 무조건 랜치와 스위트칠리로...',
-    likesCount: 4,
-    publishDate: '2024-08-21',
-    recipieId: 2,
-  },
-  {
-    commentId: 3,
-    mainTitle: '요아정 꿀조합!!! 딸기바나나',
-    brandImage: <ImageIcon />,
-    comment: '역시 이 조합이 최고네요. 매번 먹어도 질리지가 않아요!',
-    likesCount: 3,
-    publishDate: '2024-08-20',
-    recipieId: 3,
-  },
-  {
-    commentId: 4,
-    mainTitle: '문의하기',
-    brandImage: <ImageIcon />,
-    comment: '앱 사용 중 문의사항이 있습니다.',
-    likesCount: 2,
-    publishDate: '2024-08-19',
-    recipieId: 4,
-  },
-  {
-    commentId: 5,
-    mainTitle: '문의하기',
-    brandImage: <ImageIcon />,
-    comment: '앱 사용 중 문의사항이 있습니다.',
-    likesCount: 2,
-    publishDate: '2024-08-19',
-    recipieId: 4,
-  },
-];
