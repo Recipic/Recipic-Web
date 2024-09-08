@@ -12,29 +12,35 @@ import Login from './pages/login';
 import DislikeIngredients from './pages/dislikeIngredients';
 import MyRecipe from './pages/myRecipe';
 import Notice from './pages/notice';
-import EditProfile from './pages/editProfile';
-import NoticeDetail from './pages/noticeDetail';
+
+type TRoutes = {
+  path: string;
+  element: JSX.Element;
+  isTabBar: boolean;
+};
+
+// 라우트 설정
+export const routes: TRoutes[] = [
+  { path: '/', element: <Home />, isTabBar: true }, // 홈
+  { path: '/recipe', element: <Recipe />, isTabBar: true }, // 레시피
+  { path: '/picked', element: <Picked />, isTabBar: true }, // 찜
+  { path: '/my', element: <My />, isTabBar: true }, // 마이페이지
+  { path: '/settings', element: <Settings />, isTabBar: false }, // 설정
+  { path: '/recipe/:recipeId', element: <RecipeDetail />, isTabBar: false }, // 레시피 상세
+  { path: '/my-comments', element: <MyComments />, isTabBar: false }, // 내가 작성한 댓글
+  { path: '/landing', element: <Landing />, isTabBar: false }, // 랜딩페이지
+  { path: '/kakao/callback', element: <Login />, isTabBar: false }, // 로그인페이지
+  { path: '/dislike-ingredients', element: <DislikeIngredients />, isTabBar: false }, // 내가 싫어하는 재료
+  { path: '/my-recipe', element: <MyRecipe />, isTabBar: false }, // 내가 작성한 레시피
+  { path: '/notice', element: <Notice />, isTabBar: false }, // 공지사항
+];
+
 export default function Router() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} /> {/* 홈 */}
-      <Route path="/recipe" element={<Recipe />} /> {/* 레시피 */}
-      <Route path="/picked" element={<Picked />} /> {/* 찜 */}
-      <Route path="/my" element={<My />} /> {/* 마이페이지 */}
-      <Route path="/settings" element={<Settings />} /> {/* 설정 */}
-      <Route path="/recipe/:recipeId" element={<RecipeDetail />} /> {/* 레시피 상세 */}
-      <Route path="/my-comments" element={<MyComments />} />
-      {/* 내가 작성한 댓글 */}
-      <Route path="/landing" element={<Landing />} />
-      {/* 랜딩페이지 */}
-      <Route path="/kakao/callback" element={<Login />} />
-      {/* 로그인페이지 */}
-      <Route path="/dislike-ingredients" element={<DislikeIngredients />} />
-      {/* 내가 싫어하는 재료 */}
-      <Route path="/my-recipe" element={<MyRecipe />} /> {/* 내가 작성한 레시피 */}
-      <Route path="/notice" element={<Notice />} /> {/*공지사항*/}
-      <Route path="/editprofile" element={<EditProfile />} /> {/*공지사항*/}
-      <Route path="/notice/:noticeId" element={<NoticeDetail />} /> {/*공지사항 상세*/}
+      {routes.map(({ path, element }: TRoutes) => (
+        <Route key={path} path={path} element={element} />
+      ))}
     </Routes>
   );
 }

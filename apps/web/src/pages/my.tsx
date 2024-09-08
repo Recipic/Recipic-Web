@@ -1,7 +1,6 @@
 import React from 'react';
 import { Header, PageLayout, Button } from '@recipic-packages/ui';
-import BannerComponent from '../components/myBanner';
-import DislikeIcon from '../assets/images/DislikeIcon.png';
+import DislikeIcon from '@/assets/icons/dislikeIcon.svg?react';
 import { useNavigate } from 'react-router-dom';
 import {
   GearIcon,
@@ -12,6 +11,7 @@ import {
   FileTextIcon,
 } from '@radix-ui/react-icons';
 import { AvatarLabel } from '@/components/common/AvatarLabel';
+import BannerComponent from '@/components/myBanner';
 
 export default function My() {
   const navigate = useNavigate();
@@ -54,22 +54,22 @@ export default function My() {
   );
 }
 
-interface BannerProps {
+type TBannerProps = {
   title: string;
   icon: React.ReactNode;
   route: string;
-}
+};
 
-const userMenuItems: BannerProps[] = [
-  { title: '내가 작성한 레시피', icon: <Pencil2Icon className="w-6 h-6" />, route: '/my-recipes' },
+const userMenuItems: TBannerProps[] = [
+  { title: '내가 작성한 레시피', icon: <Pencil2Icon className="w-6 h-6" />, route: '/my-recipe' },
   {
     title: '싫어하는 재료',
-    icon: <img src={DislikeIcon} alt="Dislike Icon" className="w-6 h-6" />,
+    icon: <DislikeIcon className="w-6 h-6" />,
     route: '/dislike-ingredients',
   },
   { title: '내가 작성한 댓글', icon: <FileTextIcon className="w-6 h-6" />, route: '/my-comments' },
 ];
-const bannerItems: BannerProps[] = [
+const bannerItems: TBannerProps[] = [
   { title: '공지사항', icon: <BellIcon />, route: '/notice' },
   { title: '문의하기', icon: <PaperPlaneIcon />, route: '/inquiry' },
   { title: '공식 인스타그램', icon: <InstagramLogoIcon />, route: '/instagram' },

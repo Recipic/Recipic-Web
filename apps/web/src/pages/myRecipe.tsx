@@ -7,8 +7,10 @@ import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
 import PrimarySpinner from '@/components/common/PrimarySpinner';
 import { DEFAULT_SIZE } from '@/constants/pagenation';
 import { SearchBar } from '@/components/common/SearchBar';
+import { useNavigate } from 'react-router-dom';
 
 export default function MyRecipe() {
+  const navigate = useNavigate();
   const { searchQuery, isSearching, handleSearchSubmit, handleGoBack } = useSearchLogic();
 
   const { myRecipeInfosList, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } = useGetMyRecipeList({
@@ -23,14 +25,15 @@ export default function MyRecipe() {
   });
 
   return (
-    <PageLayout isBottomSpace isHeaderVisible isTopNavBarVisible={isSearching}>
-      <Header title="내가 작성한 레시피" order="first" />
+    <PageLayout isBottomSpace isHeaderVisible={!isSearching} isTopNavBarVisible>
       {isSearching ? (
-        <TopNavBar showBackButton onBackButtonClick={handleGoBack} childrenPosition="center" order="second">
+        <TopNavBar showBackButton onBackButtonClick={handleGoBack} childrenPosition="center" order="first">
           <SearchBar onSearchClick={handleSearchSubmit} searchQuery={searchQuery} />
         </TopNavBar>
       ) : (
         <>
+          <TopNavBar order="first" onBackButtonClick={() => navigate('/my')} />
+          <Header title="내가 작성한 레시피" order="second" />
           <div className="px-4 py-1 flex-[1_0_100%]">
             <SearchBar onSearchClick={handleSearchSubmit} searchQuery={searchQuery} />
           </div>
