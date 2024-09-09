@@ -263,3 +263,9 @@ export const ingredientsOptions: TIngredient[] = [
     cost: 600,
   },
 ];
+
+export const userEditProfileData = {
+  userProfileImageSrc: undefined,
+  nickname: '닉네임asfasdf',
+  introduction: undefined,
+};

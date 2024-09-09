@@ -97,7 +97,7 @@ export default function DislikeIngredients() {
           />
         </form>
       </Form>
-      <BottomFixedButtonWithGradientDiv buttonText="등록하기" onClick={form.handleSubmit(onSubmit)} />
+      <BottomFixedButtonWithGradientDiv type="submit" buttonText="등록하기" onClick={form.handleSubmit(onSubmit)} />
     </PageLayout>
   );
 }
