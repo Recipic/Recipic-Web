@@ -13,7 +13,7 @@ export type Comment = {
 
 export type TMyCommentsList = Comment[];
 
-export type myCommentsListParams = {
+export type MyCommentsListParams = {
   recipeId: number;
   page: number;
   size: number;

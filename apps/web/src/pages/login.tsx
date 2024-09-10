@@ -1,10 +1,31 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { PageLayout } from '@recipic-packages/ui';
 import LogoImage from '@/assets/icons/logo.svg';
 import RecipicLogoImage from '@/assets/icons/Recipic.svg';
 import axios from 'axios';
 const Login: React.FC = () => {
   const baseUrl = import.meta.env.VITE_APP_SERVER_URL;
+
+  const sendCodeToServer = useCallback(
+    async (code: string) => {
+      try {
+        const response = await axios.post<ApiResponse>(
+          `${baseUrl}/api/auth/kakao`,
+          {
+            authorizationCode: code,
+          },
+          {
+            headers: { 'Content-Type': 'application/json' },
+          },
+        );
+        console.log('Server response:', response.data);
+        localStorage.setItem('accessToken: ', response.data.accessToken);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    },
+    [baseUrl],
+  ); // baseUrl이 변경되면 sendCodeToServer 함수 업데이트
 
   //   카카오 정보제공동의 후 인가코드(Authorization code) 획득
   useEffect(() => {
@@ -13,12 +34,11 @@ const Login: React.FC = () => {
     const authorizationCode = queryParams.get('code');
     if (authorizationCode) {
       console.log('Authorization code: ', authorizationCode);
-      //   서버에 인가코드 전송
       sendCodeToServer(authorizationCode);
     } else {
       console.log('Authorization code를 받지 못했습니다.');
     }
-  }, []);
+  }, [sendCodeToServer]);
 
   // response data 정의, refreshToken은 cookie로 발급
   interface ApiResponse {
@@ -27,24 +47,6 @@ const Login: React.FC = () => {
     accessTokenExpiresIn: number; // 액세스 토큰 만료 시간
   }
 
-  const sendCodeToServer = async (code: string): Promise<void> => {
-    try {
-      const response = await axios.post<ApiResponse>(
-        `${baseUrl}/api/auth/kakao`,
-        {
-          authorizationCode: code,
-        },
-        {
-          headers: { 'Content-Type': 'application/json' },
-        },
-      );
-      console.log('Server response:', response.data);
-      //로컬스토리지에 accessToken 저장
-      localStorage.setItem('accessToken: ', response.data.accessToken);
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
   return (
     <PageLayout isBottomSpace>
       <div className="flex flex-col items-center justify-center min-h-screen">

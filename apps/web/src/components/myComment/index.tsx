@@ -1,3 +1,4 @@
+import React from 'react';
 import { HeartFilledIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { CommentProps } from '../../pages/mycomments';
 import { useNavigate } from 'react-router-dom';

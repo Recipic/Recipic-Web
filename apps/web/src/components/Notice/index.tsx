@@ -1,3 +1,4 @@
+import React from 'react';
 import { NoticeProps } from '../../pages/notice';
 import { useNavigate } from 'react-router-dom';
 export default function NoticeComponent(props: NoticeProps) {

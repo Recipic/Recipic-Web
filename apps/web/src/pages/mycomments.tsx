@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import MyCommentBox from '../components/myComment';
 import { Header, PageLayout, TopNavBar } from '@recipic-packages/ui';
 import { ImageIcon } from '@radix-ui/react-icons';
