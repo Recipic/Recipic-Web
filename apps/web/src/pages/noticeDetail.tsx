@@ -1,11 +1,11 @@
 import React from 'react';
 import { Header, PageLayout, TopNavBar } from '@recipic-packages/ui';
-import { useParams } from 'react-router-dom';
+//import { useParams } from 'react-router-dom';
 
 export default function NoticeDetail() {
   /*추후 noticeId값으로 공지사항 상세 정보 받아옴*/
-  const params = useParams<{ noticeId: string }>();
-  const noticeId = Number(params.noticeId);
+  //const params = useParams<{ noticeId: string }>();
+  //const noticeId = Number(params.noticeId);
   return (
     <PageLayout>
       <Header title="공지사항 상세" order="second" />
