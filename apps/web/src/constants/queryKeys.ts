@@ -9,6 +9,7 @@ import { getCommentsList } from '@/apis/recipeDetail/getCommentsList';
 import { TGetCommentsListParams } from '@/apis/recipeDetail/type';
 import { getIngredientOfBrand } from '@/apis/recipe/getIngredientOfBrand';
 import { TGetIngredientOfBrandParams } from '@/apis/recipe/type';
+import { getUserCommentsList } from '@/apis/userComments/getUserCommentsList';
 
 /** 홈 페이지에서 일반인 레시피 순위 리스트를 받고 관리하기 위한 쿼리 키 */
 export const getRecipeRankListQueryKey = () => {
@@ -64,5 +65,13 @@ export const getMyInfoQueryKey = () => {
   return {
     queryKey: ['myInfo'],
     queryFn: () => getMyInfo(),
+  };
+};
+
+/** 마이페이지의 유저댓글목록에서 유저가 작성한 댓글 리스트 정보를 받고 관리하기 위한 쿼리 키 */
+export const getUserCommentsListQueryKey = () => {
+  return {
+    queryKey: ['userCommentsList'],
+    queryFn: () => getUserCommentsList(),
   };
 };

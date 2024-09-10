@@ -50,8 +50,8 @@ const Login: React.FC = () => {
   return (
     <PageLayout isBottomSpace>
       <div className="flex flex-col items-center justify-center min-h-screen">
-        <RecipicLogoImage className="w-24 mb-4" />
-        <LogoImage className="w-24 mb-4" />
+        <RecipicLogoImage />
+        <LogoImage />
 
         <button className="text-gray-300 font-xs">로그인중입니다...</button>
       </div>
