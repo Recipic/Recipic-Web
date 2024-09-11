@@ -40,7 +40,7 @@ export default function EditProfile() {
 
   return (
     <PageLayout>
-      <Header title="프로필 설정" order="second" />
+      <Header title="프로필 수정" order="second" />
       <TopNavBar order="first" />
       <Form {...form}>
         <form

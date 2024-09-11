@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Label, PageLayout } from '@recipic-packages/ui';
+import { Button, Header, Label, PageLayout } from '@recipic-packages/ui';
 import DislikeIcon from '@/assets/icons/dislikeIcon.svg?react';
 import { Pencil2Icon, BellIcon, PaperPlaneIcon, InstagramLogoIcon, FileTextIcon } from '@radix-ui/react-icons';
 import { AvatarLabel } from '@/components/common/AvatarLabel';
@@ -42,6 +42,14 @@ export default function My() {
           imageAlt={`유저 프로필 이미지`}
           label={myInfoData.nickName}
         />
+        <Button
+          variant="secondary"
+          className="w-full h-10 mt-4"
+          type="button"
+          onClick={() => navigate('/edit-profile')}
+        >
+          프로필 수정
+        </Button>
       </MypageSection>
       <MypageSection>
         <UserMenuButtonList buttons={userMenuItems} gridCols={3} />
