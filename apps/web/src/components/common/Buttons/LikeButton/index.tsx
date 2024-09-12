@@ -15,13 +15,13 @@ const iconSizeClasses = {
 };
 
 const likeCountSizeClasses = {
-  small: 'text-black text-regular12',
-  large: 'text-black text-semiBold14',
+  small: 'text-gray-600 text-regular12',
+  large: 'text-gray-600 text-semiBold14',
 };
 
 const buttonVariants = {
-  liked: 'text-red-500 hover:text-red-500',
-  notLiked: 'text-black hover:text-black',
+  liked: 'text-primary-500 hover:text-primary-100',
+  notLiked: 'text-gray-600 hover:text-gray-400',
 };
 
 export function LikeButton({ isLiked, likeCount, onLikeClick, size = 'large' }: TLikeButtonProps) {

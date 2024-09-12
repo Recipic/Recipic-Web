@@ -43,7 +43,7 @@ export default function My() {
           label={myInfoData.nickName}
         />
         <Button
-          variant="secondary"
+          variant="defaultSub"
           className="w-full h-10 mt-4"
           type="button"
           onClick={() => navigate('/edit-profile')}

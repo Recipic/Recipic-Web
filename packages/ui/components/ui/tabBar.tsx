@@ -33,20 +33,25 @@ export function TabBar() {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 mx-auto max-w-lg bg-white shadow-lg border-t border-gray-200">
-      <div className="flex justify-around items-center h-14">
-        {tabItems.map(item => (
-          <button
-            key={item.key}
-            className="flex flex-col items-center justify-center w-full h-full"
-            onClick={() => handleTabClick(item.path)}
-          >
-            <div className={`w-8 h-8 ${getActiveTab() === item.key ? 'text-black' : 'text-gray-400'}`}>
-              {React.cloneElement(item.icon, {
-                className: 'w-8 h-8',
-              })}
-            </div>
-          </button>
-        ))}
+      <div className="flex justify-around items-center h-12">
+        {tabItems.map(item => {
+          const isActive = getActiveTab() === item.key;
+          return (
+            <button
+              key={item.key}
+              className="flex flex-col items-center justify-center w-full h-full"
+              onClick={() => handleTabClick(item.path)}
+            >
+              <div
+                className={`w-7 h-7 ${isActive ? 'text-primary-500' : 'text-gray-400'} transition-colors duration-200`}
+              >
+                {React.cloneElement(item.icon, {
+                  className: 'w-full h-full [&>path]:stroke-none [&>path]:fill-current',
+                })}
+              </div>
+            </button>
+          );
+        })}
       </div>
     </div>
   );
