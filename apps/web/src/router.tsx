@@ -6,7 +6,7 @@ import Picked from './pages/picked';
 import My from './pages/my';
 import Settings from './pages/settings';
 import RecipeDetail from './pages/recipeDetail';
-import MyComments from './pages/mycomments';
+import MyComments from './pages/myComments';
 import Landing from './pages/landing';
 import Login from './pages/login';
 import DislikeIngredients from './pages/dislikeIngredients';
