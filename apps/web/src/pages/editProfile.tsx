@@ -39,14 +39,14 @@ export default function EditProfile() {
   };
 
   return (
-    <PageLayout>
+    <PageLayout isTopNavBarVisible isHeaderVisible>
       <Header title="프로필 수정" order="second" />
       <TopNavBar order="first" />
       <Form {...form}>
         <form
           id="edit-profile-form"
           onSubmit={form.handleSubmit(onSubmit)}
-          className="grid grid-cols-1 gap-8 mt-24 px-4 py-12"
+          className="grid grid-cols-1 gap-8 px-4 py-12"
         >
           <FormField
             control={form.control}
