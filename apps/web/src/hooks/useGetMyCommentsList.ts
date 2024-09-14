@@ -1,17 +1,17 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { TGetMyCommentsResponse } from '@/apis/myCommentsList/type';
+import { TGetMyCommentsListResponse } from '@/apis/myComments/type';
 import { getMyCommentsListQueryKey } from '@/constants/queryKeys';
-import { TGetMyCommentsListParams } from '@/apis/myCommentsList/type';
-export const useGetMyCommentsList = ({ recipeId, page, size, sortType }: TGetMyCommentsListParams) => {
+
+export const useGetMyCommentsList = () => {
   const {
-    data: myCommentsList,
+    data: myCommentsListData,
     isLoading,
     error,
-  } = useSuspenseQuery<TGetMyCommentsResponse>({
-    queryKey: getMyCommentsListQueryKey({ recipeId, page, size, sortType }).queryKey,
-    queryFn: getMyCommentsListQueryKey({ recipeId, page, size, sortType }).queryFn,
+  } = useSuspenseQuery<TGetMyCommentsListResponse>({
+    queryKey: getMyCommentsListQueryKey().queryKey,
+    queryFn: getMyCommentsListQueryKey().queryFn,
     staleTime: 1000 * 60 * 60, // 1시간
     gcTime: 1000 * 60 * 40, // 40분
   });
-  return { myCommentsList, isLoading, error };
+  return { myCommentsListData, isLoading, error };
 };

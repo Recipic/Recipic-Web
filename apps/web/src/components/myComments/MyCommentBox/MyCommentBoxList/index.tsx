@@ -1,10 +1,10 @@
 import React from 'react';
 import { MyCommentBox } from '@/components/myComments/MyCommentBox';
-import { TUserComment } from '@/types/userComments';
+import { TMyComment } from '@/types/myComments';
 import { Separator } from '@recipic-packages/ui';
 
 type TMyCommentBoxProps = {
-  myCommentsListData: TUserComment[];
+  myCommentsListData: TMyComment[];
 };
 
 export function MyCommentBoxList({ myCommentsListData }: TMyCommentBoxProps) {
@@ -18,7 +18,7 @@ export function MyCommentBoxList({ myCommentsListData }: TMyCommentBoxProps) {
 
   return (
     <div className="flex flex-col mt-2">
-      {myCommentsListData.map((comment: TUserComment, index: number) => (
+      {myCommentsListData.map((comment: TMyComment, index: number) => (
         <React.Fragment key={`${comment.commentId}-${comment.createdAt}`}>
           <div className="px-4">
             <MyCommentBox

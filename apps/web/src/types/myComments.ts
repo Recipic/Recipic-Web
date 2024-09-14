@@ -1,21 +1,8 @@
-export type Comment = {
+export type TMyComment = {
   commentId: number;
-  content: string;
-  createdAt: string;
-  userId: number;
-  userProfileImageUrl: string;
-  userNickName: string;
+  recipeId: number;
   recipeTitle: string;
-  recipeId: number;
+  content: string;
   likeCount: number;
-  isLiked: boolean;
-};
-
-export type TMyCommentsList = Comment[];
-
-export type MyCommentsListParams = {
-  recipeId: number;
-  page: number;
-  size: number;
-  sortType: 'latest' | 'likes';
+  createdAt: string;
 };
