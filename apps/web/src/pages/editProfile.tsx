@@ -40,8 +40,8 @@ export default function EditProfile() {
 
   return (
     <PageLayout isTopNavBarVisible isHeaderVisible>
-      <Header title="프로필 수정" order="second" />
       <TopNavBar order="first" />
+      <Header title="프로필 수정" order="second" />
       <Form {...form}>
         <form
           id="edit-profile-form"

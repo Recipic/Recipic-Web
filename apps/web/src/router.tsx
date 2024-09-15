@@ -7,8 +7,8 @@ import My from './pages/my';
 import Settings from './pages/settings';
 import RecipeDetail from './pages/recipeDetail';
 import MyComments from './pages/myComments';
-import Landing from './pages/landing';
 import Login from './pages/login';
+import KakaoCallback from './pages/kakaoCallback';
 import DislikeIngredients from './pages/dislikeIngredients';
 import MyRecipe from './pages/myRecipe';
 import Notice from './pages/notice';
@@ -30,8 +30,8 @@ export const routes: TRoutes[] = [
   { path: '/settings', element: <Settings />, isTabBar: false }, // 설정
   { path: '/recipe/:recipeId', element: <RecipeDetail />, isTabBar: false }, // 레시피 상세
   { path: '/my-comments', element: <MyComments />, isTabBar: false }, // 내가 작성한 댓글
-  { path: '/landing', element: <Landing />, isTabBar: false }, // 랜딩페이지
-  { path: '/kakao/callback', element: <Login />, isTabBar: false }, // 로그인페이지
+  { path: '/login', element: <Login />, isTabBar: false }, // 로그인
+  { path: '/kakao/callback', element: <KakaoCallback />, isTabBar: false }, // 카카오 로그인 콜백
   { path: '/dislike-ingredients', element: <DislikeIngredients />, isTabBar: false }, // 내가 싫어하는 재료
   { path: '/my-recipe', element: <MyRecipe />, isTabBar: false }, // 내가 작성한 레시피
   { path: '/notice', element: <Notice />, isTabBar: false }, // 공지사항

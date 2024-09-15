@@ -141,6 +141,7 @@ const config: Config = {
       bold14: ['14px', { lineHeight: '1.5', fontWeight: '700' }],
       semibold14: ['14px', { lineHeight: '1.5', fontWeight: '600' }],
       regular14: ['14px', { lineHeight: '1.5', fontWeight: '400' }],
+      semibold12: ['12px', { lineHeight: '1.5', fontWeight: '600' }],
       semibold10: ['10px', { lineHeight: '1.5', fontWeight: '600' }],
       regular12: ['12px', { lineHeight: '1.5', fontWeight: '400' }],
       regular10: ['10px', { lineHeight: '1.5', fontWeight: '400' }],

@@ -1,62 +1,35 @@
-import React, { useCallback, useEffect } from 'react';
-import { PageLayout } from '@recipic-packages/ui';
-import LogoImage from '@/assets/icons/logo.svg';
-import RecipicLogoImage from '@/assets/icons/Recipic.svg';
-import axios from 'axios';
-const Login: React.FC = () => {
-  const baseUrl = import.meta.env.VITE_APP_SERVER_URL;
+import React from 'react';
+import { Button, PageLayout, TopNavBar } from '@recipic-packages/ui';
+import RecipicLogoImage from '@/assets/icons/logo.svg?react';
+import KakaoLogoImage from '@/assets/images/kakaoLogo.svg?react';
+import { AppInstallBanner } from '@/components/login/AppInstallBanner';
+import { SpeechBubble } from '@/components/login/SpeechBubble';
 
-  const sendCodeToServer = useCallback(
-    async (code: string) => {
-      try {
-        const response = await axios.post<ApiResponse>(
-          `${baseUrl}/api/auth/kakao`,
-          {
-            authorizationCode: code,
-          },
-          {
-            headers: { 'Content-Type': 'application/json' },
-          },
-        );
-        console.log('Server response:', response.data);
-        localStorage.setItem('accessToken: ', response.data.accessToken);
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    },
-    [baseUrl],
-  ); // baseUrl이 변경되면 sendCodeToServer 함수 업데이트
+const REDIRECT_URL = import.meta.env.VITE_REDIRECT_URL;
+const API_KEY = import.meta.env.VITE_REST_API_KEY;
+const KAKAO_AUTH_LINK = `https://kauth.kakao.com/oauth/authorize?client_id=${API_KEY}&redirect_uri=${REDIRECT_URL}&response_type=code`;
 
-  //   카카오 정보제공동의 후 인가코드(Authorization code) 획득
-  useEffect(() => {
-    console.log('login.tsx 파일입니다.');
-    const queryParams = new URLSearchParams(window.location.search);
-    const authorizationCode = queryParams.get('code');
-    if (authorizationCode) {
-      console.log('Authorization code: ', authorizationCode);
-      sendCodeToServer(authorizationCode);
-    } else {
-      console.log('Authorization code를 받지 못했습니다.');
-    }
-  }, [sendCodeToServer]);
-
-  // response data 정의, refreshToken은 cookie로 발급
-  interface ApiResponse {
-    grantType: string; // 토큰 타입 Bearer
-    accessToken: string; // 액세스 토큰
-    accessTokenExpiresIn: number; // 액세스 토큰 만료 시간
-  }
+export default function Login() {
+  const handleKakaoLogin = () => {
+    window.location.href = KAKAO_AUTH_LINK;
+  };
 
   return (
-    <PageLayout isBottomSpace>
-      <div className="flex flex-col items-center justify-center min-h-screen">
-        <RecipicLogoImage />
-        <LogoImage />
-
-        <button className="text-gray-300 font-xs">로그인중입니다...</button>
+    <PageLayout isTopNavBarVisible isHeaderVisible>
+      <AppInstallBanner />
+      <TopNavBar order="second" />
+      <div className="flex flex-col items-center justify-center px-4 py-16 w-full h-ful gap-4">
+        <RecipicLogoImage className="w-[160px] h-auto" />
+        <h1 className="text-regular12 text-gray-500 mb-60">프랜차이즈 꿀조합 레시피는 이곳에서!</h1>
+        <SpeechBubble text={'3초만에 시작하고\n꿀조합 레시피를 알아보아요!'} />
+        <Button
+          onClick={handleKakaoLogin}
+          className="bg-[#FEE500] hover:bg-[#FEE500]/90 text-black font-bold rounded inline-flex items-center w-full h-12"
+        >
+          <KakaoLogoImage className="w-5 h-5" />
+          <p className="pl-2">카카오로 시작</p>
+        </Button>
       </div>
     </PageLayout>
   );
-};
-
-export default Login;
+}
