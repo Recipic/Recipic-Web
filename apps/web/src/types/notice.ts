@@ -3,3 +3,9 @@ export type TNoticeList = {
   createdAt: string;
   noticeId: number;
 };
+
+export type TNoticeDetail = {
+  title: string;
+  createdAt: string;
+  content: string;
+};

@@ -13,12 +13,7 @@ export function NoticeList({ noticeListData }: TNoticeListProps) {
       {noticeListData.map((notice: TNoticeList, index: number) => (
         <React.Fragment key={`${notice.noticeId}-${notice.title}`}>
           <div className="p-4">
-            <NoticeComponent
-              key={notice.noticeId}
-              title={notice.title}
-              createdAt={notice.createdAt}
-              noticeId={notice.noticeId}
-            />
+            <NoticeComponent title={notice.title} createdAt={notice.createdAt} noticeId={notice.noticeId} />
           </div>
           {index < noticeListData.length - 1 && noticeListData.length > 1 && (
             <Separator className="h-[1px] bg-gray-200" />

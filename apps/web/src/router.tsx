@@ -13,6 +13,7 @@ import DislikeIngredients from './pages/dislikeIngredients';
 import MyRecipe from './pages/myRecipe';
 import Notice from './pages/notice';
 import EditProfile from './pages/editProfile';
+import NoticeDetail from './pages/noticeDetail';
 
 type TRoutes = {
   path: string;
@@ -34,6 +35,7 @@ export const routes: TRoutes[] = [
   { path: '/dislike-ingredients', element: <DislikeIngredients />, isTabBar: false }, // 내가 싫어하는 재료
   { path: '/my-recipe', element: <MyRecipe />, isTabBar: false }, // 내가 작성한 레시피
   { path: '/notice', element: <Notice />, isTabBar: false }, // 공지사항
+  { path: '/notice/:noticeId', element: <NoticeDetail />, isTabBar: false }, //공지사항 상세
   { path: '/edit-profile', element: <EditProfile />, isTabBar: false }, // 프로필 수정
 ];
 

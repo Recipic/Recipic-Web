@@ -16,7 +16,7 @@ const iconSizeClasses = {
 
 const likeCountSizeClasses = {
   small: 'text-gray-600 text-regular12',
-  large: 'text-gray-600 text-semiBold14',
+  large: 'text-gray-600 text-semibold14',
 };
 
 const buttonVariants = {
