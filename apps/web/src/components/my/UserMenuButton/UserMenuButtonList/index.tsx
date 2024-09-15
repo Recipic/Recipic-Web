@@ -21,7 +21,7 @@ export default function UserMenuButtonList({ buttons, gridCols }: TUserMenuButto
   return (
     <div className={`grid ${gridColsVariants[gridCols]} gap-2`}>
       {buttons.map((button, index) => (
-        <UserMenuButton key={index} title={button.title} icon={button.icon} onClick={button.onClick} />
+        <UserMenuButton key={index} title={button.title} icon={button.icon} route={button.route} />
       ))}
     </div>
   );

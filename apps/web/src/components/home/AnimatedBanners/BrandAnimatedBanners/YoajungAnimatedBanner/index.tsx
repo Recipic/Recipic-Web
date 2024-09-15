@@ -1,11 +1,8 @@
 import React from 'react';
 import { AnimatedBanner } from '@/components/common/AnimatedBanner';
-import { useNavigate } from 'react-router-dom';
 import YoajungBannerImage1 from '@/assets/images/yoajungBannerImage1.webp';
 
 export default function YoajungAnimatedBanner() {
-  const navigate = useNavigate();
-
   return (
     <AnimatedBanner
       imageUrl={YoajungBannerImage1}
@@ -15,7 +12,7 @@ export default function YoajungAnimatedBanner() {
       backgroundColor="bg-pink-300"
       textColor="text-white"
       delay={200}
-      onClick={() => navigate('/recipe?keyword=요아정')}
+      route={'/recipe?keyword=요아정'}
     />
   );
 }

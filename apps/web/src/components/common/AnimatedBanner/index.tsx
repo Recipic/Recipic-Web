@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 type TAnimatedBannerProps = {
   imageUrl: string;
@@ -9,7 +10,7 @@ type TAnimatedBannerProps = {
   backgroundColor?: string;
   textColor?: string;
   delay?: number;
-  onClick?: () => void;
+  route: string;
 };
 
 export function AnimatedBanner({
@@ -20,7 +21,7 @@ export function AnimatedBanner({
   backgroundColor = 'bg-primary-100',
   textColor = 'text-white',
   delay = 500,
-  onClick,
+  route,
 }: TAnimatedBannerProps) {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -30,7 +31,7 @@ export function AnimatedBanner({
   }, [delay]);
 
   return (
-    <div className="m-4">
+    <Link to={route}>
       <AnimatePresence>
         {isVisible && (
           <motion.div
@@ -48,7 +49,6 @@ export function AnimatedBanner({
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.3 }}
               className={`${backgroundColor} ${textColor} rounded-lg`}
-              onClick={onClick}
             >
               <div className="p-4 flex items-center justify-between">
                 <img src={imageUrl} alt={alt} className="w-16 h-16 object-cover rounded-full" />
@@ -61,6 +61,6 @@ export function AnimatedBanner({
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </Link>
   );
 }

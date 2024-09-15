@@ -22,5 +22,9 @@ function getRandomBanner(): TBannerItem {
 
 export function RandomBrandAnimatedBanner() {
   const { Component, name } = getRandomBanner();
-  return <React.Fragment key={name}>{Component}</React.Fragment>;
+  return (
+    <div key={name} className="m-4">
+      {Component}
+    </div>
+  );
 }

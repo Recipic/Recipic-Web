@@ -27,8 +27,8 @@ export default function Home() {
   return (
     <PageLayout isTabBarVisible isBottomSpace isHeaderVisible>
       <Header titleImage={RecipcLogoImage} order="first">
-        <SearchButton onClick={() => navigate('/recipe')} />
-        <NotificationButton onClick={() => {}} /* TODO: 알림 페이지 이동 */ />
+        <SearchButton route={'/recipe'} />
+        <NotificationButton route={'/notification'} /* TODO: 알림 페이지 이동 */ />
       </Header>
       <RandomBrandAnimatedBanner />
       <CarouselWithBanners />

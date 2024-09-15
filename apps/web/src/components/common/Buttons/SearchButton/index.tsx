@@ -1,14 +1,17 @@
 import React from 'react';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { Button } from '@recipic-packages/ui';
+import { Link } from 'react-router-dom';
 
 type TSearchButtonProps = {
-  onClick?: () => void;
+  route: string;
 };
-export default function SearchButton({ onClick }: TSearchButtonProps) {
+export default function SearchButton({ route }: TSearchButtonProps) {
   return (
-    <Button variant="ghost" size="icon" onClick={onClick} className="text-black" aria-label="레시피 검색">
-      <MagnifyingGlassIcon className="h-7 w-7" />
-    </Button>
+    <Link to={route}>
+      <Button variant="ghost" size="icon" className="text-black" aria-label="레시피 검색">
+        <MagnifyingGlassIcon className="h-7 w-7" />
+      </Button>
+    </Link>
   );
 }

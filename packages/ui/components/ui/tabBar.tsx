@@ -1,34 +1,28 @@
 import React from 'react';
 import { HomeIcon, HeartIcon, MixerHorizontalIcon, PersonIcon } from '@radix-ui/react-icons';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 
 type TTabBarKey = 'home' | 'recipe' | 'favorite' | 'my';
 
 type TTabItem = {
   key: TTabBarKey;
   icon: React.ReactElement;
-  path: string;
+  route: string;
 };
 
 const tabItems: TTabItem[] = [
-  { key: 'home', icon: <HomeIcon />, path: '/' },
-  { key: 'recipe', icon: <MixerHorizontalIcon />, path: '/recipe' },
-  { key: 'favorite', icon: <HeartIcon />, path: '/picked' },
-  { key: 'my', icon: <PersonIcon />, path: '/my' },
+  { key: 'home', icon: <HomeIcon />, route: '/' },
+  { key: 'recipe', icon: <MixerHorizontalIcon />, route: '/recipe' },
+  { key: 'favorite', icon: <HeartIcon />, route: '/picked' },
+  { key: 'my', icon: <PersonIcon />, route: '/my' },
 ];
 
 export function TabBar() {
-  const navigate = useNavigate();
   const location = useLocation();
-
   const getActiveTab = (): TTabBarKey => {
     const path = location.pathname;
-    const activeItem = tabItems.find(item => item.path === path);
+    const activeItem = tabItems.find(item => item.route === path);
     return activeItem ? activeItem.key : 'home';
-  };
-
-  const handleTabClick = (path: string) => {
-    navigate(path);
   };
 
   return (
@@ -37,19 +31,17 @@ export function TabBar() {
         {tabItems.map(item => {
           const isActive = getActiveTab() === item.key;
           return (
-            <button
-              key={item.key}
-              className="flex flex-col items-center justify-center w-full h-full"
-              onClick={() => handleTabClick(item.path)}
-            >
-              <div
-                className={`w-7 h-7 ${isActive ? 'text-primary-500' : 'text-gray-400'} transition-colors duration-200`}
-              >
-                {React.cloneElement(item.icon, {
-                  className: 'w-full h-full [&>path]:stroke-none [&>path]:fill-current',
-                })}
-              </div>
-            </button>
+            <Link to={item.route} key={item.key}>
+              <button className="flex flex-col items-center justify-center w-full h-full">
+                <div
+                  className={`w-7 h-7 ${isActive ? 'text-primary-500' : 'text-gray-400'} transition-colors duration-200`}
+                >
+                  {React.cloneElement(item.icon, {
+                    className: 'w-full h-full [&>path]:stroke-none [&>path]:fill-current',
+                  })}
+                </div>
+              </button>
+            </Link>
           );
         })}
       </div>

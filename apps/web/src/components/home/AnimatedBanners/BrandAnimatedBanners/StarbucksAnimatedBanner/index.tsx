@@ -1,11 +1,8 @@
 import React from 'react';
 import { AnimatedBanner } from '@/components/common/AnimatedBanner';
-import { useNavigate } from 'react-router-dom';
 import StarbucksBannerImage1 from '@/assets/images/starbucksBannerImage1.webp';
 
 export default function StarbucksAnimatedBanner() {
-  const navigate = useNavigate();
-
   return (
     <AnimatedBanner
       imageUrl={StarbucksBannerImage1}
@@ -15,7 +12,7 @@ export default function StarbucksAnimatedBanner() {
       backgroundColor="bg-green-700"
       textColor="text-white"
       delay={200}
-      onClick={() => navigate('/recipe?keyword=스타벅스')}
+      route={'/recipe?keyword=스타벅스'}
     />
   );
 }

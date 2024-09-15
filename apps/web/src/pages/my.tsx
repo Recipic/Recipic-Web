@@ -9,26 +9,25 @@ import { TMenu } from '@/types/my';
 import { MypageSection } from '@/components/my/MypageSection';
 import MenuList from '@/components/my/Menu/MenuList';
 import { useGetMyInfo } from '@/hooks/useGetMyInfo';
-import { useNavigate } from 'react-router-dom';
+import EditProfileRouteButton from '@/components/my/EditProfileRouteButton';
 
 export default function My() {
   const { myInfoData } = useGetMyInfo();
-  const navigate = useNavigate();
 
   const userMenuItems: TMenu[] = [
-    { title: '내 레시피', icon: <Pencil2Icon className="w-6 h-6" />, onClick: () => navigate('/my-recipe') },
+    { title: '내 레시피', icon: <Pencil2Icon className="w-6 h-6" />, route: '/my-recipe' },
     {
       title: '알러지 선택',
       icon: <DislikeIcon className="w-6 h-6" />,
-      onClick: () => navigate('/dislike-ingredients'),
+      route: '/dislike-ingredients',
     },
-    { title: '내 댓글', icon: <FileTextIcon className="w-6 h-6" />, onClick: () => navigate('/my-comments') },
+    { title: '내 댓글', icon: <FileTextIcon className="w-6 h-6" />, route: '/my-comments' },
   ];
 
   const menuItems: TMenu[] = [
-    { title: '공지사항', icon: <BellIcon className="w-4 h-4" />, onClick: () => navigate('/notice') },
-    { title: '문의하기', icon: <PaperPlaneIcon className="w-4 h-4" />, onClick: () => {} }, // TODO: 카카오톡 문의하기로 연결
-    { title: '공식 인스타그램', icon: <InstagramLogoIcon className="w-4 h-4" />, onClick: () => {} }, // TODO: 인스타그램으로 연결
+    { title: '공지사항', icon: <BellIcon className="w-4 h-4" />, route: '/notice' },
+    { title: '문의하기', icon: <PaperPlaneIcon className="w-4 h-4" />, route: '' }, // TODO: 카카오톡 문의하기로 연결
+    { title: '공식 인스타그램', icon: <InstagramLogoIcon className="w-4 h-4" />, route: '' }, // TODO: 인스타그램으로 연결
   ];
 
   return (
@@ -42,14 +41,7 @@ export default function My() {
           imageAlt={`유저 프로필 이미지`}
           label={myInfoData.nickName}
         />
-        <Button
-          variant="defaultSub"
-          className="w-full h-10 mt-4"
-          type="button"
-          onClick={() => navigate('/edit-profile')}
-        >
-          프로필 수정
-        </Button>
+        <EditProfileRouteButton route={'/edit-profile'} />
       </MypageSection>
       <MypageSection>
         <UserMenuButtonList buttons={userMenuItems} gridCols={3} />
