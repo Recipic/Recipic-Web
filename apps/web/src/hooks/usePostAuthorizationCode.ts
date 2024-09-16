@@ -11,7 +11,7 @@ export const usePostAuthorizationCode = () => {
       postAuthorizationCode({ authorizationCode: body.authorizationCode }),
     onSuccess: (data: TPostAuthorizationCodeResponse) => {
       localStorage.setItem('accessToken', data.accessToken);
-      navigate('/home');
+      navigate('/');
     },
     onError: (error: Error) => {
       toast.error(error.message); // TODO: 추후 에러페이지로 이동
