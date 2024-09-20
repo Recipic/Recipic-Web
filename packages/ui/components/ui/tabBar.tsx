@@ -2,9 +2,9 @@ import React from 'react';
 import { HomeIcon, HeartIcon, MixerHorizontalIcon, PersonIcon } from '@radix-ui/react-icons';
 import { useLocation, Link } from 'react-router-dom';
 
-type TTabBarKey = 'home' | 'recipe' | 'favorite' | 'my';
+export type TTabBarKey = 'home' | 'recipe' | 'favorite' | 'my';
 
-type TTabItem = {
+export type TTabItem = {
   key: TTabBarKey;
   icon: React.ReactElement;
   route: string;

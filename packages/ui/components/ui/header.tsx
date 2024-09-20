@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react';
 import { TOrderType } from '../../types/order';
 
-type THeaderBackgroundStyle = 'white' | 'gray';
+export type THeaderBackgroundStyle = 'white' | 'gray';
 
-type HeaderPropsWithTitle = {
+export type THeaderPropsWithTitle = {
   title: string;
   titleImage?: never;
   children?: ReactNode;
@@ -11,7 +11,7 @@ type HeaderPropsWithTitle = {
   headerBackgroundStyle?: THeaderBackgroundStyle;
 };
 
-type HeaderPropsWithImage = {
+export type THeaderPropsWithImage = {
   title?: never;
   titleImage: string;
   children?: ReactNode;
@@ -19,14 +19,20 @@ type HeaderPropsWithImage = {
   headerBackgroundStyle?: THeaderBackgroundStyle;
 };
 
-type HeaderProps = HeaderPropsWithTitle | HeaderPropsWithImage;
+export type THeaderProps = THeaderPropsWithTitle | THeaderPropsWithImage;
 
 const headerStyleVariants: Record<THeaderBackgroundStyle, string> = {
   white: 'bg-white',
   gray: 'bg-backgroundSecondaryLight',
 };
 
-export function Header({ title, titleImage, children, order = 'first', headerBackgroundStyle = 'white' }: HeaderProps) {
+export function Header({
+  title,
+  titleImage,
+  children,
+  order = 'first',
+  headerBackgroundStyle = 'white',
+}: THeaderProps) {
   return (
     <div
       className={`fixed top-0 ${headerStyleVariants[headerBackgroundStyle]} z-10 w-full max-w-lg h-12 ${order === 'second' ? 'mt-12' : ''}`}

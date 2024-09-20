@@ -2,9 +2,9 @@ import React, { useCallback, useEffect, useState, Children } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import type { EmblaOptionsType } from 'embla-carousel';
 
-type TAlignmentType = 'start' | 'center' | 'end';
+export type TAlignmentType = 'start' | 'center' | 'end';
 
-type TCarouselProps = {
+export type TCarouselProps = {
   children: React.ReactNode;
   autoScroll?: boolean;
   showDots?: boolean;

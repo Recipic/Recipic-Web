@@ -1,9 +1,9 @@
 import React from 'react';
 import { TabBar } from './tabBar';
 
-type TPageBackgroundStyle = 'white' | 'gray';
+export type TPageBackgroundStyle = 'white' | 'gray';
 
-type TPageLayoutProps = {
+export type TPageLayoutProps = {
   children: React.ReactNode;
   isTabBarVisible?: boolean;
   isBottomSpace?: boolean;

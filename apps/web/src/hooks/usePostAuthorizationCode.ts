@@ -14,7 +14,7 @@ export const usePostAuthorizationCode = () => {
       navigate('/');
     },
     onError: (error: Error) => {
-      toast.error(error.message); // TODO: 추후 에러페이지로 이동
+      toast.error(error.message);
     },
   });
 };

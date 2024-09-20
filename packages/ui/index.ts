@@ -1,13 +1,26 @@
-export * from './components/ui/button';
+export { Button, buttonVariants } from './components/ui/button';
+export type { ButtonProps } from './components/ui/button';
 export { PageLayout } from './components/ui/pageLayout';
+export type { TPageBackgroundStyle, TPageLayoutProps } from './components/ui/pageLayout';
 export { TabBar } from './components/ui/tabBar';
+export type { TTabBarKey, TTabItem } from './components/ui/tabBar';
 export { Header } from './components/ui/header';
+export type {
+  THeaderBackgroundStyle,
+  THeaderPropsWithTitle,
+  THeaderPropsWithImage,
+  THeaderProps,
+} from './components/ui/header';
 export { TopNavBar } from './components/ui/topNavBar';
+export type { TChildrenPosition, TTopNavBarProps } from './components/ui/topNavBar';
 export { Carousel } from './components/ui/carousel';
+export type { TAlignmentType, TCarouselProps } from './components/ui/carousel';
 export { Banner } from './components/ui/banner';
+export type { BannerProps } from './components/ui/banner';
 export { Card } from './components/ui/card';
 export { Label } from './components/ui/label';
 export { Input } from './components/ui/input';
+export type { InputProps } from './components/ui/input';
 export { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from './components/ui/form';
 export {
   Drawer,
@@ -23,9 +36,11 @@ export {
 } from './components/ui/drawer';
 export { RadioGroup, RadioGroupItem } from './components/ui/radioGroup';
 export { TextArea } from './components/ui/textArea';
+export type { TextareaProps } from './components/ui/textArea';
 export { Checkbox } from './components/ui/checkbox';
 export { Avatar, AvatarImage, AvatarFallback } from './components/ui/avatar';
 export { Badge, badgeVariants } from './components/ui/badge';
+export type { BadgeProps } from './components/ui/badge';
 export { Separator } from './components/ui/separator';
 export {
   Select,
@@ -40,7 +55,9 @@ export {
   SelectScrollDownButton,
 } from './components/ui/select';
 export { Spinner } from './components/ui/spinner';
+export type { SpinnerContentProps } from './components/ui/spinner';
 export { Toaster } from './components/ui/sonner';
+export type { ToasterProps } from './components/ui/sonner';
 export {
   AlertDialog,
   AlertDialogPortal,

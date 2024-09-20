@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from './button';
 import { TOrderType } from '../../types/order';
 
-type TChildrenPosition = 'left' | 'right' | 'center';
+export type TChildrenPosition = 'left' | 'right' | 'center';
 
-type TopNavBarProps = {
+export type TTopNavBarProps = {
   children?: ReactNode;
   showBackButton?: boolean;
   onBackButtonClick?: () => void;
@@ -20,7 +20,7 @@ export function TopNavBar({
   onBackButtonClick,
   childrenPosition = 'left',
   order = 'first',
-}: TopNavBarProps) {
+}: TTopNavBarProps) {
   const navigate = useNavigate();
 
   const handleGoBack = () => {

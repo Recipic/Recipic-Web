@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from './button';
 
-type BannerProps = {
+export type BannerProps = {
   imageUrl: string;
   onClick: () => void;
 };
