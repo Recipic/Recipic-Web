@@ -2,9 +2,10 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { TGetMyRecipeListParams, TGetMyRecipeListResponse } from '@/apis/myRecipe/type';
 import { getMyRecipeList } from '@/apis/myRecipe/getMyRecipeList';
 import { DEFAULT_SIZE } from '@/constants/pagenation';
+import { toast } from 'sonner';
 
 export const useGetMyRecipeList = ({ keyword, size = DEFAULT_SIZE }: Omit<TGetMyRecipeListParams, 'page'>) => {
-  const { data, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } = useInfiniteQuery<
+  const { data, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage, error } = useInfiniteQuery<
     TGetMyRecipeListResponse,
     Error
   >({
@@ -22,5 +23,10 @@ export const useGetMyRecipeList = ({ keyword, size = DEFAULT_SIZE }: Omit<TGetMy
     },
   });
   const myRecipeInfosList = data !== undefined ? data.pages.flat() : [];
+
+  if (error) {
+    toast.error(error.message);
+  }
+
   return { myRecipeInfosList, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage };
 };

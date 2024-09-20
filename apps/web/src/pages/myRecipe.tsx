@@ -1,6 +1,5 @@
 import React from 'react';
 import { Header, PageLayout, TopNavBar } from '@recipic-packages/ui';
-import { RecipeCardList } from '@/components/common/RecipeCard/RecipeCardList';
 import { useGetMyRecipeList } from '@/hooks/useGetMyRecipeList';
 import { useSearchLogic } from '@/hooks/useSearchLogic';
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
@@ -8,6 +7,7 @@ import PrimarySpinner from '@/components/common/PrimarySpinner';
 import { DEFAULT_SIZE } from '@/constants/pagenation';
 import { SearchBar } from '@/components/common/SearchBar';
 import { useNavigate } from 'react-router-dom';
+import { MyRecipeCardList } from '@/components/myRecipe/MyRecipeCardList';
 
 export default function MyRecipe() {
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ export default function MyRecipe() {
         </div>
       ) : (
         <>
-          <RecipeCardList recipeInfosList={myRecipeInfosList} />
+          <MyRecipeCardList recipeInfosList={myRecipeInfosList} onEditRecipe={() => {}} onDeleteRecipe={() => {}} />
           <div ref={ref}>{isFetchingNextPage && <PrimarySpinner />}</div>
         </>
       )}

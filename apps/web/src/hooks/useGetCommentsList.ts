@@ -3,13 +3,14 @@ import { TGetCommentsListParams, TGetCommentsListResponse } from '@/apis/recipeD
 import { DEFAULT_SIZE } from '@/constants/pagenation';
 import { getCommentsListQueryKey } from '@/constants/queryKeys';
 import { getCommentsList } from '@/apis/recipeDetail/getCommentsList';
+import { toast } from 'sonner';
 
 export const useGetCommentsList = ({
   recipeId,
   size = DEFAULT_SIZE,
   sortType,
 }: Omit<TGetCommentsListParams, 'page'>) => {
-  const { data, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } = useInfiniteQuery<
+  const { data, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage, error } = useInfiniteQuery<
     TGetCommentsListResponse,
     Error
   >({
@@ -32,6 +33,10 @@ export const useGetCommentsList = ({
 
   const commentsList = data?.pages.flatMap(page => page.content) ?? [];
   const totalComments = data?.pages[0]?.totalElements ?? 0;
+
+  if (error) {
+    toast.error(error.message);
+  }
 
   return { commentsList, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage, totalComments };
 };

@@ -1,9 +1,10 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { TGetRecipeListParams, TGetRecipeListResponse } from '@/apis/recipe/type';
 import { getRecipeList } from '@/apis/recipe/getRecipeList';
+import { toast } from 'sonner';
 
 export const useGetRecipeList = ({ keyword }: Omit<TGetRecipeListParams, 'page'>) => {
-  const { data, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } = useInfiniteQuery<
+  const { data, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage, error } = useInfiniteQuery<
     TGetRecipeListResponse,
     Error
   >({
@@ -21,5 +22,10 @@ export const useGetRecipeList = ({ keyword }: Omit<TGetRecipeListParams, 'page'>
     },
   });
   const recipeInfosList = data !== undefined ? data.pages.flat() : [];
+
+  if (error) {
+    toast.error(error.message);
+  }
+
   return { recipeInfosList, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage };
 };

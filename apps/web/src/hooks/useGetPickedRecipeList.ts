@@ -1,9 +1,10 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { TGetPickedRecipeListResponse } from '@/apis/picked/type';
 import { getPickedRecipeList } from '@/apis/picked/getPickedRecipeList';
+import { toast } from 'sonner';
 
 export const useGetPickedRecipeList = () => {
-  const { data, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } = useInfiniteQuery<
+  const { data, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage, error } = useInfiniteQuery<
     TGetPickedRecipeListResponse,
     Error
   >({
@@ -21,5 +22,10 @@ export const useGetPickedRecipeList = () => {
     },
   });
   const pickedRecipeInfosList = data !== undefined ? data.pages.flat() : [];
+
+  if (error) {
+    toast.error(error.message);
+  }
+
   return { pickedRecipeInfosList, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage };
 };
