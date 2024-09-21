@@ -1,14 +1,10 @@
 import React from 'react';
-import { Button } from '@recipic-packages/ui';
+import { Button, ButtonProps } from '@recipic-packages/ui';
 import { Cross2Icon } from '@radix-ui/react-icons';
 
-type TXButtonProps = {
-  onClick: () => void;
-};
-
-export default function XButton({ onClick }: TXButtonProps) {
+export default function XButton({ ...props }: Omit<ButtonProps, 'variant' | 'size'>) {
   return (
-    <Button variant="ghost" size="icon" onClick={onClick} aria-label="삭제 버튼">
+    <Button variant="ghost" size="icon" aria-label="삭제 버튼" {...props}>
       <Cross2Icon className="h-5 w-5" />
     </Button>
   );
