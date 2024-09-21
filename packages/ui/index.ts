@@ -117,5 +117,6 @@ export type {
   AlertDialogHeaderProps,
   AlertDialogFooterProps,
 } from './components/ui/alertDialog';
+export { Skeleton } from './components/ui/skeleton';
 export { cn } from './lib/utils';
 import './styles/fonts.css';
