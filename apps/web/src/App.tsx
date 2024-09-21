@@ -15,12 +15,14 @@ const App = () => {
 
   return (
     <ErrorBoundary errorFallback={DefaultErrorFallbackUI} onReset={handleReload}>
-      <CookiesProvider>
-        <BrowserRouter>
-          <Router />
-          <ScrollToTop />
-        </BrowserRouter>
-      </CookiesProvider>
+      <Suspense fallback={<FallbackUI />}>
+        <CookiesProvider>
+          <BrowserRouter>
+            <Router />
+            <ScrollToTop />
+          </BrowserRouter>
+        </CookiesProvider>
+      </Suspense>
     </ErrorBoundary>
   );
 };

@@ -2,12 +2,11 @@ import React from 'react';
 import { MyCommentBox } from '@/components/myComments/MyCommentBox';
 import { TMyComment } from '@/types/myComments';
 import { Separator } from '@recipic-packages/ui';
+import { useGetMyCommentsList } from '@/hooks/useGetMyCommentsList';
 
-type TMyCommentBoxProps = {
-  myCommentsListData: TMyComment[];
-};
+export function MyCommentBoxList() {
+  const { myCommentsListData } = useGetMyCommentsList();
 
-export function MyCommentBoxList({ myCommentsListData }: TMyCommentBoxProps) {
   if (myCommentsListData.length === 0) {
     return (
       <div className="mt-10">
