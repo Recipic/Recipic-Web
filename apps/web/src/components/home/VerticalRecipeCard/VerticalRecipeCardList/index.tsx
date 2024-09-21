@@ -21,6 +21,7 @@ export function VerticalRecipeCardList({ recipeInfosList }: TRecipeCardListProps
             title={recipeInfo.title}
             description={recipeInfo.description}
             brandName={recipeInfo.brandName}
+            recipeId={recipeInfo.recipeId}
           />
         </div>
       ))}
