@@ -1,7 +1,7 @@
 import { TBrandKo } from '@/types/brand';
 
 export type TRecipeCardInfo = {
-  recipeId?: number;
+  recipeId: number;
   userNickName: string;
   title: string;
   thumbnailUrl?: string;

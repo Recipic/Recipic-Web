@@ -8,6 +8,9 @@ import { TGetCommentsListParams } from '@/apis/recipeDetail/type';
 import { getIngredientOfBrand } from '@/apis/recipe/getIngredientOfBrand';
 import { TGetIngredientOfBrandParams } from '@/apis/recipe/type';
 import { getMyCommentsList } from '@/apis/myComments/getMyCommentsList';
+import { TGetMyRecipeListParams } from '@/apis/myRecipe/type';
+import { DEFAULT_SIZE } from './pagenation';
+import { getMyRecipeList } from '@/apis/myRecipe/getMyRecipeList';
 
 /** 홈 페이지에서 일반인 레시피 순위 리스트를 받고 관리하기 위한 쿼리 키 */
 export const getRecipeRankListQueryKey = () => {
@@ -63,5 +66,14 @@ export const getMyCommentsListQueryKey = () => {
   return {
     queryKey: ['myCommentsList'],
     queryFn: () => getMyCommentsList(),
+  };
+};
+
+/** 내 레시피 목록을 받고 관리하기 위한 쿼리 키 */
+export const getMyRecipeListQueryKey = ({ keyword, size = DEFAULT_SIZE }: Omit<TGetMyRecipeListParams, 'page'>) => {
+  return {
+    queryKey: ['myRecipeList', keyword],
+    queryFn: ({ pageParam = 0 }: { pageParam?: number }) =>
+      getMyRecipeList({ page: pageParam as number, keyword, size }),
   };
 };

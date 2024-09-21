@@ -47,7 +47,7 @@ export default function MyRecipe() {
         </div>
       ) : (
         <>
-          <MyRecipeCardList recipeInfosList={myRecipeInfosList} onEditRecipe={() => {}} onDeleteRecipe={() => {}} />
+          {myRecipeInfosList !== undefined && <MyRecipeCardList recipeInfosList={myRecipeInfosList} />}
           <div ref={ref}>{isFetchingNextPage && <PrimarySpinner />}</div>
         </>
       )}

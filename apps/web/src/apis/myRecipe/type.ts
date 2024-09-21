@@ -7,3 +7,7 @@ export type TGetMyRecipeListParams = {
   keyword: string;
   size: number;
 };
+
+export type TDeleteMyRecipeParams = {
+  recipeId: number;
+};
