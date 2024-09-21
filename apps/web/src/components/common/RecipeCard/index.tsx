@@ -20,7 +20,6 @@ export function RecipeCard({
   brandName,
 }: TRecipeCardProps) {
   const brandImage = getBrandImage(brandName);
-  const displayDescription = description.length > 30 ? `${description.substring(0, 30)}...` : description;
 
   return (
     <Link to={route} className="cursor-pointer">
@@ -40,7 +39,7 @@ export function RecipeCard({
           <div className="flex-auto p-4 flex flex-col justify-between">
             <div>
               <h3 className="text-H3 font-semibold">{title}</h3>
-              <p className="text-regular14 text-gray-600 mt-2">{displayDescription}</p>
+              <p className="text-regular14 text-gray-600 mt-2 truncate">{description}</p>
             </div>
             <div>
               <div className="flex items-center mt-2 gap-1">
