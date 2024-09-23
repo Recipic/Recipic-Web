@@ -17,7 +17,7 @@ export type TIncludeIngredient = {
 export type TRecipeDetail = {
   recipeId: number;
   userNickName: string;
-  userProfileImageUrl: string | null;
+  userProfileImageUrl: string | undefined;
   brandName: TBrandKo;
   title: string;
   description: string;

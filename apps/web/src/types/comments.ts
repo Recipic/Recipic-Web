@@ -3,7 +3,7 @@ export type TComment = {
   content: string;
   createdAt: string;
   userId: number;
-  userProfileImageUrl: string | null;
+  userProfileImageUrl: string | undefined;
   userNickName: string;
   likeCount: number;
   liked: boolean;

@@ -1,21 +1,26 @@
 import React from 'react';
-import { Avatar, AvatarImage, AvatarFallback, Label } from '@recipic-packages/ui';
-import DefaltUserProfile from '@/assets/icons/defaultUserProfile.webp';
+import {
+  Avatar,
+  AvatarImage,
+  AvatarFallback,
+  Label,
+  AvatarProps,
+  AvatarImageProps,
+  AvatarFallbackProps,
+  LabelProps,
+} from '@recipic-packages/ui';
+import DefaultUserProfile from '@/assets/icons/defaultUserProfile.webp';
 
-type TAvatarLabelProps = {
-  imageUrl: string | null;
-  label: string;
-  imageAlt: string;
-};
+type TAvatarLabelProps = AvatarProps & AvatarImageProps & AvatarFallbackProps & LabelProps;
 
-export function AvatarLabel({ imageUrl, label, imageAlt }: TAvatarLabelProps) {
+export function AvatarLabel({ ...props }: TAvatarLabelProps) {
   return (
     <div className="flex items-center">
       <Avatar className="h-10 w-10 mr-3">
-        <AvatarImage src={imageUrl !== null ? imageUrl : DefaltUserProfile} alt={imageAlt} />
+        <AvatarImage src={props.src !== undefined ? props.src : DefaultUserProfile} alt={props.alt} />
         <AvatarFallback />
       </Avatar>
-      <Label className="text-semibold16">{label}</Label>
+      <Label className="text-semibold16">{props.title}</Label>
     </div>
   );
 }

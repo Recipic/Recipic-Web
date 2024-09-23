@@ -91,9 +91,9 @@ export default function RecipeDetail() {
       <Section title={recipeDetailData.title} titleStyle="H1">
         <div className="px-4 py-2">
           <AvatarLabel
-            imageUrl={getBrandImage(recipeDetailData.brandName)}
-            imageAlt={`${recipeDetailData.brandName} 브랜드 로고 이미지`}
-            label={recipeDetailData.brandName}
+            src={getBrandImage(recipeDetailData.brandName)}
+            alt={`${recipeDetailData.brandName} 브랜드 로고 이미지`}
+            title={recipeDetailData.brandName}
           />
         </div>
         <div className="px-4 py-2">
@@ -107,9 +107,9 @@ export default function RecipeDetail() {
       <Section title="작성자" titleStyle="H3">
         <div className="p-4">
           <AvatarLabel
-            imageUrl={recipeDetailData.userProfileImageUrl}
-            imageAlt="작성자 프로필 이미지"
-            label={recipeDetailData.userNickName}
+            src={recipeDetailData.userProfileImageUrl}
+            alt="작성자 프로필 이미지"
+            title={recipeDetailData.userNickName}
           />
         </div>
       </Section>

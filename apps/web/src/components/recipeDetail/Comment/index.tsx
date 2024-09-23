@@ -1,7 +1,6 @@
 import React from 'react';
 import { AvatarLabel } from '@/components/common/AvatarLabel';
 import { getRelativeTime } from '@/utils/date';
-import DefaltUserProfile from '@/assets/icons/defaultUserProfile.webp';
 import { TComment } from '@/types/comments';
 import { LikeButton } from '@/components/common/Buttons/LikeButton';
 import XButton from '@/components/common/Buttons/XButton';
@@ -25,11 +24,7 @@ export function Comment({
   return (
     <div className="p-4 border-b">
       <div className="flex justify-between">
-        <AvatarLabel
-          imageUrl={userProfileImageUrl !== null ? userProfileImageUrl : DefaltUserProfile}
-          label={userNickName}
-          imageAlt="유저 프로필"
-        />
+        <AvatarLabel src={userProfileImageUrl} title={userNickName} alt="유저 프로필" />
         {myComment === true ? (
           <XButton onClick={onCommentDeleteClick} />
         ) : (
