@@ -1,9 +1,9 @@
 import React from 'react';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
-import { Button } from '@recipic-packages/ui';
+import { Button, ButtonProps } from '@recipic-packages/ui';
 import { Link } from 'react-router-dom';
 
-type TSearchButtonProps = {
+type TSearchButtonProps = Omit<ButtonProps, 'variant' | 'size' | 'className' | 'aria-label'> & {
   route: string;
 };
 export default function SearchButton({ route }: TSearchButtonProps) {

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button } from '@recipic-packages/ui';
+import { Button, ButtonProps } from '@recipic-packages/ui';
 import { HeartIcon, HeartFilledIcon } from '@radix-ui/react-icons';
 
-type TLikeButtonProps = {
+type TLikeButtonProps = Omit<ButtonProps, 'variant' | 'onClick' | 'children' | 'size' | 'className' | 'aria-label'> & {
   isLiked: boolean;
   likeCount: number;
   onLikeClick: () => void;
@@ -24,7 +24,7 @@ const buttonVariants = {
   notLiked: 'text-gray-600 hover:text-gray-400',
 };
 
-export function LikeButton({ isLiked, likeCount, onLikeClick, size = 'large' }: TLikeButtonProps) {
+export function LikeButton({ isLiked, likeCount, onLikeClick, size = 'large', ...props }: TLikeButtonProps) {
   const iconSizeClass = iconSizeClasses[size];
   const likeCountSizeClass = likeCountSizeClasses[size];
   const variantClass = isLiked ? buttonVariants.liked : buttonVariants.notLiked;
@@ -32,7 +32,7 @@ export function LikeButton({ isLiked, likeCount, onLikeClick, size = 'large' }: 
   return (
     <div className="flex items-center">
       <p className={likeCountSizeClass}>{likeCount}</p>
-      <Button variant="ghost" size="icon" onClick={onLikeClick} className={variantClass} aria-label="좋아요">
+      <Button variant="ghost" size="icon" onClick={onLikeClick} className={variantClass} aria-label="좋아요" {...props}>
         {isLiked ? <HeartFilledIcon className={iconSizeClass} /> : <HeartIcon className={iconSizeClass} />}
       </Button>
     </div>
