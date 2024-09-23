@@ -50,6 +50,7 @@ jobs:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
           cd apps/web
+          pnpm run build
           vercel deploy --prod --token $VERCEL_TOKEN
 
       - name: Deploy admin if changed
@@ -58,6 +59,7 @@ jobs:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
           cd apps/admin
+          pnpm run build
           vercel deploy --prod --token $VERCEL_TOKEN
 
       - name: Deploy UI if changed
@@ -66,4 +68,5 @@ jobs:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
           cd packages/ui
+          pnpm run build
           vercel deploy --prod --token $VERCEL_TOKEN

@@ -18,4 +18,7 @@ export default defineConfig({
       '@': resolve(__dirname, './src'), // '@'를 src 폴더로 매핑
     },
   },
+  build: {
+    outDir: 'dist',
+  },
 });

@@ -1,4 +1,11 @@
 {
-  "routes": [{ "handle": "filesystem" }, { "src": "/.*", "dest": "/index.html" }],
-  "outputDirectory": "dist"
+  "version": 2.0.0,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/node",
+      "config": { "distDir": "dist" }
+    }
+  ],
+  "routes": [{ "handle": "filesystem" }, { "src": "/.*", "dest": "/index.html" }]
 }
