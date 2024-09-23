@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom';
 type TSearchButtonProps = Omit<ButtonProps, 'variant' | 'size' | 'className' | 'aria-label'> & {
   route: string;
 };
-export default function SearchButton({ route }: TSearchButtonProps) {
+export default function SearchButton({ route, ...props }: TSearchButtonProps) {
   return (
     <Link to={route}>
-      <Button variant="ghost" size="icon" className="text-black" aria-label="레시피 검색">
+      <Button variant="ghost" size="icon" className="text-black" aria-label="레시피 검색" {...props}>
         <MagnifyingGlassIcon className="h-7 w-7" />
       </Button>
     </Link>
