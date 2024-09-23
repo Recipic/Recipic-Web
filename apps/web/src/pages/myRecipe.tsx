@@ -28,14 +28,22 @@ export default function MyRecipe() {
     <PageLayout isBottomSpace isHeaderVisible={!isSearching} isTopNavBarVisible>
       {isSearching ? (
         <TopNavBar showBackButton onBackButtonClick={handleGoBack} childrenPosition="center" order="first">
-          <SearchBar onSearchClick={handleSearchSubmit} searchQuery={searchQuery} />
+          <SearchBar
+            onSearchClick={handleSearchSubmit}
+            searchQuery={searchQuery}
+            inputProps={{ placeholder: '브랜드, 재료 등' }}
+          />
         </TopNavBar>
       ) : (
         <>
           <TopNavBar order="first" onBackButtonClick={() => navigate('/my')} />
           <Header title="내가 작성한 레시피" order="second" />
           <div className="px-4 py-1 flex-[1_0_100%]">
-            <SearchBar onSearchClick={handleSearchSubmit} searchQuery={searchQuery} />
+            <SearchBar
+              onSearchClick={handleSearchSubmit}
+              searchQuery={searchQuery}
+              inputProps={{ placeholder: '브랜드, 재료 등' }}
+            />
           </div>
         </>
       )}

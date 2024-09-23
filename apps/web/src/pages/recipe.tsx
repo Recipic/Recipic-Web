@@ -31,12 +31,20 @@ export default function Recipe() {
       <Header title="레시피" order="first" />
       {isSearching ? (
         <TopNavBar showBackButton onBackButtonClick={handleGoBack} childrenPosition="center" order="second">
-          <SearchBar onSearchClick={handleSearchSubmit} searchQuery={searchQuery} />
+          <SearchBar
+            onSearchClick={handleSearchSubmit}
+            searchQuery={searchQuery}
+            inputProps={{ placeholder: '브랜드, 재료 등' }}
+          />
         </TopNavBar>
       ) : (
         <>
           <div className="px-4 py-1 flex-[1_0_100%]">
-            <SearchBar onSearchClick={handleSearchSubmit} searchQuery={searchQuery} />
+            <SearchBar
+              onSearchClick={handleSearchSubmit}
+              searchQuery={searchQuery}
+              inputProps={{ placeholder: '브랜드, 재료 등' }}
+            />
           </div>
           <BrandButtonList brands={brands} onSearchClick={handleBrandClick} gridCols={3} />
         </>
