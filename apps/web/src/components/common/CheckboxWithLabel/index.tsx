@@ -1,12 +1,16 @@
 import React from 'react';
 import { Checkbox, FormControl, FormItem, FormLabel } from '@recipic-packages/ui';
+import type { FormItemProps, FormLabelProps, FormControlProps, CheckboxProps } from '@recipic-packages/ui';
 
-type TCheckboxWithLabelProps = {
-  checked: boolean;
-  onCheckedChange: (checked: boolean) => void;
-  label: string;
-};
-/** 체크박스와 라벨이 합쳐진 컴포넌트 */
+type TCheckboxWithLabelProps = Omit<CheckboxProps, 'checked' | 'onCheckedChange'> &
+  Omit<FormItemProps, 'children' | 'className'> &
+  Omit<FormControlProps, 'children'> &
+  Omit<FormLabelProps, 'children' | 'className'> & {
+    checked: boolean;
+    onCheckedChange: (checked: boolean) => void;
+    label: string;
+  };
+
 export function CheckboxWithLabel({ checked, onCheckedChange, label }: TCheckboxWithLabelProps) {
   return (
     <FormItem className="flex flex-row items-center space-x-2 space-y-0">

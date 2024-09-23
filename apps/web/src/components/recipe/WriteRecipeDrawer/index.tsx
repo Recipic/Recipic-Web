@@ -282,7 +282,7 @@ export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) 
                       value={field.value || undefined}
                       onChange={(value: TBrandKo | undefined) => field.onChange(value)}
                       placeholder="브랜드를 선택해주세요"
-                      className="w-full"
+                      triggerProps={{ className: 'w-full' }}
                     />
                   </FormControl>
                   <FormMessage />

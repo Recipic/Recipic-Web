@@ -1,12 +1,22 @@
 import React from 'react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@recipic-packages/ui';
+import type {
+  SelectProps,
+  SelectTriggerProps,
+  SelectValueProps,
+  SelectContentProps,
+  SelectItemProps,
+} from '@recipic-packages/ui';
 
-type TCustomSelectProps<T extends string | undefined> = {
+type TCustomSelectProps<T extends string | undefined> = Omit<SelectProps, 'value' | 'onValueChange'> & {
   items: Array<{ value: T; label: string }>;
   value: T;
   placeholder?: string;
   onChange: (value: T) => void;
-  className: string;
+  triggerProps?: Omit<SelectTriggerProps, 'children'>;
+  valueProps?: Omit<SelectValueProps, 'placeholder'>;
+  contentProps?: Omit<SelectContentProps, 'children'>;
+  itemProps?: Omit<SelectItemProps, 'value' | 'children'>;
 };
 
 export function CustomSelect<T extends string | undefined>({
@@ -14,16 +24,20 @@ export function CustomSelect<T extends string | undefined>({
   value,
   placeholder,
   onChange,
-  className,
+  triggerProps,
+  valueProps,
+  contentProps,
+  itemProps,
+  ...selectProps
 }: TCustomSelectProps<T>) {
   return (
-    <Select value={value} onValueChange={v => onChange(v as T)}>
-      <SelectTrigger className={className}>
-        <SelectValue placeholder={placeholder || '선택'} />
+    <Select value={value} onValueChange={v => onChange(v as T)} {...selectProps}>
+      <SelectTrigger {...triggerProps}>
+        <SelectValue placeholder={placeholder || '선택'} {...valueProps} />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent {...contentProps}>
         {items.map(item => (
-          <SelectItem key={item.value} value={item.value as string}>
+          <SelectItem key={item.value} value={item.value as string} {...itemProps}>
             {item.label}
           </SelectItem>
         ))}

@@ -121,7 +121,7 @@ export default function RecipeDetail() {
             items={commentSortOptions}
             value={commentSortOption}
             onChange={setCommentSortOption}
-            className="w-28"
+            triggerProps={{ className: 'w-28' }}
           />
         </div>
         {isLoading ? (

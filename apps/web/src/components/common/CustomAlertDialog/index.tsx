@@ -9,8 +9,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@recipic-packages/ui';
+import type { AlertDialogContentProps, AlertDialogTitleProps, AlertDialogDescriptionProps } from '@recipic-packages/ui';
 
-type AlertDialogProps = {
+type CustomAlertDialogProps = {
   isOpen: boolean;
   onClose: () => void;
   title: string;
@@ -18,6 +19,9 @@ type AlertDialogProps = {
   cancelText: string;
   confirmText: string;
   onConfirm: () => void;
+  contentProps?: Omit<AlertDialogContentProps, 'children'>;
+  titleProps?: Omit<AlertDialogTitleProps, 'children'>;
+  descriptionProps?: Omit<AlertDialogDescriptionProps, 'children'>;
 };
 
 export function CustomAlertDialog({
@@ -28,7 +32,10 @@ export function CustomAlertDialog({
   cancelText,
   confirmText,
   onConfirm,
-}: AlertDialogProps) {
+  contentProps,
+  titleProps,
+  descriptionProps,
+}: CustomAlertDialogProps) {
   const handleConfirm = () => {
     onConfirm();
     onClose();
@@ -36,10 +43,12 @@ export function CustomAlertDialog({
 
   return (
     <AlertDialog open={isOpen} onOpenChange={onClose}>
-      <AlertDialogContent className="max-w-80 rounded-lg">
+      <AlertDialogContent className="max-w-80 rounded-lg" {...contentProps}>
         <AlertDialogHeader>
-          <AlertDialogTitle>{title}</AlertDialogTitle>
-          <AlertDialogDescription className="whitespace-pre-wrap">{description}</AlertDialogDescription>
+          <AlertDialogTitle {...titleProps}>{title}</AlertDialogTitle>
+          <AlertDialogDescription className="whitespace-pre-wrap" {...descriptionProps}>
+            {description}
+          </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel onClick={onClose}>{cancelText}</AlertDialogCancel>
