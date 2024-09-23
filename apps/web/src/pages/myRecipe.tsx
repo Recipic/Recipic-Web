@@ -1,5 +1,6 @@
 import React from 'react';
-import { Header, PageLayout, TopNavBar } from '@recipic-packages/ui';
+import { Header, TopNavBar } from '@recipic-packages/ui';
+import { PageLayout } from '@/components/common/PageLayout';
 import { useGetMyRecipeList } from '@/hooks/useGetMyRecipeList';
 import { useSearchLogic } from '@/hooks/useSearchLogic';
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';

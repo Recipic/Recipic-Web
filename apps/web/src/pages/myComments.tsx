@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
-import { Header, PageLayout, TopNavBar } from '@recipic-packages/ui';
+import { Header, TopNavBar } from '@recipic-packages/ui';
+import { PageLayout } from '@/components/common/PageLayout';
 import { MyCommentBoxList } from '@/components/myComments/MyCommentBox/MyCommentBoxList';
 
 export default function MyComments() {

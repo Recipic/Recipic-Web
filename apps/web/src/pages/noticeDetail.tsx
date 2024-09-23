@@ -1,5 +1,6 @@
 import React from 'react';
-import { PageLayout, Separator, TopNavBar } from '@recipic-packages/ui';
+import { Separator, TopNavBar } from '@recipic-packages/ui';
+import { PageLayout } from '@/components/common/PageLayout';
 import { NoticeComponent } from '@/components/notice/NoticeComponent';
 import { useParams } from 'react-router-dom';
 import { noticeDetailData } from '@/constants/mocks';

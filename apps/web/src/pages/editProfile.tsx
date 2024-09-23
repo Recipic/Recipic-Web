@@ -1,5 +1,6 @@
 import React from 'react';
-import { Header, PageLayout, TopNavBar } from '@recipic-packages/ui';
+import { Header, TopNavBar } from '@recipic-packages/ui';
+import { PageLayout } from '@/components/common/PageLayout';
 import { BottomFixedButtonWithGradientDiv } from '@/components/common/Buttons/BottomFixedButtonWithGradientDiv';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { PageLayout, TopNavBar, Separator } from '@recipic-packages/ui';
+import { TopNavBar, Separator } from '@recipic-packages/ui';
+import { PageLayout } from '@/components/common/PageLayout';
 import { CarouselWithRecipeDetailImage } from '@/components/recipeDetail/CarouselWithRecipeDetailImage';
 import { useGetRecipeDetail } from '@/hooks/useGetRecipeDetail';
 import { Section } from '@/components/common/Section';

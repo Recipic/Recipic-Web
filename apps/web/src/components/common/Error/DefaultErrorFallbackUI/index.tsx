@@ -1,6 +1,7 @@
 import React from 'react';
 import { Player } from '@lottiefiles/react-lottie-player';
-import { Button, PageLayout } from '@recipic-packages/ui';
+import { Button } from '@recipic-packages/ui';
+import { PageLayout } from '@/components/common/PageLayout';
 import ErrorLottie from '@/assets/lotties/error.json';
 
 type TDefaultErrorFallbackUIProps = {

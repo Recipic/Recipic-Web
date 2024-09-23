@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
-import { Header, PageLayout } from '@recipic-packages/ui';
+import { Header } from '@recipic-packages/ui';
+import { PageLayout } from '@/components/common/PageLayout';
 import { CarouselWithBanners } from '@/components/home/CarouselWithBanners';
 import { Section } from '@/components/common/Section';
 import { TBrandEn } from '@/types/brand';

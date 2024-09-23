@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, PageLayout, TopNavBar } from '@recipic-packages/ui';
+import { Button, TopNavBar } from '@recipic-packages/ui';
+import { PageLayout } from '@/components/common/PageLayout';
 import RecipicLogoImage from '@/assets/icons/logo.svg?react';
 import KakaoLogoImage from '@/assets/images/kakaoLogo.svg?react';
 import { AppInstallBanner } from '@/components/login/AppInstallBanner';

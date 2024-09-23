@@ -1,5 +1,6 @@
 import React from 'react';
-import { Header, PageLayout, TopNavBar } from '@recipic-packages/ui';
+import { Header, TopNavBar } from '@recipic-packages/ui';
+import { PageLayout } from '@/components/common/PageLayout';
 import { NoticeList } from '@/components/notice/NoticeComponent/NoticeList';
 import { noticeListData } from '@/constants/mocks';
 

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Header, PageLayout, TopNavBar } from '@recipic-packages/ui';
+import { Header, TopNavBar } from '@recipic-packages/ui';
+import { PageLayout } from '@/components/common/PageLayout';
 import { RecipeCardList } from '@/components/common/RecipeCard/RecipeCardList';
 import { brands } from '@/constants/brands';
 import { WriteRecipeButton } from '@/components/recipe/WriteRecipeButton';

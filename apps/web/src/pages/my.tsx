@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
-import { Header, Label, PageLayout } from '@recipic-packages/ui';
+import { Header, Label } from '@recipic-packages/ui';
+import { PageLayout } from '@/components/common/PageLayout';
 import DislikeIcon from '@/assets/icons/dislikeIcon.svg?react';
 import { Pencil2Icon, BellIcon, PaperPlaneIcon, InstagramLogoIcon, FileTextIcon } from '@radix-ui/react-icons';
 import { AvatarLabel } from '@/components/common/AvatarLabel';

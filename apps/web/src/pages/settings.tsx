@@ -1,5 +1,6 @@
 import React from 'react';
-import { Header, PageLayout, TopNavBar } from '@recipic-packages/ui';
+import { Header, TopNavBar } from '@recipic-packages/ui';
+import { PageLayout } from '@/components/common/PageLayout';
 import { SettingsSection } from '@/components/settings/SettingsSection';
 import { TSettingsMenuItem } from '@/types/settings';
 import { SettingsMenuList } from '@/components/settings/SettingsMenu/SettingsMenuList';
