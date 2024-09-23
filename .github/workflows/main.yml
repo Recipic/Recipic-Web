@@ -15,11 +15,10 @@ jobs:
           fetch-depth: 0
 
       - name: Determine changes
-        id: determine_changes
+        id: changes
         run: |
           changed_files=$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }})
-          echo "changed_files=$changed_files" >> $GITHUB_ENV
-          echo "Changed files: $changed_files"
+          echo "files=$changed_files" >> $GITHUB_OUTPUT
 
       - name: Install pnpm
         uses: pnpm/action-setup@v2
@@ -42,7 +41,7 @@ jobs:
         run: pnpm add -g vercel@latest
 
       - name: Deploy web if changed
-        if: contains(env.changed_files, 'apps/web/')
+        if: contains(steps.changes.outputs.files, 'apps/web/')
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
@@ -50,7 +49,7 @@ jobs:
           vercel deploy --prod --token $VERCEL_TOKEN
 
       - name: Deploy admin if changed
-        if: contains(env.changed_files, 'apps/admin/')
+        if: contains(steps.changes.outputs.files, 'apps/admin/')
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
@@ -58,7 +57,7 @@ jobs:
           vercel deploy --prod --token $VERCEL_TOKEN
 
       - name: Deploy UI if changed
-        if: contains(env.changed_files, 'packages/ui/')
+        if: contains(steps.changes.outputs.files, 'packages/ui/')
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
