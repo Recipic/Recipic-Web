@@ -27,27 +27,31 @@ export function TabBar() {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 mx-auto max-w-lg bg-white shadow-lg border-t border-gray-200">
-      <div className="flex justify-around items-center h-12">
+    <nav className="fixed bottom-0 left-0 right-0 mx-auto max-w-lg bg-white shadow-lg border-t border-gray-200">
+      <ul className="flex justify-around items-center h-12">
         {tabItems.map(item => {
           const isActive = getActiveTab() === item.key;
           return (
-            <Link to={item.route} key={item.key}>
-              <button className="flex flex-col items-center justify-center w-full h-full">
+            <li key={item.key} className="w-full">
+              <Link
+                to={item.route}
+                className="flex flex-col items-center justify-center w-full h-full"
+                aria-label={item.label}
+              >
                 <div
                   className={`w-7 h-7 ${isActive ? 'text-primary-500' : 'text-gray-400'} transition-colors duration-200`}
+                  aria-hidden="true"
                 >
                   {React.cloneElement(item.icon, {
                     className: 'w-full h-full [&>path]:stroke-none [&>path]:fill-current',
-                    'aria-hidden': 'true',
                   })}
                 </div>
                 <span className="sr-only">{item.label}</span>
-              </button>
-            </Link>
+              </Link>
+            </li>
           );
         })}
-      </div>
-    </div>
+      </ul>
+    </nav>
   );
 }
