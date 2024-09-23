@@ -1,0 +1,108 @@
+name: Deploy on Push to Main
+on: 
+  push:
+    branches:
+      - main # main 브랜치에 push가 발생했을 때
+jobs:
+  deploy-blog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository # 깃 레포지토리 정보 가져오기
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # 모든 커밋 정보 가져오기
+          
+      - name: Determine changes # 수정 내역 체크하기
+        id: determine_changes
+        run: |
+          changed_files=$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }})
+          changed_files_csv=$(echo "$changed_files" | tr '\n' ',')
+          echo "Changed files: $changed_files_csv"
+          echo "changed_files=$changed_files_csv" >> $GITHUB_ENV
+          
+      - name: Install expect
+        if: ${{ contains(env.changed_files, 'apps/web/') }} # 수정 내역에 'apps/web/'를 포함했을 때 실행
+        run: |
+          sudo apt-get update
+          sudo apt-get install expect
+          
+      - name: Install pnpm
+        if: ${{ contains(env.changed_files, 'apps/web/') }}
+        run: |
+          npm install -g pnpm
+          
+      - name: Build web
+        if: ${{ contains(env.changed_files, 'apps/web/') }}
+        working-directory: apps/blog
+        run: |
+          pnpm install
+          npx turbo run build
+          
+      - name: Deploy web if changed
+        if: ${{ contains(env.changed_files, 'apps/web/') }}
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          expect << EOF
+          spawn vercel --prod --token $VERCEL_TOKEN
+          expect "Set up and deploy “~/work/blog/blog”? (Y/n)"
+          send "Y\r"
+          expect "Which scope do you want to deploy to? (Use arrow keys)"
+          send "\r"
+          expect "Found project “jo-hanbins-projects/blog”. Link to it? (Y/n)?"
+          send "Y\r"
+          expect eof
+          EOF
+        
+  deploy-lab:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+        
+      - name: Determine changes
+        id: determine_changes
+        run: |
+          changed_files=$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }})
+          changed_files_csv=$(echo "$changed_files" | tr '\n' ',')
+          echo "Changed files: $changed_files_csv"
+          echo "changed_files=$changed_files_csv" >> $GITHUB_ENV
+          
+      - name: Install expect
+        if: ${{ contains(env.changed_files, 'apps/admin/') }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install expect
+      - name: Install pnpm
+        if: ${{ contains(env.changed_files, 'apps/admin/') }}
+        run: |
+          pnpm install
+          npm install -g pnpm
+          
+      - name: Build admin
+        if: ${{ contains(env.changed_files, 'apps/admin/') }}
+        working-directory: apps/admin
+        run: |
+          npx turbo run build
+      
+      - name: Deploy admin if changed
+        if: ${{ contains(env.changed_files, 'apps/admin/') }}
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          expect << EOF
+          spawn vercel --prod --token $VERCEL_TOKEN
+          expect "Set up and deploy “~/work/blog/lab”? (Y/n)"
+          send "Y\r"
+          expect "Which scope do you want to deploy to? (Use arrow keys)"
+          send "\r"
+          expect "Found project “jo-hanbins-projects/blog”. Link to it? (Y/n)"
+          send "n\r"
+          expect "Link to different existing project? (Y/n)?"
+          send "Y\r"
+          expect "What’s the name of your existing project?"
+          send "blog-lab\r"
+          expect eof
+          EOF
