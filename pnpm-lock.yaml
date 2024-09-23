@@ -49,6 +49,85 @@ importers:
         specifier: ^4.2.0
         version: 4.2.0(typescript@5.5.4)(vite@5.4.2)
 
+  apps/admin:
+    dependencies:
+      '@recipic-packages/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      '@tanstack/react-query':
+        specifier: ^5.52.1
+        version: 5.52.1(react@18.3.1)
+      '@tanstack/react-query-devtools':
+        specifier: ^5.52.1
+        version: 5.52.1(@tanstack/react-query@5.52.1)(react@18.3.1)
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-cookie:
+        specifier: ^7.2.0
+        version: 7.2.0(react@18.3.1)
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
+      react-intersection-observer:
+        specifier: ^9.13.0
+        version: 9.13.0(react-dom@18.3.1)(react@18.3.1)
+      react-router-dom:
+        specifier: ^6.26.1
+        version: 6.26.1(react-dom@18.3.1)(react@18.3.1)
+    devDependencies:
+      '@eslint/js':
+        specifier: ^8.56.0
+        version: 8.57.0
+      '@recipic-packages/eslint-config':
+        specifier: workspace:*
+        version: link:../../packages/eslint-config
+      '@recipic-packages/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/typescript-config
+      '@types/react':
+        specifier: ^18.3.3
+        version: 18.3.4
+      '@types/react-dom':
+        specifier: ^18.3.0
+        version: 18.3.0
+      '@vitejs/plugin-react':
+        specifier: ^4.3.1
+        version: 4.3.1(vite@5.4.2)
+      autoprefixer:
+        specifier: ^10.4.20
+        version: 10.4.20(postcss@8.4.41)
+      eslint:
+        specifier: ^8.56.0
+        version: 8.57.0
+      eslint-plugin-react-hooks:
+        specifier: ^5.1.0-rc.0
+        version: 5.1.0-rc-fb9a90fa48-20240614(eslint@8.57.0)
+      eslint-plugin-react-refresh:
+        specifier: ^0.4.9
+        version: 0.4.10(eslint@8.57.0)
+      globals:
+        specifier: ^15.9.0
+        version: 15.9.0
+      postcss:
+        specifier: ^8.4.41
+        version: 8.4.41
+      tailwindcss:
+        specifier: ^3.4.10
+        version: 3.4.10
+      typescript:
+        specifier: ^5.5.3
+        version: 5.5.4
+      typescript-eslint:
+        specifier: ^8.0.1
+        version: 8.2.0(eslint@8.57.0)(typescript@5.5.4)
+      vite:
+        specifier: ^5.4.1
+        version: 5.4.2(@types/node@20.16.1)
+      vitest:
+        specifier: ^2.0.5
+        version: 2.0.5
+
   apps/web:
     dependencies:
       '@hookform/resolvers':

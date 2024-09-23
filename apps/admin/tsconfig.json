@@ -1,0 +1,21 @@
+{
+  "extends": "../../tsconfig.json",
+  "files": [],
+  "compilerOptions": {
+    "composite": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "outDir": "dist",
+    "resolveJsonModule": true
+  },
+  "include": [
+    "src",
+    "src/**/*.json",
+    "vite.config.ts",
+    "tailwind.config.ts",
+    "postcss.config.js",
+    "../../packages/ui/types/*"
+  ]
+}
