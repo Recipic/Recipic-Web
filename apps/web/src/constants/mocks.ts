@@ -73,7 +73,7 @@ export const pickedRecipeInfosListData: TRecipeCardInfo[] = [
 export const recipeDetailData: TRecipeDetail = {
   recipeId: 3,
   userNickName: '먹부림 사냥꾼',
-  userProfileImageUrl: null,
+  userProfileImageUrl: undefined,
   brandName: '요아정',
   title: '요아정 꿀조합!! 딸기바나나',
   description:
@@ -161,7 +161,7 @@ export const commentsData: TComment[] = [
     content: '정말 맛있어 보이네요!',
     createdAt: '2024-08-27T02:11:19.740Z',
     userId: 1,
-    userProfileImageUrl: null,
+    userProfileImageUrl: undefined,
     userNickName: '맛있는 레시피',
     likeCount: 50000,
     liked: false,
