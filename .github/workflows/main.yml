@@ -18,7 +18,11 @@ jobs:
         id: changes
         run: |
           changed_files=$(git diff-tree --no-commit-id --name-only -r ${{ github.sha }})
-          echo "files=$changed_files" >> $GITHUB_OUTPUT
+          echo "Changed files:"
+          echo "$changed_files"
+          echo "files<<EOF" >> $GITHUB_OUTPUT
+          echo "$changed_files" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Install pnpm
         uses: pnpm/action-setup@v2
