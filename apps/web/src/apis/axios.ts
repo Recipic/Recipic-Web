@@ -1,48 +1,29 @@
 import axios, { AxiosError, InternalAxiosRequestConfig, AxiosResponse, AxiosInstance } from 'axios';
-import { useCookies } from 'react-cookie';
 
 interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
   _retry?: boolean;
 }
 
 type TReissueRequestData = {
-  refreshToken: string;
+  accessToken: string;
 };
 
 type TAuthResponse = {
   accessToken: string;
 };
 
-const getAccessToken = (): string | undefined => {
-  //return import.meta.env.VITE_APP_SUPER_ACCESS_TOKEN;
-
-  //TODO: 발표를 위해 임시로 주석처리
-  // if (import.meta.env.MODE === 'development') {
-  //   return import.meta.env.VITE_APP_SUPER_ACCESS_TOKEN;
-  // }
-
-  const storedToken = localStorage.getItem('accessToken');
-  if (storedToken) {
-    return storedToken;
-  }
-
-  return;
-};
-
 export const instance: AxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_APP_SERVER_URL,
   headers: {
-    Authorization: `Bearer ${getAccessToken()}`,
+    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
   },
   withCredentials: true,
 });
 
 export const useAxiosWithReissue = () => {
-  const [cookies] = useCookies(['refreshToken']);
-
   instance.interceptors.request.use(
     (config: CustomAxiosRequestConfig): CustomAxiosRequestConfig => {
-      const accessToken = getAccessToken();
+      const accessToken = localStorage.getItem('accessToken');
       if (accessToken && config.headers) {
         config.headers.Authorization = `Bearer ${accessToken}`;
       }
@@ -57,21 +38,20 @@ export const useAxiosWithReissue = () => {
     (response: AxiosResponse): AxiosResponse => response,
     async (error: AxiosError): Promise<AxiosResponse> => {
       const originalRequest = error.config as CustomAxiosRequestConfig;
-
+      console.error('Response Error:', error); // 디버깅용
+      console.log('Error Response:', error.response); // 디버깅용
+      console.log('Error Config:', error.config); // 디버깅용
       if (error.response?.status !== 401 || originalRequest._retry) {
         return Promise.reject(error);
       }
 
       originalRequest._retry = true;
 
-      try {
-        const refreshToken = cookies.refreshToken;
-        if (!refreshToken) {
-          return Promise.reject(error);
-        }
+      const accessToken = localStorage.getItem('accessToken');
 
+      try {
         const response: AxiosResponse<TAuthResponse, TReissueRequestData> = await instance.post('/auth/reissue', {
-          refreshToken: refreshToken,
+          accessToken: accessToken,
         });
 
         if (response.status !== 200) {
@@ -80,9 +60,7 @@ export const useAxiosWithReissue = () => {
 
         const newAccessToken = response.data.accessToken;
 
-        if (import.meta.env.MODE !== 'development') {
-          localStorage.setItem('accessToken', newAccessToken);
-        }
+        localStorage.setItem('accessToken', newAccessToken);
 
         if (originalRequest.headers) {
           originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;

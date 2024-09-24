@@ -27,26 +27,17 @@ type TAuthProviderProps = {
   children: React.ReactNode;
 };
 
-const isDevelopment = process.env.NODE_ENV === 'development';
-
 export function AuthProvider({ children }: TAuthProviderProps): JSX.Element {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [cookies, removeCookie] = useCookies(['refreshToken']);
+  const [, , removeCookie] = useCookies(['refreshToken']);
 
   const checkLoginStatus = useCallback((): void => {
     const accessToken = localStorage.getItem('accessToken');
-    const refreshToken = cookies.refreshToken;
 
-    if (isDevelopment) {
-      setIsLoggedIn(accessToken !== null);
-      setIsLoading(false);
-      return;
-    }
-
-    setIsLoggedIn(accessToken !== null && refreshToken !== undefined);
+    setIsLoggedIn(accessToken !== null);
     setIsLoading(false);
-  }, [cookies.refreshToken]);
+  }, []);
 
   useEffect(() => {
     checkLoginStatus();
