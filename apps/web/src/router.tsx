@@ -14,37 +14,43 @@ import MyRecipe from './pages/myRecipe';
 import Notice from './pages/notice';
 import EditProfile from './pages/editProfile';
 import NoticeDetail from './pages/noticeDetail';
+import { ProtectedRoute } from './components/common/ProtectedRoute';
 
 type TRoutes = {
   path: string;
   element: JSX.Element;
   isTabBar: boolean;
+  isProtected?: boolean;
 };
 
-// 라우트 설정
+// 라우트 설정 업데이트
 export const routes: TRoutes[] = [
-  { path: '/', element: <Home />, isTabBar: true }, // 홈
-  { path: '/recipe', element: <Recipe />, isTabBar: true }, // 레시피
-  { path: '/picked', element: <Picked />, isTabBar: true }, // 찜
-  { path: '/my', element: <My />, isTabBar: true }, // 마이페이지
-  { path: '/settings', element: <Settings />, isTabBar: false }, // 설정
-  { path: '/recipe/:recipeId', element: <RecipeDetail />, isTabBar: false }, // 레시피 상세
-  { path: '/my-comments', element: <MyComments />, isTabBar: false }, // 내가 작성한 댓글
-  { path: '/login', element: <Login />, isTabBar: false }, // 로그인
-  { path: '/kakao/callback', element: <KakaoCallback />, isTabBar: false }, // 카카오 로그인 콜백
-  { path: '/dislike-ingredients', element: <DislikeIngredients />, isTabBar: false }, // 내가 싫어하는 재료
-  { path: '/my-recipe', element: <MyRecipe />, isTabBar: false }, // 내가 작성한 레시피
-  { path: '/notice', element: <Notice />, isTabBar: false }, // 공지사항
-  { path: '/notice/:noticeId', element: <NoticeDetail />, isTabBar: false }, //공지사항 상세
-  { path: '/edit-profile', element: <EditProfile />, isTabBar: false }, // 프로필 수정
+  { path: '/', element: <Home />, isTabBar: true },
+  { path: '/recipe', element: <Recipe />, isTabBar: true },
+  { path: '/picked', element: <Picked />, isTabBar: true, isProtected: true },
+  { path: '/my', element: <My />, isTabBar: true, isProtected: true },
+  { path: '/settings', element: <Settings />, isTabBar: false, isProtected: true },
+  { path: '/recipe/:recipeId', element: <RecipeDetail />, isTabBar: false },
+  { path: '/my-comments', element: <MyComments />, isTabBar: false, isProtected: true },
+  { path: '/login', element: <Login />, isTabBar: false },
+  { path: '/kakao/callback', element: <KakaoCallback />, isTabBar: false },
+  { path: '/dislike-ingredients', element: <DislikeIngredients />, isTabBar: false, isProtected: true },
+  { path: '/my-recipe', element: <MyRecipe />, isTabBar: false, isProtected: true },
+  { path: '/notice', element: <Notice />, isTabBar: false },
+  { path: '/notice/:noticeId', element: <NoticeDetail />, isTabBar: false },
+  { path: '/edit-profile', element: <EditProfile />, isTabBar: false, isProtected: true },
 ];
 
 export default function Router() {
   return (
     <Routes>
-      {routes.map(({ path, element }: TRoutes) => (
-        <Route key={path} path={path} element={element} />
-      ))}
+      {routes.map(({ path, element, isProtected: isProtected }: TRoutes) =>
+        isProtected ? (
+          <Route key={path} path={path} element={<ProtectedRoute redirectPath="/login">{element}</ProtectedRoute>} />
+        ) : (
+          <Route key={path} path={path} element={element} />
+        ),
+      )}
     </Routes>
   );
 }

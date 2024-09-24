@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TopNavBar, Separator } from '@recipic-packages/ui';
+import { TopNavBar, Separator, Button } from '@recipic-packages/ui';
 import { PageLayout } from '@/components/common/PageLayout';
 import { CarouselWithRecipeDetailImage } from '@/components/recipeDetail/CarouselWithRecipeDetailImage';
 import { useGetRecipeDetail } from '@/hooks/useGetRecipeDetail';
@@ -10,7 +10,7 @@ import { CommentInputForm } from '@/components/recipeDetail/CommentInputForm';
 import { TSortOption } from '@/types/comments';
 import { LikeButton } from '@/components/common/Buttons/LikeButton';
 import { CustomSelect } from '@/components/common/CustomSelect';
-import { useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { DEFAULT_SIZE } from '@/constants/pagenation';
 import { usePostRecipePick } from '@/hooks/usePostRecipePick';
 import { useGetCommentsList } from '@/hooks/useGetCommentsList';
@@ -22,6 +22,7 @@ import BadgeList from '@/components/recipeDetail/BadgeList';
 import CommentList from '@/components/recipeDetail/CommentList';
 import { useDeleteMyComment } from '@/hooks/useDeleteMyComment';
 import { useAlertDialog } from '@/contexts/alertDialogContext';
+import { useAuth } from '@/contexts/authContext';
 
 const commentSortOptions: Array<{ value: TSortOption; label: string }> = [
   { value: 'latest', label: '최신순' },
@@ -29,6 +30,8 @@ const commentSortOptions: Array<{ value: TSortOption; label: string }> = [
 ];
 
 export default function RecipeDetail() {
+  const { isLoggedIn } = useAuth();
+  const navigate = useNavigate();
   const [commentSortOption, setCommentSortOption] = useState<TSortOption>('latest'); // 최신순, 좋아요순 옵션 상태
   const params = useParams<{ recipeId: string }>(); // recipeId를 url 파라미터에서 가져오기
   const recipeId = Number(params.recipeId);
@@ -52,6 +55,10 @@ export default function RecipeDetail() {
 
   /** 레시피 상세 글에 대한 스크랩(좋아요) 클릭 핸들러 */
   const handleRecipeLikeClick = () => {
+    if (!isLoggedIn) {
+      navigate('/login');
+      return;
+    }
     mutateRecipePick({ recipeId: recipeId });
   };
 
@@ -116,30 +123,41 @@ export default function RecipeDetail() {
       </Section>
       <Separator className="my-2" />
       <Section title="댓글" titleStyle="H3">
-        <CommentInputForm onSubmit={handleCommentSubmit} />
-        <div className="flex justify-end px-4 py-2">
-          <CustomSelect<TSortOption>
-            items={commentSortOptions}
-            value={commentSortOption}
-            onChange={setCommentSortOption}
-            triggerProps={{ className: 'w-28' }}
-          />
-        </div>
-        {isLoading ? (
-          <PrimarySpinner />
-        ) : commentsList.length === 0 ? (
-          <div className="px-4 py-4 text-center">
-            <p className="text-regular16 text-gray-500">아직 댓글이 없어요.</p>
-          </div>
-        ) : (
+        {isLoggedIn ? (
           <>
-            <CommentList
-              commentsList={commentsList}
-              onCommentLikeClick={handleCommentLikeClick}
-              onCommentDeleteClick={handleDeleteMyComment}
-            />
-            <div ref={ref}>{isFetchingNextPage && <PrimarySpinner />}</div>
+            <CommentInputForm onSubmit={handleCommentSubmit} />
+            <div className="flex justify-end px-4 py-2">
+              <CustomSelect<TSortOption>
+                items={commentSortOptions}
+                value={commentSortOption}
+                onChange={setCommentSortOption}
+                triggerProps={{ className: 'w-28' }}
+              />
+            </div>
+            {isLoading ? (
+              <PrimarySpinner />
+            ) : commentsList.length === 0 ? (
+              <div className="p-4 text-center">
+                <p className="text-regular16 text-gray-500">아직 댓글이 없어요.</p>
+              </div>
+            ) : (
+              <>
+                <CommentList
+                  commentsList={commentsList}
+                  onCommentLikeClick={handleCommentLikeClick}
+                  onCommentDeleteClick={handleDeleteMyComment}
+                />
+                <div ref={ref}>{isFetchingNextPage && <PrimarySpinner />}</div>
+              </>
+            )}
           </>
+        ) : (
+          <div className="p-4 flex flex-col items-center gap-4">
+            <p className="text-regular16 text-gray-500">로그인하면 댓글을 보실 수 있어요!</p>
+            <Link to="/login">
+              <Button variant="default">로그인하러 가기</Button>
+            </Link>
+          </div>
         )}
       </Section>
     </PageLayout>

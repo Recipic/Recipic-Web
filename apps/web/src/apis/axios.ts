@@ -13,7 +13,7 @@ type TAuthResponse = {
   accessToken: string;
 };
 
-const getAccessToken = (): string => {
+const getAccessToken = (): string | undefined => {
   //return import.meta.env.VITE_APP_SUPER_ACCESS_TOKEN;
 
   //TODO: 발표를 위해 임시로 주석처리
@@ -21,15 +21,12 @@ const getAccessToken = (): string => {
   //   return import.meta.env.VITE_APP_SUPER_ACCESS_TOKEN;
   // }
 
-  // //TODO: 실제 서비스에서는 else 삭제
   const storedToken = localStorage.getItem('accessToken');
   if (storedToken) {
     return storedToken;
-  } else {
-    return import.meta.env.VITE_APP_SUPER_ACCESS_TOKEN;
   }
 
-  // return '';
+  return;
 };
 
 export const instance: AxiosInstance = axios.create({

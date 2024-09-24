@@ -6,7 +6,7 @@ export const getIngredientOfBrand = async ({
   brandName,
 }: TGetIngredientOfBrandParams): Promise<TGetIngredientOfBrandResponse> => {
   const response = await instance.get<TGetResponse<TGetIngredientOfBrandResponse>>(
-    `/api/brand/ingredients?brandName=${brandName}`,
+    `/api/brand/baseingredients?brandName=${brandName}`,
   );
   return response.data.response;
 };

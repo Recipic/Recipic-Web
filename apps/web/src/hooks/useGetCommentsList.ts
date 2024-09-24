@@ -1,15 +1,17 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { skipToken, useInfiniteQuery } from '@tanstack/react-query';
 import { TGetCommentsListParams, TGetCommentsListResponse } from '@/apis/recipeDetail/type';
 import { DEFAULT_SIZE } from '@/constants/pagenation';
 import { getCommentsListQueryKey } from '@/constants/queryKeys';
 import { getCommentsList } from '@/apis/recipeDetail/getCommentsList';
 import { toast } from 'sonner';
+import { useAuth } from '@/contexts/authContext';
 
 export const useGetCommentsList = ({
   recipeId,
   size = DEFAULT_SIZE,
   sortType,
 }: Omit<TGetCommentsListParams, 'page'>) => {
+  const { isLoggedIn } = useAuth();
   const { data, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage, error } = useInfiniteQuery<
     TGetCommentsListResponse,
     Error
@@ -22,13 +24,15 @@ export const useGetCommentsList = ({
       }
       return lastPage.number + 1;
     },
-    queryFn: ({ pageParam = 0 }) =>
-      getCommentsList({
-        recipeId,
-        page: pageParam as number,
-        size,
-        sortType,
-      }),
+    queryFn: isLoggedIn
+      ? ({ pageParam = 0 }) =>
+          getCommentsList({
+            recipeId,
+            page: pageParam as number,
+            size,
+            sortType,
+          })
+      : skipToken,
   });
 
   const commentsList = data?.pages.flatMap(page => page.content) ?? [];

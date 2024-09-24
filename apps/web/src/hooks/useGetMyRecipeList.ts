@@ -1,10 +1,12 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { skipToken, useInfiniteQuery } from '@tanstack/react-query';
 import { TGetMyRecipeListParams, TGetMyRecipeListResponse } from '@/apis/myRecipe/type';
 import { DEFAULT_SIZE } from '@/constants/pagenation';
 import { toast } from 'sonner';
 import { getMyRecipeListQueryKey } from '@/constants/queryKeys';
+import { useAuth } from '@/contexts/authContext';
 
 export const useGetMyRecipeList = ({ keyword, size = DEFAULT_SIZE }: Omit<TGetMyRecipeListParams, 'page'>) => {
+  const { isLoggedIn } = useAuth();
   const { data, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage, error } = useInfiniteQuery<
     TGetMyRecipeListResponse,
     Error
@@ -17,11 +19,13 @@ export const useGetMyRecipeList = ({ keyword, size = DEFAULT_SIZE }: Omit<TGetMy
       }
       return allPages.length + 1;
     },
-    queryFn: ({ pageParam = 0 }) =>
-      getMyRecipeListQueryKey({
-        keyword,
-        size,
-      }).queryFn({ pageParam: pageParam as number }),
+    queryFn: isLoggedIn
+      ? ({ pageParam = 0 }) =>
+          getMyRecipeListQueryKey({
+            keyword,
+            size,
+          }).queryFn({ pageParam: pageParam as number })
+      : skipToken,
   });
 
   const myRecipeInfosList = data !== undefined ? data.pages.flat() : [];

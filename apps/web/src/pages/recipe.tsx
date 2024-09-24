@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Header, TopNavBar } from '@recipic-packages/ui';
 import { PageLayout } from '@/components/common/PageLayout';
 import { RecipeCardList } from '@/components/common/RecipeCard/RecipeCardList';
@@ -12,11 +12,14 @@ import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
 import { Spinner } from '@recipic-packages/ui';
 import BrandButtonList from '@/components/common/Buttons/BrandButton/BrandButtonList';
 import { SearchBar } from '@/components/common/SearchBar';
+import { useAuth } from '@/contexts/authContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function Recipe() {
+  const { isLoggedIn } = useAuth();
+  const navigate = useNavigate();
   const { searchQuery, isSearching, handleSearchSubmit, handleBrandClick, handleGoBack } = useSearchLogic();
   const { isOpen, open, close } = useDrawer();
-
   const { recipeInfosList, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } = useGetRecipeList({
     keyword: searchQuery,
   });
@@ -26,6 +29,14 @@ export default function Recipe() {
     hasNextPage: hasNextPage,
     isFetchingNextPage: isFetchingNextPage,
   });
+
+  const handleOpenWriteRecipeDrawer = useCallback(() => {
+    if (!isLoggedIn) {
+      navigate('/login');
+      return;
+    }
+    open();
+  }, [isLoggedIn, navigate, open]);
 
   return (
     <PageLayout isTabBarVisible isBottomSpace isHeaderVisible isTopNavBarVisible={isSearching}>
@@ -62,7 +73,7 @@ export default function Recipe() {
           <div ref={ref}>{isFetchingNextPage && <Spinner className="text-primary-500" />}</div>
         </>
       )}
-      <WriteRecipeButton onClick={open} />
+      <WriteRecipeButton onClick={handleOpenWriteRecipeDrawer} />
       <WriteRecipeDrawer isOpen={isOpen} onClose={close} />
     </PageLayout>
   );
