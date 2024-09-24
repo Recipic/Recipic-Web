@@ -44,29 +44,26 @@ jobs:
       - name: Install Vercel CLI
         run: pnpm add -g vercel@latest
 
-      - name: Deploy web if changed
+      - name: Deploy web
         if: contains(steps.changes.outputs.files, 'apps/web/')
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
           cd apps/web
-          pnpm run build
           vercel deploy --prod --token $VERCEL_TOKEN
 
-      - name: Deploy admin if changed
+      - name: Deploy admin
         if: contains(steps.changes.outputs.files, 'apps/admin/')
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
           cd apps/admin
-          pnpm run build
           vercel deploy --prod --token $VERCEL_TOKEN
 
-      - name: Deploy UI if changed
+      - name: Deploy UI
         if: contains(steps.changes.outputs.files, 'packages/ui/')
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
           cd packages/ui
-          pnpm run build
           vercel deploy --prod --token $VERCEL_TOKEN
