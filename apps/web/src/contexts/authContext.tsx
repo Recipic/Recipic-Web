@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
 import { useCookies } from 'react-cookie';
 
 type TTokens = {
@@ -34,51 +34,62 @@ export function AuthProvider({ children }: TAuthProviderProps): JSX.Element {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [cookies, removeCookie] = useCookies(['refreshToken']);
 
-  useEffect(() => {
-    const checkLoginStatus = (): void => {
-      const accessToken = localStorage.getItem('accessToken');
-      const refreshToken = cookies.refreshToken;
+  const checkLoginStatus = useCallback((): void => {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = cookies.refreshToken;
 
-      if (isDevelopment) {
-        setIsLoggedIn(Boolean(accessToken));
-      } else {
-        setIsLoggedIn(Boolean(accessToken && refreshToken));
-      }
+    if (isDevelopment) {
+      setIsLoggedIn(accessToken !== null);
       setIsLoading(false);
-    };
+      return;
+    }
 
+    setIsLoggedIn(accessToken !== null && refreshToken !== undefined);
+    setIsLoading(false);
+  }, [cookies.refreshToken]);
+
+  useEffect(() => {
     checkLoginStatus();
     window.addEventListener('storage', checkLoginStatus);
 
     return () => {
       window.removeEventListener('storage', checkLoginStatus);
     };
-  }, [cookies.refreshToken]);
+  }, [checkLoginStatus]);
 
-  const login = ({ accessToken }: TTokens): void => {
-    localStorage.setItem('accessToken', accessToken);
-    setIsLoggedIn(true);
-  };
+  const login = useCallback(
+    ({ accessToken }: TTokens): void => {
+      localStorage.setItem('accessToken', accessToken);
+      setIsLoggedIn(true);
+      checkLoginStatus();
+    },
+    [checkLoginStatus],
+  );
 
-  const logout = (): void => {
+  const logout = useCallback((): void => {
     localStorage.removeItem('accessToken');
     removeCookie('refreshToken', { path: '/' });
     setIsLoggedIn(false);
-  };
+    checkLoginStatus();
+  }, [removeCookie, checkLoginStatus]);
 
-  const signout = (): void => {
+  const signout = useCallback((): void => {
     localStorage.removeItem('accessToken');
     removeCookie('refreshToken', { path: '/' });
     setIsLoggedIn(false);
-  };
+    checkLoginStatus();
+  }, [removeCookie, checkLoginStatus]);
 
-  const value: TAuthContext = {
-    isLoggedIn,
-    isLoading,
-    login,
-    logout,
-    signout,
-  };
+  const value = useMemo<TAuthContext>(
+    () => ({
+      isLoggedIn,
+      isLoading,
+      login,
+      logout,
+      signout,
+    }),
+    [isLoggedIn, isLoading, login, logout, signout],
+  );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
