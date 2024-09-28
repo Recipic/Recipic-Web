@@ -1,5 +1,10 @@
 import { TBrandKo } from '@/types/brand';
 
+export type TMenuOfBrand = {
+  ingredientId: number;
+  ingredientName: string;
+};
+
 export type TIngredient = {
   ingredientId: number;
   ingredientName: string;

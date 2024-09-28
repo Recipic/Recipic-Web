@@ -31,13 +31,13 @@ export function CustomSelect<T extends string | undefined>({
   ...selectProps
 }: TCustomSelectProps<T>) {
   return (
-    <Select value={value} onValueChange={v => onChange(v as T)} {...selectProps}>
+    <Select value={value === undefined ? '' : value} onValueChange={v => onChange(v as T)} {...selectProps}>
       <SelectTrigger {...triggerProps}>
         <SelectValue placeholder={placeholder || '선택'} {...valueProps} />
       </SelectTrigger>
       <SelectContent {...contentProps}>
         {items.map(item => (
-          <SelectItem key={item.value} value={item.value as string} {...itemProps}>
+          <SelectItem key={item.value} value={item.value || ''} {...itemProps}>
             {item.label}
           </SelectItem>
         ))}

@@ -27,16 +27,24 @@ import { DrawerCloseButton } from '@/components/recipe/DrawerCloseButton';
 import { brandsko } from '@/constants/brands';
 import { TBrandKo } from '@/types/brand';
 import { CustomSelect } from '@/components/common/CustomSelect';
-import { useGetIngredientOfBrand } from '@/hooks/useGetIngredientOfBrand';
+import { useGetMenuOfBrand } from '@/hooks/useGetMenuOfBrand';
+import { useGetSideIngredients } from '@/hooks/useGetSideIngredients';
 
 const recipeFormSchema = z.object({
   title: z.string().min(1, '제목을 입력해주세요').max(20, '제목은 최대 20자까지 입력할 수 있습니다'),
   brand: z
     .enum([...(brandsko as [TBrandKo, ...TBrandKo[]])]) // 배열을 튜플로 변환
-    .optional() // 선택적으로 undefined 가능
+    .optional()
     .refine(value => value !== undefined, {
       message: '브랜드를 선택해주세요',
     }), // undefined 일 경우 에러 메시지 출력
+  menuId: z
+    .number()
+    .optional()
+    .refine(value => value !== undefined, {
+      message: '메뉴를 선택해주세요',
+    }),
+
   ingredients: z
     .array(
       z.object({
@@ -85,6 +93,7 @@ export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) 
     defaultValues: {
       title: '',
       brand: undefined,
+      menuId: undefined,
       ingredients: [],
       images: [],
       description: '',
@@ -97,8 +106,17 @@ export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) 
     name: 'brand',
   });
 
-  const { ingredientOptions } = useGetIngredientOfBrand({
+  const selectedMenuId: number | undefined = useWatch({
+    control: form.control,
+    name: 'menuId',
+  });
+
+  const { menuOptions } = useGetMenuOfBrand({
     brandName: brandName,
+  });
+
+  const { sideOptions } = useGetSideIngredients({
+    menuId: selectedMenuId,
   });
 
   const { fields, replace } = useFieldArray({
@@ -107,9 +125,9 @@ export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) 
   });
 
   useEffect(() => {
-    if (ingredientOptions) {
+    if (sideOptions) {
       replace(
-        ingredientOptions.map(ingredient => ({
+        sideOptions.map(ingredient => ({
           ...ingredient,
           selectedQuantity: 0,
         })),
@@ -117,7 +135,7 @@ export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) 
     } else {
       replace([]);
     }
-  }, [ingredientOptions, replace]);
+  }, [sideOptions, replace]);
 
   const {
     fields: imageFields,
@@ -279,10 +297,40 @@ export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) 
                   <FormControl>
                     <CustomSelect<TBrandKo | undefined>
                       items={brandOptions}
-                      value={field.value || undefined}
-                      onChange={(value: TBrandKo | undefined) => field.onChange(value)}
+                      value={field.value}
+                      onChange={(value: TBrandKo | undefined) => {
+                        field.onChange(value);
+                        form.resetField('menuId');
+                      }}
                       placeholder="브랜드를 선택해주세요"
                       triggerProps={{ className: 'w-full' }}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="menuId"
+              render={({ field }) => (
+                <FormItem className="flex-1">
+                  <FormLabel>메뉴</FormLabel>
+                  <FormControl>
+                    <CustomSelect<string | undefined>
+                      items={
+                        menuOptions?.map(menu => ({
+                          value: menu.ingredientId.toString(),
+                          label: menu.ingredientName,
+                        })) || []
+                      }
+                      value={field.value?.toString()}
+                      onChange={(value: string | undefined) => {
+                        field.onChange(value ? parseInt(value, 10) : undefined);
+                      }}
+                      placeholder="메뉴를 선택해주세요"
+                      triggerProps={{ className: 'w-full' }}
+                      disabled={!brandName}
                     />
                   </FormControl>
                   <FormMessage />

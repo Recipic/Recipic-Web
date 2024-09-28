@@ -5,12 +5,13 @@ import { TRecipeId } from '@/types/recipe';
 import { getRecipeCelebRankList } from '@/apis/home/getRecipeCelebRankList';
 import { getCommentsList } from '@/apis/recipeDetail/getCommentsList';
 import { TGetCommentsListParams } from '@/apis/recipeDetail/type';
-import { getIngredientOfBrand } from '@/apis/recipe/getIngredientOfBrand';
-import { TGetIngredientOfBrandParams } from '@/apis/recipe/type';
+import { getMenuOfBrand } from '@/apis/recipe/getMenuOfBrand';
+import { TGetMenuOfBrandParams, TGetSideIngredientsParams } from '@/apis/recipe/type';
 import { getMyCommentsList } from '@/apis/myComments/getMyCommentsList';
 import { TGetMyRecipeListParams } from '@/apis/myRecipe/type';
 import { DEFAULT_SIZE } from './pagenation';
 import { getMyRecipeList } from '@/apis/myRecipe/getMyRecipeList';
+import { getSideIngredients } from '@/apis/recipe/getSideIngredients';
 
 /** 홈 페이지에서 일반인 레시피 순위 리스트를 받고 관리하기 위한 쿼리 키 */
 export const getRecipeRankListQueryKey = () => {
@@ -45,11 +46,19 @@ export const getCommentsListQueryKey = ({ recipeId, sortType }: Omit<TGetComment
   };
 };
 
-/** 레시피 작성 폼 Drawer에서 브랜드별 재료 정보를 받고 관리하기 위한 쿼리 키 */
-export const getIngredientOfBrandQueryKey = ({ brandName }: TGetIngredientOfBrandParams) => {
+/** 레시피 작성 폼 Drawer에서 브랜드별 메뉴 정보를 받고 관리하기 위한 쿼리 키 */
+export const getMenuOfBrandQueryKey = ({ brandName }: TGetMenuOfBrandParams) => {
   return {
-    queryKey: ['ingredientOfBrand', brandName],
-    queryFn: () => getIngredientOfBrand({ brandName: brandName }),
+    queryKey: ['menuOfBrand', brandName],
+    queryFn: () => getMenuOfBrand({ brandName: brandName }),
+  };
+};
+
+/** 레시피 작성 폼 Drawer에서 브랜드별 메뉴에 해당하는 사이드 재료 정보를 받고 관리하기 위한 쿼리 키 */
+export const getSideIngredientsQueryKey = ({ menuId }: TGetSideIngredientsParams) => {
+  return {
+    queryKey: ['sideIngredients', menuId],
+    queryFn: () => getSideIngredients({ menuId: menuId }),
   };
 };
 

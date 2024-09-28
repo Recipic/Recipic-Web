@@ -1,5 +1,5 @@
 import { TBrandKo } from '@/types/brand';
-import { TIngredient } from '@/types/recipe';
+import { TIngredient, TMenuOfBrand } from '@/types/recipe';
 import { TRecipeCardInfo } from '@/types/recipeCard';
 
 export type TGetRecipeListResponse = TRecipeCardInfo[];
@@ -9,8 +9,14 @@ export type TGetRecipeListParams = {
   keyword: string;
 };
 
-export type TGetIngredientOfBrandResponse = TIngredient[];
+export type TGetMenuOfBrandResponse = TMenuOfBrand[];
 
-export type TGetIngredientOfBrandParams = {
+export type TGetMenuOfBrandParams = {
   brandName: TBrandKo | undefined;
+};
+
+export type TGetSideIngredientsResponse = TIngredient[];
+
+export type TGetSideIngredientsParams = {
+  menuId: number | undefined;
 };
