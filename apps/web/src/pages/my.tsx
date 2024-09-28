@@ -1,8 +1,14 @@
 import React, { Suspense } from 'react';
 import { Header, Label } from '@recipic-packages/ui';
 import { PageLayout } from '@/components/common/PageLayout';
-import DislikeIcon from '@/assets/icons/dislikeIcon.svg?react';
-import { Pencil2Icon, BellIcon, PaperPlaneIcon, InstagramLogoIcon, FileTextIcon } from '@radix-ui/react-icons';
+import {
+  Pencil2Icon,
+  BellIcon,
+  PaperPlaneIcon,
+  InstagramLogoIcon,
+  FileTextIcon,
+  QuestionMarkCircledIcon,
+} from '@radix-ui/react-icons';
 import { AvatarLabel } from '@/components/common/AvatarLabel';
 import UserMenuButtonList from '@/components/my/UserMenuButton/UserMenuButtonList';
 import SettingsButton from '@/components/my/SettingsButton';
@@ -16,12 +22,12 @@ import { TGetMyInfoResponse } from '@/apis/my/type';
 export default function My() {
   const userMenuItems: TMenu[] = [
     { title: '내 레시피', icon: <Pencil2Icon className="w-6 h-6" />, route: '/my-recipe' },
-    {
-      title: '알러지 선택',
-      icon: <DislikeIcon className="w-6 h-6" />,
-      route: '/dislike-ingredients',
-    },
     { title: '내 댓글', icon: <FileTextIcon className="w-6 h-6" />, route: '/my-comments' },
+    {
+      title: '이용방법',
+      icon: <QuestionMarkCircledIcon className="w-6 h-6" />,
+      route: '/guide',
+    },
   ];
 
   const menuItems: TMenu[] = [

@@ -83,8 +83,8 @@ export default function DislikeIngredients() {
 
   return (
     <PageLayout isBottomSpace isHeaderVisible isTopNavBarVisible>
-      <Header title="싫어하는 재료" order="second" />
       <TopNavBar order="first" />
+      <Header title="싫어하는 재료" order="second" />
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex-grow overflow-y-auto px-4 py-2 pb-20">
           <FormField

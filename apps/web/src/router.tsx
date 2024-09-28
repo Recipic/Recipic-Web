@@ -18,6 +18,7 @@ import { ProtectedRoute } from './components/common/ProtectedRoute';
 import Terms from './pages/terms';
 import Privacy from './pages/privacy';
 import Copyright from './pages/copyright';
+import Guide from './pages/guide';
 
 type TRoutes = {
   path: string;
@@ -45,6 +46,7 @@ export const routes: TRoutes[] = [
   { path: '/notice', element: <Notice />, isTabBar: false },
   { path: '/notice/:noticeId', element: <NoticeDetail />, isTabBar: false },
   { path: '/edit-profile', element: <EditProfile />, isTabBar: false, isProtected: true },
+  { path: '/guide', element: <Guide />, isTabBar: false, isProtected: false },
 ];
 
 export default function Router() {
