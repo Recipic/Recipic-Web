@@ -4,16 +4,9 @@ import { TSettingsMenuItem } from '@/types/settings';
 
 type TSettingsMenuProps = TSettingsMenuItem;
 
-export function SettingsMenu({ title, action }: TSettingsMenuProps) {
+export function SettingsMenu({ title, onClick }: TSettingsMenuProps) {
   const handleClick = () => {
-    if (typeof action === 'function') {
-      action();
-      return;
-    }
-    if (typeof action === 'string') {
-      window.open(action, '_blank', 'noopener,noreferrer');
-      return;
-    }
+    onClick();
   };
 
   return (

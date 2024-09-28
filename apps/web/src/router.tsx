@@ -15,6 +15,9 @@ import Notice from './pages/notice';
 import EditProfile from './pages/editProfile';
 import NoticeDetail from './pages/noticeDetail';
 import { ProtectedRoute } from './components/common/ProtectedRoute';
+import Terms from './pages/terms';
+import Privacy from './pages/privacy';
+import Copyright from './pages/copyright';
 
 type TRoutes = {
   path: string;
@@ -30,6 +33,9 @@ export const routes: TRoutes[] = [
   { path: '/picked', element: <Picked />, isTabBar: true, isProtected: true },
   { path: '/my', element: <My />, isTabBar: true, isProtected: true },
   { path: '/settings', element: <Settings />, isTabBar: false, isProtected: true },
+  { path: '/settings/terms', element: <Terms />, isTabBar: false, isProtected: false },
+  { path: '/settings/privacy', element: <Privacy />, isTabBar: false, isProtected: false },
+  { path: '/settings/copyright', element: <Copyright />, isTabBar: false, isProtected: false },
   { path: '/recipe/:recipeId', element: <RecipeDetail />, isTabBar: false },
   { path: '/my-comments', element: <MyComments />, isTabBar: false, isProtected: true },
   { path: '/login', element: <Login />, isTabBar: false },

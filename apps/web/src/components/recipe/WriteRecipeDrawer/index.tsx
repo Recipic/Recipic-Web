@@ -274,7 +274,6 @@ export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) 
                           </Button>
                         </div>
                       ))}
-
                       <Input
                         type="file"
                         accept="image/*"

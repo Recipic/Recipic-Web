@@ -1,4 +1,9 @@
 export type TSettingsMenuItem = {
   title: string;
-  action: string | (() => void);
+  onClick: () => void;
+};
+
+export type TSettingsRouteMenuItem = {
+  title: string;
+  route: string;
 };
