@@ -214,7 +214,7 @@ export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) 
   };
 
   return (
-    <Drawer open={isOpen} onOpenChange={open => !open && handleDrawerClose()}>
+    <Drawer open={isOpen} onOpenChange={open => !open && handleDrawerClose()} dismissible={false}>
       <DrawerContent className="max-w-screen-lg mx-auto h-[100dvh] flex flex-col">
         <DrawerCloseButton onClick={handleDrawerClose} />
         <DrawerHeader>

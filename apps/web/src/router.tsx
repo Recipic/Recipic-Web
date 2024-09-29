@@ -19,6 +19,7 @@ import Terms from './pages/terms';
 import Privacy from './pages/privacy';
 import Copyright from './pages/copyright';
 import Guide from './pages/guide';
+import Success from './pages/success';
 
 type TRoutes = {
   path: string;
@@ -27,7 +28,6 @@ type TRoutes = {
   isProtected?: boolean;
 };
 
-// 라우트 설정 업데이트
 export const routes: TRoutes[] = [
   { path: '/', element: <Home />, isTabBar: true },
   { path: '/recipe', element: <Recipe />, isTabBar: true },
@@ -47,6 +47,7 @@ export const routes: TRoutes[] = [
   { path: '/notice/:noticeId', element: <NoticeDetail />, isTabBar: false },
   { path: '/edit-profile', element: <EditProfile />, isTabBar: false, isProtected: true },
   { path: '/guide', element: <Guide />, isTabBar: false, isProtected: false },
+  { path: '/success', element: <Success />, isTabBar: false, isProtected: true },
 ];
 
 export default function Router() {
