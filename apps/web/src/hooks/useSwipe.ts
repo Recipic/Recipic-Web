@@ -1,77 +1,85 @@
 import React, { useCallback, useRef, useState } from 'react';
 
-type SwipeState = {
-  offset: number;
-  isDragging: boolean;
+type TUseSwipe = {
+  threshold: number;
+  minSwipeDistance: number;
 };
 
-type SwipeActions = {
-  handleTouchStart: (e: React.TouchEvent) => void;
-  handleTouchMove: (e: React.TouchEvent) => void;
-  handleTouchEnd: () => void;
-  handleMouseDown: (e: React.MouseEvent) => void;
-  handleMouseMove: (e: React.MouseEvent) => void;
-  handleMouseUp: () => void;
-};
-
-export function useSwipe(threshold: number): [SwipeState, SwipeActions] {
-  const [state, setState] = useState<SwipeState>({
+export function useSwipe({ threshold = 20, minSwipeDistance = 5 }: TUseSwipe) {
+  const [state, setState] = useState({
     offset: 0,
     isDragging: false,
   });
   const startXRef = useRef<number>(0);
+  const startYRef = useRef<number>(0);
+  const isVerticalRef = useRef<boolean | null>(null);
 
-  const handleStart = useCallback((clientX: number): void => {
+  const handleStart = useCallback((clientX: number, clientY: number): void => {
     setState(prev => ({ ...prev, isDragging: true }));
     startXRef.current = clientX;
+    startYRef.current = clientY;
+    isVerticalRef.current = null;
   }, []);
 
   const handleMove = useCallback(
-    (clientX: number): void => {
+    (clientX: number, clientY: number): void => {
       if (!state.isDragging) {
         return;
       }
-      const diff = clientX - startXRef.current;
-      setState(prev => ({
-        ...prev,
-        offset: Math.max(-threshold, Math.min(threshold, diff)),
-      }));
+
+      const diffX = clientX - startXRef.current;
+      const diffY = clientY - startYRef.current;
+
+      if (isVerticalRef.current === null) {
+        if (Math.abs(diffY) > Math.abs(diffX) && Math.abs(diffY) > minSwipeDistance) {
+          isVerticalRef.current = true;
+        } else if (Math.abs(diffX) > minSwipeDistance) {
+          isVerticalRef.current = false;
+        }
+      }
+
+      if (isVerticalRef.current === false) {
+        setState(prev => ({
+          ...prev,
+          offset: Math.max(-threshold, Math.min(threshold, diffX)),
+        }));
+      }
     },
-    [state.isDragging, threshold],
+    [state.isDragging, threshold, minSwipeDistance],
   );
 
   const handleEnd = useCallback((): void => {
     setState(prev => ({
-      ...prev,
       isDragging: false,
       offset: Math.abs(prev.offset) < threshold / 2 ? 0 : prev.offset > 0 ? threshold : -threshold,
     }));
+    isVerticalRef.current = null;
   }, [threshold]);
 
   const handleTouchStart = useCallback(
     (e: React.TouchEvent): void => {
-      handleStart(e.touches[0].clientX);
+      handleStart(e.touches[0].clientX, e.touches[0].clientY);
     },
     [handleStart],
   );
 
   const handleTouchMove = useCallback(
     (e: React.TouchEvent): void => {
-      handleMove(e.touches[0].clientX);
+      handleMove(e.touches[0].clientX, e.touches[0].clientY);
     },
     [handleMove],
   );
 
   const handleMouseDown = useCallback(
     (e: React.MouseEvent): void => {
-      handleStart(e.clientX);
+      handleStart(e.clientX, e.clientY);
     },
     [handleStart],
   );
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent): void => {
-      handleMove(e.clientX);
+      handleMove(e.clientX, e.clientY);
     },
     [handleMove],
   );
@@ -86,5 +94,5 @@ export function useSwipe(threshold: number): [SwipeState, SwipeActions] {
       handleMouseMove,
       handleMouseUp: handleEnd,
     },
-  ];
+  ] as const;
 }

@@ -14,7 +14,7 @@ export function SwipeableRecipeCard({
   onEdit: (recipeId: number) => void;
 }): React.ReactElement {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [{ offset, isDragging }, swipeHandlers] = useSwipe(100);
+  const [{ offset, isDragging }, swipeHandlers] = useSwipe({ threshold: 100, minSwipeDistance: 10 });
 
   const handleDelete = useCallback(() => {
     if (recipeInfo.recipeId === undefined) {
@@ -55,7 +55,7 @@ export function SwipeableRecipeCard({
   return (
     <div
       ref={cardRef}
-      className="relative overflow-hidden mb-4 touch-none"
+      className="relative overflow-hidden mb-4 touch-action-pan-y"
       onTouchStart={swipeHandlers.handleTouchStart}
       onTouchMove={swipeHandlers.handleTouchMove}
       onTouchEnd={swipeHandlers.handleTouchEnd}
