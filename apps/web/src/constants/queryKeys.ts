@@ -12,6 +12,9 @@ import { TGetMyRecipeListParams } from '@/apis/myRecipe/type';
 import { DEFAULT_SIZE } from './pagenation';
 import { getMyRecipeList } from '@/apis/myRecipe/getMyRecipeList';
 import { getSideIngredients } from '@/apis/recipe/getSideIngredients';
+import { getNoticeList } from '@/apis/notice/getNoticeList';
+import { TGetNoticeDetailParams } from '@/apis/noticeDetail/type';
+import { getNoticeDetail } from '@/apis/noticeDetail/getNoticeDetail';
 
 /** 홈 페이지에서 일반인 레시피 순위 리스트를 받고 관리하기 위한 쿼리 키 */
 export const getRecipeRankListQueryKey = () => {
@@ -84,5 +87,21 @@ export const getMyRecipeListQueryKey = ({ keyword, size = DEFAULT_SIZE }: Omit<T
     queryKey: ['myRecipeList', keyword],
     queryFn: ({ pageParam = 0 }: { pageParam?: number }) =>
       getMyRecipeList({ page: pageParam as number, keyword, size }),
+  };
+};
+
+/** 공지사항 목록을 받고 관리하기 위한 쿼리 키 */
+export const getNoticeListQueryKey = () => {
+  return {
+    queryKey: ['noticeList'],
+    queryFn: () => getNoticeList(),
+  };
+};
+
+/** 공지사항 상세 데이터를 받고 관리하기 위한 쿼리 키 */
+export const getNoticeDetailQueryKey = ({ announcementId }: TGetNoticeDetailParams) => {
+  return {
+    queryKey: ['noticeDetail', announcementId],
+    queryFn: () => getNoticeDetail({ announcementId: announcementId }),
   };
 };

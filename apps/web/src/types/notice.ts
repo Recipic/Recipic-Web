@@ -1,11 +1,15 @@
 export type TNoticeList = {
+  announcementId: number;
   title: string;
+  description?: string;
+  thumbnailUrl?: string;
   createdAt: string;
-  noticeId: number;
 };
 
 export type TNoticeDetail = {
+  announcementId: number;
   title: string;
+  description: string;
+  thumbnilUrl: string;
   createdAt: string;
-  content: string;
 };
