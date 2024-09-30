@@ -3,4 +3,5 @@ export type TGetMyInfoResponse = {
   nickName: string;
   profileImageUrl: string | undefined;
   email: string;
+  description: string | null;
 };

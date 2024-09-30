@@ -9,7 +9,7 @@ type TEditProfileRouteButtonProps = {
 export default function EditProfileRouteButton({ route }: TEditProfileRouteButtonProps) {
   return (
     <Link to={route}>
-      <Button variant="defaultSub" className="w-full h-10 mt-4" type="button">
+      <Button variant="defaultSub" className="w-full h-10" type="button">
         프로필 수정
       </Button>
     </Link>

@@ -18,6 +18,7 @@ import MenuList from '@/components/my/Menu/MenuList';
 import EditProfileRouteButton from '@/components/my/EditProfileRouteButton';
 import { MyContainer } from '@/components/my/RenderPropsContainer/MyContainer';
 import { TGetMyInfoResponse } from '@/apis/my/type';
+import { MyDescription } from '@/components/my/MyDescription';
 
 export default function My() {
   const userMenuItems: TMenu[] = [
@@ -47,6 +48,7 @@ export default function My() {
             <>
               <MypageSection>
                 <AvatarLabel src={myInfoData.profileImageUrl} alt={`유저 프로필 이미지`} title={myInfoData.nickName} />
+                <MyDescription description={myInfoData.description} />
                 <EditProfileRouteButton route={'/edit-profile'} />
               </MypageSection>
               <MypageSection>
