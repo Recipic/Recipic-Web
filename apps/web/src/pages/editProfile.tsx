@@ -10,32 +10,49 @@ import { useDrawer } from '@/hooks/useDrawer';
 import EditProfileImageDrawer from '@/components/editProfile/EditProfileImageDrawer';
 import EditProfileImageButton from '@/components/editProfile/EditProfileImageButton';
 import { userEditProfileData } from '@/constants/mocks';
+import { useGetMyInfo } from '@/hooks/useGetMyInfo';
+import { usePutEditProfile } from '@/hooks/usePutEditProfile';
+import { convertToFile } from '@/utils/convertToFile';
+import DefaultUserProfileImage from '@/assets/icons/defaultUserProfile.webp';
+import { toast } from 'sonner';
 
 const profileFormSchema = z.object({
   nickname: z.string().min(2, '닉네임은 2글자 이상이어야 합니다.').max(10, '닉네임은 10글자 이하여야 합니다.'),
-  introduction: z.string().max(100, '자기소개는 100자 이내로 작성해주세요.').optional(),
-  profileImage: z.string().optional(),
+  introduction: z.string().max(100, '자기소개는 100자 이내로 작성해주세요.'),
+  profileImage: z.union([z.string(), z.instanceof(File)]).optional(),
 });
 
 type TProfileFormValues = z.infer<typeof profileFormSchema>;
 
 export default function EditProfile() {
+  const { myInfoData } = useGetMyInfo();
+  const { mutate: mutateEditProfile } = usePutEditProfile();
   const { isOpen, open, close } = useDrawer();
+
   const form = useForm<TProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
     defaultValues: {
-      nickname: userEditProfileData.nickname || '',
-      introduction: userEditProfileData.introduction || '',
-      profileImage: userEditProfileData.userProfileImageSrc || '',
+      nickname: myInfoData.nickName,
+      introduction: myInfoData.description || '',
+      profileImage: myInfoData.profileImageUrl || '',
     },
   });
 
-  const onSubmit = (data: TProfileFormValues) => {
+  const onSubmit = async (data: TProfileFormValues) => {
     console.log(data);
-    // TODO: 프로필 편집 변경사항 저장 로직 api 연동
-    // api 요청 후 blob URL을 revoke 해야 함
-    if (data.profileImage && data.profileImage.startsWith('blob:')) {
-      URL.revokeObjectURL(data.profileImage);
+    try {
+      const profileImageFile = data.profileImage
+        ? await convertToFile(data.profileImage, `${data.nickname}_profile_image.jpg`)
+        : DefaultUserProfileImage;
+
+      mutateEditProfile({
+        profileImage: profileImageFile,
+        nickName: data.nickname,
+        description: data.introduction,
+      });
+    } catch (error) {
+      console.log(error);
+      toast.error('적절하지 않은 이미지 형식이에요');
     }
   };
 

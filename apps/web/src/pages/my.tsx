@@ -47,7 +47,11 @@ export default function My() {
           render={(myInfoData: TGetMyInfoResponse) => (
             <>
               <MypageSection>
-                <AvatarLabel src={myInfoData.profileImageUrl} alt={`유저 프로필 이미지`} title={myInfoData.nickName} />
+                <AvatarLabel
+                  src={myInfoData.profileImageUrl !== null ? myInfoData.profileImageUrl : undefined}
+                  alt={`유저 프로필 이미지`}
+                  title={myInfoData.nickName}
+                />
                 <MyDescription description={myInfoData.description} />
                 <EditProfileRouteButton route={'/edit-profile'} />
               </MypageSection>

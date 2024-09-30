@@ -1,7 +1,7 @@
 export type TGetMyInfoResponse = {
   userId: number;
   nickName: string;
-  profileImageUrl: string | undefined;
+  profileImageUrl: string | null;
   email: string;
   description: string | null;
 };
