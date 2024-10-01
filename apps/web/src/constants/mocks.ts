@@ -83,6 +83,7 @@ export const recipeDetailData: TRecipeDetail = {
   status: '1',
   scrapCount: 10,
   isScrapped: false,
+  baseIngredient: '요거트 아이스크림',
   includeIngredients: [
     {
       ingredient: {
