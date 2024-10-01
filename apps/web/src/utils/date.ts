@@ -68,3 +68,19 @@ export function getRelativeTime({ date }: TGetRelativeTimeParams): string {
   } // hours가 0일 때만 분을 확인
   return '방금 전';
 }
+
+/** YYYY-MM-DD 형태로 포멧팅하는 함수 */
+export function formatDate({ dateString }: { dateString: string }): string {
+  const date = new Date(dateString);
+
+  // 날짜가 유효한지 확인
+  if (isNaN(date.getTime())) {
+    throw new Error('Invalid date string');
+  }
+
+  const year = date.getUTCFullYear();
+  const month = (date.getUTCMonth() + 1).toString().padStart(2, '0');
+  const day = date.getUTCDate().toString().padStart(2, '0');
+
+  return `${year}-${month}-${day}`;
+}
