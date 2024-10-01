@@ -17,14 +17,19 @@ export const postRecipeWrite = async ({
     formData.append('thumbnailImage', thumbnailImage);
   }
 
-  const recipeData = JSON.stringify({
-    title,
-    brandName,
-    baseIngredientId,
-    selectedIngredients,
-    description,
-    isCelebrity,
-  });
+  const recipeData = new Blob(
+    [
+      JSON.stringify({
+        title,
+        brandName,
+        baseIngredientId,
+        selectedIngredients,
+        description,
+        isCelebrity,
+      }),
+    ],
+    { type: 'application/json' },
+  );
 
   formData.append('recipe', recipeData);
 
