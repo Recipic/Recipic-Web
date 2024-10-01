@@ -14,7 +14,7 @@ import DefaultUserProfileImage from '@/assets/icons/defaultUserProfile.webp';
 type TEditProfileImageDrawerProps = {
   isOpen: boolean;
   onClose: () => void;
-  onImageSelect: (blobUrl: string | null) => void;
+  onImageSelect: (file: File | string) => void;
 };
 
 export default function EditProfileImageDrawer({ isOpen, onClose, onImageSelect }: TEditProfileImageDrawerProps) {
@@ -23,13 +23,21 @@ export default function EditProfileImageDrawer({ isOpen, onClose, onImageSelect 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      const blobUrl = URL.createObjectURL(file);
-      onImageSelect(blobUrl);
+      onImageSelect(file);
     }
   };
 
-  const handleDefaultImageSelect = () => {
-    onImageSelect(DefaultUserProfileImage);
+  const handleDefaultImageSelect = async () => {
+    try {
+      const response = await fetch(DefaultUserProfileImage);
+      const blob = await response.blob();
+      const file = new File([blob], 'default_profile_image.webp', { type: 'image/webp' });
+      onImageSelect(file);
+    } catch (error) {
+      console.error('기본 이미지 로드 실패:', error);
+      // 실패 시 문자열로 전달
+      onImageSelect(DefaultUserProfileImage);
+    }
   };
 
   return (

@@ -7,11 +7,11 @@ export const patchEditProfile = async ({
   nickName,
   description,
 }: TPatchEditProfileBody): Promise<void> => {
-  const formData = new FormData();
-
   if (profileImage === undefined && nickName === undefined && description === undefined) {
     return;
   }
+
+  const formData = new FormData();
 
   if (profileImage instanceof File) {
     formData.append('profileImage', profileImage);

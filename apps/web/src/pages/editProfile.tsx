@@ -50,7 +50,7 @@ export default function EditProfile() {
 
     try {
       const profileImageFile =
-        data.profileImage instanceof File || data.profileImage !== initialValues.profileImage
+        data.profileImage instanceof File || data.profileImage !== initialValues.profileImage //타입이 FIle이거나, 이미지를 변경한 경우 (기존 프로필 이미지와 다른 경우)
           ? data.profileImage
           : undefined;
 
