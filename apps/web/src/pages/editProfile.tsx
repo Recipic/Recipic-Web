@@ -12,6 +12,7 @@ import EditProfileImageButton from '@/components/editProfile/EditProfileImageBut
 import { userEditProfileData } from '@/constants/mocks';
 import { useGetMyInfo } from '@/hooks/useGetMyInfo';
 import { usePatchEditProfile } from '@/hooks/usePatchEditProfile';
+import { TranslucentFallbackUI } from '@/components/common/FallbackUI';
 
 const profileFormSchema = z.object({
   nickname: z.string().min(2, '닉네임은 2글자 이상이어야 합니다.').max(10, '닉네임은 10글자 이하여야 합니다.'),
@@ -23,7 +24,7 @@ type TProfileFormValues = z.infer<typeof profileFormSchema>;
 
 export default function EditProfile() {
   const { myInfoData } = useGetMyInfo();
-  const { mutate: mutateEditProfile } = usePatchEditProfile();
+  const { mutate: mutateEditProfile, isPending } = usePatchEditProfile();
   const { isOpen, open, close } = useDrawer();
 
   const initialValues = useMemo(
@@ -61,6 +62,7 @@ export default function EditProfile() {
     <PageLayout isTopNavBarVisible isHeaderVisible>
       <TopNavBar order="first" />
       <Header title="프로필 수정" order="second" />
+      {isPending && <TranslucentFallbackUI />}
       <Form {...form}>
         <form
           id="edit-profile-form"
