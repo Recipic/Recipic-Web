@@ -18,7 +18,7 @@ export const usePostLikeComment = () => {
       //모든 정렬 옵션에 대해 쿼리 무효화
       const sortOptions: TSortOption[] = ['latest', 'likes']; // 모든 가능한 정렬 옵션을 나열
       sortOptions.forEach(sortType => {
-        queryClient.refetchQueries({
+        queryClient.invalidateQueries({
           queryKey: getCommentsListQueryKey({ recipeId: variables.recipeId, sortType }).queryKey,
         });
       });

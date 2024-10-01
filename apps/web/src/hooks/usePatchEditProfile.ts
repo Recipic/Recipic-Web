@@ -25,7 +25,7 @@ export const usePatchEditProfile = () => {
         return;
       }
 
-      queryClient.refetchQueries({
+      queryClient.invalidateQueries({
         queryKey: getMyInfoQueryKey().queryKey,
       });
 

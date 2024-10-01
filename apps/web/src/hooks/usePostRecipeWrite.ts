@@ -16,7 +16,7 @@ export const usePostRecipeWrite = ({ onClose }: TUsePostRecipeWrite) => {
   return useMutation({
     mutationFn: async (body: TPostRecipeWriteBody) => postRecipeWrite(body),
     onSuccess: () => {
-      queryClient.refetchQueries({
+      queryClient.invalidateQueries({
         queryKey: getMyRecipeListQueryKey({}).queryKey,
       });
       onClose();

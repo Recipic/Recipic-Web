@@ -6,14 +6,16 @@ import { getRecipeCelebRankList } from '@/apis/home/getRecipeCelebRankList';
 import { getCommentsList } from '@/apis/recipeDetail/getCommentsList';
 import { TGetCommentsListParams } from '@/apis/recipeDetail/type';
 import { getMenuOfBrand } from '@/apis/recipe/getMenuOfBrand';
-import { TGetMenuOfBrandParams, TGetSideIngredientsParams } from '@/apis/recipe/type';
+import { TGetMenuOfBrandParams, TGetRecipeListParams, TGetSideIngredientsParams } from '@/apis/recipe/type';
 import { getMyCommentsList } from '@/apis/myComments/getMyCommentsList';
 import { TGetMyRecipeListParams } from '@/apis/myRecipe/type';
+import { DEFAULT_SIZE } from './pagenation';
 import { getMyRecipeList } from '@/apis/myRecipe/getMyRecipeList';
 import { getSideIngredients } from '@/apis/recipe/getSideIngredients';
 import { getNoticeList } from '@/apis/notice/getNoticeList';
 import { TGetNoticeDetailParams } from '@/apis/noticeDetail/type';
 import { getNoticeDetail } from '@/apis/noticeDetail/getNoticeDetail';
+import { getRecipeList } from '@/apis/recipe/getRecipeList';
 
 /** 홈 페이지에서 일반인 레시피 순위 리스트를 받고 관리하기 위한 쿼리 키 */
 export const getRecipeRankListQueryKey = () => {
@@ -80,11 +82,20 @@ export const getMyCommentsListQueryKey = () => {
   };
 };
 
-/** 내 레시피 목록을 받고 관리하기 위한 쿼리 키 */
-export const getMyRecipeListQueryKey = (params?: Partial<Omit<TGetMyRecipeListParams, 'page'>>) => {
+/** 레시피 페이지에서 레시피 목록을 받고 관리하기 위한 쿼리 키 */
+export const getRecipeListQueryKey = ({ keyword }: TGetRecipeListParams) => {
   return {
-    queryKey: ['myRecipeList', params?.keyword, params?.size] as const,
-    queryFn: ({ pageParam = 0 }: { pageParam?: number }) => getMyRecipeList({ page: pageParam as number, ...params }),
+    queryKey: keyword !== undefined ? ['recipeList', keyword] : ['recipeList'],
+    queryFn: ({ pageParam = 0 }) => getRecipeList({ page: pageParam as number, keyword: keyword }),
+  };
+};
+
+/** 내 레시피 목록을 받고 관리하기 위한 쿼리 키 */
+export const getMyRecipeListQueryKey = ({ keyword, size = DEFAULT_SIZE }: Omit<TGetMyRecipeListParams, 'page'>) => {
+  return {
+    queryKey: keyword !== undefined ? ['myRecipeList', keyword] : ['myRecipeList'],
+    queryFn: ({ pageParam = 0 }: { pageParam?: number }) =>
+      getMyRecipeList({ page: pageParam as number, keyword, size }),
   };
 };
 

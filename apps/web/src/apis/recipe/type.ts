@@ -5,8 +5,8 @@ import { TRecipeCardInfo } from '@/types/recipeCard';
 export type TGetRecipeListResponse = TRecipeCardInfo[];
 
 export type TGetRecipeListParams = {
-  page: number;
-  keyword: string;
+  page?: number;
+  keyword?: string;
 };
 
 export type TGetMenuOfBrandResponse = TMenuOfBrand[];

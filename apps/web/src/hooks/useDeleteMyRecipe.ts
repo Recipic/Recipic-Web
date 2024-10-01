@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteMyRecipe } from '@/apis/myRecipe/deleteMyRecipe';
-import { getMyRecipeListQueryKey } from '@/constants/queryKeys';
+import { getMyRecipeListQueryKey, getRecipeListQueryKey } from '@/constants/queryKeys';
 import { toast } from 'sonner';
 import { TDeleteMyRecipeParams } from '@/apis/myRecipe/type';
 
@@ -13,6 +13,10 @@ export const useDeleteMyRecipe = () => {
       // 모든 내 레시피 목록 쿼리 무효화
       queryClient.invalidateQueries({
         queryKey: getMyRecipeListQueryKey({}).queryKey,
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: getRecipeListQueryKey({}).queryKey,
       });
 
       toast.success('내 레시피가 삭제되었어요.');
