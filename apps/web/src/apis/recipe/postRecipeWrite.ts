@@ -17,16 +17,16 @@ export const postRecipeWrite = async ({
     formData.append('thumbnailImage', thumbnailImage);
   }
 
-  const recipeData = {
+  const recipeData = JSON.stringify({
     title,
     brandName,
     baseIngredientId,
     selectedIngredients,
     description,
     isCelebrity,
-  };
+  });
 
-  formData.append('recipe', JSON.stringify(recipeData));
+  formData.append('recipe', recipeData);
 
   await instance.post<TGetResponse<void>>('/api/recipe/register', formData, {
     headers: {

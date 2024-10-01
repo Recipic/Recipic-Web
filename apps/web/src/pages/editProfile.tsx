@@ -12,7 +12,6 @@ import EditProfileImageButton from '@/components/editProfile/EditProfileImageBut
 import { userEditProfileData } from '@/constants/mocks';
 import { useGetMyInfo } from '@/hooks/useGetMyInfo';
 import { usePatchEditProfile } from '@/hooks/usePatchEditProfile';
-import { convertToFile } from '@/utils/convertToFile';
 import { toast } from 'sonner';
 
 const profileFormSchema = z.object({
@@ -51,11 +50,9 @@ export default function EditProfile() {
 
     try {
       const profileImageFile =
-        data.profileImage instanceof File
+        data.profileImage instanceof File || data.profileImage !== initialValues.profileImage
           ? data.profileImage
-          : data.profileImage !== initialValues.profileImage
-            ? await convertToFile(data.profileImage, `${data.nickname}_profile_image.jpg`)
-            : undefined;
+          : undefined;
 
       mutateEditProfile({
         profileImage: profileImageFile,

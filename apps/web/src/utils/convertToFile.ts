@@ -20,7 +20,8 @@ export async function convertToFile(
       input.startsWith('blob:') ||
       input.startsWith('data:') ||
       input.startsWith('http://') ||
-      input.startsWith('https://')
+      input.startsWith('https://') ||
+      input.startsWith('/assets/defaultUserProfile-BsZGTRtu.webp')
     ) {
       const response = await fetch(input);
       blob = await response.blob();
