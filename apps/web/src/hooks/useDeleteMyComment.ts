@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteMyComment } from '@/apis/recipeDetail/deleteMyComment';
-import { getCommentsListQueryKey } from '@/constants/queryKeys';
+import { getCommentsListQueryKey, getMyCommentsListQueryKey } from '@/constants/queryKeys';
 import { toast } from 'sonner';
 import { TDeleteMyCommentParams } from '@/apis/recipeDetail/type';
 import { TSortOption } from '@/types/comments';
@@ -22,7 +22,7 @@ export const useDeleteMyComment = () => {
           queryKey: getCommentsListQueryKey({ recipeId: variables.recipeId, sortType }).queryKey,
         });
       });
-
+      queryClient.invalidateQueries({ queryKey: getMyCommentsListQueryKey().queryKey });
       toast.success('댓글이 삭제되었어요.');
     },
     onError: (error: Error) => {
