@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Header, TopNavBar } from '@recipic-packages/ui';
 import { PageLayout } from '@/components/common/PageLayout';
 import { BottomFixedButtonWithGradientDiv } from '@/components/common/Buttons/BottomFixedButtonWithGradientDiv';
@@ -11,9 +11,8 @@ import EditProfileImageDrawer from '@/components/editProfile/EditProfileImageDra
 import EditProfileImageButton from '@/components/editProfile/EditProfileImageButton';
 import { userEditProfileData } from '@/constants/mocks';
 import { useGetMyInfo } from '@/hooks/useGetMyInfo';
-import { usePutEditProfile } from '@/hooks/usePutEditProfile';
+import { usePatchEditProfile } from '@/hooks/usePatchEditProfile';
 import { convertToFile } from '@/utils/convertToFile';
-import DefaultUserProfileImage from '@/assets/icons/defaultUserProfile.webp';
 import { toast } from 'sonner';
 
 const profileFormSchema = z.object({
@@ -26,8 +25,17 @@ type TProfileFormValues = z.infer<typeof profileFormSchema>;
 
 export default function EditProfile() {
   const { myInfoData } = useGetMyInfo();
-  const { mutate: mutateEditProfile } = usePutEditProfile();
+  const { mutate: mutateEditProfile } = usePatchEditProfile();
   const { isOpen, open, close } = useDrawer();
+
+  const initialValues = useMemo(
+    () => ({
+      nickname: myInfoData.nickName,
+      introduction: myInfoData.description || '',
+      profileImage: myInfoData.profileImageUrl || '',
+    }),
+    [myInfoData],
+  );
 
   const form = useForm<TProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
@@ -40,15 +48,19 @@ export default function EditProfile() {
 
   const onSubmit = async (data: TProfileFormValues) => {
     console.log(data);
+
     try {
-      const profileImageFile = data.profileImage
-        ? await convertToFile(data.profileImage, `${data.nickname}_profile_image.jpg`)
-        : DefaultUserProfileImage;
+      const profileImageFile =
+        data.profileImage instanceof File
+          ? data.profileImage
+          : data.profileImage !== initialValues.profileImage
+            ? await convertToFile(data.profileImage, `${data.nickname}_profile_image.jpg`)
+            : undefined;
 
       mutateEditProfile({
         profileImage: profileImageFile,
-        nickName: data.nickname,
-        description: data.introduction,
+        nickName: data.nickname !== initialValues.nickname ? data.nickname : undefined,
+        description: data.introduction !== initialValues.introduction ? data.introduction : undefined,
       });
     } catch (error) {
       console.log(error);

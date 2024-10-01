@@ -1,5 +1,8 @@
 /** 파일 변환 함수 */
-export async function convertToFile(input: string | File, filename = 'image'): Promise<File | string> {
+export async function convertToFile(
+  input: string | File | undefined,
+  filename = 'image',
+): Promise<File | string | undefined> {
   if (input instanceof File) {
     return input;
   }
@@ -7,7 +10,7 @@ export async function convertToFile(input: string | File, filename = 'image'): P
   if (typeof input === 'string') {
     // S3 URL인 경우 그대로 반환
     if (input.startsWith('https://storage.googleapis.com/recipick-image-bucket')) {
-      return input;
+      return undefined;
     }
 
     let blob: Blob;

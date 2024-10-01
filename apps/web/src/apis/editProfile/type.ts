@@ -1,5 +1,5 @@
-import { TGetMyInfoResponse } from '@/apis/my/type';
-
-export type TPutEditProfileBody = Pick<TGetMyInfoResponse, 'description' | 'nickName'> & {
-  profileImage: File | string;
+export type TPatchEditProfileBody = {
+  profileImage: File | string | undefined;
+  nickName: string | undefined;
+  description: string | undefined;
 };
