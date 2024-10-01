@@ -16,6 +16,7 @@ import { getNoticeList } from '@/apis/notice/getNoticeList';
 import { TGetNoticeDetailParams } from '@/apis/noticeDetail/type';
 import { getNoticeDetail } from '@/apis/noticeDetail/getNoticeDetail';
 import { getRecipeList } from '@/apis/recipe/getRecipeList';
+import { getPickedRecipeList } from '@/apis/picked/getPickedRecipeList';
 
 /** 홈 페이지에서 일반인 레시피 순위 리스트를 받고 관리하기 위한 쿼리 키 */
 export const getRecipeRankListQueryKey = () => {
@@ -96,6 +97,14 @@ export const getMyRecipeListQueryKey = ({ keyword, size = DEFAULT_SIZE }: Omit<T
     queryKey: keyword !== undefined ? ['myRecipeList', keyword] : ['myRecipeList'],
     queryFn: ({ pageParam = 0 }: { pageParam?: number }) =>
       getMyRecipeList({ page: pageParam as number, keyword, size }),
+  };
+};
+
+/** 나의 찜 목록을 받고 관리하기 위한 쿼리 키 */
+export const getPickedRecipeListQueryKey = () => {
+  return {
+    queryKey: ['pickedRecipeList'],
+    queryFn: ({ pageParam = 0 }: { pageParam?: number }) => getPickedRecipeList({ page: pageParam as number }),
   };
 };
 

@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { TRecipeId } from '@/types/recipe';
 import { postRecipePick } from '@/apis/recipeDetail/postRecipePick';
-import { getRecipeDetailQueryKey } from '@/constants/queryKeys';
+import { getPickedRecipeListQueryKey, getRecipeDetailQueryKey } from '@/constants/queryKeys';
 import { toast } from 'sonner';
 import { TGetRecipeDetailResponse } from '@/apis/recipeDetail/type';
 
@@ -30,6 +30,7 @@ export const usePostRecipePick = () => {
       return { previousRecipe, queryKey };
     },
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: getPickedRecipeListQueryKey().queryKey });
       toast.success('찜 상태가 변경되었어요! 나의 찜 목록에서 확인해보세요.');
     },
     onError: (error: Error, _, context) => {

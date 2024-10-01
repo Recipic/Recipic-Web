@@ -1,8 +1,8 @@
 import { skipToken, useInfiniteQuery } from '@tanstack/react-query';
 import { TGetPickedRecipeListResponse } from '@/apis/picked/type';
-import { getPickedRecipeList } from '@/apis/picked/getPickedRecipeList';
 import { toast } from 'sonner';
 import { useAuth } from '@/contexts/authContext';
+import { getPickedRecipeListQueryKey } from '@/constants/queryKeys';
 
 export const useGetPickedRecipeList = () => {
   const { isLoggedIn } = useAuth();
@@ -10,12 +10,9 @@ export const useGetPickedRecipeList = () => {
     TGetPickedRecipeListResponse,
     Error
   >({
-    queryKey: ['pickedRecipeList'],
+    queryKey: getPickedRecipeListQueryKey().queryKey,
     queryFn: isLoggedIn
-      ? ({ pageParam = 0 }) => {
-          const result = getPickedRecipeList({ page: pageParam as number });
-          return result;
-        }
+      ? ({ pageParam = 0 }) => getPickedRecipeListQueryKey().queryFn({ pageParam: pageParam as number })
       : skipToken,
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
