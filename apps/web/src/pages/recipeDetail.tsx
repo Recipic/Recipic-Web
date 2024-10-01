@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TopNavBar, Separator, Button } from '@recipic-packages/ui';
+import { TopNavBar, Separator, Button, Badge } from '@recipic-packages/ui';
 import { PageLayout } from '@/components/common/PageLayout';
 import { CarouselWithRecipeDetailImage } from '@/components/recipeDetail/CarouselWithRecipeDetailImage';
 import { useGetRecipeDetail } from '@/hooks/useGetRecipeDetail';
@@ -108,6 +108,9 @@ export default function RecipeDetail() {
           <p className="text-gray-700 mb-4">{recipeDetailData.description}</p>
         </div>
         <div className="px-4 py-2 flex flex-wrap gap-2">
+          <Badge key={`${recipeDetailData.recipeId}-${recipeDetailData.baseIngredient}`} variant="default">
+            {recipeDetailData.baseIngredient}
+          </Badge>
           <BadgeList includeIngredients={recipeDetailData.includeIngredients} />
         </div>
       </Section>

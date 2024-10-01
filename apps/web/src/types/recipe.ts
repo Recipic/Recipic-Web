@@ -32,6 +32,7 @@ export type TRecipeDetail = {
   status: string;
   scrapCount: number;
   isScrapped: boolean;
+  baseIngredient: string;
   includeIngredients: TIncludeIngredient[];
 };
 
