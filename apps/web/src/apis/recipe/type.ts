@@ -20,3 +20,18 @@ export type TGetSideIngredientsResponse = TIngredient[];
 export type TGetSideIngredientsParams = {
   menuId: number | undefined;
 };
+
+export type TSelectedIngredient = {
+  ingredientId: number;
+  count: number;
+};
+
+export type TPostRecipeWriteBody = {
+  thumbnailImage: File;
+  title: string;
+  brandName: string;
+  baseIngredientId: number;
+  selectedIngredients: TSelectedIngredient[];
+  description: string;
+  isCelebrity: boolean;
+};

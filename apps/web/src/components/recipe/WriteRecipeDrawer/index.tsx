@@ -29,6 +29,7 @@ import { TBrandKo } from '@/types/brand';
 import { CustomSelect } from '@/components/common/CustomSelect';
 import { useGetMenuOfBrand } from '@/hooks/useGetMenuOfBrand';
 import { useGetSideIngredients } from '@/hooks/useGetSideIngredients';
+import { usePostRecipeWrite } from '@/hooks/usePostRecipeWrite';
 
 const recipeFormSchema = z.object({
   title: z.string().min(1, '제목을 입력해주세요').max(20, '제목은 최대 20자까지 입력할 수 있습니다'),
@@ -88,6 +89,7 @@ const brandOptions = brandsko.map((brand: TBrandKo) => ({
 }));
 
 export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) {
+  const { mutate: mutateWriteRecipe } = usePostRecipeWrite({ onClose: onClose });
   const form = useForm<TRecipeFormValues>({
     resolver: zodResolver(recipeFormSchema),
     defaultValues: {
@@ -166,12 +168,25 @@ export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) 
 
   const onSubmit = (data: TRecipeFormValues) => {
     const filteredIngredients = data.ingredients.filter(ingredient => ingredient.selectedQuantity > 0);
+    const formattedIngredients = filteredIngredients.map(ingredient => ({
+      ingredientId: ingredient.ingredientId,
+      count: Math.floor(ingredient.selectedQuantity / ingredient.quantity),
+    }));
     const submissionData = {
       ...data,
-      ingredients: filteredIngredients,
+      ingredients: formattedIngredients,
     };
     console.log(submissionData);
     // TODO: 데이터 처리 로직 추가
+    mutateWriteRecipe({
+      thumbnailImage: submissionData.images[0].file,
+      title: submissionData.title,
+      brandName: submissionData.brand,
+      baseIngredientId: submissionData.menuId,
+      selectedIngredients: submissionData.ingredients,
+      description: submissionData.description,
+      isCelebrity: submissionData.isCelebrity,
+    });
     onClose();
   };
 

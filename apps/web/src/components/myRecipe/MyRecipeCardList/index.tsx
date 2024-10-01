@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSearchParams } from 'react-router-dom';
 import { TRecipeCardInfo } from '@/types/recipeCard';
 import { SwipeableRecipeCard } from '@/components/myRecipe/SwipeableRecipeCard';
 import { useDeleteMyRecipe } from '@/hooks/useDeleteMyRecipe';
@@ -9,13 +8,10 @@ type TRecipeCardListProps = {
 };
 
 export function MyRecipeCardList({ recipeInfosList }: TRecipeCardListProps): React.ReactElement {
-  const [searchParams] = useSearchParams();
-  const keyword = searchParams.get('keyword') || '';
-
   const { mutate: mutateDeleteMyRecipe } = useDeleteMyRecipe();
 
   const handleDeleteRecipe = ({ recipeId }: { recipeId: number }) => {
-    mutateDeleteMyRecipe({ recipeId, keyword });
+    mutateDeleteMyRecipe({ recipeId: recipeId });
   };
 
   const handleEditRecipe = ({ recipeId }: { recipeId: number }) => {

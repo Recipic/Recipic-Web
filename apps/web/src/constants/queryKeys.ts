@@ -9,7 +9,6 @@ import { getMenuOfBrand } from '@/apis/recipe/getMenuOfBrand';
 import { TGetMenuOfBrandParams, TGetSideIngredientsParams } from '@/apis/recipe/type';
 import { getMyCommentsList } from '@/apis/myComments/getMyCommentsList';
 import { TGetMyRecipeListParams } from '@/apis/myRecipe/type';
-import { DEFAULT_SIZE } from './pagenation';
 import { getMyRecipeList } from '@/apis/myRecipe/getMyRecipeList';
 import { getSideIngredients } from '@/apis/recipe/getSideIngredients';
 import { getNoticeList } from '@/apis/notice/getNoticeList';
@@ -82,11 +81,10 @@ export const getMyCommentsListQueryKey = () => {
 };
 
 /** 내 레시피 목록을 받고 관리하기 위한 쿼리 키 */
-export const getMyRecipeListQueryKey = ({ keyword, size = DEFAULT_SIZE }: Omit<TGetMyRecipeListParams, 'page'>) => {
+export const getMyRecipeListQueryKey = (params?: Partial<Omit<TGetMyRecipeListParams, 'page'>>) => {
   return {
-    queryKey: ['myRecipeList', keyword],
-    queryFn: ({ pageParam = 0 }: { pageParam?: number }) =>
-      getMyRecipeList({ page: pageParam as number, keyword, size }),
+    queryKey: ['myRecipeList', params?.keyword, params?.size] as const,
+    queryFn: ({ pageParam = 0 }: { pageParam?: number }) => getMyRecipeList({ page: pageParam as number, ...params }),
   };
 };
 
