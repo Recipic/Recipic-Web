@@ -177,8 +177,6 @@ export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) 
       ...data,
       ingredients: formattedIngredients,
     };
-    console.log(submissionData);
-    // TODO: 데이터 처리 로직 추가
     mutateWriteRecipe({
       thumbnailImage: submissionData.images[0].file,
       title: submissionData.title,
@@ -190,9 +188,9 @@ export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) 
     });
   };
 
-  const handleTempSave = () => {
-    // TODO: 임시저장 로직 구현
-  };
+  // const handleTempSave = () => {
+  //   // TODO: 임시저장 로직 구현
+  // };
 
   const handleDrawerClose = () => {
     form.reset();
@@ -443,9 +441,9 @@ export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) 
         </Form>
         <DrawerFooter>
           <div className="flex w-full gap-2">
-            <Button className="flex-1 h-12" variant="secondary" onClick={handleTempSave}>
+            {/* <Button className="flex-1 h-12" variant="secondary" onClick={handleTempSave}>
               임시저장
-            </Button>
+            </Button> */}
             <Button className="flex-1 h-12" type="submit" form="recipe-form" disabled={isPending}>
               {isPending ? '업로드 중...' : '업로드'}
             </Button>

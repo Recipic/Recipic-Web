@@ -36,10 +36,10 @@ export function RecipeCard({
               <div className="absolute inset-0 flex items-center justify-center bg-gray-200 w-full h-full rounded-l-lg md:rounded-none" />
             )}
           </div>
-          <div className="flex-auto p-4 flex flex-col justify-between">
-            <div>
+          <div className="flex-auto p-4 flex flex-col justify-between overflow-hidden">
+            <div className="space-y-2">
               <h3 className="text-H3 font-semibold">{title}</h3>
-              <p className="text-regular14 text-gray-600 mt-2 truncate">{description}</p>
+              <p className="text-regular14 text-gray-600 truncate">{description}</p>
             </div>
             <div>
               <div className="flex items-center mt-2 gap-1">

@@ -12,7 +12,6 @@ import EditProfileImageButton from '@/components/editProfile/EditProfileImageBut
 import { userEditProfileData } from '@/constants/mocks';
 import { useGetMyInfo } from '@/hooks/useGetMyInfo';
 import { usePatchEditProfile } from '@/hooks/usePatchEditProfile';
-import { toast } from 'sonner';
 
 const profileFormSchema = z.object({
   nickname: z.string().min(2, '닉네임은 2글자 이상이어야 합니다.').max(10, '닉네임은 10글자 이하여야 합니다.'),
@@ -46,23 +45,16 @@ export default function EditProfile() {
   });
 
   const onSubmit = async (data: TProfileFormValues) => {
-    console.log(data);
+    const profileImageFile =
+      data.profileImage instanceof File || data.profileImage !== initialValues.profileImage
+        ? data.profileImage
+        : undefined;
 
-    try {
-      const profileImageFile =
-        data.profileImage instanceof File || data.profileImage !== initialValues.profileImage //타입이 FIle이거나, 이미지를 변경한 경우 (기존 프로필 이미지와 다른 경우)
-          ? data.profileImage
-          : undefined;
-
-      mutateEditProfile({
-        profileImage: profileImageFile,
-        nickName: data.nickname !== initialValues.nickname ? data.nickname : undefined,
-        description: data.introduction !== initialValues.introduction ? data.introduction : undefined,
-      });
-    } catch (error) {
-      console.log(error);
-      toast.error('적절하지 않은 이미지 형식이에요');
-    }
+    mutateEditProfile({
+      profileImage: profileImageFile,
+      nickName: data.nickname !== initialValues.nickname ? data.nickname : undefined,
+      description: data.introduction !== initialValues.introduction ? data.introduction : undefined,
+    });
   };
 
   return (
