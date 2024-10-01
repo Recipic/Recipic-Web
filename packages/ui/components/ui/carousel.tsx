@@ -28,8 +28,8 @@ export function Carousel({
 
   const options: EmblaOptionsType = {
     slidesToScroll: freeScroll ? 1 : slidesToShow,
-    dragFree: freeScroll,
-    containScroll: freeScroll ? false : 'trimSnaps',
+    dragFree: false,
+    containScroll: 'keepSnaps',
     align: alignmentMode,
     loop: false,
     skipSnaps: freeScroll,
