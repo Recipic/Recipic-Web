@@ -38,11 +38,11 @@ export function RecipeCard({
           </div>
           <div className="flex-auto p-4 flex flex-col justify-between overflow-hidden">
             <div className="space-y-2">
-              <h3 className="text-H3 font-semibold">{title}</h3>
+              <h3 className="text-H3 font-semibold truncate">{title}</h3>
               <p className="text-regular14 text-gray-600 truncate">{description}</p>
             </div>
             <div>
-              <div className="flex items-center mt-2 gap-1">
+              <div className="flex items-center mt-2 gap-1 overflow-hidden">
                 <div className="flex items-center">
                   <HeartIcon className="h-4 w-4 text-gray-500" />
                   <p className="text-regular14 text-gray-700 mx-1">{scrapCount}</p>
@@ -51,7 +51,7 @@ export function RecipeCard({
                   <ChatBubbleIcon className="h-4 w-4 text-gray-500" />
                   <p className="text-regular14 text-gray-700 mx-1">{commentCount}</p>
                 </div>
-                <p className="text-regular16 text-gray-700">{userNickName}</p>
+                <p className="text-regular16 text-gray-700 truncate">{userNickName}</p>
               </div>
               <div className="flex items-center mt-2">
                 <img
