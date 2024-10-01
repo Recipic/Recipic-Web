@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { postLeaveComment } from '@/apis/recipeDetail/postLeaveComment';
-import { getCommentsListQueryKey } from '@/constants/queryKeys';
+import { getCommentsListQueryKey, getMyCommentsListQueryKey } from '@/constants/queryKeys';
 import { toast } from 'sonner';
 import { TPostLeaveCommentBody } from '@/apis/recipeDetail/type';
 import { TSortOption } from '@/types/comments';
@@ -18,7 +18,7 @@ export const usePostLeaveComment = () => {
           queryKey: getCommentsListQueryKey({ recipeId: variables.recipeId, sortType }).queryKey,
         });
       });
-
+      queryClient.invalidateQueries({ queryKey: getMyCommentsListQueryKey().queryKey });
       toast.success('댓글을 남겼어요! 레시피 작성자에게 큰 힘이 될거예요.');
     },
     onError: (error: Error) => {
