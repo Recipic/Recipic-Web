@@ -1,4 +1,4 @@
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { skipToken, useQuery } from '@tanstack/react-query';
 import { TGetRecipeDetailResponse } from '@/apis/recipeDetail/type';
 import { getRecipeDetailQueryKey } from '@/constants/queryKeys';
 import { TRecipeId } from '@/types/recipe';
@@ -8,10 +8,11 @@ export const useGetRecipeDetail = ({ recipeId }: TRecipeId) => {
   const {
     data: recipeDetailData,
     isLoading,
+    isFetching,
     error,
-  } = useSuspenseQuery<TGetRecipeDetailResponse>({
+  } = useQuery<TGetRecipeDetailResponse>({
     queryKey: getRecipeDetailQueryKey({ recipeId: recipeId }).queryKey,
-    queryFn: getRecipeDetailQueryKey({ recipeId: recipeId }).queryFn,
+    queryFn: recipeId !== undefined ? getRecipeDetailQueryKey({ recipeId: recipeId }).queryFn : skipToken,
     staleTime: 1000 * 60 * 3, // 3분
     gcTime: 1000 * 60 * 1, // 1분
   });
@@ -20,5 +21,5 @@ export const useGetRecipeDetail = ({ recipeId }: TRecipeId) => {
     toast.error(error.message);
   }
 
-  return { recipeDetailData, isLoading, error };
+  return { recipeDetailData, isLoading, isFetching, error };
 };

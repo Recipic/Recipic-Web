@@ -23,6 +23,7 @@ import CommentList from '@/components/recipeDetail/CommentList';
 import { useDeleteMyComment } from '@/hooks/useDeleteMyComment';
 import { useAlertDialog } from '@/contexts/alertDialogContext';
 import { useAuth } from '@/contexts/authContext';
+import FallbackUI from '@/components/common/FallbackUI';
 
 const commentSortOptions: Array<{ value: TSortOption; label: string }> = [
   { value: 'latest', label: '최신순' },
@@ -84,6 +85,10 @@ export default function RecipeDetail() {
       },
     });
   };
+
+  if (recipeDetailData === undefined) {
+    return <FallbackUI />;
+  }
 
   return (
     <PageLayout isBottomSpace isTopNavBarVisible>

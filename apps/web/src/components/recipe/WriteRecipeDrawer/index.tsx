@@ -31,6 +31,8 @@ import { useGetMenuOfBrand } from '@/hooks/useGetMenuOfBrand';
 import { useGetSideIngredients } from '@/hooks/useGetSideIngredients';
 import { usePostRecipeWrite } from '@/hooks/usePostRecipeWrite';
 import { TranslucentFallbackUI } from '@/components/common/FallbackUI';
+import { TFormatedRecipeData } from '@/types/recipe';
+import { usePutRecipeEdit } from '@/hooks/usePutRecipeEdit';
 
 const recipeFormSchema = z.object({
   title: z.string().min(1, '제목을 입력해주세요').max(20, '제목은 최대 20자까지 입력할 수 있습니다'),
@@ -77,11 +79,12 @@ const recipeFormSchema = z.object({
   }),
 });
 
-type TRecipeFormValues = z.infer<typeof recipeFormSchema>;
+export type TRecipeFormValues = z.infer<typeof recipeFormSchema>;
 
 type TWriteRecipeDrawerProps = {
   isOpen: boolean;
   onClose: () => void;
+  editRecipeData?: TFormatedRecipeData;
 };
 
 const brandOptions = brandsko.map((brand: TBrandKo) => ({
@@ -89,8 +92,12 @@ const brandOptions = brandsko.map((brand: TBrandKo) => ({
   label: brand,
 }));
 
-export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) {
-  const { mutate: mutateWriteRecipe, isPending } = usePostRecipeWrite({ onClose: onClose });
+export function WriteRecipeDrawer({ isOpen, onClose, editRecipeData }: TWriteRecipeDrawerProps) {
+  const { mutate: mutateWriteRecipe, isPending: isWriteRecipePending } = usePostRecipeWrite({ onClose: onClose });
+  const { mutate: mutateEditRecipe, isPending: isEditRecipePending } = usePutRecipeEdit({
+    onClose: onClose,
+    editRecipeId: editRecipeData?.recipeId,
+  });
   const form = useForm<TRecipeFormValues>({
     resolver: zodResolver(recipeFormSchema),
     defaultValues: {
@@ -103,6 +110,20 @@ export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) 
       isCelebrity: false,
     },
   });
+
+  useEffect(() => {
+    if (editRecipeData !== undefined) {
+      form.reset({
+        title: editRecipeData.title,
+        brand: editRecipeData.brand,
+        menuId: undefined,
+        ingredients: [],
+        images: editRecipeData.images,
+        description: editRecipeData.description,
+        isCelebrity: editRecipeData.isCelebrity,
+      });
+    }
+  }, [editRecipeData, form]);
 
   const brandName: TBrandKo | undefined = useWatch({
     control: form.control,
@@ -177,6 +198,20 @@ export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) 
       ...data,
       ingredients: formattedIngredients,
     };
+    // 게시글 작성이 아닌, 수정하기 일 경우
+    if (editRecipeData !== undefined) {
+      mutateEditRecipe({
+        recipeId: editRecipeData.recipeId,
+        thumbnailImage: submissionData.images[0].file,
+        title: submissionData.title,
+        brandName: submissionData.brand,
+        baseIngredientId: submissionData.menuId,
+        selectedIngredients: submissionData.ingredients,
+        description: submissionData.description,
+        isCelebrity: submissionData.isCelebrity,
+      });
+      return;
+    }
     mutateWriteRecipe({
       thumbnailImage: submissionData.images[0].file,
       title: submissionData.title,
@@ -189,7 +224,7 @@ export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) 
   };
 
   // const handleTempSave = () => {
-  //   // TODO: 임시저장 로직 구현
+  //   // 임시저장 로직 구현
   // };
 
   const handleDrawerClose = () => {
@@ -229,7 +264,7 @@ export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) 
   return (
     <Drawer open={isOpen} onOpenChange={open => !open && handleDrawerClose()} dismissible={false}>
       <DrawerContent className="max-w-screen-lg mx-auto h-[100dvh] flex flex-col">
-        {isPending && <TranslucentFallbackUI />}
+        {isWriteRecipePending || (isEditRecipePending && <TranslucentFallbackUI />)}
         <DrawerCloseButton onClick={handleDrawerClose} />
         <DrawerHeader>
           <DrawerTitle>레시피 등록하기</DrawerTitle>
@@ -444,8 +479,13 @@ export function WriteRecipeDrawer({ isOpen, onClose }: TWriteRecipeDrawerProps) 
             {/* <Button className="flex-1 h-12" variant="secondary" onClick={handleTempSave}>
               임시저장
             </Button> */}
-            <Button className="flex-1 h-12" type="submit" form="recipe-form" disabled={isPending}>
-              {isPending ? '업로드 중...' : '업로드'}
+            <Button
+              className="flex-1 h-12"
+              type="submit"
+              form="recipe-form"
+              disabled={isWriteRecipePending || isEditRecipePending}
+            >
+              {isWriteRecipePending || isEditRecipePending ? '업로드 중...' : '업로드'}
             </Button>
           </div>
         </DrawerFooter>

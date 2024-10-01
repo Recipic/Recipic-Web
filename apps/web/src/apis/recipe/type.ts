@@ -35,3 +35,7 @@ export type TPostRecipeWriteBody = {
   description: string;
   isCelebrity: boolean;
 };
+
+export type TPutRecipeEditBody = {
+  recipeId: number;
+} & TPostRecipeWriteBody;

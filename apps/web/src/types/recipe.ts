@@ -1,3 +1,4 @@
+import { TRecipeFormValues } from '@/components/recipe/WriteRecipeDrawer';
 import { TBrandKo } from '@/types/brand';
 
 export type TMenuOfBrand = {
@@ -37,5 +38,9 @@ export type TRecipeDetail = {
 };
 
 export type TRecipeId = {
-  recipeId: number;
+  recipeId?: number;
 };
+
+export type TFormatedRecipeData = {
+  recipeId: number;
+} & Omit<TRecipeFormValues, 'menuId' | 'ingredients'>;
