@@ -16,11 +16,11 @@ type TAvatarLabelProps = AvatarProps & AvatarImageProps & AvatarFallbackProps & 
 export function AvatarLabel({ ...props }: TAvatarLabelProps) {
   return (
     <div className="flex items-center">
-      <Avatar className="h-10 w-10 mr-3">
+      <Avatar className="h-11 w-11 mr-3">
         <AvatarImage src={props.src !== undefined ? props.src : DefaultUserProfile} alt={props.alt} />
         <AvatarFallback />
       </Avatar>
-      <Label className="text-semibold16">{props.title}</Label>
+      <Label className="text-semibold18">{props.title}</Label>
     </div>
   );
 }
