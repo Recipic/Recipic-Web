@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
-import { getMyRecipeListQueryKey } from '@/constants/queryKeys';
+import { getMyRecipeListQueryKey, getRecipeListQueryKey } from '@/constants/queryKeys';
 import { useNavigate } from 'react-router-dom';
 import { TPostRecipeWriteBody } from '@/apis/recipe/type';
 import { postRecipeWrite } from '@/apis/recipe/postRecipeWrite';
@@ -18,6 +18,9 @@ export const usePostRecipeWrite = ({ onClose }: TUsePostRecipeWrite) => {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: getMyRecipeListQueryKey({}).queryKey,
+      });
+      queryClient.invalidateQueries({
+        queryKey: getRecipeListQueryKey({}).queryKey,
       });
       onClose();
       navigate('/success');

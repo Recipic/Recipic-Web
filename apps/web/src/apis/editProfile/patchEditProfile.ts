@@ -17,12 +17,17 @@ export const patchEditProfile = async ({
     formData.append('profileImage', profileImage);
   }
 
-  const userData = {
-    nickName,
-    description,
-  };
+  const userData = new Blob(
+    [
+      JSON.stringify({
+        nickName,
+        description,
+      }),
+    ],
+    { type: 'application/json' },
+  );
 
-  formData.append('user', JSON.stringify(userData));
+  formData.append('user', userData);
 
   await instance.patch<TGetResponse<void>>('/api/user/update', formData, {
     headers: {
