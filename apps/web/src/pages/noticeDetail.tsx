@@ -20,6 +20,7 @@ export default function NoticeDetail() {
         />
         <Separator className="h-[1px] bg-gray-200 my-4" />
         <p className="text-regular16 whitespace-pre-line">{noticeDetailData.description}</p>
+        <img src={noticeDetailData.thumbnailUrl} alt="공지사항 이미지" className="w-full h-auto object-cover" />
       </div>
     </PageLayout>
   );
