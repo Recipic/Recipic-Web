@@ -2,12 +2,15 @@ import React from 'react';
 import { NoticeComponent } from '@/components/notice/NoticeComponent';
 import { TNoticeList } from '@/types/notice';
 import { Separator } from '@recipic-packages/ui';
+import { useGetNoticeList } from '@/hooks/useGetNoticeList';
 
-type TNoticeListProps = {
-  noticeListData: TNoticeList[];
-};
+export function NoticeList() {
+  const { noticeListData } = useGetNoticeList();
 
-export function NoticeList({ noticeListData }: TNoticeListProps) {
+  if (noticeListData.length === 0) {
+    return <div className="flex justify-center items-center h-20 text-gray-500">아직 공지사항이 없어요</div>;
+  }
+
   return (
     <div className="flex flex-col mt-2">
       {noticeListData.map((notice: TNoticeList, index: number) => (
