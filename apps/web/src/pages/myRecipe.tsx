@@ -9,6 +9,7 @@ import { DEFAULT_SIZE } from '@/constants/pagenation';
 import { SearchBar } from '@/components/common/SearchBar';
 import { useNavigate } from 'react-router-dom';
 import { MyRecipeCardList } from '@/components/myRecipe/MyRecipeCardList';
+import { AnimatedRecipeShareContainer } from '@/components/myRecipe/AnimatedRecipeShareContainer';
 
 export default function MyRecipe() {
   const navigate = useNavigate();
@@ -51,7 +52,7 @@ export default function MyRecipe() {
       {isLoading ? (
         <PrimarySpinner />
       ) : myRecipeInfosList.length === 0 ? (
-        <div className="px-4 py-4 text-center">
+        <div className="p-4 text-center">
           <p className="text-regular16 text-gray-500">검색된 레시피가 없어요</p>
         </div>
       ) : (
@@ -60,6 +61,9 @@ export default function MyRecipe() {
           <div ref={ref}>{isFetchingNextPage && <PrimarySpinner />}</div>
         </>
       )}
+      <div className="p-4">
+        <AnimatedRecipeShareContainer />
+      </div>
     </PageLayout>
   );
 }
