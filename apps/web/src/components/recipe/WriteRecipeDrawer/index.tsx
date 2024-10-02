@@ -264,7 +264,7 @@ export function WriteRecipeDrawer({ isOpen, onClose, editRecipeData }: TWriteRec
   return (
     <Drawer open={isOpen} onOpenChange={open => !open && handleDrawerClose()} dismissible={false}>
       <DrawerContent className="max-w-screen-lg mx-auto h-[100dvh] flex flex-col">
-        {isWriteRecipePending || (isEditRecipePending && <TranslucentFallbackUI />)}
+        {(isWriteRecipePending || isEditRecipePending) && <TranslucentFallbackUI />}
         <DrawerCloseButton onClick={handleDrawerClose} />
         <DrawerHeader>
           <DrawerTitle>레시피 등록하기</DrawerTitle>
