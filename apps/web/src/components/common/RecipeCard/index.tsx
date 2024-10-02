@@ -29,7 +29,7 @@ export function RecipeCard({
             {thumbnailUrl ? (
               <img
                 src={thumbnailUrl}
-                alt="Post image"
+                alt={`${title} 레시피 이미지`}
                 className="absolute inset-0 w-full h-full object-cover rounded-l-lg md:rounded-none"
               />
             ) : (

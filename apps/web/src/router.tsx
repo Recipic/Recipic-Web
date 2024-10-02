@@ -20,6 +20,7 @@ import Privacy from './pages/privacy';
 import Copyright from './pages/copyright';
 import Guide from './pages/guide';
 import Success from './pages/success';
+import Notification from './pages/notification';
 
 type TRoutes = {
   path: string;
@@ -48,6 +49,7 @@ export const routes: TRoutes[] = [
   { path: '/edit-profile', element: <EditProfile />, isTabBar: false, isProtected: true },
   { path: '/guide', element: <Guide />, isTabBar: false, isProtected: false },
   { path: '/success', element: <Success />, isTabBar: false, isProtected: true },
+  { path: '/notification', element: <Notification />, isTabBar: false, isProtected: true },
 ];
 
 export default function Router() {
