@@ -9,7 +9,6 @@ import DefaultErrorFallbackUI from './components/common/Error/DefaultErrorFallba
 
 const App = () => {
   const handleReload = () => {
-    // TODO: 추후 수정 필요
     window.location.reload();
   };
 

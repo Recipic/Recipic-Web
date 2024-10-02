@@ -10,6 +10,8 @@ import { SearchBar } from '@/components/common/SearchBar';
 import { useNavigate } from 'react-router-dom';
 import { MyRecipeCardList } from '@/components/myRecipe/MyRecipeCardList';
 import { AnimatedRecipeShareContainer } from '@/components/myRecipe/AnimatedRecipeShareContainer';
+import { useDrawer } from '@/hooks/useDrawer';
+import { WriteRecipeDrawer } from '@/components/recipe/WriteRecipeDrawer';
 
 export default function MyRecipe() {
   const navigate = useNavigate();
@@ -25,6 +27,8 @@ export default function MyRecipe() {
     hasNextPage: hasNextPage,
     isFetchingNextPage: isFetchingNextPage,
   });
+
+  const { isOpen, open, close } = useDrawer();
 
   return (
     <PageLayout isBottomSpace isHeaderVisible={!isSearching} isTopNavBarVisible>
@@ -52,18 +56,20 @@ export default function MyRecipe() {
       {isLoading ? (
         <PrimarySpinner />
       ) : myRecipeInfosList.length === 0 ? (
-        <div className="p-4 text-center">
+        <div className="flex flex-col gap-4 p-4 text-center">
           <p className="text-regular16 text-gray-500">검색된 레시피가 없어요</p>
+          <AnimatedRecipeShareContainer onClick={open} />
         </div>
       ) : (
         <>
+          <div className="p-4">
+            <AnimatedRecipeShareContainer onClick={open} />
+          </div>
           {myRecipeInfosList !== undefined && <MyRecipeCardList recipeInfosList={myRecipeInfosList} />}
           <div ref={ref}>{isFetchingNextPage && <PrimarySpinner />}</div>
         </>
       )}
-      <div className="p-4">
-        <AnimatedRecipeShareContainer />
-      </div>
+      <WriteRecipeDrawer isOpen={isOpen} onClose={close} />
     </PageLayout>
   );
 }

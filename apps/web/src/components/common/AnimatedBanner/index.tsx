@@ -13,6 +13,32 @@ type TAnimatedBannerProps = {
   route: string;
 };
 
+const containerVariants = {
+  hidden: { opacity: 0, height: 0 },
+  visible: {
+    opacity: 1,
+    height: 'auto',
+    transition: {
+      duration: 0.1,
+      height: { type: 'spring', stiffness: 130, damping: 20 },
+    },
+  },
+  exit: { opacity: 0, height: 0 },
+};
+
+const contentVariants = {
+  hidden: { scale: 0.7, opacity: 0 },
+  visible: {
+    scale: 1,
+    opacity: 1,
+    transition: { delay: 0.3, duration: 0.3 },
+  },
+  tap: {
+    scale: 0.95,
+    transition: { duration: 0.1 },
+  },
+};
+
 export function AnimatedBanner({
   imageUrl,
   alt,
@@ -35,19 +61,17 @@ export function AnimatedBanner({
       <AnimatePresence>
         {isVisible && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{
-              duration: 0.1,
-              height: { type: 'spring', stiffness: 130, damping: 20 },
-            }}
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
             className="w-full overflow-hidden"
           >
             <motion.div
-              initial={{ scale: 0.7, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.3, duration: 0.3 }}
+              variants={contentVariants}
+              initial="hidden"
+              animate="visible"
+              whileTap="tap"
               className={`${backgroundColor} ${textColor} rounded-lg`}
             >
               <div className="p-4 flex items-center justify-between">

@@ -4,7 +4,7 @@ import { TNotificationData } from '@/types/notification';
 import { Separator } from '@recipic-packages/ui';
 
 export function NotificationList() {
-  if (notificationListData.length !== 0) {
+  if (notificationListData.length === 0) {
     return <div className="flex justify-center items-center h-20 text-gray-500">아직 알림이 없어요</div>;
   }
   return (

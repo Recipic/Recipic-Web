@@ -18,6 +18,9 @@ export default function Picked() {
   return (
     <PageLayout isTabBarVisible isBottomSpace isHeaderVisible>
       <Header title="찜" order="first" />
+      <div className="p-4">
+        <BrandsPopUpIconsContainer />
+      </div>
       {isLoading ? (
         <PrimarySpinner />
       ) : pickedRecipeInfosList.length === 0 ? (
@@ -27,9 +30,6 @@ export default function Picked() {
         </div>
       ) : (
         <>
-          <div className="p-4">
-            <BrandsPopUpIconsContainer />
-          </div>
           <RecipeCardList recipeInfosList={pickedRecipeInfosList} />
           <div ref={ref}>{isFetchingNextPage && <PrimarySpinner />}</div>
         </>

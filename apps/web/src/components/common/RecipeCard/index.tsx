@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Card } from '@recipic-packages/ui';
 import { HeartIcon, ChatBubbleIcon } from '@radix-ui/react-icons';
 import { getBrandImage } from '@/utils/formatBrand';
@@ -8,6 +9,11 @@ import { Link } from 'react-router-dom';
 type TRecipeCardProps = {
   route: string;
 } & TRecipeCardInfo;
+
+const cardVariants = {
+  initial: { scale: 1 },
+  tap: { scale: 0.95, transition: { duration: 0.1 } },
+};
 
 export function RecipeCard({
   route,
@@ -23,7 +29,7 @@ export function RecipeCard({
 
   return (
     <Link to={route} className="cursor-pointer">
-      <div className="max-w-screen-lg mx-auto">
+      <motion.div className="max-w-screen-lg mx-auto" variants={cardVariants} initial="initial" whileTap="tap">
         <Card className="bg-white rounded-lg overflow-hidden flex flex-row md:flex-nowrap" style={{ height: '210px' }}>
           <div className="flex-none w-full md:w-2/5 relative">
             {thumbnailUrl ? (
@@ -64,7 +70,7 @@ export function RecipeCard({
             </div>
           </div>
         </Card>
-      </div>
+      </motion.div>
     </Link>
   );
 }
