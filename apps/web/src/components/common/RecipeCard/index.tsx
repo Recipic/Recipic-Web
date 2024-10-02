@@ -50,11 +50,11 @@ export function RecipeCard({
             <div>
               <div className="flex items-center mt-2 gap-3">
                 <div className="flex items-center gap-0.5">
-                  <HeartIcon className="h-4 w-4 text-gray-500" />
+                  <HeartIcon className="h-4 w-auto text-gray-500" />
                   <p className="text-sm text-gray-700 ml-1">{scrapCount}</p>
                 </div>
                 <div className="flex items-center gap-0.5">
-                  <ChatBubbleIcon className="h-4 w-4 text-gray-500" />
+                  <ChatBubbleIcon className="h-4 w-auto text-gray-500" />
                   <p className="text-sm text-gray-700 ml-1">{commentCount}</p>
                 </div>
                 <p className="text-sm text-gray-700 truncate">{userNickName}</p>
