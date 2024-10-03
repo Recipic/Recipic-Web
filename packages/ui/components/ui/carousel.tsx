@@ -83,19 +83,19 @@ export function Carousel({
         </div>
       </div>
       {showCounter && shouldEnableScroll && (
-        <nav
-          aria-label="Carousel Navigation"
+        <div
+          aria-label="현재 및 전체 슬라이드 숫자 표시 항목"
           className="absolute bottom-4 right-6 bg-black bg-opacity-80 rounded-lg px-2"
         >
           <p className="text-regular12 text-white">
             <span className="sr-only">Slide</span>
             <span aria-current="true">{selectedIndex + 1}</span>
-            <span aria-hidden="true" className="text-gray-400">
-              `|`
+            <span aria-hidden="true" className="text-gray-400 px-1.5">
+              {`|`}
             </span>
             <span>{scrollSnaps.length}</span>
           </p>
-        </nav>
+        </div>
       )}
     </div>
   );
