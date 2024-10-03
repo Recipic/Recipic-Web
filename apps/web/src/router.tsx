@@ -9,7 +9,6 @@ import RecipeDetail from './pages/recipeDetail';
 import MyComments from './pages/myComments';
 import Login from './pages/login';
 import KakaoCallback from './pages/kakaoCallback';
-import DislikeIngredients from './pages/dislikeIngredients';
 import MyRecipe from './pages/myRecipe';
 import Notice from './pages/notice';
 import EditProfile from './pages/editProfile';
@@ -21,6 +20,7 @@ import Copyright from './pages/copyright';
 import Guide from './pages/guide';
 import Success from './pages/success';
 import Notification from './pages/notification';
+import NotFound from './pages/notFound';
 
 type TRoutes = {
   path: string;
@@ -42,7 +42,6 @@ export const routes: TRoutes[] = [
   { path: '/my-comments', element: <MyComments />, isTabBar: false, isProtected: true },
   { path: '/login', element: <Login />, isTabBar: false },
   { path: '/kakao/callback', element: <KakaoCallback />, isTabBar: false },
-  { path: '/dislike-ingredients', element: <DislikeIngredients />, isTabBar: false, isProtected: true },
   { path: '/my-recipe', element: <MyRecipe />, isTabBar: false, isProtected: true },
   { path: '/notice', element: <Notice />, isTabBar: false },
   { path: '/notice/:noticeId', element: <NoticeDetail />, isTabBar: false },
@@ -62,6 +61,8 @@ export default function Router() {
           <Route key={path} path={path} element={element} />
         ),
       )}
+      {/* 404 페이지를 위한 catch-all 라우트 */}
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
