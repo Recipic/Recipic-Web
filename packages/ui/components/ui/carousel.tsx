@@ -7,7 +7,7 @@ export type TAlignmentType = 'start' | 'center' | 'end';
 export type TCarouselProps = {
   children: React.ReactNode;
   autoScroll?: boolean;
-  showDots?: boolean;
+  showCounter?: boolean;
   autoScrollInterval?: number;
   slidesToShow?: number;
   freeScroll?: boolean;
@@ -17,7 +17,7 @@ export type TCarouselProps = {
 export function Carousel({
   children,
   autoScroll = false,
-  showDots = false,
+  showCounter = false,
   autoScrollInterval = 3000,
   slidesToShow = 1,
   freeScroll = false,
@@ -39,8 +39,6 @@ export function Carousel({
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
-
-  const scrollTo = useCallback((index: number) => emblaApi && emblaApi.scrollTo(index), [emblaApi]);
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
@@ -84,16 +82,20 @@ export function Carousel({
           ))}
         </div>
       </div>
-      {showDots && shouldEnableScroll && (
-        <div className="flex justify-center mt-1">
-          {scrollSnaps.map((_, index) => (
-            <button
-              key={index}
-              className={`w-2 h-2 rounded-full mx-1 ${index === selectedIndex ? 'bg-black' : 'bg-gray-200'}`}
-              onClick={() => scrollTo(index)}
-            />
-          ))}
-        </div>
+      {showCounter && shouldEnableScroll && (
+        <nav
+          aria-label="Carousel Navigation"
+          className="absolute bottom-4 right-6 bg-black bg-opacity-80 rounded-lg px-2"
+        >
+          <p className="text-regular12 text-white">
+            <span className="sr-only">Slide</span>
+            <span aria-current="true">{selectedIndex + 1}</span>
+            <span aria-hidden="true" className="text-gray-400">
+              `|`
+            </span>
+            <span>{scrollSnaps.length}</span>
+          </p>
+        </nav>
       )}
     </div>
   );

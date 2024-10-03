@@ -10,7 +10,7 @@ const banners = [
 
 export function CarouselWithBanners() {
   return (
-    <Carousel autoScroll showDots autoScrollInterval={5000}>
+    <Carousel autoScroll showCounter autoScrollInterval={5000}>
       {banners.map(banner => (
         <div key={banner.id} className="px-4 flex-[1_0_100%]">
           <Banner imageUrl={banner.imageUrl} onClick={banner.onClick} />
