@@ -9,7 +9,7 @@ import {
   AvatarFallbackProps,
   LabelProps,
 } from '@recipic-packages/ui';
-import DefaultUserProfile from '@/assets/icons/defaultUserProfile.webp';
+import DefaultUserProfile from '@/assets/icons/defaultUserProfile.png';
 
 type TAvatarLabelProps = AvatarProps & AvatarImageProps & AvatarFallbackProps & LabelProps;
 

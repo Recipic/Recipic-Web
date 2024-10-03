@@ -9,7 +9,7 @@ import {
   DrawerTitle,
   Separator,
 } from '@recipic-packages/ui';
-import DefaultUserProfileImage from '@/assets/icons/defaultUserProfile.webp';
+import DefaultUserProfileImage from '@/assets/icons/defaultUserProfile.png';
 
 type TEditProfileImageDrawerProps = {
   isOpen: boolean;

@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { Button } from '@recipic-packages/ui';
 import { Pencil2Icon } from '@radix-ui/react-icons';
-import DefaultUserProfileImage from '@/assets/icons/defaultUserProfile.webp';
+import DefaultUserProfileImage from '@/assets/icons/defaultUserProfile.png';
 
 type TEditProfileImageButtonProps = {
   profileImageSrc: string | File | undefined;

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Player } from '@lottiefiles/react-lottie-player';
 import FireCrackerLottie from '@/assets/lotties/fireCracker.json';
+import YummyFaceLottie from '@/assets/lotties/yummyFace.json';
 import { PageLayout } from '@/components/common/PageLayout';
 import { BottomFixedButtonWithGradientDiv } from '@/components/common/Buttons/BottomFixedButtonWithGradientDiv';
 import { Link } from 'react-router-dom';
 import { Header } from '@recipic-packages/ui';
-import SmileFaceIcon from '@/assets/icons/smileFace.webp';
 import { motion } from 'framer-motion';
 
 export default function Success() {
@@ -23,14 +23,14 @@ export default function Success() {
         </div>
         <div className="flex flex-col justify-center items-center h-full py-16">
           <div className="flex flex-col gap-3 text-center justify-center items-center">
-            <motion.img
-              src={SmileFaceIcon}
-              alt="맛있는 표정의 얼굴 아이콘"
-              className="w-40 h-40 m-4"
+            <motion.div
+              className="w-[280px] h-[280px]"
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
-            />
+            >
+              <Player autoplay loop={true} src={YummyFaceLottie} style={{ width: '100%', height: '100%' }} />
+            </motion.div>
             <motion.h3
               className="text-H3"
               initial={{ opacity: 0, y: 20 }}
