@@ -1,4 +1,4 @@
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { TGetNotificationListResponse } from '@/apis/notification/type';
 import { getNotificationListQueryKey } from '@/constants/queryKeys';
 import { toast } from 'sonner';
@@ -8,7 +8,7 @@ export const useGetNotificationList = () => {
     data: notificationListData,
     isLoading,
     error,
-  } = useSuspenseQuery<TGetNotificationListResponse>({
+  } = useQuery<TGetNotificationListResponse>({
     queryKey: getNotificationListQueryKey().queryKey,
     queryFn: getNotificationListQueryKey().queryFn,
     staleTime: 1000 * 60 * 5, // 5분

@@ -20,7 +20,7 @@ import { SkeletonCardList } from '@/components/home/SkeletonCard/SkeletonCardLis
 export default function Home() {
   const navigate = useNavigate();
 
-  /** 브랜드 버튼 클릭을 처리하는 함수 */
+  /** 브랜드 버튼 클릭을 처리하는 핸들러 */
   const handleBrandClick = (searchBrand: TBrandEn) => {
     navigate(`recipe?keyword=${formatBrandToHangeul(searchBrand)}`);
   };
