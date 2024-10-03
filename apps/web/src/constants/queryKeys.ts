@@ -17,6 +17,7 @@ import { TGetNoticeDetailParams } from '@/apis/noticeDetail/type';
 import { getNoticeDetail } from '@/apis/noticeDetail/getNoticeDetail';
 import { getRecipeList } from '@/apis/recipe/getRecipeList';
 import { getPickedRecipeList } from '@/apis/picked/getPickedRecipeList';
+import { getNotificationList } from '@/apis/notification/getNotificationList';
 
 /** 홈 페이지에서 일반인 레시피 순위 리스트를 받고 관리하기 위한 쿼리 키 */
 export const getRecipeRankListQueryKey = () => {
@@ -121,5 +122,13 @@ export const getNoticeDetailQueryKey = ({ announcementId }: TGetNoticeDetailPara
   return {
     queryKey: ['noticeDetail', announcementId],
     queryFn: () => getNoticeDetail({ announcementId: announcementId }),
+  };
+};
+
+/** 알림 목록을 받고 관리하기 위한 쿼리 키 */
+export const getNotificationListQueryKey = () => {
+  return {
+    queryKey: ['notificationList'],
+    queryFn: () => getNotificationList(),
   };
 };

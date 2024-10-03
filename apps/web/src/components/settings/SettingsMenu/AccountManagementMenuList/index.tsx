@@ -38,7 +38,7 @@ export function AccountManagementMenuList() {
   const handleSignout = () => {
     showAlertDialog({
       title: '계정탈퇴',
-      description: '탈퇴하면 기록이 모두 없어져요.\n정말 탈퇴하시겠어요?',
+      description: '탈퇴하면 기록이 모두 없어져요.\n정말 탈퇴를 진행할까요?',
       cancelText: '취소',
       confirmText: '확인',
       onConfirm: () => {
