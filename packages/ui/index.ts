@@ -16,7 +16,7 @@ export type { TChildrenPosition, TTopNavBarProps } from './components/ui/topNavB
 export { Carousel } from './components/ui/carousel';
 export type { TAlignmentType, TCarouselProps } from './components/ui/carousel';
 export { Banner } from './components/ui/banner';
-export type { BannerProps } from './components/ui/banner';
+export type { TBannerProps, TBannerSize, TGradientColor } from './components/ui/banner';
 export { Card } from './components/ui/card';
 export { Label } from './components/ui/label';
 export type { LabelProps } from './components/ui/label';
