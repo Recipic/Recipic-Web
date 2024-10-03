@@ -12,7 +12,7 @@ type TRecipeCardProps = {
 
 const cardVariants = {
   initial: { scale: 1 },
-  tap: { scale: 0.95, transition: { duration: 0.1 } },
+  tap: { scale: 0.97, transition: { duration: 0.1 } },
 };
 
 export function RecipeCard({
