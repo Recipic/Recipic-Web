@@ -42,7 +42,7 @@ export function CarouselWithBanners() {
           <Banner
             imageUrl={banner.imageUrl}
             onClick={banner.onClick}
-            size="lg"
+            size="fullSquare"
             gradientColor={banner.gradientColor}
             title={banner.title}
             description={banner.description}

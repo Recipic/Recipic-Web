@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from './button';
 
-export type TBannerSize = 'sm' | 'lg';
+export type TBannerSize = 'sm' | 'lg' | 'fullSquare';
 export type TGradientColor = 'primary' | 'primarySub' | 'black' | 'gray' | 'none';
 
 export type TBannerProps = {
@@ -17,6 +17,7 @@ export function Banner({ imageUrl, onClick, size = 'lg', gradientColor = 'none',
   const sizeClasses = {
     sm: 'h-60',
     lg: 'h-80',
+    fullSquare: 'aspect-square',
   };
 
   const gradientClasses = {
@@ -28,9 +29,9 @@ export function Banner({ imageUrl, onClick, size = 'lg', gradientColor = 'none',
   };
 
   return (
-    <div className="w-full h-full relative">
-      <Button variant="ghost" className="p-0 w-full h-full aspect-[16/9]" onClick={onClick}>
-        <img src={imageUrl} alt="Banner" className={`w-full object-cover rounded-lg ${sizeClasses[size]}`} />
+    <div className={`relative w-full ${sizeClasses[size]}`}>
+      <Button variant="ghost" className="p-0 w-full h-full" onClick={onClick}>
+        <img src={imageUrl} alt="Banner" className="w-full h-full object-cover rounded-lg" />
         {gradientColor !== 'none' && (
           <div className={`absolute bottom-0 left-0 right-0 h-1/2 rounded-b-lg ${gradientClasses[gradientColor]}`} />
         )}
