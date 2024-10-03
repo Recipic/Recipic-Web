@@ -29,7 +29,7 @@ export default function Home() {
     <PageLayout isTabBarVisible isBottomSpace isHeaderVisible>
       <Header titleImage={RecipcLogoImage} order="first">
         <SearchButton route={'/recipe'} />
-        <NotificationButton route={'/notification'} /* TODO: 알림 페이지 이동 */ />
+        <NotificationButton route={'/notification'} />
       </Header>
       <RandomBrandAnimatedBanner />
       <CarouselWithBanners />

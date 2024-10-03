@@ -41,7 +41,7 @@ export function Header({
         {title ? (
           <h1 className="text-H1 font-semibold">{title}</h1>
         ) : titleImage ? (
-          <img src={titleImage} alt="Header Title" className="h-8" />
+          <img src={titleImage} alt="레시픽 메인 로고" className="w-auto h-8" />
         ) : null}
         {children && <div className="flex items-center">{children}</div>}
       </div>

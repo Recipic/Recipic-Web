@@ -122,7 +122,7 @@ const config: Config = {
     },
     fontSize: {
       H1: ['24px', { lineHeight: '1.5', fontWeight: '700' }],
-      H2: ['22px', { lineHeight: '1.5', fontWeight: '700' }],
+      H2: ['22px', { lineHeight: '1.5', fontWeight: '600' }],
       H3: ['18px', { lineHeight: '1.5', fontWeight: '600' }],
       Subtitle1: ['16px', { lineHeight: '1.5', fontWeight: '600' }],
       Subtitle2: ['16px', { lineHeight: '1.5', fontWeight: '400' }],
