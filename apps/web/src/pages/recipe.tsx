@@ -14,6 +14,8 @@ import BrandButtonList from '@/components/common/Buttons/BrandButton/BrandButton
 import { SearchBar } from '@/components/common/SearchBar';
 import { useAuth } from '@/contexts/authContext';
 import { useNavigate } from 'react-router-dom';
+import PullToRefresh from '@/components/common/PullToRefresh';
+import { useRefreshQueries } from '@/hooks/useRefreshQueries';
 
 export default function Recipe() {
   const { isLoggedIn } = useAuth();
@@ -23,6 +25,7 @@ export default function Recipe() {
   const { recipeInfosList, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage } = useGetRecipeList({
     keyword: searchQuery,
   });
+  const { refreshQueries } = useRefreshQueries();
 
   const { ref } = useInfiniteScroll({
     fetchNextPage: fetchNextPage,
@@ -38,29 +41,8 @@ export default function Recipe() {
     open();
   }, [isLoggedIn, navigate, open]);
 
-  return (
-    <PageLayout isTabBarVisible isBottomSpace isHeaderVisible isTopNavBarVisible={isSearching}>
-      <Header title="레시피" order="first" />
-      {isSearching ? (
-        <TopNavBar showBackButton onBackButtonClick={handleGoBack} childrenPosition="center" order="second">
-          <SearchBar
-            onSearchClick={handleSearchSubmit}
-            searchQuery={searchQuery}
-            inputProps={{ placeholder: '브랜드, 재료 등' }}
-          />
-        </TopNavBar>
-      ) : (
-        <>
-          <div className="px-4 py-1 flex-[1_0_100%]">
-            <SearchBar
-              onSearchClick={handleSearchSubmit}
-              searchQuery={searchQuery}
-              inputProps={{ placeholder: '브랜드, 재료 등' }}
-            />
-          </div>
-          <BrandButtonList brands={brands} onSearchClick={handleBrandClick} gridCols={3} />
-        </>
-      )}
+  const renderRecipeInfosListContent = () => (
+    <>
       {isLoading ? (
         <Spinner className="text-primary-500" />
       ) : recipeInfosList.length === 0 ? (
@@ -72,6 +54,36 @@ export default function Recipe() {
           <RecipeCardList recipeInfosList={recipeInfosList} />
           <div ref={ref}>{isFetchingNextPage && <Spinner className="text-primary-500" />}</div>
         </>
+      )}
+    </>
+  );
+
+  return (
+    <PageLayout isTabBarVisible isBottomSpace isHeaderVisible isTopNavBarVisible={isSearching}>
+      <Header title="레시피" order="first" />
+      {isSearching ? (
+        <>
+          <TopNavBar showBackButton onBackButtonClick={handleGoBack} childrenPosition="center" order="second">
+            <SearchBar
+              onSearchClick={handleSearchSubmit}
+              searchQuery={searchQuery}
+              inputProps={{ placeholder: '브랜드, 재료 등' }}
+            />
+          </TopNavBar>
+          {renderRecipeInfosListContent()}
+        </>
+      ) : (
+        <PullToRefresh onRefresh={refreshQueries}>
+          <div className="px-4 py-1 flex-[1_0_100%]">
+            <SearchBar
+              onSearchClick={handleSearchSubmit}
+              searchQuery={searchQuery}
+              inputProps={{ placeholder: '브랜드, 재료 등' }}
+            />
+          </div>
+          <BrandButtonList brands={brands} onSearchClick={handleBrandClick} gridCols={3} />
+          {renderRecipeInfosListContent()}
+        </PullToRefresh>
       )}
       <WriteRecipeButton onClick={handleOpenWriteRecipeDrawer} />
       <WriteRecipeDrawer isOpen={isOpen} onClose={close} />

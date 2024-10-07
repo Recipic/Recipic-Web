@@ -17,8 +17,12 @@ import { TGetRecipeRankListResponse } from '@/apis/home/type';
 import { RecipeCelebRankListContainer } from '@/components/home/RenderPropsContainer/RecipeCelebRankListContainer';
 import { RecipeRankListContainer } from '@/components/home/RenderPropsContainer/RecipeRankListContainer';
 import { SkeletonCardList } from '@/components/home/SkeletonCard/SkeletonCardList';
+import PullToRefresh from '@/components/common/PullToRefresh';
+import { useRefreshQueries } from '@/hooks/useRefreshQueries';
+
 export default function Home() {
   const navigate = useNavigate();
+  const { refreshQueries } = useRefreshQueries();
 
   /** 브랜드 버튼 클릭을 처리하는 핸들러 */
   const handleBrandClick = (searchBrand: TBrandEn) => {
@@ -31,29 +35,31 @@ export default function Home() {
         <SearchButton route={'/recipe'} />
         <NotificationButton route={'/notification'} />
       </Header>
-      <RandomBrandAnimatedBanner />
-      <CarouselWithBanners />
-      <Section title="이번 달 인기 레시피">
-        <Suspense fallback={<SkeletonCardList />}>
-          <RecipeRankListContainer
-            render={(recipeRankListData: TGetRecipeRankListResponse) => (
-              <VerticalRecipeCardList recipeInfosList={recipeRankListData} />
-            )}
-          />
-        </Suspense>
-      </Section>
-      <Section title="최신 HOT 브랜드">
-        <BrandButtonList brands={brands} onSearchClick={handleBrandClick} gridCols={3} />
-      </Section>
-      <Section title="유명인의 인기 레시피">
-        <Suspense fallback={<SkeletonCardList />}>
-          <RecipeCelebRankListContainer
-            render={(recipeCelebRankListData: TGetRecipeRankListResponse) => (
-              <VerticalRecipeCardList recipeInfosList={recipeCelebRankListData} />
-            )}
-          />
-        </Suspense>
-      </Section>
+      <PullToRefresh onRefresh={refreshQueries}>
+        <RandomBrandAnimatedBanner />
+        <CarouselWithBanners />
+        <Section title="이번 달 인기 레시피">
+          <Suspense fallback={<SkeletonCardList />}>
+            <RecipeRankListContainer
+              render={(recipeRankListData: TGetRecipeRankListResponse) => (
+                <VerticalRecipeCardList recipeInfosList={recipeRankListData} />
+              )}
+            />
+          </Suspense>
+        </Section>
+        <Section title="최신 HOT 브랜드">
+          <BrandButtonList brands={brands} onSearchClick={handleBrandClick} gridCols={3} />
+        </Section>
+        <Section title="유명인의 인기 레시피">
+          <Suspense fallback={<SkeletonCardList />}>
+            <RecipeCelebRankListContainer
+              render={(recipeCelebRankListData: TGetRecipeRankListResponse) => (
+                <VerticalRecipeCardList recipeInfosList={recipeCelebRankListData} />
+              )}
+            />
+          </Suspense>
+        </Section>
+      </PullToRefresh>
     </PageLayout>
   );
 }

@@ -21,6 +21,7 @@ import Guide from './pages/guide';
 import Success from './pages/success';
 import Notification from './pages/notification';
 import NotFound from './pages/notFound';
+import TestPage from './pages/testPage';
 
 type TRoutes = {
   path: string;
@@ -49,6 +50,7 @@ export const routes: TRoutes[] = [
   { path: '/guide', element: <Guide />, isTabBar: false, isProtected: false },
   { path: '/success', element: <Success />, isTabBar: false, isProtected: true },
   { path: '/notification', element: <Notification />, isTabBar: false, isProtected: true },
+  { path: '/test', element: <TestPage />, isTabBar: false },
 ];
 
 export default function Router() {
