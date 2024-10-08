@@ -3,10 +3,13 @@ import { SettingsMenu } from '@/components/settings/SettingsMenu';
 import { TSettingsMenuItem } from '@/types/settings';
 import { useAlertDialog } from '@/contexts/alertDialogContext';
 import { usePostLogout } from '@/hooks/usePostLogout';
+import { useDeleteWithdraw } from '@/hooks/useDeleteWithdraw';
 
 export function AccountManagementMenuList() {
   const { showAlertDialog } = useAlertDialog();
   const { mutate: mutateLogout } = usePostLogout();
+  const { mutate: mutateWithdraw } = useDeleteWithdraw();
+
   const accountManagement: TSettingsMenuItem[] = [
     {
       title: '로그아웃',
@@ -43,7 +46,7 @@ export function AccountManagementMenuList() {
       cancelText: '취소',
       confirmText: '확인',
       onConfirm: () => {
-        /* 계정탈퇴 처리 함수 */
+        mutateWithdraw();
       },
     });
   };

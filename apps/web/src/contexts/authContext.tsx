@@ -10,7 +10,7 @@ type TAuthContext = {
   isLoading: boolean;
   login: ({ accessToken }: TTokens) => void;
   logout: () => void;
-  signout: () => void;
+  withdraw: () => void;
 };
 
 const defaultAuthContext: TAuthContext = {
@@ -18,7 +18,7 @@ const defaultAuthContext: TAuthContext = {
   isLoading: true,
   login: () => {},
   logout: () => {},
-  signout: () => {},
+  withdraw: () => {},
 };
 
 const AuthContext = createContext<TAuthContext>(defaultAuthContext);
@@ -64,7 +64,7 @@ export function AuthProvider({ children }: TAuthProviderProps): JSX.Element {
     checkLoginStatus();
   }, [removeCookie, checkLoginStatus]);
 
-  const signout = useCallback((): void => {
+  const withdraw = useCallback((): void => {
     localStorage.removeItem('accessToken');
     removeCookie('refreshToken', { path: '/' });
     setIsLoggedIn(false);
@@ -77,9 +77,9 @@ export function AuthProvider({ children }: TAuthProviderProps): JSX.Element {
       isLoading,
       login,
       logout,
-      signout,
+      withdraw,
     }),
-    [isLoggedIn, isLoading, login, logout, signout],
+    [isLoggedIn, isLoading, login, logout, withdraw],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
