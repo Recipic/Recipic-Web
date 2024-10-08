@@ -2,10 +2,11 @@ import React from 'react';
 import { SettingsMenu } from '@/components/settings/SettingsMenu';
 import { TSettingsMenuItem } from '@/types/settings';
 import { useAlertDialog } from '@/contexts/alertDialogContext';
+import { usePostLogout } from '@/hooks/usePostLogout';
 
 export function AccountManagementMenuList() {
   const { showAlertDialog } = useAlertDialog();
-
+  const { mutate: mutateLogout } = usePostLogout();
   const accountManagement: TSettingsMenuItem[] = [
     {
       title: '로그아웃',
@@ -29,7 +30,7 @@ export function AccountManagementMenuList() {
       cancelText: '취소',
       confirmText: '확인',
       onConfirm: () => {
-        /* 로그아웃 처리 함수 */
+        mutateLogout();
       },
     });
   };
