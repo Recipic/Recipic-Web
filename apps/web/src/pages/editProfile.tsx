@@ -9,7 +9,6 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, Input, 
 import { useDrawer } from '@/hooks/useDrawer';
 import EditProfileImageDrawer from '@/components/editProfile/EditProfileImageDrawer';
 import EditProfileImageButton from '@/components/editProfile/EditProfileImageButton';
-import { userEditProfileData } from '@/constants/mocks';
 import { useGetMyInfo } from '@/hooks/useGetMyInfo';
 import { usePatchEditProfile } from '@/hooks/usePatchEditProfile';
 import { TranslucentFallbackUI } from '@/components/common/FallbackUI';
@@ -75,10 +74,7 @@ export default function EditProfile() {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <EditProfileImageButton
-                    onClickToOpenDrawer={open}
-                    profileImageSrc={field.value || userEditProfileData.userProfileImageSrc}
-                  />
+                  <EditProfileImageButton onClickToOpenDrawer={open} profileImageSrc={field.value} />
                 </FormControl>
                 <EditProfileImageDrawer
                   isOpen={isOpen}
