@@ -16,6 +16,8 @@ export const useDeleteWithdraw = () => {
     },
     onError: (error: Error) => {
       toast.error(error.message);
+      //TODO: 백엔드 에러 해결을 위한 임시 로그
+      console.error('탈퇴 api 에러', error);
     },
   });
 };

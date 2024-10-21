@@ -67,8 +67,11 @@ instance.interceptors.response.use(
 
       return instance(originalRequest);
     } catch (refreshError) {
-      localStorage.removeItem('accessToken');
-      window.location.href = '/';
+      //TODO: 실제 서비스에서는 로그아웃 처리를 해야함
+      // localStorage.removeItem('accessToken');
+      // window.location.href = '/';
+      //TODO:  백엔드 에러 해결을 위한 임시 로직
+      console.error('reissue api 에러:', refreshError);
       return Promise.reject(refreshError);
     }
   },
