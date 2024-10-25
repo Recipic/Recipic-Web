@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { Cross2Icon, MinusIcon, PlusIcon, ImageIcon } from '@radix-ui/react-icons';
 import { useForm, useFieldArray, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -223,42 +223,9 @@ export function WriteRecipeDrawer({ isOpen, onClose, editRecipeData }: TWriteRec
     });
   };
 
-  // const handleTempSave = () => {
-  //   // 임시저장 로직 구현
-  // };
-
   const handleDrawerClose = () => {
     form.reset();
     onClose();
-  };
-
-  useEffect(() => {
-    return () => {
-      form.getValues('images').forEach(image => URL.revokeObjectURL(image.preview));
-    };
-  }, [form]);
-
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(event.target.files || []);
-    const currentImageCount = imageFields.length;
-    const availableSlots = 1 - currentImageCount;
-
-    if (files.length > availableSlots) {
-      alert(`최대 1장의 이미지만 업로드할 수 있어요`);
-      return;
-    }
-
-    const mappedFiles = files.map(file => ({
-      file,
-      preview: URL.createObjectURL(file),
-    }));
-    appendImage(mappedFiles);
-  };
-
-  const handleImageUploadClick = () => {
-    fileInputRef.current?.click();
   };
 
   return (
@@ -302,7 +269,7 @@ export function WriteRecipeDrawer({ isOpen, onClose, editRecipeData }: TWriteRec
                       <Button
                         type="button"
                         variant="outline"
-                        onClick={handleImageUploadClick}
+                        onClick={() => document.getElementById('file-input')?.click()}
                         className="w-20 h-20 flex-shrink-0"
                       >
                         <div className="flex flex-col items-center">
@@ -312,7 +279,7 @@ export function WriteRecipeDrawer({ isOpen, onClose, editRecipeData }: TWriteRec
                       </Button>
                       {imageFields.map((image, index) => (
                         <div key={image.id} className="relative w-20 h-20">
-                          <img src={image.preview} alt="Preview" className="w-full h-full object-cover rounded" />
+                          <img src={image.preview} alt="미리보기" className="w-full h-full object-cover rounded" />
                           <Button
                             type="button"
                             onClick={() => removeImage(index)}
@@ -324,11 +291,25 @@ export function WriteRecipeDrawer({ isOpen, onClose, editRecipeData }: TWriteRec
                         </div>
                       ))}
                       <Input
+                        id="file-input"
                         type="file"
                         accept="image/*"
-                        onChange={handleImageChange}
                         className="hidden"
-                        ref={fileInputRef}
+                        onChange={e => {
+                          const files = Array.from(e.target.files || []);
+                          if (files.length > 1 - imageFields.length) {
+                            alert(`최대 1장의 이미지만 업로드할 수 있어요`);
+                            return;
+                          }
+
+                          const mappedFiles = files.map(file => ({
+                            file,
+                            preview: URL.createObjectURL(file),
+                          }));
+                          appendImage(mappedFiles);
+
+                          e.target.value = '';
+                        }}
                       />
                     </div>
                   </FormControl>
@@ -476,9 +457,6 @@ export function WriteRecipeDrawer({ isOpen, onClose, editRecipeData }: TWriteRec
         </Form>
         <DrawerFooter>
           <div className="flex w-full gap-2">
-            {/* <Button className="flex-1 h-12" variant="secondary" onClick={handleTempSave}>
-              임시저장
-            </Button> */}
             <Button
               className="flex-1 h-12"
               type="submit"
