@@ -34,7 +34,7 @@ export default function My() {
   const menuItems: TMenu[] = [
     { title: '공지사항', icon: <BellIcon className="w-4 h-4" />, route: '/notice' },
     { title: '문의하기', icon: <PaperPlaneIcon className="w-4 h-4" />, route: '' }, // TODO: 카카오톡 문의하기로 연결
-    { title: '공식 인스타그램', icon: <InstagramLogoIcon className="w-4 h-4" />, route: '' }, // TODO: 인스타그램으로 연결
+    { title: '공식 인스타그램', icon: <InstagramLogoIcon className="w-4 h-4" />, route: '/instagram/1' }, // TODO: 인스타그램으로 연결
   ];
 
   return (

@@ -23,6 +23,7 @@ import Notification from './pages/notification';
 import NotFound from './pages/notFound';
 import TestPage from './pages/testPage';
 import GoogleForm from './pages/googleForm';
+import Instagram from './pages/instagram';
 
 type TRoutes = {
   path: string;
@@ -52,7 +53,8 @@ export const routes: TRoutes[] = [
   { path: '/success', element: <Success />, isTabBar: false, isProtected: true },
   { path: '/notification', element: <Notification />, isTabBar: false, isProtected: true },
   { path: '/test', element: <TestPage />, isTabBar: false },
-  { path: 'google-form/survey/:formId', element: <GoogleForm />, isTabBar: false },
+  { path: '/google-form/survey/:formId', element: <GoogleForm />, isTabBar: false },
+  { path: '/instagram/:embedId', element: <Instagram />, isTabBar: false },
 ];
 
 export default function Router() {
