@@ -37,9 +37,6 @@ instance.interceptors.response.use(
   (response: AxiosResponse): AxiosResponse => response,
   async (error: AxiosError): Promise<AxiosResponse> => {
     const originalRequest = error.config as CustomAxiosRequestConfig;
-    console.error('Response Error:', error); // 디버깅용
-    console.log('Error Response:', error.response); // 디버깅용
-    console.log('Error Config:', error.config); // 디버깅용
     if (error.response?.status !== 401 || originalRequest._retry) {
       return Promise.reject(error);
     }
@@ -67,11 +64,8 @@ instance.interceptors.response.use(
 
       return instance(originalRequest);
     } catch (refreshError) {
-      //TODO: 실제 서비스에서는 로그아웃 처리를 해야함
-      // localStorage.removeItem('accessToken');
-      // window.location.href = '/';
-      //TODO:  백엔드 에러 해결을 위한 임시 로직
-      console.error('reissue api 에러:', refreshError);
+      localStorage.removeItem('accessToken');
+      window.location.href = '/';
       return Promise.reject(refreshError);
     }
   },

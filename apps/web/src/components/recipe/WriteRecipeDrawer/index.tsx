@@ -240,9 +240,7 @@ export function WriteRecipeDrawer({ isOpen, onClose, editRecipeData }: TWriteRec
         <Form {...form}>
           <form
             id="recipe-form"
-            onSubmit={form.handleSubmit(onSubmit, errors => {
-              console.log('Form errors:', errors);
-            })}
+            onSubmit={form.handleSubmit(onSubmit)}
             className="pb-4 space-y-8 flex-grow overflow-y-auto px-4"
           >
             <FormField

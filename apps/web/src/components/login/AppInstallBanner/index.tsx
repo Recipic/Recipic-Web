@@ -1,14 +1,9 @@
 import React from 'react';
 import { Button } from '@recipic-packages/ui';
 import AppLogoImage from '@/assets/icons/appLogo.svg?react';
+import { detectOS } from '@/utils/detectOS';
 
 export function AppInstallBanner() {
-  const detectOS = () => {
-    const userAgent = window.navigator.userAgent.toLowerCase();
-    const ios = /iphone|ipad|ipod/.test(userAgent);
-    return ios ? 'iOS' : 'Android';
-  };
-
   const handleAppInstall = () => {
     const os = detectOS();
     let storeUrl;
