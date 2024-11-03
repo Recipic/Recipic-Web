@@ -19,8 +19,20 @@ import EditProfileRouteButton from '@/components/my/EditProfileRouteButton';
 import { MyContainer } from '@/components/my/RenderPropsContainer/MyContainer';
 import { TGetMyInfoResponse } from '@/apis/my/type';
 import { MyDescription } from '@/components/my/MyDescription';
+import { useAlertDialog } from '@/contexts/alertDialogContext';
 
 export default function My() {
+  const { showAlertDialog } = useAlertDialog();
+
+  const handleShowEmail = () => {
+    showAlertDialog({
+      title: '문의하기',
+      description: '아래 이메일로 문의해 주시면,\n빠른 시일 내에 답변 드리도록 할게요.\n\nrecipick7@gmail.com',
+      confirmText: '확인',
+      onConfirm: () => {},
+    });
+  };
+
   const userMenuItems: TMenu[] = [
     { title: '내 레시피', icon: <Pencil2Icon className="w-6 h-6" />, route: '/my-recipe' },
     { title: '내 댓글', icon: <FileTextIcon className="w-6 h-6" />, route: '/my-comments' },
@@ -33,8 +45,14 @@ export default function My() {
 
   const menuItems: TMenu[] = [
     { title: '공지사항', icon: <BellIcon className="w-4 h-4" />, route: '/notice' },
-    { title: '문의하기', icon: <PaperPlaneIcon className="w-4 h-4" />, route: '' }, // TODO: 카카오톡 문의하기로 연결
-    { title: '공식 인스타그램', icon: <InstagramLogoIcon className="w-4 h-4" />, route: '/instagram/1' }, // TODO: 인스타그램으로 연결
+    {
+      title: '문의하기',
+      icon: <PaperPlaneIcon className="w-4 h-4" />,
+      route: '',
+      showInDialog: true,
+      onShowDialog: handleShowEmail,
+    },
+    { title: '공식 인스타그램', icon: <InstagramLogoIcon className="w-4 h-4" />, route: '/instagram/1' },
   ];
 
   return (

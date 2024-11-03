@@ -16,8 +16,8 @@ type CustomAlertDialogProps = {
   onClose: () => void;
   title: string;
   description: string;
-  cancelText: string;
-  confirmText: string;
+  cancelText?: string;
+  confirmText?: string;
   onConfirm: () => void;
   contentProps?: Omit<AlertDialogContentProps, 'children'>;
   titleProps?: Omit<AlertDialogTitleProps, 'children'>;
@@ -41,6 +41,8 @@ export function CustomAlertDialog({
     onClose();
   };
 
+  const showFooter = cancelText || confirmText;
+
   return (
     <AlertDialog open={isOpen} onOpenChange={onClose}>
       <AlertDialogContent className="max-w-80 rounded-lg" {...contentProps}>
@@ -50,10 +52,12 @@ export function CustomAlertDialog({
             {description}
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel onClick={onClose}>{cancelText}</AlertDialogCancel>
-          <AlertDialogAction onClick={handleConfirm}>{confirmText}</AlertDialogAction>
-        </AlertDialogFooter>
+        {showFooter && (
+          <AlertDialogFooter>
+            {cancelText && <AlertDialogCancel onClick={onClose}>{cancelText}</AlertDialogCancel>}
+            {confirmText && <AlertDialogAction onClick={handleConfirm}>{confirmText}</AlertDialogAction>}
+          </AlertDialogFooter>
+        )}
       </AlertDialogContent>
     </AlertDialog>
   );

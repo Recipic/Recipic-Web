@@ -55,8 +55,8 @@ export function AlertDialogProvider({ children }: AlertDialogProviderProps) {
           onClose={closeDialog}
           title={dialogState.title}
           description={dialogState.description}
-          cancelText={dialogState.cancelText || 'Cancel'}
-          confirmText={dialogState.confirmText || 'Confirm'}
+          cancelText={dialogState.cancelText}
+          confirmText={dialogState.confirmText}
           onConfirm={dialogState.onConfirm}
         />,
         document.body,
