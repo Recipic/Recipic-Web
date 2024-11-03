@@ -3,6 +3,7 @@ import { TGetMyCommentsListResponse } from '@/apis/myComments/type';
 import { getMyCommentsListQueryKey } from '@/constants/queryKeys';
 import { toast } from 'sonner';
 import { useAuth } from '@/contexts/authContext';
+import { TCustomError } from '@/apis/type';
 
 export const useGetMyCommentsList = () => {
   const { isLoggedIn } = useAuth();
@@ -10,7 +11,7 @@ export const useGetMyCommentsList = () => {
     data: myCommentsListData,
     isLoading,
     error,
-  } = useSuspenseQuery<TGetMyCommentsListResponse>({
+  } = useSuspenseQuery<TGetMyCommentsListResponse, TCustomError>({
     queryKey: getMyCommentsListQueryKey().queryKey,
     queryFn: isLoggedIn ? getMyCommentsListQueryKey().queryFn : skipToken,
     staleTime: 1000 * 60 * 60, // 1시간
@@ -18,7 +19,7 @@ export const useGetMyCommentsList = () => {
   });
 
   if (error) {
-    toast.error(error.message);
+    toast.error(error.response?.data.error.message);
   }
 
   return { myCommentsListData, isLoading, error };

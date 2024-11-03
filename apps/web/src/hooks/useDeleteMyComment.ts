@@ -4,6 +4,7 @@ import { getCommentsListQueryKey, getMyCommentsListQueryKey } from '@/constants/
 import { toast } from 'sonner';
 import { TDeleteMyCommentParams } from '@/apis/recipeDetail/type';
 import { TSortOption } from '@/types/comments';
+import { TCustomError } from '@/apis/type';
 
 type TUsePostLikeComment = {
   recipeId: number;
@@ -25,8 +26,8 @@ export const useDeleteMyComment = () => {
       queryClient.invalidateQueries({ queryKey: getMyCommentsListQueryKey().queryKey });
       toast.success('댓글이 삭제되었어요.');
     },
-    onError: (error: Error) => {
-      toast.error(error.message);
+    onError: (error: TCustomError) => {
+      toast.error(error.response?.data.error.message);
     },
   });
 };

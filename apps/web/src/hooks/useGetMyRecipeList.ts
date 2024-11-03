@@ -4,12 +4,13 @@ import { DEFAULT_SIZE } from '@/constants/pagenation';
 import { toast } from 'sonner';
 import { getMyRecipeListQueryKey } from '@/constants/queryKeys';
 import { useAuth } from '@/contexts/authContext';
+import { TCustomError } from '@/apis/type';
 
 export const useGetMyRecipeList = ({ keyword, size = DEFAULT_SIZE }: Omit<TGetMyRecipeListParams, 'page'>) => {
   const { isLoggedIn } = useAuth();
   const { data, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage, error } = useInfiniteQuery<
     TGetMyRecipeListResponse,
-    Error
+    TCustomError
   >({
     queryKey: getMyRecipeListQueryKey({ keyword, size }).queryKey,
     initialPageParam: 0,
@@ -31,7 +32,7 @@ export const useGetMyRecipeList = ({ keyword, size = DEFAULT_SIZE }: Omit<TGetMy
   const myRecipeInfosList = data !== undefined ? data.pages.flat() : [];
 
   if (error) {
-    toast.error(error.message);
+    toast.error(error.response?.data.error.message);
   }
 
   return { myRecipeInfosList, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage };

@@ -4,6 +4,7 @@ import { getMyRecipeListQueryKey, getRecipeDetailQueryKey, getRecipeListQueryKey
 import { TPutRecipeEditBody } from '@/apis/recipe/type';
 import { putRecipeEdit } from '@/apis/recipe/putRecipeEdit';
 import { useNavigate } from 'react-router-dom';
+import { TCustomError } from '@/apis/type';
 
 type TUsePutRecipeEdit = {
   onClose: () => void;
@@ -32,8 +33,8 @@ export const usePutRecipeEdit = ({ onClose, editRecipeId }: TUsePutRecipeEdit) =
         navigate(`/recipe/${editRecipeId}`);
       }
     },
-    onError: (error: Error) => {
-      toast.error(error.message);
+    onError: (error: TCustomError) => {
+      toast.error(error.response?.data.error.message);
     },
   });
 };

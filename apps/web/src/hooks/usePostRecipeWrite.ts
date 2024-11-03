@@ -4,6 +4,7 @@ import { getMyRecipeListQueryKey, getRecipeListQueryKey } from '@/constants/quer
 import { useNavigate } from 'react-router-dom';
 import { TPostRecipeWriteBody } from '@/apis/recipe/type';
 import { postRecipeWrite } from '@/apis/recipe/postRecipeWrite';
+import { TCustomError } from '@/apis/type';
 
 type TUsePostRecipeWrite = {
   onClose: () => void;
@@ -25,8 +26,8 @@ export const usePostRecipeWrite = ({ onClose }: TUsePostRecipeWrite) => {
       onClose();
       navigate('/success');
     },
-    onError: (error: Error) => {
-      toast.error(error.message);
+    onError: (error: TCustomError) => {
+      toast.error(error.response?.data.error.message);
     },
   });
 };

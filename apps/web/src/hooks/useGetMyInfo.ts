@@ -3,6 +3,7 @@ import { TGetMyInfoResponse } from '@/apis/my/type';
 import { getMyInfoQueryKey } from '@/constants/queryKeys';
 import { toast } from 'sonner';
 import { useAuth } from '@/contexts/authContext';
+import { TCustomError } from '@/apis/type';
 
 export const useGetMyInfo = () => {
   const { isLoggedIn } = useAuth();
@@ -10,7 +11,7 @@ export const useGetMyInfo = () => {
     data: myInfoData,
     isLoading,
     error,
-  } = useSuspenseQuery<TGetMyInfoResponse>({
+  } = useSuspenseQuery<TGetMyInfoResponse, TCustomError>({
     queryKey: getMyInfoQueryKey().queryKey,
     queryFn: isLoggedIn ? getMyInfoQueryKey().queryFn : skipToken,
     staleTime: 1000 * 60 * 60 * 2, // 2시간
@@ -18,7 +19,7 @@ export const useGetMyInfo = () => {
   });
 
   if (error) {
-    toast.error(error.message);
+    toast.error(error.response?.data.error.message);
   }
 
   return { myInfoData, isLoading, error };

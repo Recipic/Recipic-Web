@@ -3,6 +3,7 @@ import { TGetNotificationListResponse } from '@/apis/notification/type';
 import { getNotificationListQueryKey } from '@/constants/queryKeys';
 import { toast } from 'sonner';
 import { useAuth } from '@/contexts/authContext';
+import { TCustomError } from '@/apis/type';
 
 export const useGetNotificationList = () => {
   const { isLoggedIn } = useAuth();
@@ -11,7 +12,7 @@ export const useGetNotificationList = () => {
     data: notificationListData,
     isLoading,
     error,
-  } = useQuery<TGetNotificationListResponse>({
+  } = useQuery<TGetNotificationListResponse, TCustomError>({
     queryKey: getNotificationListQueryKey().queryKey,
     queryFn: isLoggedIn ? getNotificationListQueryKey().queryFn : skipToken,
     staleTime: 1000 * 60 * 5, // 5분
@@ -19,7 +20,7 @@ export const useGetNotificationList = () => {
   });
 
   if (error) {
-    toast.error(error.message);
+    toast.error(error.response?.data.error.message);
   }
 
   return { notificationListData, isLoading, error };

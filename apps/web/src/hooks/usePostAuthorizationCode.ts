@@ -4,6 +4,7 @@ import { toast } from 'sonner';
 import { TPostAuthorizationCodeBody, TPostAuthorizationCodeResponse } from '@/apis/kakaoCallback/type';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/authContext';
+import { TCustomError } from '@/apis/type';
 
 export const usePostAuthorizationCode = () => {
   const { login } = useAuth();
@@ -15,8 +16,8 @@ export const usePostAuthorizationCode = () => {
       login({ accessToken: data.accessToken });
       navigate('/');
     },
-    onError: (error: Error) => {
-      toast.error(error.message);
+    onError: (error: TCustomError) => {
+      toast.error(error.response?.data.error.message);
     },
   });
 };

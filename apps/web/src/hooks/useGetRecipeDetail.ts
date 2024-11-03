@@ -3,6 +3,7 @@ import { TGetRecipeDetailResponse } from '@/apis/recipeDetail/type';
 import { getRecipeDetailQueryKey } from '@/constants/queryKeys';
 import { TRecipeId } from '@/types/recipe';
 import { toast } from 'sonner';
+import { TCustomError } from '@/apis/type';
 
 export const useGetRecipeDetail = ({ recipeId }: TRecipeId) => {
   const {
@@ -10,7 +11,7 @@ export const useGetRecipeDetail = ({ recipeId }: TRecipeId) => {
     isLoading,
     isFetching,
     error,
-  } = useQuery<TGetRecipeDetailResponse>({
+  } = useQuery<TGetRecipeDetailResponse, TCustomError>({
     queryKey: getRecipeDetailQueryKey({ recipeId: recipeId }).queryKey,
     queryFn: recipeId !== undefined ? getRecipeDetailQueryKey({ recipeId: recipeId }).queryFn : skipToken,
     staleTime: 1000 * 60 * 3, // 3분
@@ -18,7 +19,7 @@ export const useGetRecipeDetail = ({ recipeId }: TRecipeId) => {
   });
 
   if (error) {
-    toast.error(error.message);
+    toast.error(error.response?.data.error.message);
   }
 
   return { recipeDetailData, isLoading, isFetching, error };

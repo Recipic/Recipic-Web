@@ -3,6 +3,7 @@ import { getNotificationListQueryKey } from '@/constants/queryKeys';
 import { toast } from 'sonner';
 import { postCheckNotification } from '@/apis/notification/postCheckNotification';
 import { TPostCheckNotificationParams } from '@/apis/notification/type';
+import { TCustomError } from '@/apis/type';
 
 export const usePostCheckNotification = () => {
   const queryClient = useQueryClient();
@@ -13,8 +14,8 @@ export const usePostCheckNotification = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: getNotificationListQueryKey().queryKey });
     },
-    onError: (error: Error) => {
-      toast.error(error.message);
+    onError: (error: TCustomError) => {
+      toast.error(error.response?.data.error.message);
     },
   });
 };

@@ -4,6 +4,7 @@ import { getCommentsListQueryKey } from '@/constants/queryKeys';
 import { toast } from 'sonner';
 import { TPostLikeCommentBody } from '@/apis/recipeDetail/type';
 import { TSortOption } from '@/types/comments';
+import { TCustomError } from '@/apis/type';
 
 type TUsePostLikeComment = {
   recipeId: number;
@@ -25,8 +26,8 @@ export const usePostLikeComment = () => {
 
       toast.success('해당 댓글에 대한 좋아요 상태가 변경되었어요.');
     },
-    onError: (error: Error) => {
-      toast.error(error.message);
+    onError: (error: TCustomError) => {
+      toast.error(error.response?.data.error.message);
     },
   });
 };

@@ -4,6 +4,7 @@ import { getCommentsListQueryKey, getMyCommentsListQueryKey } from '@/constants/
 import { toast } from 'sonner';
 import { TPostLeaveCommentBody } from '@/apis/recipeDetail/type';
 import { TSortOption } from '@/types/comments';
+import { TCustomError } from '@/apis/type';
 
 export const usePostLeaveComment = () => {
   const queryClient = useQueryClient();
@@ -21,8 +22,8 @@ export const usePostLeaveComment = () => {
       queryClient.invalidateQueries({ queryKey: getMyCommentsListQueryKey().queryKey });
       toast.success('댓글을 남겼어요! 레시피 작성자에게 큰 힘이 될거예요.');
     },
-    onError: (error: Error) => {
-      toast.error(error.message);
+    onError: (error: TCustomError) => {
+      toast.error(error.response?.data.error.message);
     },
   });
 };

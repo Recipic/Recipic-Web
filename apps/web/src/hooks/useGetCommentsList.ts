@@ -5,6 +5,7 @@ import { getCommentsListQueryKey } from '@/constants/queryKeys';
 import { getCommentsList } from '@/apis/recipeDetail/getCommentsList';
 import { toast } from 'sonner';
 import { useAuth } from '@/contexts/authContext';
+import { TCustomError } from '@/apis/type';
 
 export const useGetCommentsList = ({
   recipeId,
@@ -14,7 +15,7 @@ export const useGetCommentsList = ({
   const { isLoggedIn } = useAuth();
   const { data, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage, error } = useInfiniteQuery<
     TGetCommentsListResponse,
-    Error
+    TCustomError
   >({
     queryKey: getCommentsListQueryKey({ recipeId, sortType }).queryKey,
     initialPageParam: 0,
@@ -39,7 +40,7 @@ export const useGetCommentsList = ({
   const totalComments = data?.pages[0]?.totalElements ?? 0;
 
   if (error) {
-    toast.error(error.message);
+    toast.error(error.response?.data.error.message);
   }
 
   return { commentsList, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage, totalComments };

@@ -3,6 +3,7 @@ import { deleteMyRecipe } from '@/apis/myRecipe/deleteMyRecipe';
 import { getMyRecipeListQueryKey, getRecipeListQueryKey } from '@/constants/queryKeys';
 import { toast } from 'sonner';
 import { TDeleteMyRecipeParams } from '@/apis/myRecipe/type';
+import { TCustomError } from '@/apis/type';
 
 export const useDeleteMyRecipe = () => {
   const queryClient = useQueryClient();
@@ -21,8 +22,8 @@ export const useDeleteMyRecipe = () => {
 
       toast.success('내 레시피가 삭제되었어요.');
     },
-    onError: (error: Error) => {
-      toast.error(error.message);
+    onError: (error: TCustomError) => {
+      toast.error(error.response?.data.error.message);
     },
   });
 };

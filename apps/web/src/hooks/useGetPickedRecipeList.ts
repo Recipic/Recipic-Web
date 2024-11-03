@@ -3,12 +3,13 @@ import { TGetPickedRecipeListResponse } from '@/apis/picked/type';
 import { toast } from 'sonner';
 import { useAuth } from '@/contexts/authContext';
 import { getPickedRecipeListQueryKey } from '@/constants/queryKeys';
+import { TCustomError } from '@/apis/type';
 
 export const useGetPickedRecipeList = () => {
   const { isLoggedIn } = useAuth();
   const { data, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage, error } = useInfiniteQuery<
     TGetPickedRecipeListResponse,
-    Error
+    TCustomError
   >({
     queryKey: getPickedRecipeListQueryKey().queryKey,
     queryFn: isLoggedIn
@@ -25,7 +26,7 @@ export const useGetPickedRecipeList = () => {
   const pickedRecipeInfosList = data !== undefined ? data.pages.flat() : [];
 
   if (error) {
-    toast.error(error.message);
+    toast.error(error.response?.data.error.message);
   }
 
   return { pickedRecipeInfosList, fetchNextPage, hasNextPage, isLoading, isFetchingNextPage };

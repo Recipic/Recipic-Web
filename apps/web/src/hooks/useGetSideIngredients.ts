@@ -2,6 +2,7 @@ import { skipToken, useQuery } from '@tanstack/react-query';
 import { getSideIngredientsQueryKey } from '@/constants/queryKeys';
 import { TGetSideIngredientsResponse, TGetSideIngredientsParams } from '@/apis/recipe/type';
 import { toast } from 'sonner';
+import { TCustomError } from '@/apis/type';
 
 export const useGetSideIngredients = ({ menuId }: TGetSideIngredientsParams) => {
   const {
@@ -9,7 +10,7 @@ export const useGetSideIngredients = ({ menuId }: TGetSideIngredientsParams) => 
     isLoading,
     refetch,
     error,
-  } = useQuery<TGetSideIngredientsResponse>({
+  } = useQuery<TGetSideIngredientsResponse, TCustomError>({
     queryKey: getSideIngredientsQueryKey({ menuId }).queryKey,
     queryFn: menuId !== undefined ? getSideIngredientsQueryKey({ menuId }).queryFn : skipToken,
     staleTime: 1000 * 60 * 60 * 2, // 2시간
@@ -17,7 +18,7 @@ export const useGetSideIngredients = ({ menuId }: TGetSideIngredientsParams) => 
   });
 
   if (error) {
-    toast.error(error.message);
+    toast.error(error.response?.data.error.message);
   }
 
   return { sideOptions, isLoading, refetch, error };

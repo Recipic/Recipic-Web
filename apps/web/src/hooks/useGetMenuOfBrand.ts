@@ -2,6 +2,7 @@ import { skipToken, useQuery } from '@tanstack/react-query';
 import { getMenuOfBrandQueryKey } from '@/constants/queryKeys';
 import { TGetMenuOfBrandParams, TGetMenuOfBrandResponse } from '@/apis/recipe/type';
 import { toast } from 'sonner';
+import { TCustomError } from '@/apis/type';
 
 export const useGetMenuOfBrand = ({ brandName }: TGetMenuOfBrandParams) => {
   const {
@@ -9,7 +10,7 @@ export const useGetMenuOfBrand = ({ brandName }: TGetMenuOfBrandParams) => {
     isLoading,
     refetch,
     error,
-  } = useQuery<TGetMenuOfBrandResponse>({
+  } = useQuery<TGetMenuOfBrandResponse, TCustomError>({
     queryKey: getMenuOfBrandQueryKey({ brandName }).queryKey,
     queryFn: brandName !== undefined ? getMenuOfBrandQueryKey({ brandName }).queryFn : skipToken,
     staleTime: 1000 * 60 * 60 * 2, // 2시간
@@ -17,7 +18,7 @@ export const useGetMenuOfBrand = ({ brandName }: TGetMenuOfBrandParams) => {
   });
 
   if (error) {
-    toast.error(error.message);
+    toast.error(error.response?.data.error.message);
   }
 
   return { menuOptions, isLoading, refetch, error };
