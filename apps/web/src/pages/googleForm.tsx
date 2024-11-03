@@ -4,7 +4,6 @@ import { TopNavBar } from '@recipic-packages/ui';
 import { PageLayout } from '@/components/common/PageLayout';
 import PrimarySpinner from '@/components/common/PrimarySpinner';
 import { GOOGLE_FORMS } from '@/constants/googleForm';
-import { getGoogleFormUrl } from '@/utils/googleForm';
 import { useIframeLoad } from '@/hooks/useIframeLoad';
 
 export default function GoogleForm() {
@@ -25,12 +24,7 @@ export default function GoogleForm() {
     return <Navigate to="/not-found" replace />;
   }
 
-  const formUrl = getGoogleFormUrl(formId);
   const formConfig = GOOGLE_FORMS[formId];
-
-  if (!formUrl) {
-    return <Navigate to="/not-found" replace />;
-  }
 
   if (error) {
     return <Navigate to="/not-found" replace />;
@@ -46,7 +40,7 @@ export default function GoogleForm() {
           </div>
         )}
         <iframe
-          src={formUrl}
+          src={formConfig.url}
           className="w-full h-full border-0"
           onLoad={handleIframeLoad}
           onError={handleError}
