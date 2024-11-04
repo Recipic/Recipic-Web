@@ -31,7 +31,7 @@ import { useGetMenuOfBrand } from '@/hooks/useGetMenuOfBrand';
 import { useGetSideIngredients } from '@/hooks/useGetSideIngredients';
 import { usePostRecipeWrite } from '@/hooks/usePostRecipeWrite';
 import { TranslucentFallbackUI } from '@/components/common/FallbackUI';
-import { TFormatedRecipeData } from '@/types/recipe';
+import { TFormatedRecipeData, TMenuOfBrand } from '@/types/recipe';
 import { usePutRecipeEdit } from '@/hooks/usePutRecipeEdit';
 
 const recipeFormSchema = z.object({
@@ -346,9 +346,9 @@ export function WriteRecipeDrawer({ isOpen, onClose, editRecipeData }: TWriteRec
                   <FormControl>
                     <CustomSelect<string | undefined>
                       items={
-                        menuOptions?.map(menu => ({
+                        menuOptions?.map((menu: TMenuOfBrand) => ({
                           value: menu.ingredientId.toString(),
-                          label: menu.ingredientName,
+                          label: `${menu.ingredientName} ${menu.size}`,
                         })) || []
                       }
                       value={field.value?.toString()}
