@@ -18,6 +18,8 @@ export default function Login() {
     window.location.href = KAKAO_AUTH_LINK;
   };
 
+  const handleAppleTestLogin = () => {};
+
   return (
     <PageLayout isTopNavBarVisible isHeaderVisible>
       {!isAppWebView && <AppInstallBanner />}
@@ -32,6 +34,12 @@ export default function Login() {
         >
           <KakaoLogoImage className="w-5 h-5" />
           <p className="pl-2">카카오로 시작</p>
+        </Button>
+        <Button
+          onClick={handleAppleTestLogin}
+          className="bg-gray-200 hover:bg-gray-300 text-black font-bold rounded inline-flex items-center w-full h-12"
+        >
+          <p className="pl-2">Apple Test Login</p>
         </Button>
       </div>
     </PageLayout>
