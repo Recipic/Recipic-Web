@@ -24,6 +24,7 @@ import { useDeleteMyComment } from '@/hooks/useDeleteMyComment';
 import { useAlertDialog } from '@/contexts/alertDialogContext';
 import { useAuth } from '@/contexts/authContext';
 import FallbackUI from '@/components/common/FallbackUI';
+import { ReportButton } from '@/components/recipeDetail/ReportButton';
 
 const commentSortOptions: Array<{ value: TSortOption; label: string }> = [
   { value: 'latest', label: '최신순' },
@@ -93,12 +94,16 @@ export default function RecipeDetail() {
   return (
     <PageLayout isBottomSpace isTopNavBarVisible>
       <TopNavBar showBackButton childrenPosition="right" order="first">
-        <LikeButton
-          isLiked={recipeDetailData.isScrapped}
-          likeCount={recipeDetailData.scrapCount}
-          onLikeClick={handleRecipeLikeClick}
-          size="large"
-        />
+        <div className="flex items-center gap-2">
+          <ReportButton onClick={() => alert('신고가 접수되었어요. 48시간 이내에 검토 후 조치 예정이에요.')} />{' '}
+          {/* TODO: 임시 신고하기 버튼 */}
+          <LikeButton
+            isLiked={recipeDetailData.isScrapped}
+            likeCount={recipeDetailData.scrapCount}
+            onLikeClick={handleRecipeLikeClick}
+            size="large"
+          />
+        </div>
       </TopNavBar>
       <CarouselWithRecipeDetailImage detailImages={[recipeDetailData.thunbnailUrl]} />
       <Section title={recipeDetailData.title} titleStyle="H1">
