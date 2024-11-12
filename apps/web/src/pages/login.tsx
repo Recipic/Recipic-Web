@@ -36,7 +36,7 @@ export default function Login() {
 
   return (
     <PageLayout isTopNavBarVisible isHeaderVisible>
-      {!isAppWebView && <AppInstallBanner />}
+      {/* {!isAppWebView && <AppInstallBanner />} */} {/**TODO: 임시 주석 처리 */}
       <TopNavBar order={isAppWebView ? 'first' : 'second'} />
       <div className="flex flex-col items-center justify-center px-4 py-16 w-full h-ful gap-4">
         <RecipicLogoImage className="w-[160px] h-auto" />
