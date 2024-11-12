@@ -26,19 +26,33 @@ export function isMobileAppWebView() {
 
 /** 사용자 환경 감지 */
 export function detectOS() {
-  const userAgent = navigator.userAgent;
-  if (/iPad|iPhone|iPod/.test(userAgent)) {
+  const userAgent = navigator.userAgent.toLowerCase();
+
+  // iPad 체크를 가장 먼저 수행
+  if (
+    /ipad/.test(userAgent) ||
+    // iPad Pro와 같은 최신 기기 체크
+    (/macintosh/.test(userAgent) && 'ontouchend' in document)
+  ) {
     return 'iOS';
   }
-  if (/android/i.test(userAgent)) {
+
+  // 그 다음 iPhone, iPod 체크
+  if (/iphone|ipod/.test(userAgent)) {
+    return 'iOS';
+  }
+
+  // 마지막으로 Android 체크
+  if (/android/.test(userAgent)) {
     return 'Android';
   }
+
   return 'unknown';
 }
 
 /** 사용자 환경 로깅 (디버깅용) */
 export function logEnvironment() {
-  const userAgent = navigator.userAgent;
+  const userAgent = navigator.userAgent.toLowerCase();
   const isWebViewResult = isWebView();
   const isMobileAppWebViewResult = isMobileAppWebView();
 
