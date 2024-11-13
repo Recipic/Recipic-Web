@@ -292,7 +292,6 @@ export function WriteRecipeDrawer({ isOpen, onClose, editRecipeData }: TWriteRec
                         id="file-input"
                         type="file"
                         accept="image/*"
-                        capture="environment"
                         className="hidden"
                         onChange={e => {
                           const files = Array.from(e.target.files || []);
