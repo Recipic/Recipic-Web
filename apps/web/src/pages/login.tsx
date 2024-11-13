@@ -64,13 +64,14 @@ export default function Login() {
           </Button>
         </div>
         <SpeechBubble text={'3초만에 시작하고\n꿀조합 레시피를 알아보아요!'} />
-        <Button
+        {/**TODO: 임시 주석 처리 */}
+        {/* <Button
           onClick={handleKakaoLogin}
           className="bg-[#FEE500] hover:bg-[#FEE500]/90 text-black font-bold rounded inline-flex items-center w-full h-12"
         >
           <KakaoLogoImage className="w-5 h-5" />
           <p className="pl-2">카카오로 시작</p>
-        </Button>
+        </Button> */}
       </div>
     </PageLayout>
   );
