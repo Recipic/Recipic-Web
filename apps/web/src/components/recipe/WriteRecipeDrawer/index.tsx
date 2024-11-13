@@ -291,7 +291,7 @@ export function WriteRecipeDrawer({ isOpen, onClose, editRecipeData }: TWriteRec
                       <Input
                         id="file-input"
                         type="file"
-                        accept="image/*"
+                        accept=".jpg,.jpeg,.png,.gif,.heic,.heif"
                         capture={false}
                         className="hidden"
                         onChange={e => {
