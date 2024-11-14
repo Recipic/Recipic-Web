@@ -64,6 +64,13 @@ export default function RecipeDetail() {
     mutateRecipePick({ recipeId: recipeId });
   };
 
+  //TODO: 애플 심사를 위한 임시 기능
+  const handleReportClick = () => {
+    alert('신고가 접수되었어요. 48시간 이내에 검토 후 조치 예정이에요.');
+    localStorage.setItem('reportedRecipeId', recipeId.toString());
+    navigate('/recipe');
+  };
+
   /** 댓글에 대한 좋아요 클릭 핸들러 */
   const handleCommentLikeClick = ({ commentId }: { commentId: number }) => {
     mutateLikeComment({ recipeId: recipeId, commentId: commentId });
@@ -95,7 +102,7 @@ export default function RecipeDetail() {
     <PageLayout isBottomSpace isTopNavBarVisible>
       <TopNavBar showBackButton childrenPosition="right" order="first">
         <div className="flex items-center gap-2">
-          <ReportButton onClick={() => alert('신고가 접수되었어요. 48시간 이내에 검토 후 조치 예정이에요.')} />{' '}
+          <ReportButton onClick={handleReportClick} />
           {/* TODO: 임시 신고하기 버튼 */}
           <LikeButton
             isLiked={recipeDetailData.isScrapped}

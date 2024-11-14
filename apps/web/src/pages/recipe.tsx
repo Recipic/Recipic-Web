@@ -17,6 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import PullToRefresh from '@/components/common/PullToRefresh';
 import { useRefreshQueries } from '@/hooks/useRefreshQueries';
 
+//TODO: 애플 심사 통과 후 이전 커밋 상태로 되돌리기
 export default function Recipe() {
   const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
@@ -26,12 +27,16 @@ export default function Recipe() {
     keyword: searchQuery,
   });
   const { refreshQueries } = useRefreshQueries();
+  const reportedRecipeId = localStorage.getItem('reportedRecipeId'); //TODO: 애플 심사를 위한 임시 기능
 
   const { ref } = useInfiniteScroll({
     fetchNextPage: fetchNextPage,
     hasNextPage: hasNextPage,
     isFetchingNextPage: isFetchingNextPage,
   });
+
+  //TODO: 애플 심사를 위한 임시 기능
+  const filteredRecipeInfosList = recipeInfosList.filter(recipe => recipe.recipeId !== Number(reportedRecipeId));
 
   const handleOpenWriteRecipeDrawer = useCallback(() => {
     if (!isLoggedIn) {
@@ -45,13 +50,13 @@ export default function Recipe() {
     <>
       {isLoading ? (
         <Spinner className="text-primary-500" />
-      ) : recipeInfosList.length === 0 ? (
+      ) : filteredRecipeInfosList.length === 0 ? (
         <div className="px-4 py-4 text-center">
           <p className="text-regular16 text-gray-500">검색된 레시피가 없어요</p>
         </div>
       ) : (
         <>
-          <RecipeCardList recipeInfosList={recipeInfosList} />
+          <RecipeCardList recipeInfosList={filteredRecipeInfosList} />
           <div ref={ref}>{isFetchingNextPage && <Spinner className="text-primary-500" />}</div>
         </>
       )}
