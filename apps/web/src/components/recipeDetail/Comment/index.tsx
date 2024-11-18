@@ -8,6 +8,7 @@ import XButton from '@/components/common/Buttons/XButton';
 type TCommentProps = {
   onLikeClick: () => void;
   onCommentDeleteClick: () => void;
+  onReportClick: () => void; // TODO: 애플 심사 통과를 위한 임시 신고 버튼 클릭 핸들러
 } & TComment;
 
 export function Comment({
@@ -19,6 +20,7 @@ export function Comment({
   liked,
   onLikeClick,
   onCommentDeleteClick,
+  onReportClick, // TODO: 애플 심사 통과를 위한 임시 신고 버튼 클릭 핸들러
   myComment,
 }: TCommentProps) {
   return (
@@ -26,7 +28,14 @@ export function Comment({
       <div className="flex justify-between">
         <AvatarLabel src={userProfileImageUrl} title={userNickName} alt="유저 프로필" />
         {myComment === true ? (
-          <XButton onClick={onCommentDeleteClick} />
+          <div className="flex flex-end">
+            {/*TODO:  애플 심사 통과를 위한 임시 신고 div */}
+            {/*TODO:  애플 심사 통과를 위한 임시 신고 버튼 */}
+            <button onClick={onReportClick} className="text-red-500 hover:text-red-300 text-sm">
+              신고
+            </button>
+            <XButton onClick={onCommentDeleteClick} />
+          </div>
         ) : (
           <LikeButton isLiked={liked} likeCount={likeCount} onLikeClick={onLikeClick} size="small" />
         )}
