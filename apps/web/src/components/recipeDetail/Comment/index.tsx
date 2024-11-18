@@ -28,16 +28,16 @@ export function Comment({
       <div className="flex justify-between">
         <AvatarLabel src={userProfileImageUrl} title={userNickName} alt="유저 프로필" />
         {myComment === true ? (
+          <XButton onClick={onCommentDeleteClick} />
+        ) : (
           <div className="flex flex-end">
             {/*TODO:  애플 심사 통과를 위한 임시 신고 div */}
             {/*TODO:  애플 심사 통과를 위한 임시 신고 버튼 */}
             <button onClick={onReportClick} className="text-red-500 hover:text-red-300 text-sm">
               신고
             </button>
-            <XButton onClick={onCommentDeleteClick} />
+            <LikeButton isLiked={liked} likeCount={likeCount} onLikeClick={onLikeClick} size="small" />
           </div>
-        ) : (
-          <LikeButton isLiked={liked} likeCount={likeCount} onLikeClick={onLikeClick} size="small" />
         )}
       </div>
 
