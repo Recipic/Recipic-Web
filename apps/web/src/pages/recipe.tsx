@@ -17,7 +17,6 @@ import { useNavigate } from 'react-router-dom';
 import PullToRefresh from '@/components/common/PullToRefresh';
 import { useRefreshQueries } from '@/hooks/useRefreshQueries';
 
-//TODO: 애플 심사 통과 후 이전 커밋 상태로 되돌리기
 export default function Recipe() {
   const { isLoggedIn } = useAuth();
   const navigate = useNavigate();
@@ -27,7 +26,9 @@ export default function Recipe() {
     keyword: searchQuery,
   });
   const { refreshQueries } = useRefreshQueries();
-  const reportedRecipeId = localStorage.getItem('reportedRecipeId'); //TODO: 애플 심사를 위한 임시 기능
+
+  // 로컬스토리지에서 신고된 댓글 정보를 가져옴
+  const reportedComments = JSON.parse(localStorage.getItem('reportedComments') || '[]');
 
   const { ref } = useInfiniteScroll({
     fetchNextPage: fetchNextPage,
@@ -35,8 +36,14 @@ export default function Recipe() {
     isFetchingNextPage: isFetchingNextPage,
   });
 
-  //TODO: 애플 심사를 위한 임시 기능
-  const filteredRecipeInfosList = recipeInfosList.filter(recipe => recipe.recipeId !== Number(reportedRecipeId));
+  // 신고된 댓글의 recipeId와 userNickName을 기반으로 게시글 필터링
+  const filteredRecipeInfosList = recipeInfosList.filter(
+    recipe =>
+      !reportedComments.some(
+        (reported: { recipeId: number; userNickName: string }) =>
+          reported.recipeId === recipe.recipeId || reported.userNickName === recipe.userNickName,
+      ),
+  );
 
   const handleOpenWriteRecipeDrawer = useCallback(() => {
     if (!isLoggedIn) {
