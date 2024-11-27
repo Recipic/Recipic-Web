@@ -27,22 +27,32 @@ export default function Home() {
   const { refreshQueries } = useRefreshQueries();
   const { showAlertDialog } = useAlertDialog(); // TODO: 애플 심사 통과를 위한 임시 기능
   const { isLoggedIn } = useAuth(); // TODO: 애플 심사 통과를 위한 임시 기능
+  const hasAgreedToTerms = localStorage.getItem('hasAgreedToTerms'); // TODO: 애플 심사 통과를 위한 임시 기능
+
   /** 브랜드 버튼 클릭을 처리하는 핸들러 */
   const handleBrandClick = (searchBrand: TBrandEn) => {
     navigate(`recipe?keyword=${formatBrandToHangeul(searchBrand)}`);
   };
 
+  // TODO: 애플 심사 통과를 위한 임시 기능
   useEffect(() => {
+    if (hasAgreedToTerms) {
+      return;
+    }
+
     if (isLoggedIn) {
       showAlertDialog({
         title: '약관 동의',
         description:
           '레시픽은 불쾌감을 주는 콘텐츠나 학대적인 사용자에 대한 관용이 없습니다. 법적 조치를 취할 수 있습니다.',
         confirmText: '동의',
-        onConfirm: () => {},
+        onConfirm: () => {
+          // 약관 동의 완료 상태를 로컬스토리지에 저장
+          localStorage.setItem('hasAgreedToTerms', 'true');
+        },
       });
     }
-  }, [isLoggedIn, showAlertDialog]);
+  }, [hasAgreedToTerms, isLoggedIn, showAlertDialog]);
 
   return (
     <PageLayout isTabBarVisible isBottomSpace isHeaderVisible>
