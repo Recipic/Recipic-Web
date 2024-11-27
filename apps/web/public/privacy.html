@@ -1,0 +1,692 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>개인정보 처리방침</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="8c11c92e-59ae-444f-9adb-36d636886b17" class="page sans"><header><p class="page-description"></p></header><div class="page-body"><div id="75d2e985-a39e-4d8a-a559-3bcb92d7b0d7" class="column-list"><div id="c7b4f9e8-6529-4528-8e61-5ec71f9cfbbe" style="width:43.75%" class="column"><p id="abd47f25-d2af-4fbc-af5a-b2d5f7f70044" class="">Recipic 서비스에 오신 것을 환영합니다.</p><p id="d8128cb5-07b3-4ad9-bea3-50467af05473" class="">당사는 사용자의 개인정보를 소중히 여기며 이를 보호하기 위해 최선을 다하고 있습니다. 본 개인정보 처리방침은 사용자가 당사 웹사이트 <a href="https://www.recipic.co.kr/">https://www.recipic.co.kr/</a>를 방문할 때 당사가 사용자의 정보를 수집, 사용, 공개 및 보호하는 방법을 담고 있습니다.</p><p id="9dabef6b-6bca-45ff-86b8-79f4546e93aa" class="">본 정책을 통해 사용자의 개인정보에 관한 당사의 견해와 관행, 개인정보 처리 방법을 참고하시기 바랍니다. </p></div><div id="6600a87a-e4e6-4265-b086-b85f0b33810c" style="width:56.25%" class="column"><nav id="824b944f-ea9d-4349-8996-e9ba83c95026" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#a6b573a5-c3f3-4eb6-b8e1-fab1c64a2ae7"><strong>수집 대상</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#bc7a2cc9-6708-4818-a216-134f588d4165"><strong>2.1 고유 식별 정보</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#0cc7965f-e53e-488b-a9f2-6225cc0594a9"><strong>2.2 비식별 정보</strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#69b58d52-44c9-4447-a1af-9d49330067f2"><strong>개인정보 이용</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ec8fd3ad-2f46-49ee-9f5f-ae2895d18b59"><strong>3.1 커뮤니티 활동 관리</strong> </a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f28d8d68-473f-4ff8-81bd-d7c19a2a479f"><strong>3.2 서비스 개선</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f713fcdc-cab7-4db8-a4ad-e7ab3c4ce19e"><strong>3.3 커뮤니케이션</strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#10d0403c-1e7b-4db3-8a95-fd7a3f020b07"><strong>데이터 보호</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1bed7e7a-82cc-4a20-b65e-b228af9a2be1"><strong>4. 1 보안 조치</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e9d79188-9d40-4f10-8fdd-f4abf1549a90"><strong>4.2 데이터 보유</strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#22ca7adc-0f29-4080-972e-e074d8385903"><strong>정보 공유</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b8f0e886-b92f-4a3d-af4f-aeaa9de13e45"><strong>5.1 제3자 서비스</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6e9c791f-7db0-4b1d-9df1-13c79ae0419c"><strong>5.2 법적 요건</strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#314f52e8-506c-48f2-b1d9-c9a67ba2d8bc"><strong>사용자의 권리</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6b32c845-df18-4b1a-9f40-9755d9d0b4d0"><strong>6.1 액세스 및 업데이트</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#36a12a9d-c158-418f-9691-9a3e4859fc86"><strong>6.2 수신 거부 </strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e57364ac-d476-480c-bd0d-621cbabe424b"><strong>6.3 데이터 파기</strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#bfc78b4a-8a3c-446f-9570-b7a3005fa5d0"><strong>쿠키 및 추적 기술</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7671c6f6-50f1-4d7e-970e-d88a92900d41"><strong>쿠키 사용</strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#5b535c89-b18d-4db8-8407-60a74830cd5e"><strong>본 정책의 변경</strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#a704cb3d-b471-4c56-acd1-d19cc5a2cee4">문의</a></div></nav></div></div><h2 id="a6b573a5-c3f3-4eb6-b8e1-fab1c64a2ae7" class=""><strong>수집 대상</strong></h2><hr id="95ccece8-1428-4f4b-9b67-42ca174b2ade"/><h3 id="bc7a2cc9-6708-4818-a216-134f588d4165" class=""><strong>2.1 고유 식별 정보</strong></h3><p id="4b234cfd-a948-4281-b3cf-dd020f9aca9e" class="">당사는 다음과 같은 개인정보를 수집할 수 있습니다.<div class="indented"><ul id="a63a291a-7fc0-4336-b51a-abad62326800" class="bulleted-list"><li style="list-style-type:disc"><strong>이름 또는 닉네임</strong>: 사용자를 식별하기 위한 정보</li></ul><ul id="ffa62f70-77d4-4976-81ee-6fe80a1f1d3d" class="bulleted-list"><li style="list-style-type:disc"><strong>이메일 주소</strong>: 계정 관리, 비밀번호 재설정, 공지 사항 전달 등에 사용</li></ul><ul id="aba7c43c-674a-4351-a34d-5379ad369ae1" class="bulleted-list"><li style="list-style-type:disc"><strong>휴대전화 번호</strong> (선택 사항): 계정 보안을 위한 2단계 인증 등에 사용 가능</li></ul><ul id="88ef2ffc-f6ec-4195-98d8-bb31c82c5b38" class="bulleted-list"><li style="list-style-type:disc"><strong>프로필 정보</strong> (선택 사항): 예를 들어, 프로필 사진이나 자기소개 등</li></ul></div></p><h3 id="0cc7965f-e53e-488b-a9f2-6225cc0594a9" class=""><strong>2.2 비식별 정보</strong></h3><p id="262d16c0-d74d-4087-859a-6cc9e62ca1a3" class="">당사는 또한 다음과 같은 비개인 정보를 수집할 수 있습니다:</p><ul id="12799973-21bf-4c78-af26-e0959382c641" class="bulleted-list"><li style="list-style-type:disc">브라우저 유형</li></ul><ul id="aa272a1f-9e95-4078-852e-e02d899e847e" class="bulleted-list"><li style="list-style-type:disc">기기 유형</li></ul><ul id="cd1fbe75-e63d-45fa-b6a8-786cac89dfe7" class="bulleted-list"><li style="list-style-type:disc">IP 주소</li></ul><ul id="4eab59ad-f2f4-4459-aaf8-00349b743ac9" class="bulleted-list"><li style="list-style-type:disc">브라우징 행동(예: 조회한 페이지, 클릭한 링크)</li></ul><p id="c161986e-6700-4bab-8529-10737dffd29c" class="">
+</p><h2 id="69b58d52-44c9-4447-a1af-9d49330067f2" class=""><strong>개인정보 이용</strong></h2><hr id="8a94c6c8-ab10-49c4-b199-3a4a69cd191d"/><h3 id="ec8fd3ad-2f46-49ee-9f5f-ae2895d18b59" class=""><strong>3.1 커뮤니티 활동 관리</strong> </h3><ul id="354d490d-f702-42c6-9d63-3816f432f53a" class="bulleted-list"><li style="list-style-type:disc">게시물 및 댓글 관리</li></ul><ul id="8cb1b25e-93bd-4030-be8e-5e74a9d6215f" class="bulleted-list"><li style="list-style-type:disc">커뮤니티 내 알림 및 소식 전달</li></ul><ul id="ec812bc2-39b1-497e-b69c-57522a0ef2db" class="bulleted-list"><li style="list-style-type:disc">사용자 피드백 수집 및 개선</li></ul><ul id="b22a5a2d-8c45-4ffb-b4f7-2616a3fa36c6" class="bulleted-list"><li style="list-style-type:disc">커뮤니티 규칙 준수를 위한 모니터링</li></ul><h3 id="f28d8d68-473f-4ff8-81bd-d7c19a2a479f" class=""><strong>3.2 서비스 개선</strong></h3><ul id="d07d7ed0-d2ac-4d19-b0e7-32320fe6b099" class="bulleted-list"><li style="list-style-type:disc">웹사이트 사용자 경험 향상</li></ul><ul id="004be6f5-dbde-4dd4-94f6-b71631607d5a" class="bulleted-list"><li style="list-style-type:disc">사이트 사용 및 동향 분석</li></ul><ul id="423b9efa-6e91-483c-a086-8de78dfb4131" class="bulleted-list"><li style="list-style-type:disc">고객 서비스 및 지원 개선</li></ul><h3 id="f713fcdc-cab7-4db8-a4ad-e7ab3c4ce19e" class=""><strong>3.3 커뮤니케이션</strong></h3><ul id="3a1bfd28-6563-42f3-87f4-5d572a463d37" class="bulleted-list"><li style="list-style-type:disc">홍보 자료 및 뉴스레터 발송(동의 시)</li></ul><ul id="5f56816b-b6df-4794-82fe-511a4667ff81" class="bulleted-list"><li style="list-style-type:disc">문의 및 고객 서비스 요청에 대한 응답</li></ul><p id="19cd7547-749a-4df2-a1ef-a794d0bd29cf" class="">
+</p><h2 id="10d0403c-1e7b-4db3-8a95-fd7a3f020b07" class=""><strong>데이터 보호</strong></h2><hr id="46c6afdd-edd0-4b00-9577-2446a45905fb"/><h3 id="1bed7e7a-82cc-4a20-b65e-b228af9a2be1" class=""><strong>4. 1 보안 조치</strong></h3><p id="daa4dcc2-84a8-43d1-a99b-0d47ade48266" class="">당사는 사용자가 주문하거나 개인정보를 입력, 제출 또는 접근할 때 개인정보를 보호하기 위해 다양한 보안 조치를 사용합니다. 이러한 조치에는 SSL 암호화, 보안 서버, 개인정보에 대한 접근 제한 등이 있습니다. </p><h3 id="e9d79188-9d40-4f10-8fdd-f4abf1549a90" class=""><strong>4.2 데이터 보유</strong></h3><p id="184c1ee2-a1f8-4dd3-8ff0-a03d990f4038" class="">당사는 본 정책에 명시된 목적을 달성하고 법적 의무를 준수하며 분쟁을 해결하고 계약을 이행하는 데 필요한 기간만 개인정보를 보유합니다.</p><p id="814dd506-d017-4aa8-ae26-6639840cf1e4" class="">
+</p><h2 id="22ca7adc-0f29-4080-972e-e074d8385903" class=""><strong>정보 공유</strong></h2><hr id="1e0346e9-b0a9-4db0-a8a5-ca0849dd4f47"/><h3 id="b8f0e886-b92f-4a3d-af4f-aeaa9de13e45" class=""><strong>5.1 제3자 서비스</strong></h3><p id="509ca11a-4ab8-46ee-8b83-26fcdbbf6fab" class="">당사는 웹사이트 관리, 비즈니스 운영 또는 고객 서비스를 지원하는 제3자 서비스 제공업체와 사용자의 정보를 공유할 수 있습니다. 이러한 서비스는 계약상 사용자의 정보를 기밀로 안전하게 보관할 의무가 있습니다.</p><h3 id="6e9c791f-7db0-4b1d-9df1-13c79ae0419c" class=""><strong>5.2 법적 요건</strong></h3><p id="08a8256b-a7bb-4d71-aba6-03c06a2917d9" class="">당사는 소환장 또는 이와 유사한 법적 절차를 준수하기 위해 또는 당사의 권리, 사용자의 안전 또는 타인의 안전을 보호하기 위해 필요하다고 판단되는 경우에 사용자의 정보를 공개할 수 있습니다.</p><p id="4f2ed9cd-b1d8-4ec7-af16-8a95914cc415" class="">
+</p><h2 id="314f52e8-506c-48f2-b1d9-c9a67ba2d8bc" class=""><strong>사용자의 권리</strong></h2><hr id="ac8f8d77-a834-4d14-b5af-c96c467002ce"/><h3 id="6b32c845-df18-4b1a-9f40-9755d9d0b4d0" class=""><strong>6.1 액세스 및 업데이트</strong></h3><p id="cb9893a5-6f1f-422d-bbbd-a99aa3243389" class="">사용자는 자신의 개인정보에 액세스하고 업데이트할 권리가 있습니다. 당사 웹사이트에서 계정에 로그인하거나 당사에 직접 연락하여 이를 수행할 수 있습니다.</p><h3 id="36a12a9d-c158-418f-9691-9a3e4859fc86" class=""><strong>6.2 수신 거부 </strong></h3><p id="52bb6887-fd85-4eb0-99d3-a3c4127c24ea" class="">사용자는 당사로부터 받은 이메일의 수신 거부 링크를 클릭하거나 당사에 직접 연락하여 언제든지 홍보 이메일 수신을 거부할 수 있습니다.</p><h3 id="e57364ac-d476-480c-bd0d-621cbabe424b" class=""><strong>6.3 데이터 파기</strong></h3><p id="b79b392c-234e-4f7a-8614-6ffea8efaf9e" class="">사용자는 당사에 연락하여 개인 데이터 파기를 요청할 수 있습니다. 요청 시 당사는 법률에 따라 또는 합법적인 사업상의 목적으로 보유해야 하는 경우를 제외하고 사용자의 정보를 당사의 기록에서 삭제합니다. </p><p id="980fce57-7469-4044-9b0a-9dcc65ea019a" class="">
+</p><h2 id="bfc78b4a-8a3c-446f-9570-b7a3005fa5d0" class=""><strong>쿠키 및 추적 기술</strong></h2><hr id="76927e23-176a-457b-8c4c-c0bf666fccc9"/><h3 id="7671c6f6-50f1-4d7e-970e-d88a92900d41" class=""><strong>쿠키 사용</strong></h3><p id="7c0f49d9-bcf0-4012-8850-220df2599a3d" class="">당사는 쿠키 및 유사한 추적 기술을 사용하여 사용자의 브라우징 경험을 개선하고, 사이트 트래픽을 분석하며, 방문자의 출처를 파악합니다. 쿠키 사용은 사용자의 개별 브라우저 수준에서 제어할 수 있습니다.</p><p id="9eb97ffa-cb06-42a0-8584-642a1b5e0bf5" class="">
+</p><h2 id="5b535c89-b18d-4db8-8407-60a74830cd5e" class=""><strong>본 정책의 변경</strong></h2><hr id="127bea28-d1a5-47ec-959d-1a044149c2b5"/><p id="5615b9c4-1ced-4b9d-af4e-d289135dd5dc" class="">당사는 업무의 변화를 반영하거나 기타 운영, 법률 또는 규제 상의 이유로 본 개인정보 처리방침을 수시로 업데이트할 수 있습니다. 중요한 변경사항이 있을 경우 당사는 웹사이트에 새 정책을 게시하고 본 정책 하단의 발효일을 업데이트하여 사용자에게 통지할 것입니다.</p><p id="ebfa9cc8-6897-4356-b28e-609122824116" class="">
+</p><h2 id="a704cb3d-b471-4c56-acd1-d19cc5a2cee4" class="">문의</h2><hr id="6586de63-849a-476f-9d42-e60ee0883b37"/><p id="6ebd7de7-05b6-4a13-9590-15225e5f9f2d" class="">본 개인정보 처리방침에 대한 질문이나 우려 사항이 있는 경우 아래로 문의하시기 바랍니다. </p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="4801124b-8779-491f-b8a1-f77a53c9a999"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/send_lightgray.svg"/></div><div style="width:100%"><strong>이메일</strong>: <a href="mailto:recipick7@gmail.com">recipick7@gmail.com</a><p id="0c3a00a3-97bf-49b9-9093-bee2f8b2e5dd" class=""><strong>발효일: 2024년 11월 7일</strong></p></div></figure><p id="1e8f5642-33c8-4dc8-b167-51d70b673b4d" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
